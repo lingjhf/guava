@@ -1,0 +1,28 @@
+{
+  "name": "@lingjhf/color-picker",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch"
+  },
+  "dependencies": {
+    "color": "^4.2.3"
+  },
+  "devDependencies": {
+    "@types/color": "^3.0.3"
+  }
+}
