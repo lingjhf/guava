@@ -1,17 +1,12 @@
 import { defineConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
-import dts from 'rollup-plugin-dts'
-
+import Unocss from 'unocss/vite'
+import { presetWind } from 'unocss'
 export default defineConfig({
-  plugins: [solidPlugin()],
+  plugins: [solidPlugin(), Unocss({ presets: [presetWind({ preflight: false })] })],
   build: {
-    rollupOptions: {
-      input: './src/index.tsx',
-      output: [{ dir: './dist', file: './dist/index.d.ts', format: 'es' }],
-      plugins: [dts()],
-    },
-    lib: { entry: './src/index.tsx', fileName: './dist/index.mjs' },
-    // outDir: './dist',
-    // target: 'esnext',
+    outDir: 'dist',
+    lib: { entry: './src/index.tsx', fileName: 'index', formats: ['es'] },
+    target: 'esnext',
   },
 })

@@ -3,21 +3,19 @@
   "version": "0.0.0",
   "description": "",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "src/index.tsx",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "default": "./src/index.tsx"
       }
     }
   },
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c --watch"
+    "build": "vite build"
   },
   "dependencies": {
     "color": "^4.2.3"
