@@ -1,0 +1,21 @@
+{
+  "name": "@lingjhf/draggable",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  }
+}
