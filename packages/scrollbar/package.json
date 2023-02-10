@@ -16,7 +16,6 @@
     }
   },
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c --watch"
+    "build": "vite build"
   }
 }
