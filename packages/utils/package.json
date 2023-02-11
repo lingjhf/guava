@@ -1,0 +1,17 @@
+{
+  "name": "@lingjhf/utils",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./src/index.ts"
+      }
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  }
+}
