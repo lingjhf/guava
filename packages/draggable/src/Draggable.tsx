@@ -1,5 +1,5 @@
 import { createEffect, createSignal, JSXElement } from 'solid-js'
-import { ClassList } from '@lingjhf/utils'
+import { ClassList, Position } from '@lingjhf/utils'
 
 interface Props {
   x: number
@@ -10,7 +10,7 @@ interface Props {
   maxY?: number
   classList?: ClassList
   children: JSXElement
-  onChange: () => void
+  onChange?: (value: Position) => void
 }
 
 export const GDraggable = (props: Partial<Props>) => {
@@ -47,8 +47,13 @@ export const GDraggable = (props: Partial<Props>) => {
     } else if (props?.maxY !== undefined && tempY > props.maxY) {
       tempY = props.maxY
     }
-    setX(tempX)
-    setY(tempY)
+    props.onChange?.({ x: tempX, y: tempY })
+    if (tempX != x()) {
+      setX(tempX)
+    }
+    if (tempY != y()) {
+      setY(tempY)
+    }
   }
   function onDragEnd() {
     window.removeEventListener('mousemove', onDragUpdate)
