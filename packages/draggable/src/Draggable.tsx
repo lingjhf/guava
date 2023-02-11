@@ -4,13 +4,13 @@ import { ClassList, Position } from '@lingjhf/utils'
 interface Props {
   x: number
   y: number
-  minX?: number
-  minY?: number
-  maxX?: number
-  maxY?: number
-  classList?: ClassList
+  minX: number
+  minY: number
+  maxX: number
+  maxY: number
+  classList: ClassList
   children: JSXElement
-  onChange?: (value: Position) => void
+  onChange: (value: Position) => void
 }
 
 export const GDraggable = (props: Partial<Props>) => {
