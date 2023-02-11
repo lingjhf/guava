@@ -3,19 +3,18 @@
   "version": "0.0.0",
   "description": "",
   "type": "module",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "types": "src/index.tsx",
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "default": "./src/index.tsx"
       }
     }
   },
   "scripts": {
     "build": "vite build"
+  },
+  "dependencies": {
+    "@lingjhf/utils": "workspace:^0.0.0"
   }
 }
