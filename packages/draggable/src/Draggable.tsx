@@ -11,12 +11,15 @@ interface Props {
   classList: ClassList
   children: JSXElement
   onChange: (value: Position) => void
+  expose: { onDrag: () => void }
 }
 
 export const GDraggable = (props: Partial<Props>) => {
   const [x, setX] = createSignal(0)
   const [y, setY] = createSignal(0)
-
+  if (props.expose) {
+    props.expose.onDrag = onDrag
+  }
   createEffect(() => {
     if (props.x !== undefined) {
       setX(checkXBoundary(props.x))
@@ -48,11 +51,15 @@ export const GDraggable = (props: Partial<Props>) => {
 
   let pressedX = 0
   let pressedY = 0
+
+  function onDrag() {
+    window.addEventListener('mousedown', onDragStart)
+    window.addEventListener('mousemove', onDragUpdate)
+    window.addEventListener('mouseup', onDragEnd)
+  }
   function onDragStart(e: MouseEvent) {
     pressedX = e.pageX - x()
     pressedY = e.pageY - y()
-    window.addEventListener('mousemove', onDragUpdate)
-    window.addEventListener('mouseup', onDragEnd)
   }
   function onDragUpdate(e: MouseEvent) {
     let tempX = e.pageX - pressedX
@@ -68,6 +75,7 @@ export const GDraggable = (props: Partial<Props>) => {
     }
   }
   function onDragEnd() {
+    window.removeEventListener('mousedown', onDragStart)
     window.removeEventListener('mousemove', onDragUpdate)
     window.removeEventListener('mouseup', onDragEnd)
   }
@@ -77,7 +85,7 @@ export const GDraggable = (props: Partial<Props>) => {
       class="absolute"
       classList={props.classList}
       style={{ left: `${x()}px`, top: `${y()}px` }}
-      onMouseDown={onDragStart}
+      onMouseDown={onDrag}
     >
       {props.children}
     </div>
