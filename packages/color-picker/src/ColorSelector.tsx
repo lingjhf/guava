@@ -59,11 +59,14 @@ export const GColorSelector = (props: Partial<Props>) => {
   })
   //监听滑块大小变化
   createEffect(() => {
+    let _sliderSize: Size
     if (props.sliderSize) {
+      _sliderSize = props.sliderSize
     } else {
-      setSliderSize(defaultSliderSize)
-      sliderCenter = defaultSliderCenter
+      _sliderSize = defaultSliderSize
     }
+    setSliderSize(_sliderSize)
+    sliderCenter = { x: _sliderSize.width / 2, y: _sliderSize.height / 2 }
     //设置滑块边界
     setSliderBoundary({
       minX: 0 - sliderCenter.x,
