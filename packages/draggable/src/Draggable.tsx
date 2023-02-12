@@ -18,13 +18,34 @@ export const GDraggable = (props: Partial<Props>) => {
   const [y, setY] = createSignal(0)
 
   createEffect(() => {
-    if (props.x) {
-      setX(props.x)
+    if (props.x !== undefined) {
+      setX(checkXBoundary(props.x))
     }
-    if (props.y) {
-      setY(props.y)
+    if (props.y !== undefined) {
+      setY(checkYBoundary(props.y))
     }
   })
+
+  //检查x轴边界
+  function checkXBoundary(x: number): number {
+    if (props.minX !== undefined && x < props.minX) {
+      x = props.minX
+    } else if (props?.maxX !== undefined && x > props.maxX) {
+      x = props.maxX
+    }
+    return x
+  }
+
+  //检查y轴边界
+  function checkYBoundary(y: number): number {
+    if (props?.minY !== undefined && y < props.minY) {
+      y = props.minY
+    } else if (props?.maxY !== undefined && y > props.maxY) {
+      y = props.maxY
+    }
+    return y
+  }
+
   let pressedX = 0
   let pressedY = 0
   function onDragStart(e: MouseEvent) {
@@ -36,17 +57,8 @@ export const GDraggable = (props: Partial<Props>) => {
   function onDragUpdate(e: MouseEvent) {
     let tempX = e.pageX - pressedX
     let tempY = e.pageY - pressedY
-
-    if (props.minX !== undefined && tempX < props.minX) {
-      tempX = props.minX
-    } else if (props?.maxX !== undefined && tempX > props.maxX) {
-      tempX = props.maxX
-    }
-    if (props?.minY !== undefined && tempY < props.minY) {
-      tempY = props.minY
-    } else if (props?.maxY !== undefined && tempY > props.maxY) {
-      tempY = props.maxY
-    }
+    tempX = checkXBoundary(tempX)
+    tempY = checkYBoundary(tempY)
     props.onChange?.({ x: tempX, y: tempY })
     if (tempX != x()) {
       setX(tempX)
