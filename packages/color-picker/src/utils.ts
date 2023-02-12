@@ -29,11 +29,11 @@ export function saturationTransformX(saturation: number, width: number) {
 }
 
 //y坐标转换明度
-export function yTransformValue(value: number, height: number) {
-  return (1 - value) * height
+export function yTransformValue(y: number, height: number) {
+  return 1 - y / height
 }
 
 //明度转换y坐标
-export function valueTransformY(y: number, height: number) {
-  return 1 - y / height
+export function valueTransformY(value: number, height: number) {
+  return (1 - value) * height
 }
