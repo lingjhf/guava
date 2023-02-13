@@ -52,7 +52,7 @@ export const GColorSelector = (props: Partial<Props>) => {
     }
     //根据颜色设置滑块位置
     setSliderPosition({
-      x: saturationTransformX(c.saturationv(), colorSelectorRef.offsetWidth) - sliderCenter.x,
+      x: saturationTransformX(c.saturationv() / 100, colorSelectorRef.offsetWidth) - sliderCenter.x,
       y: valueTransformY(c.value() / 100, colorSelectorRef.offsetHeight) - sliderCenter.y,
     })
     setColor(c)
