@@ -18,6 +18,8 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@lingjhf/draggable": "workspace:^0.0.0",
+    "@lingjhf/utils": "workspace:^0.0.0",
     "color": "^4.2.3"
   },
   "devDependencies": {

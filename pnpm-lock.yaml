@@ -46,9 +46,13 @@ importers:
 
   packages/color-picker:
     specifiers:
+      '@lingjhf/draggable': workspace:^0.0.0
+      '@lingjhf/utils': workspace:^0.0.0
       '@types/color': ^3.0.3
       color: ^4.2.3
     dependencies:
+      '@lingjhf/draggable': link:../draggable
+      '@lingjhf/utils': link:../utils
       color: 4.2.3
     devDependencies:
       '@types/color': 3.0.3
@@ -56,8 +60,16 @@ importers:
   packages/dev:
     specifiers:
       '@lingjhf/color-picker': workspace:^0.0.0
+      '@lingjhf/draggable': workspace:^0.0.0
     dependencies:
       '@lingjhf/color-picker': link:../color-picker
+      '@lingjhf/draggable': link:../draggable
+
+  packages/draggable:
+    specifiers:
+      '@lingjhf/utils': workspace:^0.0.0
+    dependencies:
+      '@lingjhf/utils': link:../utils
 
   packages/scrollbar:
     specifiers: {}
