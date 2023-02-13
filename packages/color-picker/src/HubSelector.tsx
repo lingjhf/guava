@@ -5,9 +5,9 @@ import { createEffect, createSignal } from 'solid-js'
 import { xTransformHue, hueTransformX } from './utils'
 
 interface Props {
-  color: string
+  color: Color
   sliderSize: Size
-  onChange: (color: string) => void
+  onChange: (color: Color) => void
 }
 
 //滑块默认大小
@@ -27,7 +27,7 @@ export const GHubSelector = (props: Partial<Props>) => {
   createEffect(() => {
     let c: Color
     if (props.color) {
-      c = Color(props.color).hsv()
+      c = props.color.hsv()
     } else {
       c = Color().hsv()
     }
@@ -54,7 +54,7 @@ export const GHubSelector = (props: Partial<Props>) => {
   })
 
   function emitChange() {
-    props.onChange?.(color().hexa())
+    props.onChange?.(color())
   }
 
   function onDraggableChange(value: Position) {
