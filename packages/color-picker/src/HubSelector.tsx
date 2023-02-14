@@ -9,11 +9,11 @@ interface Props {
   color: Color
   size: Size
   sliderSize: Size
-  onChange: (color: Color) => void
+  onChange?: (color: Color) => void
 }
 
 export const GHubSelector = (props: Partial<Props>) => {
-  const defaultProps = mergeProps<Partial<Props>[]>(
+  const defaultProps = mergeProps<[Props, ...Partial<Props>[]]>(
     {
       color: Color().hsv(),
       vertical: false,
@@ -32,26 +32,26 @@ export const GHubSelector = (props: Partial<Props>) => {
         ? {
             x: 0,
             y: hueTransformX(
-              defaultProps.color!.hue(),
-              defaultProps.size!.height - defaultProps.sliderSize!.height
+              defaultProps.color.hue(),
+              defaultProps.size.height - defaultProps.sliderSize.height
             ),
           }
         : {
             x: hueTransformX(
-              defaultProps.color!.hue(),
-              defaultProps.size!.width - defaultProps.sliderSize!.width
+              defaultProps.color.hue(),
+              defaultProps.size.width - defaultProps.sliderSize.width
             ),
             y: 0,
           }
     )
-    setColor(defaultProps.color!)
+    setColor(defaultProps.color)
   })
 
   function onRailChange(value: Position) {
     setColor((c) =>
       defaultProps.vertical
-        ? c.hue(xTransformHue(value.y, defaultProps.size!.height - defaultProps.sliderSize!.height))
-        : c.hue(xTransformHue(value.x, defaultProps.size!.width - defaultProps.sliderSize!.width))
+        ? c.hue(xTransformHue(value.y, defaultProps.size.height - defaultProps.sliderSize.height))
+        : c.hue(xTransformHue(value.x, defaultProps.size.width - defaultProps.sliderSize.width))
     )
     setSliderPosition(value)
     defaultProps.onChange?.(color())

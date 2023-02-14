@@ -6,11 +6,11 @@ import { createEffect, createSignal, mergeProps } from 'solid-js'
 
 interface Props {
   color: string
-  onChange: (color: Color) => void
+  onChange?: (color: Color) => void
 }
 
 export const GColorPicker = (props: Partial<Props>) => {
-  const defaultProps = mergeProps<Partial<Props>[]>({ color: '#fff' }, props)
+  const defaultProps = mergeProps<[Props, ...Partial<Props>[]]>({ color: '#fff' }, props)
   const [color, setColor] = createSignal(Color().hsv())
 
   const railSize = { width: 200, height: 12 }

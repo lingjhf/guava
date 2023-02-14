@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const GRail = (props: Partial<Props>) => {
-  const defaultProps = mergeProps<Partial<Props>[]>(
+  const defaultProps = mergeProps<[Props, ...Partial<Props>[]]>(
     {
       vertical: false,
       style: '',
@@ -29,28 +29,28 @@ export const GRail = (props: Partial<Props>) => {
 
   createEffect(() => {
     if (defaultProps.vertical) {
-      setSliderPosition({ x: 0, y: defaultProps.sliderPosition!.y })
+      setSliderPosition({ x: 0, y: defaultProps.sliderPosition.y })
     } else {
-      setSliderPosition({ x: defaultProps.sliderPosition!.x, y: 0 })
+      setSliderPosition({ x: defaultProps.sliderPosition.x, y: 0 })
     }
   })
 
-  const sliderMaxX = createMemo(() => defaultProps.size!.width - defaultProps.sliderSize!.width)
-  const sliderMaxY = createMemo(() => defaultProps.size!.height - defaultProps.sliderSize!.height)
+  const sliderMaxX = createMemo(() => defaultProps.size.width - defaultProps.sliderSize.width)
+  const sliderMaxY = createMemo(() => defaultProps.size.height - defaultProps.sliderSize.height)
 
   const railStyles = () => {
     let styles = `${defaultProps.style}`
     if (defaultProps.vertical) {
-      styles = `width:${defaultProps.size!.height}px;height:${defaultProps.size!.width}px;` + styles
+      styles = `width:${defaultProps.size.height}px;height:${defaultProps.size.width}px;` + styles
     } else {
-      styles = `width:${defaultProps.size!.width}px;height:${defaultProps.size!.height}px;` + styles
+      styles = `width:${defaultProps.size.width}px;height:${defaultProps.size.height}px;` + styles
     }
     return styles
   }
 
   const sliderStyles = () => ({
-    width: `${defaultProps.sliderSize!.width}px`,
-    height: `${defaultProps.sliderSize!.height}px`,
+    width: `${defaultProps.sliderSize.width}px`,
+    height: `${defaultProps.sliderSize.height}px`,
   })
 
   const classes = () => `g-rail ${defaultProps.class}`
@@ -66,7 +66,7 @@ export const GRail = (props: Partial<Props>) => {
 
   function onSelect(e: MouseEvent) {
     if (defaultProps.vertical) {
-      let sliderY = e.pageY - railRef.offsetTop - defaultProps.sliderSize!.height / 2
+      let sliderY = e.pageY - railRef.offsetTop - defaultProps.sliderSize.height / 2
       if (sliderY > sliderMaxX()) {
         sliderY = sliderMaxX()
       }
@@ -75,7 +75,7 @@ export const GRail = (props: Partial<Props>) => {
       }
       setSliderPosition({ x: 0, y: sliderY })
     } else {
-      let slidereX = e.pageX - railRef.offsetLeft - defaultProps.sliderSize!.width / 2
+      let slidereX = e.pageX - railRef.offsetLeft - defaultProps.sliderSize.width / 2
       if (slidereX > sliderMaxX()) {
         slidereX = sliderMaxX()
       }

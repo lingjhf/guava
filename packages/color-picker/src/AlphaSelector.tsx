@@ -9,11 +9,11 @@ interface Props {
   color: Color
   size: Size
   sliderSize: Size
-  onChange: (color: Color) => void
+  onChange?: (color: Color) => void
 }
 
 export const GAlphaSelector = (props: Partial<Props>) => {
-  const defaultProps = mergeProps<Partial<Props>[]>(
+  const defaultProps = mergeProps<[Props, ...Partial<Props>[]]>(
     {
       color: Color().hsv(),
       vertical: false,
@@ -32,19 +32,19 @@ export const GAlphaSelector = (props: Partial<Props>) => {
         ? {
             x: 0,
             y: alphaTransformX(
-              defaultProps.color!.alpha(),
-              defaultProps.size!.height - defaultProps.sliderSize!.height / 2
+              defaultProps.color.alpha(),
+              defaultProps.size.height - defaultProps.sliderSize.height / 2
             ),
           }
         : {
             x: alphaTransformX(
-              defaultProps.color!.alpha(),
-              defaultProps.size!.width - defaultProps.sliderSize!.width
+              defaultProps.color.alpha(),
+              defaultProps.size.width - defaultProps.sliderSize.width
             ),
             y: 0,
           }
     )
-    setColor(defaultProps.color!)
+    setColor(defaultProps.color)
   })
   const styles = () =>
     `background: linear-gradient(to right, ${color().alpha(0).hexa()} 0%, 
@@ -54,10 +54,10 @@ export const GAlphaSelector = (props: Partial<Props>) => {
     setColor((c) =>
       defaultProps.vertical
         ? c.alpha(
-            xTransformAlpha(value.y, defaultProps.size!.height - defaultProps.sliderSize!.height)
+            xTransformAlpha(value.y, defaultProps.size.height - defaultProps.sliderSize.height)
           )
         : c.alpha(
-            xTransformAlpha(value.x, defaultProps.size!.width - defaultProps.sliderSize!.width)
+            xTransformAlpha(value.x, defaultProps.size.width - defaultProps.sliderSize.width)
           )
     )
     setSliderPosition(value)
