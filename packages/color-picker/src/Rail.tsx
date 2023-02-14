@@ -5,6 +5,7 @@ import { createEffect, createSignal, mergeProps, createMemo } from 'solid-js'
 interface Props {
   vertical: boolean
   style: string
+  class: string
   size: Size
   sliderSize: Size
   sliderPosition: Position
@@ -16,6 +17,7 @@ export const GRail = (props: Partial<Props>) => {
     {
       vertical: false,
       style: '',
+      class: '',
       size: { width: 168, height: 12 },
       sliderSize: { width: 12, height: 12 },
       sliderPosition: { x: 0, y: 0 },
@@ -50,6 +52,8 @@ export const GRail = (props: Partial<Props>) => {
     width: `${defaultProps.sliderSize!.width}px`,
     height: `${defaultProps.sliderSize!.height}px`,
   })
+
+  const classes = () => `g-rail ${defaultProps.class}`
 
   function emitChange() {
     defaultProps.onChange?.(sliderPosition())
@@ -95,7 +99,7 @@ export const GRail = (props: Partial<Props>) => {
   const setRailRef = (el: HTMLElement) => (railRef = el)
 
   return (
-    <div ref={setRailRef} style={railStyles()} class="g-rail" onMouseDown={onSelect}>
+    <div ref={setRailRef} style={railStyles()} class={classes()} onMouseDown={onSelect}>
       <GDraggable
         minX={0}
         maxX={sliderMaxX()}
