@@ -21,7 +21,11 @@ export const GColorSelector = (props: Partial<Props>) => {
   const setColorSelectorRef = (el: HTMLElement) => (colorSelectorRef = el)
 
   const defaultProps = mergeProps<Partial<Props>[]>(
-    { size: { width: 240, height: 240 }, sliderSize: { width: 12, height: 12 } },
+    {
+      color: Color().hsv(),
+      size: { width: 240, height: 240 },
+      sliderSize: { width: 12, height: 12 },
+    },
     props
   )
   let sliderCenter = {
@@ -40,18 +44,16 @@ export const GColorSelector = (props: Partial<Props>) => {
 
   //监听颜色变化
   createEffect(() => {
-    let c: Color
-    if (defaultProps.color) {
-      c = defaultProps.color.hsv()
-    } else {
-      c = Color().hsv()
-    }
     //根据颜色设置滑块位置
     setSliderPosition({
-      x: saturationTransformX(c.saturationv() / 100, defaultProps.size!.width) - sliderCenter.x,
-      y: valueTransformY(c.value() / 100, defaultProps.size!.height) - sliderCenter.y,
+      x:
+        saturationTransformX(defaultProps.color!.saturationv() / 100, defaultProps.size!.width) -
+        sliderCenter.x,
+      y:
+        valueTransformY(defaultProps.color!.value() / 100, defaultProps.size!.height) -
+        sliderCenter.y,
     })
-    setColor(c)
+    setColor(defaultProps.color!)
   })
   //监听滑块大小变化
   createEffect(() => {
