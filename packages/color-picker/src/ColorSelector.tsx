@@ -1,7 +1,7 @@
 import Color from 'color'
 import { GDraggable } from '@lingjhf/draggable'
 import { Position, Size } from '@lingjhf/utils'
-import { createEffect, createSignal } from 'solid-js'
+import { createEffect, createSignal, mergeProps } from 'solid-js'
 import {
   xTransformSaturation,
   saturationTransformX,
@@ -11,28 +11,24 @@ import {
 
 interface Props {
   color: Color
+  size: Size
   sliderSize: Size
   onChange: (color: Color) => void
-}
-
-//滑块默认大小
-const defaultSliderSize = { width: 12, height: 12 }
-
-//滑块默认中心位置
-const defaultSliderCenter = {
-  x: defaultSliderSize.width / 2,
-  y: defaultSliderSize.height / 2,
 }
 
 export const GColorSelector = (props: Partial<Props>) => {
   let colorSelectorRef: HTMLElement
   const setColorSelectorRef = (el: HTMLElement) => (colorSelectorRef = el)
-  let sliderCenter = { x: defaultSliderCenter.x, y: defaultSliderCenter.y }
 
-  const [sliderSize, setSliderSize] = createSignal({
-    width: defaultSliderSize.width,
-    height: defaultSliderSize.height,
-  })
+  const defaultProps = mergeProps<Partial<Props>[]>(
+    { size: { width: 240, height: 240 }, sliderSize: { width: 12, height: 12 } },
+    props
+  )
+  let sliderCenter = {
+    x: defaultProps.sliderSize!.width / 2,
+    y: defaultProps.sliderSize!.height / 2,
+  }
+
   const [color, setColor] = createSignal(Color())
   const [sliderPosition, setSliderPosition] = createSignal({ x: 0, y: 0 })
   const [sliderBoundary, setSliderBoundary] = createSignal({
@@ -45,60 +41,50 @@ export const GColorSelector = (props: Partial<Props>) => {
   //监听颜色变化
   createEffect(() => {
     let c: Color
-    if (props.color) {
-      c = props.color.hsv()
+    if (defaultProps.color) {
+      c = defaultProps.color.hsv()
     } else {
       c = Color().hsv()
     }
     //根据颜色设置滑块位置
     setSliderPosition({
-      x: saturationTransformX(c.saturationv() / 100, colorSelectorRef.offsetWidth) - sliderCenter.x,
-      y: valueTransformY(c.value() / 100, colorSelectorRef.offsetHeight) - sliderCenter.y,
+      x: saturationTransformX(c.saturationv() / 100, defaultProps.size!.width) - sliderCenter.x,
+      y: valueTransformY(c.value() / 100, defaultProps.size!.height) - sliderCenter.y,
     })
     setColor(c)
   })
   //监听滑块大小变化
   createEffect(() => {
-    let _sliderSize: Size
-    if (props.sliderSize) {
-      _sliderSize = props.sliderSize
-    } else {
-      _sliderSize = defaultSliderSize
-    }
-    setSliderSize(_sliderSize)
-    sliderCenter = { x: _sliderSize.width / 2, y: _sliderSize.height / 2 }
+    sliderCenter = { x: defaultProps.sliderSize!.width / 2, y: defaultProps.sliderSize!.height / 2 }
     //设置滑块边界
     setSliderBoundary({
       minX: 0 - sliderCenter.x,
       minY: 0 - sliderCenter.y,
-      maxX: colorSelectorRef.offsetWidth - sliderCenter.x,
-      maxY: colorSelectorRef.offsetHeight - sliderCenter.y,
+      maxX: defaultProps.size!.width - sliderCenter.x,
+      maxY: defaultProps.size!.height - sliderCenter.y,
     })
   })
-  const styles = () => ({
-    background: `linear-gradient(to right, #ffffff 0%, ${Color().hsv(
-      color().hue(),
-      100,
-      100
-    )} 100%)`,
-  })
-  const sliderStyles = () => ({
-    width: `${sliderSize().width}px`,
-    height: `${sliderSize().height}px`,
-  })
+  const styles = () => `
+    width:${defaultProps.size!.width}px;
+    height:${defaultProps.size!.height}px;
+    background: linear-gradient(to right, #ffffff 0%, ${Color().hsv(color().hue(), 100, 100)} 100%)
+  `
+
+  const sliderStyles = () => `
+    width: ${defaultProps.sliderSize!.width}px;
+    height: ${defaultProps.sliderSize!.height}px;
+  `
 
   function emitChange() {
-    props.onChange?.(color())
+    defaultProps.onChange?.(color())
   }
 
   //x位置换算成饱和度，y位置换算成明度
   function onDraggableChange(value: Position) {
     setColor((c) =>
       c
-        .saturationv(
-          xTransformSaturation(value.x + sliderCenter.x, colorSelectorRef.offsetWidth) * 100
-        )
-        .value(yTransformValue(value.y + sliderCenter.y, colorSelectorRef.offsetHeight) * 100)
+        .saturationv(xTransformSaturation(value.x + sliderCenter.x, defaultProps.size!.width) * 100)
+        .value(yTransformValue(value.y + sliderCenter.y, defaultProps.size!.height) * 100)
     )
     emitChange()
   }
@@ -113,8 +99,8 @@ export const GColorSelector = (props: Partial<Props>) => {
     })
     setColor((c) =>
       c
-        .saturationv(xTransformSaturation(mouseOffsetX, colorSelectorRef.offsetWidth) * 100)
-        .value(yTransformValue(mouseOffseY, colorSelectorRef.offsetHeight) * 100)
+        .saturationv(xTransformSaturation(mouseOffsetX, defaultProps.size!.width) * 100)
+        .value(yTransformValue(mouseOffseY, defaultProps.size!.height) * 100)
     )
     emitChange()
     expose.onDrag()
