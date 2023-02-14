@@ -31,14 +31,16 @@ export const GAlphaSelector = (props: Partial<Props>) => {
       defaultProps.vertical
         ? {
             x: 0,
-            y:
-              alphaTransformX(defaultProps.color!.alpha(), defaultProps.size!.height) -
-              defaultProps.sliderSize!.height / 2,
+            y: alphaTransformX(
+              defaultProps.color!.alpha(),
+              defaultProps.size!.height - defaultProps.sliderSize!.height / 2
+            ),
           }
         : {
-            x:
-              alphaTransformX(defaultProps.color!.alpha(), defaultProps.size!.width) -
-              defaultProps.sliderSize!.width / 2,
+            x: alphaTransformX(
+              defaultProps.color!.alpha(),
+              defaultProps.size!.width - defaultProps.sliderSize!.width
+            ),
             y: 0,
           }
     )
