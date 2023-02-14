@@ -117,7 +117,7 @@ export const GColorSelector = (props: Partial<Props>) => {
     <div
       ref={setColorSelectorRef}
       style={styles()}
-      class="color-selector"
+      class="g-color-selector"
       onMouseDown={onSelectColor}
     >
       <GDraggable
@@ -130,7 +130,7 @@ export const GColorSelector = (props: Partial<Props>) => {
         onChange={onDraggableChange}
         expose={expose}
       >
-        <div class="slider" style={sliderStyles()}></div>
+        <div class="g-slider" style={sliderStyles()}></div>
       </GDraggable>
     </div>
   )

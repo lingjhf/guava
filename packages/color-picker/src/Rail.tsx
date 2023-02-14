@@ -110,7 +110,7 @@ export const GRail = (props: Partial<Props>) => {
         onChange={onDraggableChange}
         expose={expose}
       >
-        <div class="slider" style={sliderStyles()}></div>
+        <div class="g-slider" style={sliderStyles()}></div>
       </GDraggable>
     </div>
   )
