@@ -64,6 +64,7 @@ export const GAlphaSelector = (props: Partial<Props>) => {
 
   return (
     <GRail
+      class="g-alpha-selector"
       vertical={props.vertical}
       size={defaultProps.size}
       sliderSize={defaultProps.sliderSize}
