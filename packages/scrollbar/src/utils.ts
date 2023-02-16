@@ -39,7 +39,7 @@ export function sliderXToScrollX(
   viewW: number,
   contentW: number
 ): number {
-  return sliderX * ((viewW - sliderW) / (contentW - viewW))
+  return sliderX * ((contentW - viewW) / (viewW - sliderW))
 }
 
 class PressedDrag {
