@@ -19,18 +19,6 @@ interface VerticalSlider {
   minHeight: number
 }
 
-interface HorizontalScroll {
-  scrollX: number
-  sliderX: number
-  sliderWidth: number
-}
-
-interface VerticalScroll {
-  scrollY: number
-  sliderY: number
-  sliderHeight: number
-}
-
 export class ScrollController {
   //可见区域大小
   private viewSize: Size
@@ -51,16 +39,10 @@ export class ScrollController {
     this.viewSize = options.viewSize
     this.contentSize = options.contentSize
     this.scrollPosition = options.scrollPosition ?? { x: 0, y: 0 }
-    this.verticalSlider = {
-      y: 0,
-      height: this.getVerticalSliderHeight(),
-      minHeight: 40,
-    }
-    this.horizontalSlider = {
-      x: 0,
-      width: this.getHorizontalSliderWidth(),
-      minWidth: 40,
-    }
+    this.verticalSlider = { y: 0, height: 0, minHeight: 40 }
+    this.horizontalSlider = { x: 0, width: 0, minWidth: 40 }
+    this.verticalSlider.height = this.getVerticalSliderHeight()
+    this.horizontalSlider.width = this.getHorizontalSliderWidth()
     if (this.scrollPosition.y) {
       this.setVerticalSliderYWithScrollY(this.scrollPosition.y)
     }
@@ -69,28 +51,28 @@ export class ScrollController {
     }
   }
 
-  /**获取水平滚动信息
-   *
-   * @returns 返回水平滚动信息
-   */
-  getHorizontalScroll(): HorizontalScroll {
-    return {
-      scrollX: this.scrollPosition.x,
-      sliderX: this.horizontalSlider.x,
-      sliderWidth: this.horizontalSlider.width,
-    }
+  get horizontalSliderX() {
+    return this.horizontalSlider.x
   }
 
-  /**获取垂直滚动信息
-   *
-   * @returns 返回垂直滚动信息
-   */
-  getVerticalScroll(): VerticalScroll {
-    return {
-      scrollY: this.scrollPosition.y,
-      sliderY: this.verticalSlider.y,
-      sliderHeight: this.verticalSlider.height,
-    }
+  get horizontalSliderWidth() {
+    return this.horizontalSlider.width
+  }
+
+  get verticalSliderY() {
+    return this.verticalSlider.y
+  }
+
+  get verticalSliderHeight() {
+    return this.verticalSlider.height
+  }
+
+  get scrollX(): number {
+    return this.scrollPosition.x
+  }
+
+  get scrollY(): number {
+    return this.scrollPosition.y
   }
 
   /**设置可见区域大小
