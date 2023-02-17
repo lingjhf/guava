@@ -34,6 +34,8 @@ const defaultPropsData: Props = {
 export const GScrollArea = (props: Partial<Props>) => {
   let isAction = false
   let isLeave = false
+  let isVisibleHorizontalScroll = false
+  let isVisibleVerticalScroll = false
   let scrollController: ScrollController
   let viewRef: HTMLElement
   let contentRef: HTMLElement
@@ -119,65 +121,113 @@ export const GScrollArea = (props: Partial<Props>) => {
   }
 
   function visibleScroll() {
-    verticalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
-    horizontalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
-    verticalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
-    horizontalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
+    if (isHorizontalOverflow() && !isVisibleHorizontalScroll) {
+      isVisibleHorizontalScroll = true
+      horizontalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
+      horizontalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
+    }
+    if (isVerticalOverflow() && !isVisibleVerticalScroll) {
+      isVisibleVerticalScroll = true
+      verticalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
+      verticalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
+    }
   }
 
   function invisibleScroll() {
-    verticalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
-    horizontalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
-    verticalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
-    horizontalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
+    if (isHorizontalOverflow() && isVisibleHorizontalScroll) {
+      isVisibleHorizontalScroll = false
+      horizontalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
+      horizontalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
+    }
+    if (isVerticalOverflow() && isVisibleVerticalScroll) {
+      isVisibleVerticalScroll = false
+      verticalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
+      verticalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
+    }
   }
 
   //显示滚动条动画
   function visibleScrollbarAnimation() {
-    verticalScrollbarRef.classList.remove('g-scrollbar-invisible-animation')
-    verticalScrollbarRef.classList.add('g-scrollbar-visible-animation')
-    verticalScrollbarRef.addEventListener('animationend', () => {
-      verticalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
-    })
-    horizontalScrollbarRef.classList.remove('g-scrollbar-invisible-animation')
-    horizontalScrollbarRef.classList.add('g-scrollbar-visible-animation')
-    horizontalScrollbarRef.addEventListener('animationend', () => {
-      horizontalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
-    })
-    verticalSliderRef.classList.remove('g-slider-invisible-animation')
-    verticalSliderRef.classList.add('g-slider-visible-animation')
-    verticalSliderRef.addEventListener('animationend', () => {
-      verticalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
-    })
-    horizontalSliderRef.classList.remove('g-slider-invisible-animation')
-    horizontalSliderRef.classList.add('g-slider-visible-animation')
-    horizontalSliderRef.addEventListener('animationend', () => {
-      horizontalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
-    })
+    if (isHorizontalOverflow()) {
+      visibleHorizontalScrollAnimation()
+    }
+    if (isVerticalOverflow()) {
+      visibleVerticalScrollAnimation()
+    }
   }
 
   //隐藏滚动条动画
   function invisibleScrollbarAnimation() {
-    verticalScrollbarRef.classList.remove('g-scrollbar-visible-animation')
-    verticalScrollbarRef.classList.add('g-scrollbar-invisible-animation')
-    verticalScrollbarRef.addEventListener('animationend', () => {
-      verticalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
-    })
-    horizontalScrollbarRef.classList.remove('g-scrollbar-visible-animation')
-    horizontalScrollbarRef.classList.add('g-scrollbar-invisible-animation')
-    horizontalScrollbarRef.addEventListener('animationend', () => {
-      horizontalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
-    })
-    verticalSliderRef.classList.remove('g-slider-visible-animation')
-    verticalSliderRef.classList.add('g-slider-invisible-animation')
-    verticalSliderRef.addEventListener('animationend', () => {
-      verticalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
-    })
-    horizontalSliderRef.classList.remove('g-slider-visible-animation')
-    horizontalSliderRef.classList.add('g-slider-invisible-animation')
-    horizontalSliderRef.addEventListener('animationend', () => {
-      horizontalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
-    })
+    if (isHorizontalOverflow()) {
+      invisibleHorizontalScrollAnimation()
+    }
+    if (isVerticalOverflow()) {
+      invisibleVerticalScrollAnimation()
+    }
+  }
+
+  function visibleHorizontalScrollAnimation() {
+    if (!isVisibleHorizontalScroll) {
+      isVisibleHorizontalScroll = true
+      horizontalScrollbarRef.classList.remove('g-scrollbar-invisible-animation')
+      horizontalScrollbarRef.classList.add('g-scrollbar-visible-animation')
+      horizontalScrollbarRef.addEventListener('animationend', () => {
+        horizontalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
+      })
+      horizontalSliderRef.classList.remove('g-slider-invisible-animation')
+      horizontalSliderRef.classList.add('g-slider-visible-animation')
+      horizontalSliderRef.addEventListener('animationend', () => {
+        horizontalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
+      })
+    }
+  }
+
+  function visibleVerticalScrollAnimation() {
+    if (!isVisibleVerticalScroll) {
+      isVisibleVerticalScroll = true
+      verticalScrollbarRef.classList.remove('g-scrollbar-invisible-animation')
+      verticalScrollbarRef.classList.add('g-scrollbar-visible-animation')
+      verticalScrollbarRef.addEventListener('animationend', () => {
+        verticalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
+      })
+      verticalSliderRef.classList.remove('g-slider-invisible-animation')
+      verticalSliderRef.classList.add('g-slider-visible-animation')
+      verticalSliderRef.addEventListener('animationend', () => {
+        verticalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
+      })
+    }
+  }
+
+  function invisibleHorizontalScrollAnimation() {
+    if (isVisibleHorizontalScroll) {
+      isVisibleHorizontalScroll = false
+      horizontalScrollbarRef.classList.remove('g-scrollbar-visible-animation')
+      horizontalScrollbarRef.classList.add('g-scrollbar-invisible-animation')
+      horizontalScrollbarRef.addEventListener('animationend', () => {
+        horizontalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
+      })
+      horizontalSliderRef.classList.remove('g-slider-visible-animation')
+      horizontalSliderRef.classList.add('g-slider-invisible-animation')
+      horizontalSliderRef.addEventListener('animationend', () => {
+        horizontalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
+      })
+    }
+  }
+
+  function invisibleVerticalScrollAnimation() {
+    if (isVisibleVerticalScroll) {
+      isVisibleVerticalScroll = false
+      verticalScrollbarRef.classList.remove('g-scrollbar-visible-animation')
+      verticalScrollbarRef.classList.add('g-scrollbar-invisible-animation')
+      verticalScrollbarRef.addEventListener('animationend', () => {
+        verticalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
+      })
+      verticalSliderRef.classList.remove('g-slider-visible-animation')
+      verticalSliderRef.classList.add('g-slider-invisible-animation')
+      verticalSliderRef.addEventListener('animationend', () => {
+        verticalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
+      })
+    }
   }
 
   //监听可见区域大小对滚动条进行变化
@@ -187,10 +237,20 @@ export const GScrollArea = (props: Partial<Props>) => {
         if (isVerticalOverflow()) {
           scrollController.setViewSize({ height: viewRef.offsetHeight })
           setVerticalAndScrollY()
+          if (defaultProps.type === 'visible') {
+            visibleVerticalScrollAnimation()
+          }
+        } else if (defaultProps.type === 'visible') {
+          invisibleVerticalScrollAnimation()
         }
         if (isHorizontalOverflow()) {
           scrollController.setViewSize({ width: viewRef.offsetWidth })
           setHorizontalAndScrollX()
+          if (defaultProps.type === 'visible') {
+            visibleHorizontalScrollAnimation()
+          }
+        } else if (defaultProps.type === 'visible') {
+          invisibleHorizontalScrollAnimation()
         }
       }
     })
@@ -204,10 +264,20 @@ export const GScrollArea = (props: Partial<Props>) => {
         if (isVerticalOverflow()) {
           scrollController.setContentSize({ height: contentRef.offsetHeight })
           setVerticalAndScrollY()
+          if (defaultProps.type === 'visible') {
+            visibleVerticalScrollAnimation()
+          }
+        } else if (defaultProps.type === 'visible') {
+          invisibleVerticalScrollAnimation()
         }
         if (isHorizontalOverflow()) {
           scrollController.setContentSize({ width: contentRef.offsetWidth })
           setHorizontalAndScrollX()
+          if (defaultProps.type === 'visible') {
+            visibleHorizontalScrollAnimation()
+          }
+        } else if (defaultProps.type === 'visible') {
+          invisibleHorizontalScrollAnimation()
         }
       }
     })
