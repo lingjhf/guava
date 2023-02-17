@@ -28,8 +28,9 @@ const example = () => {
 
 ### onChange
 
-类型: `function`<br>
+类型: `(color: Color) => void`<br>
 默认值: `null`
 
-回调函数参数是一个Color对象<br>
-参考: [Color](https://github.com/Qix-/color)
+当颜色改变后调用此函数
+
+- color 参考: [Color](https://github.com/Qix-/color)
