@@ -271,6 +271,7 @@ export class ScrollController {
    * @returns 返回一个有效的宽度
    */
   private getValidHorizontalSliderWidth(width: number): number {
+    if (this.viewSize.width >= this.contentSize.width) return 0
     if (width < this.horizontalSlider.minWidth) {
       width = this.horizontalSlider.minWidth
     }
@@ -283,6 +284,7 @@ export class ScrollController {
    * @returns 返回一个有效的高度
    */
   private getValidVerticalSliderHeight(height: number): number {
+    if (this.viewSize.height >= this.contentSize.height) return 0
     if (height < this.verticalSlider.minHeight) {
       height = this.verticalSlider.minHeight
     }
