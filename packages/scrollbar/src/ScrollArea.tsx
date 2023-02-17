@@ -32,6 +32,8 @@ const defaultPropsData: Props = {
 }
 
 export const GScrollArea = (props: Partial<Props>) => {
+  let isAction = false
+  let isLeave = false
   let scrollController: ScrollController
   let viewRef: HTMLElement
   let contentRef: HTMLElement
@@ -90,14 +92,17 @@ export const GScrollArea = (props: Partial<Props>) => {
     })
   }
 
+  //判断是否水平溢出
   function isHorizontalOverflow() {
     return contentRef.offsetWidth > viewRef.offsetWidth
   }
 
+  //判断是否垂直溢出
   function isVerticalOverflow() {
     return contentRef.offsetHeight > viewRef.offsetHeight
   }
 
+  //设置水平滑块位置大小和滚动位置
   function setHorizontalAndScrollX() {
     setHorizontalSlider({
       left: scrollController.horizontalSliderX,
@@ -106,6 +111,7 @@ export const GScrollArea = (props: Partial<Props>) => {
     viewRef.scrollLeft = scrollController.scrollX
   }
 
+  //设置垂直滑块位置大小和滚动位置
   function setVerticalAndScrollY() {
     setVerticalSlider({
       top: scrollController.verticalSliderY,
@@ -148,16 +154,36 @@ export const GScrollArea = (props: Partial<Props>) => {
     resizeObserver.observe(contentRef)
   }
 
+  //鼠标进入滚动区域显示滚动条
   function onEnterScrollArea() {
-    if (defaultProps.type === 'invisible') return
-    setVisibleHorizontalScrollbar(true)
-    setVisibleVerticalScrollbar(true)
+    isLeave = false
+    if (defaultProps.type === 'auto') {
+      setVisibleHorizontalScrollbar(true)
+      setVisibleVerticalScrollbar(true)
+    }
   }
 
+  //鼠标离开滚动区域隐藏滚动条
   function onLeaveScrollArea() {
-    if (defaultProps.type === 'visible') return
-    setVisibleHorizontalScrollbar(false)
-    setVisibleVerticalScrollbar(false)
+    isLeave = true
+    if (defaultProps.type === 'auto' && !isAction) {
+      setVisibleHorizontalScrollbar(false)
+      setVisibleVerticalScrollbar(false)
+    }
+  }
+
+  //开始操作
+  function onAction() {
+    isAction = true
+  }
+
+  //操作结束后离开滚动区域
+  function onActionEndLeaveScrollArea() {
+    isAction = false
+    if (defaultProps.type === 'auto' && isLeave) {
+      setVisibleHorizontalScrollbar(false)
+      setVisibleVerticalScrollbar(false)
+    }
   }
 
   //鼠标点击水平滚动栏跳转到指定位置
@@ -188,6 +214,7 @@ export const GScrollArea = (props: Partial<Props>) => {
     const sliderX = scrollController.horizontalSliderX
     createPressedDrag()
       .onStart((e) => {
+        onAction()
         startEvent = e
       })
       .onUpdate((e) => {
@@ -196,7 +223,7 @@ export const GScrollArea = (props: Partial<Props>) => {
         })
         setHorizontalAndScrollX()
       })
-      .onEnd(() => {})
+      .onEnd(onActionEndLeaveScrollArea)
       .action()
   }
 
@@ -206,6 +233,7 @@ export const GScrollArea = (props: Partial<Props>) => {
     const sliderY = scrollController.verticalSliderY
     createPressedDrag()
       .onStart((e) => {
+        onAction()
         startEvent = e
       })
       .onUpdate((e) => {
@@ -214,7 +242,7 @@ export const GScrollArea = (props: Partial<Props>) => {
         })
         setVerticalAndScrollY()
       })
-      .onEnd(() => {})
+      .onEnd(onActionEndLeaveScrollArea)
       .action()
   }
 
