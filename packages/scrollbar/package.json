@@ -1,21 +1,24 @@
 {
-  "name": "@lingjhf/scrollbar",
+  "name": "@lingjhf/scroll-area",
   "version": "0.0.0",
   "description": "",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "src/index.tsx",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./src/index.tsx",
+        "default": "./src/index.tsx"
       }
     }
   },
   "scripts": {
     "build": "vite build"
+  },
+  "dependencies": {
+    "@lingjhf/utils": "workspace:^0.0.0"
   }
 }
