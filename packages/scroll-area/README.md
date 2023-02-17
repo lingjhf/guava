@@ -52,11 +52,11 @@ const example = () => {
 
 ### onScroll
 
-类型: `function`<br>
+类型: `(detail: scrollDetail) => void`<br>
 默认值: `null`
 
-滚动条操作后的回调函数，鼠标滑轮滚动，鼠标拖拽滑块滚动都会执行这个回调函数
-回调函数参数是一个scrollDetail，里面包含以下属性
+滚动条操作后的回调函数，鼠标滑轮滚动，鼠标拖拽滑块滚动都会执行这个回调函数<br>
+`scrollDetail` 包含下列属性
 
 - `scrollX` 水平滚动条当前位置
 - `scrollY` 垂直滚动条当前位置
