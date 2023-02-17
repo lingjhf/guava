@@ -1,4 +1,4 @@
-import { createSignal, JSX, mergeProps, Show, onMount, createEffect } from 'solid-js'
+import { createSignal, JSX, mergeProps, onMount, createEffect } from 'solid-js'
 import { ScrollController } from './controller'
 import { createPressedDrag } from './utils'
 
@@ -53,8 +53,6 @@ export const GScrollArea = (props: Partial<Props>) => {
 
   const [verticalSlider, setVerticalSlider] = createSignal({ top: 0, height: 0 })
   const [horizontalSlider, setHorizontalSlider] = createSignal({ left: 0, width: 0 })
-  const [visibleHorizontalScrollbar, setVisibleHorizontalScrollbar] = createSignal(false)
-  const [visibleVerticalScrollbar, setVisibleVerticalScrollbar] = createSignal(false)
 
   //监听滚动位置
   createEffect(() => {
@@ -68,13 +66,13 @@ export const GScrollArea = (props: Partial<Props>) => {
   createEffect(() => {
     switch (defaultProps.type) {
       case 'visible':
-        setVisibleHorizontalScrollbar(true)
-        setVisibleVerticalScrollbar(true)
+        visibleScroll()
         break
-
       case 'invisible':
-        setVisibleHorizontalScrollbar(false)
-        setVisibleVerticalScrollbar(false)
+        invisibleScroll()
+        break
+      case 'auto':
+        invisibleScroll()
         break
     }
   })
@@ -120,6 +118,68 @@ export const GScrollArea = (props: Partial<Props>) => {
     viewRef.scrollTop = scrollController.scrollY
   }
 
+  function visibleScroll() {
+    verticalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
+    horizontalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
+    verticalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
+    horizontalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
+  }
+
+  function invisibleScroll() {
+    verticalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
+    horizontalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
+    verticalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
+    horizontalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
+  }
+
+  //显示滚动条动画
+  function visibleScrollbarAnimation() {
+    verticalScrollbarRef.classList.remove('g-scrollbar-invisible-animation')
+    verticalScrollbarRef.classList.add('g-scrollbar-visible-animation')
+    verticalScrollbarRef.addEventListener('animationend', () => {
+      verticalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
+    })
+    horizontalScrollbarRef.classList.remove('g-scrollbar-invisible-animation')
+    horizontalScrollbarRef.classList.add('g-scrollbar-visible-animation')
+    horizontalScrollbarRef.addEventListener('animationend', () => {
+      horizontalScrollbarRef.classList.replace('g-invisible', 'g-scrollbar-visible')
+    })
+    verticalSliderRef.classList.remove('g-slider-invisible-animation')
+    verticalSliderRef.classList.add('g-slider-visible-animation')
+    verticalSliderRef.addEventListener('animationend', () => {
+      verticalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
+    })
+    horizontalSliderRef.classList.remove('g-slider-invisible-animation')
+    horizontalSliderRef.classList.add('g-slider-visible-animation')
+    horizontalSliderRef.addEventListener('animationend', () => {
+      horizontalSliderRef.classList.replace('g-invisible', 'g-slider-visible')
+    })
+  }
+
+  //隐藏滚动条动画
+  function invisibleScrollbarAnimation() {
+    verticalScrollbarRef.classList.remove('g-scrollbar-visible-animation')
+    verticalScrollbarRef.classList.add('g-scrollbar-invisible-animation')
+    verticalScrollbarRef.addEventListener('animationend', () => {
+      verticalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
+    })
+    horizontalScrollbarRef.classList.remove('g-scrollbar-visible-animation')
+    horizontalScrollbarRef.classList.add('g-scrollbar-invisible-animation')
+    horizontalScrollbarRef.addEventListener('animationend', () => {
+      horizontalScrollbarRef.classList.replace('g-scrollbar-visible', 'g-invisible')
+    })
+    verticalSliderRef.classList.remove('g-slider-visible-animation')
+    verticalSliderRef.classList.add('g-slider-invisible-animation')
+    verticalSliderRef.addEventListener('animationend', () => {
+      verticalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
+    })
+    horizontalSliderRef.classList.remove('g-slider-visible-animation')
+    horizontalSliderRef.classList.add('g-slider-invisible-animation')
+    horizontalSliderRef.addEventListener('animationend', () => {
+      horizontalSliderRef.classList.replace('g-slider-visible', 'g-invisible')
+    })
+  }
+
   //监听可见区域大小对滚动条进行变化
   function watchViewResize() {
     const resizeObserver = new ResizeObserver((entries) => {
@@ -158,8 +218,7 @@ export const GScrollArea = (props: Partial<Props>) => {
   function onEnterScrollArea() {
     isLeave = false
     if (defaultProps.type === 'auto') {
-      setVisibleHorizontalScrollbar(true)
-      setVisibleVerticalScrollbar(true)
+      visibleScrollbarAnimation()
     }
   }
 
@@ -167,8 +226,7 @@ export const GScrollArea = (props: Partial<Props>) => {
   function onLeaveScrollArea() {
     isLeave = true
     if (defaultProps.type === 'auto' && !isAction) {
-      setVisibleHorizontalScrollbar(false)
-      setVisibleVerticalScrollbar(false)
+      invisibleScrollbarAnimation()
     }
   }
 
@@ -181,8 +239,7 @@ export const GScrollArea = (props: Partial<Props>) => {
   function onActionEndLeaveScrollArea() {
     isAction = false
     if (defaultProps.type === 'auto' && isLeave) {
-      setVisibleHorizontalScrollbar(false)
-      setVisibleVerticalScrollbar(false)
+      invisibleScrollbarAnimation()
     }
   }
 
@@ -281,32 +338,29 @@ export const GScrollArea = (props: Partial<Props>) => {
           {props.children}
         </div>
       </div>
-      <Show when={visibleVerticalScrollbar()}>
-        <div
-          ref={setVerticalScrollbarRef}
-          class="g-scroll-vertical-bar"
-          onMouseDown={onVerticalBarPressed}
-        ></div>
-        <div
-          ref={setVerticalSliderRef}
-          style={verticalSliderStyles()}
-          class="g-scroll-vertical-slider"
-          onMouseDown={onVerticalSliderDrag}
-        ></div>
-      </Show>
-      <Show when={visibleHorizontalScrollbar()}>
-        <div
-          ref={setHorizontalScrollbarRef}
-          class="g-scroll-horizontal-bar"
-          onMouseDown={onHorizontalBarPressed}
-        ></div>
-        <div
-          ref={setHorizontalSliderRef}
-          style={horizontalSliderStyles()}
-          class="g-scroll-horizontal-slider"
-          onMouseDown={onHorizontalSliderDrag}
-        ></div>
-      </Show>
+      <div
+        ref={setVerticalScrollbarRef}
+        class="g-scroll-vertical-bar g-invisible"
+        onMouseDown={onVerticalBarPressed}
+      ></div>
+      <div
+        ref={setVerticalSliderRef}
+        style={verticalSliderStyles()}
+        class="g-scroll-vertical-slider g-invisible"
+        onMouseDown={onVerticalSliderDrag}
+      ></div>
+
+      <div
+        ref={setHorizontalScrollbarRef}
+        class="g-scroll-horizontal-bar g-invisible"
+        onMouseDown={onHorizontalBarPressed}
+      ></div>
+      <div
+        ref={setHorizontalSliderRef}
+        style={horizontalSliderStyles()}
+        class="g-scroll-horizontal-slider g-invisible"
+        onMouseDown={onHorizontalSliderDrag}
+      ></div>
     </div>
   )
 }
