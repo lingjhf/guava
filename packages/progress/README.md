@@ -1,5 +1,10 @@
 # Progress
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/lingjhf/guava/master/images/progress/progress.png
+" style="width:400px;" />
+</p>
+
 ## 使用
 
 ```js
