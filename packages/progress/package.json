@@ -1,0 +1,21 @@
+{
+  "name": "@lingjhf/progress",
+  "version": "0.0.0",
+  "description": "File upload tool",
+  "type": "module",
+  "types": "src/index.tsx",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./src/index.tsx",
+        "default": "./src/index.tsx"
+      }
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  }
+}

@@ -1,0 +1,16 @@
+.g-progress-line {
+  @apply flex h-[16px] w-full items-center;
+}
+
+.g-progress-container {
+  @apply rounded-full bg-[#ebeef5] h-[6px]  w-full overflow-hidden;
+}
+
+.g-progress-percentage {
+  @apply rounded-full h-full;
+  transition: width 600ms;
+}
+
+.g-progress-outside-text {
+  @apply h-full  flex-shrink-0 text-xs pl-2 w-[50px] box-border;
+}
