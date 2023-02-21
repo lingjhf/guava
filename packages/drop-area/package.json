@@ -1,0 +1,25 @@
+{
+  "name": "@lingjhf/drop-area",
+  "version": "0.0.0",
+  "description": "File upload tool",
+  "type": "module",
+  "types": "src/index.tsx",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./src/index.tsx",
+        "default": "./src/index.tsx"
+      }
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@lingjhf/draggable": "workspace:^0.0.0",
+    "@lingjhf/utils": "workspace:^0.0.0"
+  }
+}
