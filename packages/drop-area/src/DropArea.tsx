@@ -78,7 +78,7 @@ export const GDropArea = (props: Partial<Props>) => {
   //交换拖拽项
   function switchItem(index: number, mousePosition: Position) {
     if (context?.enterOtherArea) {
-      context.enterOtherArea(mousePosition, areaRef, index)
+      context.enterOtherArea(mousePosition, areaRef, index, store.items[index])
       return
     }
     for (const [itemIndex, item] of store.items.entries()) {
