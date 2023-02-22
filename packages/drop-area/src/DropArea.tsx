@@ -38,7 +38,7 @@ export const GDropArea = (props: Partial<Props>) => {
   const defaultProps = mergeProps<[Props, ...Partial<Props>[]]>(
     {
       each: [],
-      switchWhileCrossEdge: true,
+      switchWhileCrossEdge: false,
     },
     props
   )
