@@ -3,7 +3,7 @@ import { mergeProps, JSX, createContext, useContext, For, createEffect } from 's
 import { createStore, produce } from 'solid-js/store'
 import { GDragItem } from './DragItem'
 import { useMultiDropAreaContext } from './MultiDropArea'
-import { checkCrossEdge, checkCrossHalf, moveItem } from './utils'
+import { checkCrossEdge, checkCrossWidthHalf, checkCrossHeightHalf, moveItem } from './utils'
 
 export interface ItemData {
   data: unknown
@@ -19,6 +19,7 @@ interface DropAreaProviderValue {
 interface Props {
   each: unknown[]
   switchWhileCrossEdge: boolean
+  horizontal: boolean
   originPlaceholder?: () => JSX.Element
   children?: (item: unknown, index: number) => JSX.Element
 }
@@ -39,6 +40,7 @@ export const GDropArea = (props: Partial<Props>) => {
     {
       each: [],
       switchWhileCrossEdge: false,
+      horizontal: false,
     },
     props
   )
@@ -51,6 +53,8 @@ export const GDropArea = (props: Partial<Props>) => {
     }
     setStore('items', newItems)
   })
+
+  const areaStyles = () => `${defaultProps.horizontal ? 'display:flex' : ''};`
 
   function getItems() {
     return store.items
@@ -95,7 +99,9 @@ export const GDropArea = (props: Partial<Props>) => {
             break
           }
         } else {
-          const direction = checkCrossHalf(mousePosition, { x, y, width, height })
+          const direction = defaultProps.horizontal
+            ? checkCrossWidthHalf(mousePosition, { x, y, width, height })
+            : checkCrossHeightHalf(mousePosition, { x, y, width, height })
           if (direction > -1) {
             setStore(
               'items',
@@ -122,7 +128,7 @@ export const GDropArea = (props: Partial<Props>) => {
 
   return (
     <DropAreaContext.Provider value={providerValue}>
-      <div ref={setAreaRef} class="g-drop-area">
+      <div ref={setAreaRef} class="g-drop-area" style={areaStyles()}>
         <For each={store.items}>
           {(item, index) => {
             return (
