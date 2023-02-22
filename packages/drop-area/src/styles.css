@@ -9,11 +9,10 @@
 }
 
 .g-drag-handle {
-  @apply bg-orange-400 top-0 bottom-0 left-0 w-2 absolute select-none;
+  @apply bg-blue-500 top-0 bottom-0 left-0 w-2 absolute select-none;
 }
 
 .g-drag-content {
-  @apply bg-blue-500 p-2;
 }
 
 .g-drag-placeholder {
