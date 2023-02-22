@@ -13,11 +13,11 @@ export const GDragItem = (props: Partial<Props>) => {
   const context = useDropArea()
 
   let dragItemRef: HTMLElement
-  let contentWrapRef: HTMLElement
+  let contentRef: HTMLElement
 
   const setDragItemRef = (el: HTMLElement) => (dragItemRef = el)
-  const setContentWrapRef = (el: HTMLElement) => {
-    contentWrapRef = el
+  const setContentRef = (el: HTMLElement) => {
+    contentRef = el
     context?.addItem(defaultProps.index, el)
   }
 
@@ -39,12 +39,13 @@ export const GDragItem = (props: Partial<Props>) => {
   })
 
   const drggableStyles = () => `width:${width()}px`
-  const placeholderstyles = () => `height:${contentWrapRef.offsetHeight}px`
+  const placeholderstyles = () =>
+    `width:${contentRef.offsetWidth}px;height:${contentRef.offsetHeight}px`
 
   function onStartDrag(e: MouseEvent) {
     const firstPageX = e.pageX
     const firstPageY = e.pageY
-    const { x, y } = contentWrapRef.getBoundingClientRect()
+    const { x, y } = contentRef.getBoundingClientRect()
     const mouseOffsetBoxX = firstPageX - x
     const mouseOffsetBoxY = firstPageY - y
     const pd = createPressedDrag()
@@ -66,20 +67,20 @@ export const GDragItem = (props: Partial<Props>) => {
       .action()
   }
 
-  const contentWrap = createMemo(() => (
-    <div ref={setContentWrapRef} class="g-drag-content-wrap">
+  const content = createMemo(() => (
+    <div ref={setContentRef} class="g-drag-content">
       <div class="g-drag-handle" onMouseDown={onStartDrag}></div>
-      <div class="g-drag-content">{props.children}</div>
+      {props.children}
     </div>
   ))
 
   return (
     <div ref={setDragItemRef} class="g-drag-item">
-      <Show when={placeholder()} fallback={contentWrap()}>
+      <Show when={placeholder()} fallback={content()}>
         <div class="g-drag-placeholder" style={placeholderstyles()}></div>
         <Show when={draggable()}>
           <GDraggable classList={{ 'g-index-top': true }} x={itemPosition().x} y={itemPosition().y}>
-            <div style={drggableStyles()}>{contentWrap()}</div>
+            <div style={drggableStyles()}>{content()}</div>
           </GDraggable>
         </Show>
       </Show>
