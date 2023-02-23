@@ -6,6 +6,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "docs":"pnpm run -r docs:build"
+  },
   "dependencies": {
     "solid-js": "^1.6.10"
   },
