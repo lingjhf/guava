@@ -1,0 +1,17 @@
+{
+  "name": "@guava/docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs": "vitepress dev .",
+    "docs:build": "vitepress build ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitepress": "1.0.0-alpha.47",
+    "vue": "^3.2.47"
+  }
+}
