@@ -1,5 +1,5 @@
 {
-  "name": "@lingjhf/drop-area",
+  "name": "@guava/drop-area",
   "version": "0.0.0",
   "description": "File upload tool",
   "type": "module",
@@ -19,7 +19,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@lingjhf/draggable": "workspace:^0.0.0",
-    "@lingjhf/utils": "workspace:^0.0.0"
+    "@guava/draggable": "workspace:^0.0.0",
+    "@guava/utils": "workspace:^0.0.0"
   }
 }

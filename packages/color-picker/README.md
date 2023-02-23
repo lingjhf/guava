@@ -7,7 +7,7 @@
 ## 使用
 
 ```js
-import { GColorPicker } from '@lingjhf/color-picker'
+import { GColorPicker } from '@guava/color-picker'
 
 const example = () => {
   return (

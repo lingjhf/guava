@@ -1,5 +1,5 @@
 {
-  "name": "@lingjhf/scroll-area",
+  "name": "@guava/scroll-area",
   "version": "0.0.0",
   "description": "",
   "type": "module",
@@ -19,6 +19,6 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@lingjhf/utils": "workspace:^0.0.0"
+    "@guava/utils": "workspace:^0.0.0"
   }
 }

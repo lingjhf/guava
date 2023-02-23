@@ -1,7 +1,7 @@
 import { createEffect, createMemo, createSignal, JSX, mergeProps, Show } from 'solid-js'
 import { useDropArea } from './DropArea'
-import { GDraggable } from '@lingjhf/draggable'
-import { createPressedDrag } from '@lingjhf/utils'
+import { GDraggable } from '@guava/draggable'
+import { createPressedDrag } from '@guava/utils'
 
 interface Props {
   index: number

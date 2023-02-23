@@ -1,4 +1,4 @@
-import { Position, Size } from '@lingjhf/utils'
+import { Position, Size } from '@guava/utils'
 
 type SizePosition = Position & Size
 

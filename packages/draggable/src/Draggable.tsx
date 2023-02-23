@@ -1,5 +1,5 @@
 import { createEffect, createSignal, JSXElement } from 'solid-js'
-import { ClassList, Position } from '@lingjhf/utils'
+import { ClassList, Position } from '@guava/utils'
 
 interface Props {
   x: number

@@ -1,5 +1,5 @@
 import Color from 'color'
-import { Position, Size } from '@lingjhf/utils'
+import { Position, Size } from '@guava/utils'
 import { createEffect, createSignal, mergeProps } from 'solid-js'
 import { xTransformAlpha, alphaTransformX } from './utils'
 import { GRail } from './Rail'

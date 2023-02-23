@@ -1,5 +1,5 @@
-import { GDraggable } from '@lingjhf/draggable'
-import { Position, Size } from '@lingjhf/utils'
+import { GDraggable } from '@guava/draggable'
+import { Position, Size } from '@guava/utils'
 import { createEffect, createSignal, mergeProps, createMemo } from 'solid-js'
 
 interface Props {

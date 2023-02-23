@@ -1,5 +1,5 @@
 import { calcSliderWidth, scrollXToSliderX, sliderXToScrollX } from './utils'
-import { Position, Size } from '@lingjhf/utils'
+import { Position, Size } from '@guava/utils'
 
 interface Options {
   viewSize: Size

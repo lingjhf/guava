@@ -7,7 +7,7 @@
 ## 使用
 
 ```js
-import { GDropArea } from '@lingjhf/drop-area'
+import { GDropArea } from '@guava/drop-area'
 
 const example = () => {
   return (

@@ -3,7 +3,7 @@
 ## 使用
 
 ```js
-import { GDraggable } from '@lingjhf/draggable'
+import { GDraggable } from '@guava/draggable'
 
 const example = () => {
   return (

@@ -1,5 +1,5 @@
 {
-  "name": "@lingjhf/color-picker",
+  "name": "@guava/color-picker",
   "version": "0.0.0",
   "description": "",
   "type": "module",
@@ -18,8 +18,8 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@lingjhf/draggable": "workspace:^0.0.0",
-    "@lingjhf/utils": "workspace:^0.0.0",
+    "@guava/draggable": "workspace:^0.0.0",
+    "@guava/utils": "workspace:^0.0.0",
     "color": "^4.2.3"
   },
   "devDependencies": {

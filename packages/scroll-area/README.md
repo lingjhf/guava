@@ -7,7 +7,7 @@
 ## 使用
 
 ```js
-import { GScrollArea } from '@lingjhf/scroll-area'
+import { GScrollArea } from '@guava/scroll-area'
 
 const example = () => {
   return (

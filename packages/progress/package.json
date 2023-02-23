@@ -1,5 +1,5 @@
 {
-  "name": "@lingjhf/progress",
+  "name": "@guava/progress",
   "version": "0.0.0",
   "description": "File upload tool",
   "type": "module",

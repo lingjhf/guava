@@ -7,7 +7,7 @@
 ## 使用
 
 ```js
-import { GProgress } from '@lingjhf/progress'
+import { GProgress } from '@guava/progress'
 
 const example = () => {
   return (
