@@ -14,6 +14,7 @@ importers:
       prettier: ^2.8.3
       rollup: ^3.14.0
       rollup-plugin-dts: ^5.1.1
+      solid-element: ^1.6.3
       solid-js: ^1.6.10
       stylelint: ^15.0.0
       stylelint-config-standard: ^30.0.1
@@ -22,6 +23,7 @@ importers:
       vite: ^4.1.1
       vite-plugin-solid: ^2.5.0
     dependencies:
+      solid-element: 1.6.3_solid-js@1.6.11
       solid-js: 1.6.11
     devDependencies:
       '@rollup/plugin-typescript': 11.0.0_vi3xdhr63abcxdtwtptol35g5u
@@ -1750,6 +1752,10 @@ packages:
     resolution: {integrity: sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==}
     dev: true
 
+  /component-register/0.8.3:
+    resolution: {integrity: sha512-/0u8ov0WPWi2FL78rgB9aFOcfY8pJT4jP/l9NTOukGNLVQ6hk35sEJE1RkEnNQU3yk48Qr7HlDQjRQKEVfgeWg==}
+    dev: false
+
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
@@ -3064,6 +3070,15 @@ packages:
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
     dev: true
+
+  /solid-element/1.6.3_solid-js@1.6.11:
+    resolution: {integrity: sha512-yS/sePJNYsbdyZUL5LDIDVIW8VxDMbmx+qm8XRZ7WlR+cr5dHNjp1lIYqCku8DmGLzuYEoumHQAK2oPvEieqfQ==}
+    peerDependencies:
+      solid-js: ^1.6.3
+    dependencies:
+      component-register: 0.8.3
+      solid-js: 1.6.11
+    dev: false
 
   /solid-js/1.6.11:
     resolution: {integrity: sha512-JquQQHPArGq+i2PLURxJ99Pcz2/1docpbycSio/cKSA0SeI3z5zRjy0TNcH4NRYvbOLrcini+iovXwnexKabyw==}
