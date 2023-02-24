@@ -54,5 +54,5 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ackages/docs/.vitepress/dist # The folder the action should deploy.
+          folder: packages/docs/.vitepress/dist # The folder the action should deploy.
         
