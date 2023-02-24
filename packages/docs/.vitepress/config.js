@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  base: '/guava/',
   title: 'Guava',
   themeConfig: {
     sidebar: [
