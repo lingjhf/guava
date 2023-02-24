@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 16
           cache: pnpm
+      - uses: pnpm/action-setup@v2
+        with:
+          verstion: 6.0.2
       - run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm run docs
