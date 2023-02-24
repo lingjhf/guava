@@ -28,7 +28,7 @@ jobs:
         with:
           version: 7
           run_install: false
-          
+
       - name: Get pnpm store directory
         id: pnpm-cache
         shell: bash
@@ -44,7 +44,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
 
       - name: Build
