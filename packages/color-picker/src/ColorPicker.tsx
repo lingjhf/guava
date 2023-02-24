@@ -4,7 +4,7 @@ import { GAlphaSelector } from './AlphaSelector'
 import { GHubSelector } from './HubSelector'
 import { createEffect, createSignal, mergeProps } from 'solid-js'
 
-interface Props {
+export interface Props {
   color: string
   onChange?: (color: Color) => void
 }
