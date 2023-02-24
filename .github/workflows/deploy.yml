@@ -8,6 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       pages: write
       id-token: write
     environment:
@@ -49,10 +50,9 @@ jobs:
 
       - name: Build
         run: pnpm run docs
-      - uses: actions/configure-pages@v2
-      - uses: actions/upload-pages-artifact@v1
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: packages/docs/.vitepress/dist
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v1
+          folder: ackages/docs/.vitepress/dist # The folder the action should deploy.
+        
