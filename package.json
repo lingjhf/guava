@@ -7,9 +7,10 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "docs":"pnpm run -r docs:build"
+    "docs": "pnpm run -r docs:build"
   },
   "dependencies": {
+    "solid-element": "^1.6.3",
     "solid-js": "^1.6.10"
   },
   "pnpm": {
