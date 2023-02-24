@@ -51,7 +51,7 @@ jobs:
       - name: Build
         run: pnpm run docs
 
-      - name: Deploy 🚀
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ackages/docs/.vitepress/dist # The folder the action should deploy.
