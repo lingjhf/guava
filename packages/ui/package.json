@@ -1,11 +1,11 @@
 {
-  "name": "@lingjhf/ui",
+  "name": "@lingjhf/guava",
   "version": "0.0.1",
   "description": "UI Components",
   "author": "lingjhf",
   "license": "MIT",
   "homepage": "https://lingjhf.github.io/guava/",
-  "resolutions": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/lingjhf/guava"
   },
