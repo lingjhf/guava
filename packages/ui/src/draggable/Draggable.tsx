@@ -1,6 +1,6 @@
 import { createEffect, createSignal, JSXElement } from 'solid-js'
-import { ClassList, Position } from '../utils'
-
+import { customElement } from 'solid-element'
+import styles from './styles.css?inline'
 export interface GDraggableProps {
   x: number
   y: number
@@ -8,18 +8,33 @@ export interface GDraggableProps {
   minY: number
   maxX: number
   maxY: number
-  classList: ClassList
   children: JSXElement
   onChange: (value: Position) => void
-  expose: { onDrag: () => void }
 }
+
+customElement<Partial<GDraggableProps>>(
+  'g-draggable',
+  { x: 0, y: 0, minX: undefined, minY: undefined, maxX: undefined, maxY: undefined },
+  (props, { element }) => {
+    console.log(props)
+    const onChange = (value: Position) => {
+      element.dispatchEvent(new CustomEvent('onChange', { detail: value }))
+    }
+    return (
+      <>
+        <style>{styles}</style>
+        <GDraggable x={props.x} y={props.y} onChange={onChange}>
+          <slot></slot>
+        </GDraggable>
+      </>
+    )
+  }
+)
 
 export const GDraggable = (props: Partial<GDraggableProps>) => {
   const [x, setX] = createSignal(0)
   const [y, setY] = createSignal(0)
-  if (props.expose) {
-    props.expose.onDrag = onDrag
-  }
+
   createEffect(() => {
     if (props.x !== undefined) {
       setX(checkXBoundary(props.x))
@@ -83,7 +98,7 @@ export const GDraggable = (props: Partial<GDraggableProps>) => {
   }
 
   return (
-    <div class="absolute" classList={props.classList} style={styles()} onMouseDown={onDrag}>
+    <div class="draggable" style={styles()} onMouseDown={onDrag}>
       {props.children}
     </div>
   )
