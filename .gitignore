@@ -1,3 +1,4 @@
 node_modules
 dist
 packages/dev
+packages/vue-dev
