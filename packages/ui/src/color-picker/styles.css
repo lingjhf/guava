@@ -1,46 +1,15 @@
-.g-color-picker {
-  @apply bg-[#121212] w-[240px];
+.color-picker {
+  width: 240px;
+  background-color: #121212;
 }
 
-/* 滑块样式 */
-.g-slider {
-  @apply border-solid border-[#fff] border-width-[2px] rounded-[50%] box-border;
+.color-picker-sliders-wrap {
+  padding: 8px;
 }
 
-/* 颜色选择器样式 */
-.g-color-selector {
-  @apply relative select-none;
-}
-
-.g-color-selector::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, #000000);
-}
-
-/* hue值选择器样式 */
-.g-hue-selector {
-  @apply rounded-[6px];
-
-  background: linear-gradient(
-    to right,
-    #ff0000 0%,
-    #ffff00 17%,
-    #00ff00 33%,
-    #00ffff 50%,
-    #0000ff 67%,
-    #ff00ff 83%,
-    #ff0000 100%
-  );
-}
-
-/* alpha值选择器样式 */
-.g-alpha-selector {
-  @apply rounded-[6px];
-}
-
-.g-rail {
-  @apply relative  select-none;
+.color-picker-slider-item-wrap {
+  display: flex;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
 }
