@@ -131,6 +131,7 @@ const GColorSlider = (props: Partial<GColorSliderProps>) => {
             .saturationv(xTransformSaturation(mouseOffsetX, defaultProps.size.width) * 100)
             .value(yTransformValue(mouseOffseY, defaultProps.size.height) * 100)
         )
+        emitChange()
       })
       .action()
   }
