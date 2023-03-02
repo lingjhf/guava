@@ -1,9 +1,10 @@
-import { Position } from '../utils'
-import { mergeProps, JSX, createContext, useContext, For, createEffect } from 'solid-js'
+import type { JSX } from 'solid-js'
+import { mergeProps, createContext, useContext, For, createEffect } from 'solid-js'
 import { createStore, produce } from 'solid-js/store'
-import { GDragItem } from './DragItem'
-import { useMultiDropAreaContext } from './MultiDropArea'
-import { checkCrossEdge, checkCrossWidthHalf, checkCrossHeightHalf, moveItem } from './utils'
+import { customElement } from 'solid-element'
+import '../drop-item'
+import { useMultiDropAreaContext } from '../drop-area-group'
+import { checkCrossEdge, checkCrossWidthHalf, checkCrossHeightHalf, moveItem } from '../utils'
 
 export interface ItemData {
   data: unknown
@@ -21,14 +22,36 @@ export interface GDropAreaProps {
   switchWhileCrossEdge: boolean
   horizontal: boolean
   originPlaceholder?: () => JSX.Element
-  children?: (item: unknown, index: number) => JSX.Element
+  render?: (item: unknown, index: number) => JSX.Element
 }
 
 const DropAreaContext = createContext<DropAreaProviderValue>()
 
 export const useDropArea = () => useContext(DropAreaContext)
 
-export const GDropArea = (props: Partial<GDropAreaProps>) => {
+customElement<Partial<GDropAreaProps>>(
+  'g-drop-area',
+  {
+    each: undefined,
+    switchWhileCrossEdge: undefined,
+    horizontal: undefined,
+    originPlaceholder: undefined,
+    render: undefined,
+  },
+  (props) => {
+    return (
+      <GDropArea
+        each={props.each}
+        switchWhileCrossEdge={props.switchWhileCrossEdge}
+        horizontal={props.horizontal}
+        originPlaceholder={props.originPlaceholder}
+        render={props.render}
+      ></GDropArea>
+    )
+  }
+)
+
+const GDropArea = (props: Partial<GDropAreaProps>) => {
   const context = useMultiDropAreaContext()
   let areaRef: HTMLElement
   const setAreaRef = (el: HTMLElement) => {
@@ -128,17 +151,27 @@ export const GDropArea = (props: Partial<GDropAreaProps>) => {
 
   return (
     <DropAreaContext.Provider value={providerValue}>
-      <div ref={setAreaRef} class="g-drop-area" style={areaStyles()}>
+      <div ref={setAreaRef} style={areaStyles()}>
         <For each={store.items}>
           {(item, index) => {
             return (
-              <GDragItem placeholder={item.placeholder} index={index()}>
-                {defaultProps.children?.(item.data, index())}
-              </GDragItem>
+              <g-drop-item
+                placeholder={item.placeholder}
+                index={index()}
+                render={() => defaultProps.render?.(item.data, index())}
+              ></g-drop-item>
             )
           }}
         </For>
       </div>
     </DropAreaContext.Provider>
   )
+}
+
+declare module 'solid-js' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'g-drop-area': Partial<GDropAreaProps>
+    }
+  }
 }
