@@ -1,6 +1,7 @@
 import { createEffect, createSignal, JSXElement } from 'solid-js'
 import { customElement } from 'solid-element'
 import styles from './styles.css?inline'
+import { createPressedDrag } from '../utils'
 export interface GDraggableProps {
   x: number
   y: number
@@ -9,21 +10,25 @@ export interface GDraggableProps {
   maxX: number
   maxY: number
   children: JSXElement
-  onChange: (value: Position) => void
+  change: (value: Position) => void
 }
 
 customElement<Partial<GDraggableProps>>(
   'g-draggable',
-  { x: 0, y: 0, minX: undefined, minY: undefined, maxX: undefined, maxY: undefined },
-  (props, { element }) => {
-    console.log(props)
-    const onChange = (value: Position) => {
-      element.dispatchEvent(new CustomEvent('onChange', { detail: value }))
-    }
+  {
+    x: undefined,
+    y: undefined,
+    minX: undefined,
+    minY: undefined,
+    maxX: undefined,
+    maxY: undefined,
+    change: undefined,
+  },
+  (props) => {
     return (
       <>
         <style>{styles}</style>
-        <GDraggable x={props.x} y={props.y} onChange={onChange}>
+        <GDraggable x={props.x} y={props.y} change={props.change}>
           <slot></slot>
         </GDraggable>
       </>
@@ -31,7 +36,7 @@ customElement<Partial<GDraggableProps>>(
   }
 )
 
-export const GDraggable = (props: Partial<GDraggableProps>) => {
+const GDraggable = (props: Partial<GDraggableProps>) => {
   const [x, setX] = createSignal(0)
   const [y, setY] = createSignal(0)
 
@@ -70,36 +75,41 @@ export const GDraggable = (props: Partial<GDraggableProps>) => {
   let pressedY = 0
 
   function onDrag() {
-    window.addEventListener('mousedown', onDragStart)
-    window.addEventListener('mousemove', onDragUpdate)
-    window.addEventListener('mouseup', onDragEnd)
+    createPressedDrag()
+      .onStart((e) => {
+        pressedX = e.pageX - x()
+        pressedY = e.pageY - y()
+      })
+      .onUpdate((e) => {
+        let tempX = e.pageX - pressedX
+        let tempY = e.pageY - pressedY
+        tempX = checkXBoundary(tempX)
+        tempY = checkYBoundary(tempY)
+        props.change?.({ x: tempX, y: tempY })
+        if (tempX != x()) {
+          setX(tempX)
+        }
+        if (tempY != y()) {
+          setY(tempY)
+        }
+      })
+      .action()
   }
-  function onDragStart(e: MouseEvent) {
-    pressedX = e.pageX - x()
-    pressedY = e.pageY - y()
-  }
-  function onDragUpdate(e: MouseEvent) {
-    let tempX = e.pageX - pressedX
-    let tempY = e.pageY - pressedY
-    tempX = checkXBoundary(tempX)
-    tempY = checkYBoundary(tempY)
-    props.onChange?.({ x: tempX, y: tempY })
-    if (tempX != x()) {
-      setX(tempX)
-    }
-    if (tempY != y()) {
-      setY(tempY)
-    }
-  }
-  function onDragEnd() {
-    window.removeEventListener('mousedown', onDragStart)
-    window.removeEventListener('mousemove', onDragUpdate)
-    window.removeEventListener('mouseup', onDragEnd)
+  function setRef(el: HTMLElement) {
+    el.addEventListener('mousedown', onDrag)
   }
 
   return (
-    <div class="draggable" style={styles()} onMouseDown={onDrag}>
+    <div class="draggable" ref={setRef} style={styles()}>
       {props.children}
     </div>
   )
+}
+
+declare module 'solid-js' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'g-draggable': Partial<GDraggableProps>
+    }
+  }
 }
