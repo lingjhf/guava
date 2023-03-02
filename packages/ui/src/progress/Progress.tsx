@@ -1,5 +1,7 @@
-import { createEffect, createSignal, JSX, mergeProps } from 'solid-js'
-
+import type { JSX } from 'solid-js'
+import { createEffect, createSignal, mergeProps } from 'solid-js'
+import { customElement } from 'solid-element'
+import styles from './styles.css?inline'
 interface precentageColor {
   percentage: number
   color: string
@@ -11,7 +13,24 @@ export interface GProgressProps {
   text?: (value: number) => JSX.Element
 }
 
-export const GProgress = (props: Partial<GProgressProps>) => {
+customElement<Partial<GProgressProps>>(
+  'g-progress',
+  { percentage: undefined, colors: undefined, text: undefined },
+  (props) => {
+    return (
+      <>
+        <style>{styles}</style>
+        <GProgress
+          percentage={props.percentage}
+          colors={props.colors}
+          text={props.text}
+        ></GProgress>
+      </>
+    )
+  }
+)
+
+const GProgress = (props: Partial<GProgressProps>) => {
   let progressRef: HTMLElement
   let outsideTextRef: HTMLElement
   const setProgressRef = (el: HTMLElement) => (progressRef = el)
@@ -65,4 +84,12 @@ export const GProgress = (props: Partial<GProgressProps>) => {
       </div>
     </div>
   )
+}
+
+declare module 'solid-js' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'g-progress': Partial<GProgressProps>
+    }
+  }
 }
