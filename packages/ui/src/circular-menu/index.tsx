@@ -1,1 +1,1 @@
-export * from './CircularMenu'
+export * from './circular-menu'
