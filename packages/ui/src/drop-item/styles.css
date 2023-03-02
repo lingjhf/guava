@@ -1,0 +1,9 @@
+.drop-item-content {
+  position: relative;
+  padding-left: 8px;
+}
+
+.drop-item-placeholder {
+  border: 2px dashed rgb(96, 165, 250);
+  box-sizing: border-box;
+}
