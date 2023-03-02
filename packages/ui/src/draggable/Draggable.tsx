@@ -28,7 +28,15 @@ customElement<Partial<GDraggableProps>>(
     return (
       <>
         <style>{styles}</style>
-        <GDraggable x={props.x} y={props.y} change={props.change}>
+        <GDraggable
+          x={props.x}
+          y={props.y}
+          minX={props.minX}
+          maxX={props.maxX}
+          minY={props.minY}
+          maxY={props.maxY}
+          change={props.change}
+        >
           <slot></slot>
         </GDraggable>
       </>
