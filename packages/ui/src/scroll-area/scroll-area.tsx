@@ -1,6 +1,9 @@
-import { createSignal, JSX, mergeProps, onMount, createEffect } from 'solid-js'
+import type { JSX } from 'solid-js'
+import { createSignal, mergeProps, onMount, createEffect } from 'solid-js'
+import { customElement } from 'solid-element'
 import { ScrollController } from './controller'
-import { createPressedDrag } from './utils'
+import { createPressedDrag } from '../utils'
+import styles from './styles.css?inline'
 
 type ScrollAreaType = 'auto' | 'visible' | 'invisible'
 
@@ -22,16 +25,30 @@ export interface GScrollAreaProps {
   //默认值是auto
   type: ScrollAreaType
   children?: JSX.Element | JSX.Element[]
-  onScroll?: (detail: ScrollDetail) => void
+  scroll?: (detail: ScrollDetail) => void
 }
 
-const defaultPropsData: GScrollAreaProps = {
-  scrollX: 0,
-  scrollY: 0,
-  type: 'auto',
-}
+customElement<Partial<GScrollAreaProps>>(
+  'g-scroll-area',
+  { scrollX: undefined, scrollY: undefined, type: undefined, scroll: undefined },
+  (props) => {
+    return (
+      <>
+        <style>{styles}</style>
+        <GScrollArea
+          scrollX={props.scrollX}
+          scrollY={props.scrollY}
+          type={props.type}
+          scroll={props.scroll}
+        >
+          <slot></slot>
+        </GScrollArea>
+      </>
+    )
+  }
+)
 
-export const GScrollArea = (props: Partial<GScrollAreaProps>) => {
+const GScrollArea = (props: Partial<GScrollAreaProps>) => {
   let isAction = false
   let isLeave = false
   let isVisibleHorizontalScroll = false
@@ -52,7 +69,11 @@ export const GScrollArea = (props: Partial<GScrollAreaProps>) => {
   const setVerticalSliderRef = (el: HTMLElement) => (verticalSliderRef = el)
 
   const defaultProps = mergeProps<[GScrollAreaProps, ...Partial<GScrollAreaProps>[]]>(
-    defaultPropsData,
+    {
+      scrollX: 0,
+      scrollY: 0,
+      type: 'auto',
+    },
     props
   )
 
@@ -89,7 +110,7 @@ export const GScrollArea = (props: Partial<GScrollAreaProps>) => {
     `height:${verticalSlider().height}px;top:${verticalSlider().top}px`
 
   function emitScroll() {
-    defaultProps.onScroll?.({
+    defaultProps.scroll?.({
       scrollX: scrollController.scrollX,
       scrollY: scrollController.scrollY,
     })
@@ -436,4 +457,12 @@ export const GScrollArea = (props: Partial<GScrollAreaProps>) => {
       ></div>
     </div>
   )
+}
+
+declare module 'solid-js' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'g-scroll-area': Partial<GScrollAreaProps>
+    }
+  }
 }
