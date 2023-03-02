@@ -9,16 +9,13 @@ export interface GColorHueSliderProps {
   color: Color
   size: Size
   sliderSize: Size
-  onChange?: (color: Color) => void
+  change?: (color: Color) => void
 }
 
 customElement<Partial<GColorHueSliderProps>>(
   'g-color-hue-slider',
-  { vertical: false, color: undefined, size: undefined, sliderSize: undefined },
-  (props, { element }) => {
-    const onChange = (color: Color) => {
-      element.dispatchEvent(new CustomEvent('onChange', { detail: color }))
-    }
+  { vertical: false, color: undefined, size: undefined, sliderSize: undefined, change: undefined },
+  (props) => {
     return (
       <>
         <style>{styles}</style>
@@ -27,7 +24,7 @@ customElement<Partial<GColorHueSliderProps>>(
           color={props.color}
           size={props.size}
           sliderSize={props.sliderSize}
-          onChange={onChange}
+          change={props.change}
         ></GColorHueSlider>
       </>
     )
@@ -76,7 +73,7 @@ const GColorHueSlider = (props: Partial<GColorHueSliderProps>) => {
         : c.hue(xTransformHue(value.x, defaultProps.size.width - defaultProps.sliderSize.width))
     )
     setSliderPosition(value)
-    defaultProps.onChange?.(color())
+    defaultProps.change?.(color())
   }
 
   return (
