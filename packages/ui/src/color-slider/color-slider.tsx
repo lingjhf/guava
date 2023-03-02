@@ -9,20 +9,17 @@ export interface GColorSliderProps {
   color: Color
   size: Size
   sliderSize: Size
-  onChange?: (color: Color) => void
+  change?: (color: Color) => void
 }
 
 customElement<Partial<GColorSliderProps>>(
   'g-color-slider',
-  { color: undefined },
-  (props, { element }) => {
-    const onChange = (color: Color) => {
-      element.dispatchEvent(new CustomEvent('onChange', { detail: color }))
-    }
+  { color: undefined, size: undefined, sliderSize: undefined, change: undefined },
+  (props) => {
     return (
       <>
         <style>{styles}</style>
-        <GColorSlider color={props.color} onChange={onChange}></GColorSlider>
+        <GColorSlider color={props.color} change={props.change}></GColorSlider>
       </>
     )
   }
@@ -91,7 +88,7 @@ const GColorSlider = (props: Partial<GColorSliderProps>) => {
   }
 
   function emitChange() {
-    defaultProps.onChange?.(color())
+    defaultProps.change?.(color())
   }
 
   //x位置换算成饱和度，y位置换算成明度
