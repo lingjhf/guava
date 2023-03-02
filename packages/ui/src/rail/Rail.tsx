@@ -86,8 +86,9 @@ const GRail = (props: Partial<GRailProps>) => {
   }
 
   function setSliderPositionByMouse(mouseX: number, mouseY: number) {
+    const { x, y } = railRef.getBoundingClientRect()
     if (defaultProps.vertical) {
-      let sliderY = mouseY - railRef.offsetTop - defaultProps.sliderSize.height / 2
+      let sliderY = mouseY - y - defaultProps.sliderSize.height / 2
       if (sliderY > sliderMaxX()) {
         sliderY = sliderMaxX()
       }
@@ -96,7 +97,7 @@ const GRail = (props: Partial<GRailProps>) => {
       }
       setSliderPosition({ x: 0, y: sliderY })
     } else {
-      let slidereX = mouseX - railRef.offsetLeft - defaultProps.sliderSize.width / 2
+      let slidereX = mouseX - x - defaultProps.sliderSize.width / 2
       if (slidereX > sliderMaxX()) {
         slidereX = sliderMaxX()
       }
