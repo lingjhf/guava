@@ -1,4 +1,5 @@
 import type { JSX } from 'solid-js'
+import type { Position } from '../utils/types'
 import { mergeProps, createContext, useContext, For, createEffect } from 'solid-js'
 import { createStore, produce } from 'solid-js/store'
 import { customElement } from 'solid-element'

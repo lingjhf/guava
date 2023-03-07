@@ -1,4 +1,5 @@
 import type { JSX } from 'solid-js'
+import type { Position } from '../utils/types'
 import { createContext, useContext } from 'solid-js'
 import { customElement } from 'solid-element'
 import { checkCrossEdge, moveItem } from '../utils'

@@ -1,3 +1,5 @@
+import type { Position, SizePosition } from './types'
+
 class PressedDrag {
   events = new Map()
 

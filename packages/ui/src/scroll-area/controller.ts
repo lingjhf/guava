@@ -1,5 +1,5 @@
 import { calcSliderWidth, scrollXToSliderX, sliderXToScrollX } from './utils'
-import { Position, Size } from '../utils'
+import { Position, Size } from '../utils/types'
 
 interface Options {
   viewSize: Size

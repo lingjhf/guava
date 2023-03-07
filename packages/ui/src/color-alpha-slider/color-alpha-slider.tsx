@@ -1,3 +1,4 @@
+import type { Size, Position } from '../utils/types'
 import { createEffect, createSignal, mergeProps } from 'solid-js'
 import { customElement } from 'solid-element'
 import Color from 'color'

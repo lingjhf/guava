@@ -1,3 +1,4 @@
+import type { Position } from '../utils/types'
 import { createEffect, createSignal, JSXElement } from 'solid-js'
 import { customElement } from 'solid-element'
 import styles from './styles.css?inline'

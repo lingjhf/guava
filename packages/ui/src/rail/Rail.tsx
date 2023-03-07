@@ -1,4 +1,5 @@
 import type { JSX } from 'solid-js'
+import type { Size, Position } from '../utils/types'
 import { createEffect, createSignal, mergeProps, createMemo } from 'solid-js'
 import { customElement } from 'solid-element'
 import '../draggable'
