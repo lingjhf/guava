@@ -8,7 +8,7 @@ export default defineConfig([
     input: './src/index.ts',
     external: ['uno.css'],
     output: {
-      dir: 'dist/es',
+      dir: 'lib',
       chunkFileNames(chunkInfo) {
         return `${chunkInfo.name}.d.ts`
       },

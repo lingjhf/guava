@@ -13,7 +13,7 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
-    outDir: 'dist/es',
+    outDir: 'lib',
     lib: {
       entry: './src/index.ts',
       formats: ['es'],
