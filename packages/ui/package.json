@@ -9,19 +9,23 @@
     "type": "git",
     "url": "https://github.com/lingjhf/guava"
   },
-  "main": "./dist/lib/index.js",
-  "module": "./dist/es/index.js",
   "type": "module",
-  "types": "./dist/es/index.d.ts",
   "scripts": {
     "build": "vite build && rollup -c"
   },
   "files": [
-    "dist"
+    "lib",
+    "README.md",
+    "package.json"
   ],
   "exports": {
     ".": {
-      "import": "./dist/es/index.js"
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    },
+    "./lib/*": {
+      "types": "./lib/*.d.ts",
+      "import": "./lib/*.js"
     }
   },
   "keywords": [
