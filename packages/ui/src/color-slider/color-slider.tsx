@@ -20,7 +20,12 @@ customElement<Partial<GColorSliderProps>>(
     return (
       <>
         <style>{styles}</style>
-        <GColorSlider color={props.color} change={props.change}></GColorSlider>
+        <GColorSlider
+          color={props.color}
+          size={props.size}
+          sliderSize={props.sliderSize}
+          change={props.change}
+        ></GColorSlider>
       </>
     )
   }
