@@ -18,6 +18,7 @@
     "README.md",
     "package.json"
   ],
+  "types": "./lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
