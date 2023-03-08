@@ -1,4 +1,7 @@
 node_modules
 dist
+es
+lib
+types
 packages/dev
 packages/vue-dev
