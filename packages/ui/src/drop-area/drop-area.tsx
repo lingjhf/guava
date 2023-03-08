@@ -19,7 +19,7 @@ interface DropAreaProviderValue {
 }
 
 export interface GDropAreaProps {
-  each: unknown[]
+  items: unknown[]
   switchWhileCrossEdge: boolean
   horizontal: boolean
   originPlaceholder?: () => JSX.Element
@@ -33,7 +33,7 @@ export const useDropArea = () => useContext(DropAreaContext)
 customElement<Partial<GDropAreaProps>>(
   'g-drop-area',
   {
-    each: undefined,
+    items: undefined,
     switchWhileCrossEdge: undefined,
     horizontal: undefined,
     originPlaceholder: undefined,
@@ -42,7 +42,7 @@ customElement<Partial<GDropAreaProps>>(
   (props) => {
     return (
       <GDropArea
-        each={props.each}
+        items={props.items}
         switchWhileCrossEdge={props.switchWhileCrossEdge}
         horizontal={props.horizontal}
         originPlaceholder={props.originPlaceholder}
@@ -62,7 +62,7 @@ const GDropArea = (props: Partial<GDropAreaProps>) => {
 
   const defaultProps = mergeProps<[GDropAreaProps, ...Partial<GDropAreaProps>[]]>(
     {
-      each: [],
+      items: [],
       switchWhileCrossEdge: false,
       horizontal: false,
     },
@@ -72,7 +72,7 @@ const GDropArea = (props: Partial<GDropAreaProps>) => {
 
   createEffect(() => {
     const newItems: ItemData[] = []
-    for (const data of defaultProps.each) {
+    for (const data of defaultProps.items) {
       newItems.push({ data: data })
     }
     setStore('items', newItems)
