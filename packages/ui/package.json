@@ -37,6 +37,8 @@
     "components"
   ],
   "dependencies": {
+    "solid-element": "^1.6.3",
+    "solid-js": "^1.6.10",
     "color": "^4.2.3"
   },
   "devDependencies": {
