@@ -1,6 +1,6 @@
 {
   "name": "@lingjhf/guava",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "UI Components",
   "author": "lingjhf",
   "license": "MIT",
@@ -39,9 +39,7 @@
   "dependencies": {
     "solid-element": "^1.6.3",
     "solid-js": "^1.6.10",
-    "color": "^4.2.3"
-  },
-  "devDependencies": {
+    "color": "^4.2.3",
     "@types/color": "^3.0.3"
   }
 }
