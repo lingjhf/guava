@@ -10,6 +10,9 @@
     "url": "https://github.com/lingjhf/guava"
   },
   "type": "module",
+  "scripts": {
+    "build": "vite build && tsc --project ./tsconfig.json"
+  },
   "files": [
     "lib",
     "README.md",
