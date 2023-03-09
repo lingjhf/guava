@@ -49,6 +49,7 @@ jobs:
 
 
       - name: Build
+        run: pnpm build
         run: pnpm run docs
 
       - name: Deploy
