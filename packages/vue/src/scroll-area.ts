@@ -8,7 +8,7 @@ export default defineComponent({
     scrollX: Number as PropType<GScrollAreaProps['scrollX']>,
     scrollY: Number as PropType<GScrollAreaProps['scrollY']>,
     type: String as PropType<GScrollAreaProps['type']>,
-    scroll: Function as PropType<GScrollAreaProps['scroll']>,
+    change: Function as PropType<GScrollAreaProps['change']>,
   },
   setup(props, { slots }) {
     return () =>
@@ -20,8 +20,8 @@ export default defineComponent({
           type: props.type,
           ref(ref: unknown) {
             const dom = ref as GScrollAreaProps
-            if (props.scroll) {
-              dom.scroll = props.scroll
+            if (props.change) {
+              dom.change = props.change
             }
           },
         },
