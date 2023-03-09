@@ -1,0 +1,27 @@
+{
+  "name": "@lingjhf/guava-vue",
+  "version": "0.0.3",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "build": "vite build && tsc --project tsconfig.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    }
+  },
+  "dependencies": {
+    "@lingjhf/guava": "workspace:^0.0.3",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4"
+  }
+}
