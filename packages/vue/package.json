@@ -1,14 +1,20 @@
 {
   "name": "@lingjhf/guava-vue",
   "version": "0.0.3",
-  "description": "",
-  "type": "module",
-  "scripts": {
-    "build": "vite build && tsc --project tsconfig.json"
+  "description": "UI Components",
+  "author": "lingjhf",
+  "license": "MIT",
+  "homepage": "https://lingjhf.github.io/guava/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lingjhf/guava"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "type": "module",
+  "files": [
+    "lib",
+    "README.md",
+    "package.json"
+  ],
   "types": "./lib/index.d.ts",
   "exports": {
     ".": {

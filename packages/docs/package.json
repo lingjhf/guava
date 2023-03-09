@@ -13,5 +13,8 @@
   "devDependencies": {
     "vitepress": "1.0.0-alpha.47",
     "vue": "^3.2.47"
+  },
+  "dependencies": {
+    "@lingjhf/guava-vue": "workspace:^0.0.3"
   }
 }
