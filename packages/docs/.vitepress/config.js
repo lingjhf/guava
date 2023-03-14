@@ -23,5 +23,6 @@ export default defineConfig({
         ],
       },
     ],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/lingjhf/guava' }],
   },
 })
