@@ -23,7 +23,7 @@ export interface GDropAreaProps {
   switchWhileCrossEdge: boolean
   horizontal: boolean
   originPlaceholder?: () => JSX.Element
-  render?: (item: unknown, index: number) => JSX.Element
+  dropItem?: (item: unknown, index: number) => JSX.Element
 }
 
 const DropAreaContext = createContext<DropAreaProviderValue>()
@@ -37,7 +37,7 @@ customElement<Partial<GDropAreaProps>>(
     switchWhileCrossEdge: undefined,
     horizontal: undefined,
     originPlaceholder: undefined,
-    render: undefined,
+    dropItem: undefined,
   },
   (props) => {
     return (
@@ -46,7 +46,7 @@ customElement<Partial<GDropAreaProps>>(
         switchWhileCrossEdge={props.switchWhileCrossEdge}
         horizontal={props.horizontal}
         originPlaceholder={props.originPlaceholder}
-        render={props.render}
+        dropItem={props.dropItem}
       ></GDropArea>
     )
   }
@@ -159,7 +159,7 @@ const GDropArea = (props: Partial<GDropAreaProps>) => {
               <g-drop-item
                 placeholder={item.placeholder}
                 index={index()}
-                render={() => defaultProps.render?.(item.data, index())}
+                render={() => defaultProps.dropItem?.(item.data, index())}
               ></g-drop-item>
             )
           }}
