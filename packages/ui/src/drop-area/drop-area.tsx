@@ -111,7 +111,9 @@ const GDropArea = (props: Partial<GDropAreaProps>) => {
     }
     for (const [itemIndex, item] of store.items.entries()) {
       if (itemIndex !== index) {
-        const { x, y, width, height } = item.el!.getBoundingClientRect()
+        const { x: x2, y: y2, width, height } = item.el!.getBoundingClientRect()
+        const x = x2 + window.scrollX
+        const y = y2 + window.scrollY
         if (defaultProps.switchWhileCrossEdge) {
           if (checkCrossEdge(mousePosition, { x, y, width, height })) {
             setStore(
