@@ -118,12 +118,12 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
 
   //判断是否水平溢出
   function isHorizontalOverflow() {
-    return contentRef.offsetWidth > viewRef.offsetWidth
+    return contentRef.getBoundingClientRect().width > viewRef.getBoundingClientRect().width
   }
 
   //判断是否垂直溢出
   function isVerticalOverflow() {
-    return contentRef.offsetHeight > viewRef.offsetHeight
+    return contentRef.getBoundingClientRect().height > viewRef.getBoundingClientRect().height
   }
 
   //设置水平滑块位置大小和滚动位置
@@ -257,9 +257,10 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
   //监听可见区域大小对滚动条进行变化
   function watchViewResize() {
     const resizeObserver = new ResizeObserver((entries) => {
+      const { width, height } = viewRef.getBoundingClientRect()
       for (let i = 0; i < entries.length; i++) {
         if (isVerticalOverflow()) {
-          scrollController.setViewSize({ height: viewRef.offsetHeight })
+          scrollController.setViewSize({ height })
           setVerticalAndScrollY()
           if (defaultProps.type === 'visible') {
             visibleVerticalScrollAnimation()
@@ -268,7 +269,7 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
           invisibleVerticalScrollAnimation()
         }
         if (isHorizontalOverflow()) {
-          scrollController.setViewSize({ width: viewRef.offsetWidth })
+          scrollController.setViewSize({ width })
           setHorizontalAndScrollX()
           if (defaultProps.type === 'visible') {
             visibleHorizontalScrollAnimation()
@@ -284,9 +285,10 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
   //监听内容大小对滚动条进行改变
   function watchContentResize() {
     const resizeObserver = new ResizeObserver((entries) => {
+      const { width, height } = contentRef.getBoundingClientRect()
       for (let i = 0; i < entries.length; i++) {
         if (isVerticalOverflow()) {
-          scrollController.setContentSize({ height: contentRef.offsetHeight })
+          scrollController.setContentSize({ height })
           setVerticalAndScrollY()
           if (defaultProps.type === 'visible') {
             visibleVerticalScrollAnimation()
@@ -295,7 +297,7 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
           invisibleVerticalScrollAnimation()
         }
         if (isHorizontalOverflow()) {
-          scrollController.setContentSize({ width: contentRef.offsetWidth })
+          scrollController.setContentSize({ width })
           setHorizontalAndScrollX()
           if (defaultProps.type === 'visible') {
             visibleHorizontalScrollAnimation()
@@ -407,9 +409,11 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
   }
 
   onMount(() => {
+    const { width: viewWidth, height: viewHeight } = viewRef.getBoundingClientRect()
+    const { width: contentWidth, height: contentHeight } = contentRef.getBoundingClientRect()
     scrollController = new ScrollController({
-      viewSize: { width: viewRef.offsetWidth, height: viewRef.offsetHeight },
-      contentSize: { width: contentRef.offsetWidth, height: contentRef.offsetHeight },
+      viewSize: { width: viewWidth, height: viewHeight },
+      contentSize: { width: contentWidth, height: contentHeight },
       scrollPosition: { x: defaultProps.scrollX, y: defaultProps.scrollY },
     })
     setVerticalSlider({

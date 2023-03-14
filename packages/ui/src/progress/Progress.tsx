@@ -68,7 +68,9 @@ const GProgress = (props: Partial<GProgressProps>) => {
     }
     setPercentage(Math.round(p))
     setPercentageWidth(
-      ((progressRef.offsetWidth - outsideTextRef.offsetWidth) * percentage()) / 100
+      ((progressRef.getBoundingClientRect().width - outsideTextRef.getBoundingClientRect().width) *
+        percentage()) /
+        100
     )
   })
 

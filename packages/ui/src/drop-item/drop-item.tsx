@@ -61,8 +61,10 @@ const GDropItem = (props: Partial<GDropItemProps>) => {
 
   const drggableStyles = () => `width:${width()}px`
   const contentStyles = () => (draggable() ? `z-index:99` : 'z-index:0')
-  const placeholderstyles = () =>
-    `width:${contentRef.offsetWidth}px;height:${contentRef.offsetHeight}px`
+  const placeholderstyles = () => {
+    const { width, height } = contentRef.getBoundingClientRect()
+    return `width:${width}px;height:${height}px`
+  }
 
   function onStartDrag(e: MouseEvent) {
     const firstPageX = e.pageX
@@ -71,7 +73,7 @@ const GDropItem = (props: Partial<GDropItemProps>) => {
     const mouseOffsetBoxX = firstPageX - x
     const mouseOffsetBoxY = firstPageY - y
     const pd = createPressedDrag()
-    setWidth(dragItemRef.offsetWidth)
+    setWidth(dragItemRef.getBoundingClientRect().width)
     pd.onUpdate((e: MouseEvent) => {
       const pageX = e.pageX
       const pageY = e.pageY
