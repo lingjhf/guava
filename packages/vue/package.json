@@ -11,7 +11,7 @@
   },
   "type": "module",
   "scripts": {
-    "build": "vite build && tsc --project ./tsconfig.json"
+    "build": "vite build && vite build -c ./vite.config.umd.ts && tsc --project ./tsconfig.json"
   },
   "files": [
     "lib",
