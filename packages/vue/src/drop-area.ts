@@ -2,6 +2,7 @@ import type { PropType } from 'vue'
 import type { GDropAreaProps } from '@lingjhf/guava'
 import { defineComponent, h } from 'vue'
 import '@lingjhf/guava/lib/drop-area'
+import { slotToDom } from './utils'
 
 export default defineComponent({
   props: {
@@ -9,12 +10,31 @@ export default defineComponent({
     horizontal: Boolean as PropType<GDropAreaProps['horizontal']>,
     switchWhileCrossEdge: Boolean as PropType<GDropAreaProps['switchWhileCrossEdge']>,
   },
-  setup(props) {
+  setup(props, { slots }) {
     return () =>
       h('g-drop-area', {
-        items: props.items,
         horizontal: props.horizontal,
         'switch-while-cross-edge': props.switchWhileCrossEdge,
+        ref(ref: unknown) {
+          const dom = ref as GDropAreaProps
+          if (props.items) {
+            dom.items = props.items
+          }
+          dom.dropItem = (item: unknown, index: number) => {
+            let renderEl: HTMLElement | null = null
+            slotToDom(slots, 'dropItem', { item, index }, (el) => {
+              renderEl = el
+            })
+            return renderEl
+          }
+          dom.originPlaceholder = () => {
+            let renderEl: HTMLElement | null = null
+            slotToDom(slots, 'originPlaceholder', {}, (el) => {
+              renderEl = el
+            })
+            return renderEl
+          }
+        },
       })
   },
 })
