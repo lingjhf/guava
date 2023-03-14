@@ -4,16 +4,36 @@
 
 ## 使用包管理器
 
-```bash
-pnpm add @lingjhf/guava
-# with npm
+::: code-group
+
+```sh [npm]
 npm install @lingjhf/guava
 ```
 
+```sh [pnpm]
+pnpm add @lingjhf/guava
+```
+
+```sh [yarn]
+yarn add @lingjhf/guava
+```
+
+:::
+
 Vue3推荐安装
 
-```bash
-pnpm add @lingjhf/guava-vue
-# with npm
+::: code-group
+
+```sh [npm]
 npm install @lingjhf/guava-vue
 ```
+
+```sh [pnpm]
+pnpm add @lingjhf/guava-vue
+```
+
+```sh [yarn]
+yarn add @lingjhf/guava-vue
+```
+
+:::
