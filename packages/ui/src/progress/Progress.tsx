@@ -2,7 +2,7 @@ import type { JSX } from 'solid-js'
 import { createEffect, createSignal, mergeProps } from 'solid-js'
 import { customElement } from 'solid-element'
 import styles from './styles.css?inline'
-interface precentageColor {
+export interface precentageColor {
   percentage: number
   color: string
 }
