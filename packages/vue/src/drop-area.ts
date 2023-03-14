@@ -20,19 +20,23 @@ export default defineComponent({
           if (props.items) {
             dom.items = props.items
           }
-          dom.dropItem = (item: unknown, index: number) => {
-            let renderEl: HTMLElement | null = null
-            slotToDom(slots, 'dropItem', { item, index }, (el) => {
-              renderEl = el
-            })
-            return renderEl
+          if (slots.dropItem) {
+            dom.dropItem = (item: unknown, index: number) => {
+              let renderEl: HTMLElement | null = null
+              slotToDom(slots, 'dropItem', { item, index }, (el) => {
+                renderEl = el
+              })
+              return renderEl
+            }
           }
-          dom.originPlaceholder = () => {
-            let renderEl: HTMLElement | null = null
-            slotToDom(slots, 'originPlaceholder', {}, (el) => {
-              renderEl = el
-            })
-            return renderEl
+          if (slots.originPlaceholder) {
+            dom.originPlaceholder = () => {
+              let renderEl: HTMLElement | null = null
+              slotToDom(slots, 'originPlaceholder', {}, (el) => {
+                renderEl = el
+              })
+              return renderEl
+            }
           }
         },
       })

@@ -18,12 +18,14 @@ export default defineComponent({
           if (typeof props.colors === 'function') {
             dom.colors = props.colors
           }
-          dom.text = (value: number) => {
-            let renderEl: HTMLElement | null = null
-            slotToDom(slots, 'text', { value }, (el) => {
-              renderEl = el
-            })
-            return renderEl
+          if (slots.text) {
+            dom.text = (value: number) => {
+              let renderEl: HTMLElement | null = null
+              slotToDom(slots, 'text', { value }, (el) => {
+                renderEl = el
+              })
+              return renderEl
+            }
           }
         },
       })
