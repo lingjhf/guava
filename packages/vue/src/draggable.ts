@@ -26,6 +26,7 @@ export default defineComponent({
           'max-y': props.maxY,
           ref(ref: unknown) {
             const dom = ref as Partial<GDraggableProps>
+            if (!dom) return
             if (props.change) {
               dom.change = props.change
             }

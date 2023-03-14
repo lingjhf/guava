@@ -20,6 +20,7 @@ export default defineComponent({
           type: props.type,
           ref(ref: unknown) {
             const dom = ref as GScrollAreaProps
+            if (!dom) return
             if (props.change) {
               dom.change = props.change
             }

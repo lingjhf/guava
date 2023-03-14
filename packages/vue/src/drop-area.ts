@@ -17,9 +17,8 @@ export default defineComponent({
         'switch-while-cross-edge': props.switchWhileCrossEdge,
         ref(ref: unknown) {
           const dom = ref as GDropAreaProps
-          if (props.items) {
-            dom.items = props.items
-          }
+          if (!dom) return
+          dom.items = props.items ?? []
           if (slots.dropItem) {
             dom.dropItem = (item: unknown, index: number) => {
               let renderEl: HTMLElement | null = null

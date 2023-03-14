@@ -20,6 +20,7 @@ export default defineComponent({
         'slider-size': props.sliderSize,
         ref(ref: unknown) {
           const dom = ref as GColorHueSliderProps
+          if (!dom) return
           if (props.change) {
             dom.change = props.change
           }

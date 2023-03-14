@@ -14,6 +14,7 @@ export default defineComponent({
         color: props.color,
         ref(ref: unknown) {
           const dom = ref as GColorPickerProps
+          if (!dom) return
           if (props.change) {
             dom.change = props.change
           }

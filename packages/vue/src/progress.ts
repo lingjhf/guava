@@ -15,6 +15,7 @@ export default defineComponent({
         percentage: props.percentage,
         ref(ref: unknown) {
           const dom = ref as GProgressProps
+          if (!dom) return
           if (typeof props.colors === 'function') {
             dom.colors = props.colors
           }
