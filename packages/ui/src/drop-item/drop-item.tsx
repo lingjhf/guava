@@ -16,7 +16,6 @@ customElement<Partial<GDropItemProps>>(
   'g-drop-item',
   { index: undefined, placeholder: undefined, render: undefined },
   (props) => {
-    console.log(props.render?.())
     return (
       <>
         <style>{styles}</style>
