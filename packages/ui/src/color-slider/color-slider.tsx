@@ -110,8 +110,8 @@ const GColorSlider = (props: Partial<GColorSliderProps>) => {
   //选择颜色
   function onSelectColor(e: MouseEvent) {
     const { x, y } = colorSelectorRef.getBoundingClientRect()
-    const mouseOffsetX = e.pageX - x
-    const mouseOffseY = e.pageY - y
+    const mouseOffsetX = e.pageX - x - window.scrollX
+    const mouseOffseY = e.pageY - y - window.scrollY
     setSliderPosition({
       x: mouseOffsetX - sliderCenter.x,
       y: mouseOffseY - sliderCenter.y,
@@ -125,8 +125,8 @@ const GColorSlider = (props: Partial<GColorSliderProps>) => {
     createPressedDrag()
       .onUpdate((e) => {
         const { x, y } = colorSelectorRef.getBoundingClientRect()
-        const mouseOffsetX = e.pageX - x
-        const mouseOffseY = e.pageY - y
+        const mouseOffsetX = e.pageX - x - window.scrollX
+        const mouseOffseY = e.pageY - y - window.scrollY
         setSliderPosition({
           x: mouseOffsetX - sliderCenter.x,
           y: mouseOffseY - sliderCenter.y,
