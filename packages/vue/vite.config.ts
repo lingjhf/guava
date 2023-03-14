@@ -11,7 +11,7 @@ export default defineConfig({
       fileName: 'index',
     },
     rollupOptions: {
-      external: ['vue', '@lingjhf/guava'],
+      external: ['vue', '@lingjhf/guava', '@vue/runtime-dom'],
     },
   },
 })
