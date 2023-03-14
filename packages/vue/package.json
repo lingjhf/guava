@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@lingjhf/guava": "workspace:^0.0.3",
+    "@vue/runtime-dom": "^3.2.47",
     "vue": "^3.2.47"
   },
   "devDependencies": {

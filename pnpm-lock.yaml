@@ -88,11 +88,13 @@ importers:
   packages/vue:
     specifiers:
       '@lingjhf/guava': workspace:^0.0.3
+      '@vue/runtime-dom': ^3.2.47
       typescript: ^4.9.5
       vite: ^4.1.4
       vue: ^3.2.47
     dependencies:
       '@lingjhf/guava': link:../ui
+      '@vue/runtime-dom': 3.2.47
       vue: 3.2.47
     devDependencies:
       typescript: 4.9.5
