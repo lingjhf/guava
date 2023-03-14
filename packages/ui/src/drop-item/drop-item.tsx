@@ -69,9 +69,8 @@ const GDropItem = (props: Partial<GDropItemProps>) => {
   function onStartDrag(e: MouseEvent) {
     const firstPageX = e.pageX
     const firstPageY = e.pageY
-    const { x, y } = contentRef.getBoundingClientRect()
-    const mouseOffsetBoxX = firstPageX - x
-    const mouseOffsetBoxY = firstPageY - y
+    const mouseOffsetBoxX = firstPageX - contentRef.offsetLeft
+    const mouseOffsetBoxY = firstPageY - contentRef.offsetTop
     const pd = createPressedDrag()
     setWidth(dragItemRef.getBoundingClientRect().width)
     pd.onUpdate((e: MouseEvent) => {
