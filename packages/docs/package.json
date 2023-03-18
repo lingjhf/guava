@@ -15,6 +15,6 @@
     "vue": "^3.2.47"
   },
   "dependencies": {
-    "@lingjhf/guava-vue": "workspace:^0.0.3"
+    "@lingjhf/guava-vue": "workspace:^0.0.4"
   }
 }
