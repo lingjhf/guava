@@ -1,4 +1,5 @@
 export interface VirtualScrollItem {
+  index: number
   y: number
   height: number
 }
@@ -15,7 +16,7 @@ export class VirtualScrollController {
   private _totalHeight = 0
   private _offsetTop = 0
   private _scrollTop = 0
-  private _currentItems: number[] = []
+  private _currentItems: VirtualScrollItem[] = []
 
   constructor({ viewHeight = 0, scrollTop = 0, defaultItems = [] }: VirtualScrollOptions = {}) {
     this._viewHeight = viewHeight
@@ -60,7 +61,7 @@ export class VirtualScrollController {
   /**
    * 返回当前items
    */
-  get currentItems(): number[] {
+  get currentItems(): VirtualScrollItem[] {
     this.setCurrentItems()
     return this._currentItems
   }
@@ -72,8 +73,9 @@ export class VirtualScrollController {
    */
   initDefaultItems(items: number[]) {
     let totalHeight = 0
-    for (const item of items) {
-      this._items.push({ height: item, y: totalHeight })
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i]
+      this._items.push({ index: i, height: item, y: totalHeight })
       totalHeight += item
     }
     this._totalHeight = totalHeight
@@ -107,10 +109,10 @@ export class VirtualScrollController {
     if (startIndex > -1) {
       const startItem = this._items[startIndex]
       this._offsetTop = startItem.y
-      const tempCurrentItems: number[] = []
+      const tempCurrentItems: VirtualScrollItem[] = []
       for (let i = startIndex; i < this._items.length; i++) {
         const item = this._items[i]
-        tempCurrentItems.push(item.height)
+        tempCurrentItems.push(item)
         if (item.y + item.height > this._scrollTop + this._viewHeight) {
           break
         }
