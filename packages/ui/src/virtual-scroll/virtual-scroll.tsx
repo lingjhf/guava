@@ -86,13 +86,26 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
         : `translateY(${contentOffsetTop()}px)`
     };`
 
-  onMount(() => {
+  function initCurrentItems() {
     const tempItems = controller
       .setViewHeight(defaultProps.horizontal ? containerRef.offsetWidth : containerRef.offsetHeight)
       .initDefaultItems(defaultProps.items.map((item) => item.value))
       .currentItems.map((item) => defaultProps.items[item.index])
     setCurrentItems(tempItems)
     setContentHeight(controller.totalHeight)
+  }
+
+  function watchContainerResize() {
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let i = 0; i < entries.length; i++) {
+        initCurrentItems()
+      }
+    })
+    resizeObserver.observe(containerRef)
+  }
+
+  onMount(() => {
+    watchContainerResize()
     containerRef.addEventListener('scroll', () => {
       const tempItems = controller
         .setScrollTop(defaultProps.horizontal ? containerRef.scrollLeft : containerRef.scrollTop)
