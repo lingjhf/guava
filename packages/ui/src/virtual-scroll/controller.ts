@@ -153,7 +153,7 @@ export class VirtualScrollController {
     ) {
       return this.findStartIndex(items, startIndex, middleIndex - 1, scrollTop)
     }
-    if (scrollTop > middleItemSum) {
+    if (scrollTop >= middleItemSum) {
       return this.findStartIndex(items, middleIndex + 1, endIndex, scrollTop)
     }
     if (middleItem.y <= scrollTop && middleItemSum > scrollTop) {
