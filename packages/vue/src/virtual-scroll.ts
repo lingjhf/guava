@@ -8,11 +8,13 @@ export default defineComponent({
   props: {
     items: Array as PropType<GVirtualScrollProps['items']>,
     horizontal: Boolean as PropType<GVirtualScrollProps['horizontal']>,
+    buffer: Number as PropType<GVirtualScrollProps['buffer']>,
   },
   setup(props, { slots }) {
     return () =>
       h('g-virtual-scroll', {
         horizontal: props.horizontal,
+        buffer: props.buffer,
         ref(ref: unknown) {
           const dom = ref as GVirtualScrollProps
           if (!dom) return
