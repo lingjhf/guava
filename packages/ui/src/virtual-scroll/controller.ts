@@ -8,6 +8,7 @@ export interface VirtualScrollOptions {
   viewHeight?: number
   scrollTop?: number
   defaultItems?: number[]
+  buffer?: number
 }
 
 export class VirtualScrollController {
@@ -17,10 +18,16 @@ export class VirtualScrollController {
   private _offsetTop = 0
   private _scrollTop = 0
   private _currentItems: VirtualScrollItem[] = []
-
-  constructor({ viewHeight = 0, scrollTop = 0, defaultItems = [] }: VirtualScrollOptions = {}) {
+  private _buffer = 10
+  constructor({
+    viewHeight = 0,
+    scrollTop = 0,
+    defaultItems = [],
+    buffer = 10,
+  }: VirtualScrollOptions = {}) {
     this._viewHeight = viewHeight
     this._scrollTop = scrollTop
+    this._buffer = buffer < 0 ? this._buffer : buffer
     this.initDefaultItems(defaultItems)
   }
   /**
@@ -72,6 +79,7 @@ export class VirtualScrollController {
    * @returns 返回当前实例
    */
   initDefaultItems(items: number[]) {
+    this._items = []
     let totalHeight = 0
     for (let i = 0; i < items.length; i++) {
       const item = items[i]
@@ -81,6 +89,17 @@ export class VirtualScrollController {
     this._totalHeight = totalHeight
     return this
   }
+
+  /**
+   * 设置buffer
+   * @param value buffer值
+   * @returns
+   */
+  setBuffer(value: number) {
+    if (value < 0) return
+    this._buffer = value
+  }
+
   /**
    * 设置可见区域高度
    * @param value 可见区域高度
@@ -113,11 +132,20 @@ export class VirtualScrollController {
     if (startIndex > -1) {
       const startItem = this._items[startIndex]
       this._offsetTop = startItem.y
-      const tempCurrentItems: VirtualScrollItem[] = []
+      let tempCurrentItems: VirtualScrollItem[] = []
+      if (startIndex > 0) {
+        const startBuffer = startIndex - this._buffer
+        tempCurrentItems = this._items.slice(startBuffer < 0 ? 0 : startBuffer, startIndex)
+        this._offsetTop = tempCurrentItems[0].y
+      }
       for (let i = startIndex; i < this._items.length; i++) {
         const item = this._items[i]
         tempCurrentItems.push(item)
         if (item.y + item.height > this._scrollTop + this._viewHeight) {
+          if (i < this._items.length - 1) {
+            const endBuffer = i + 1 + this._buffer
+            tempCurrentItems = [...tempCurrentItems, ...this._items.slice(i, endBuffer)]
+          }
           break
         }
       }

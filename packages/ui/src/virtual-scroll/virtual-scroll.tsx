@@ -12,12 +12,13 @@ export interface GVirtualScrollItem {
 export interface GVirtualScrollProps {
   items: GVirtualScrollItem[]
   horizontal: boolean
+  buffer: number
   renderItem?: (key: string) => JSX.Element
 }
 
 customElement(
   'g-virtual-scroll',
-  { items: undefined, horizontal: undefined, renderItem: undefined },
+  { items: undefined, horizontal: undefined, buffer: undefined, renderItem: undefined },
   (props) => {
     return (
       <>
@@ -25,6 +26,7 @@ customElement(
         <GVirtualScroll
           items={props.items}
           horizontal={props.horizontal}
+          buffer={props.buffer}
           renderItem={props.renderItem}
         ></GVirtualScroll>
       </>
@@ -40,6 +42,7 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
   const defaultProps = mergeProps<[GVirtualScrollProps, ...Partial<GVirtualScrollProps>[]]>(
     {
       items: [],
+      buffer: 10,
       horizontal: false,
     },
     props
@@ -57,6 +60,10 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
       setCurrentItems(tempItems)
       setContentHeight(controller.totalHeight)
     }
+  })
+
+  createEffect(() => {
+    controller.setBuffer(defaultProps.buffer)
   })
 
   const virtualScrollClasses = () =>
