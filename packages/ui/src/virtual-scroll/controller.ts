@@ -137,8 +137,8 @@ export class VirtualScrollController {
     let render = true
     if (this.scrollDirection > 0) {
       if (this.afterBuffer.length > 0) {
-        const middleItem = this.afterBuffer[Math.floor(this.afterBuffer.length / 2)]
-        if (middleItem.y + middleItem.height < this._scrollTop + this._viewHeight) {
+        const lastItem = this.afterBuffer[this.afterBuffer.length - 1]
+        if (lastItem.y < this._scrollTop + this._viewHeight) {
           render = true
         } else {
           render = false
@@ -146,8 +146,8 @@ export class VirtualScrollController {
       }
     } else {
       if (this.beforeBuffer.length > 0) {
-        const middleItem = this.beforeBuffer[Math.floor(this.beforeBuffer.length / 2)]
-        if (middleItem.y + middleItem.height > this._scrollTop) {
+        const firstItem = this.beforeBuffer[0]
+        if (firstItem.y + firstItem.height > this._scrollTop) {
           render = true
         } else {
           render = false
