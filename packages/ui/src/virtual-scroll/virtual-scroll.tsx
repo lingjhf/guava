@@ -142,10 +142,11 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
   )
 }
 
+
 declare module 'solid-js' {
   namespace JSX {
     interface IntrinsicElements {
-      'g-virtual-scroll ': Partial<GVirtualScrollProps>
+      'g-virtual-scroll': Partial<GVirtualScrollProps>
     }
   }
 }
