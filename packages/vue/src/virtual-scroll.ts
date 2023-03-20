@@ -9,6 +9,7 @@ export default defineComponent({
     items: Array as PropType<GVirtualScrollProps['items']>,
     horizontal: Boolean as PropType<GVirtualScrollProps['horizontal']>,
     buffer: Number as PropType<GVirtualScrollProps['buffer']>,
+    change: Function as PropType<GVirtualScrollProps['change']>,
   },
   setup(props, { slots }) {
     return () =>
@@ -27,6 +28,9 @@ export default defineComponent({
               })
               return renderEl
             }
+          }
+          if (props.change) {
+            dom.change = props.change
           }
         },
       })
