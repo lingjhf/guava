@@ -19,6 +19,9 @@ export class VirtualScrollController {
   private _scrollTop = 0
   private _currentItems: VirtualScrollItem[] = []
   private _buffer = 10
+  private scrollDirection = 0
+  private beforeBuffer: VirtualScrollItem[] = []
+  private afterBuffer: VirtualScrollItem[] = []
   constructor({
     viewHeight = 0,
     scrollTop = 0,
@@ -87,6 +90,9 @@ export class VirtualScrollController {
       totalHeight += item
     }
     this._totalHeight = totalHeight
+    if (this._items.length === 0) {
+      this._currentItems = []
+    }
     return this
   }
 
@@ -116,6 +122,7 @@ export class VirtualScrollController {
    * @returns 返回当前实例
    */
   setScrollTop(value: number) {
+    this.scrollDirection = value - this._scrollTop
     this._scrollTop = value
     return this
   }
@@ -124,33 +131,77 @@ export class VirtualScrollController {
    * 设置当前可见的items
    */
   private setCurrentItems() {
-    if (this._items.length === 0) {
-      this._currentItems = []
-      return
-    }
-    const startIndex = this.findStartIndex(this._items, 0, this._items.length, this._scrollTop)
-    if (startIndex > -1) {
-      const startItem = this._items[startIndex]
-      this._offsetTop = startItem.y
-      let tempCurrentItems: VirtualScrollItem[] = []
-      if (startIndex > 0) {
-        const startBuffer = startIndex - this._buffer
-        tempCurrentItems = this._items.slice(startBuffer < 0 ? 0 : startBuffer, startIndex)
-        this._offsetTop = tempCurrentItems[0].y
-      }
-      for (let i = startIndex; i < this._items.length; i++) {
-        const item = this._items[i]
-        tempCurrentItems.push(item)
-        if (item.y + item.height > this._scrollTop + this._viewHeight) {
-          if (i < this._items.length - 1) {
-            const endBuffer = i + 1 + this._buffer
-            tempCurrentItems = [...tempCurrentItems, ...this._items.slice(i, endBuffer)]
-          }
-          break
+    const startIndex = this.findStartIndex(0, this._items.length)
+    if (startIndex === -1) return
+    //判断是否需要生成新的items
+    let render = true
+    if (this.scrollDirection > 0) {
+      if (this.afterBuffer.length > 0) {
+        const middleItem = this.afterBuffer[Math.floor(this.afterBuffer.length / 2)]
+        if (middleItem.y + middleItem.height < this._scrollTop + this._viewHeight) {
+          render = true
+        } else {
+          render = false
         }
       }
-      this._currentItems = tempCurrentItems
+    } else {
+      if (this.beforeBuffer.length > 0) {
+        const middleItem = this.beforeBuffer[Math.floor(this.beforeBuffer.length / 2)]
+        if (middleItem.y + middleItem.height > this._scrollTop) {
+          render = true
+        } else {
+          render = false
+        }
+      }
     }
+    if (render) {
+      const beforeBufferItems = this.generateBeforeBufferItems(startIndex)
+      const viewItems = this.generateViewItems(startIndex)
+      const afterBufferItems = this.generateAfterBufferItems(startIndex + viewItems.length - 1)
+      this.beforeBuffer = beforeBufferItems
+      this.afterBuffer = afterBufferItems
+      this._currentItems = [...beforeBufferItems, ...viewItems, ...afterBufferItems]
+      this._offsetTop = this._currentItems[0].y
+    }
+  }
+
+  /**
+   * 生成前置缓冲items
+   * @param startIndex 开始索引
+   * @returns
+   */
+  private generateBeforeBufferItems(startIndex: number): VirtualScrollItem[] {
+    if (startIndex > 0) {
+      const startBuffer = startIndex - this._buffer
+      return this._items.slice(startBuffer < 0 ? 0 : startBuffer, startIndex)
+    }
+    return []
+  }
+
+  /**
+   * 生成后置缓冲items
+   * @param endIndex 结束索引
+   * @returns
+   */
+  private generateAfterBufferItems(endIndex: number): VirtualScrollItem[] {
+    if (endIndex < this._items.length - 1) {
+      const bufferStartIndex = endIndex + 1
+      const bufferEndIndex = bufferStartIndex + this._buffer
+      return this._items.slice(bufferStartIndex, bufferEndIndex)
+    }
+    return []
+  }
+
+  private generateViewItems(startIndex: number): VirtualScrollItem[] {
+    const items: VirtualScrollItem[] = []
+    for (let i = startIndex; i < this._items.length; i++) {
+      const item = this._items[i]
+      items.push(item)
+      if (item.y + item.height >= this._scrollTop + this._viewHeight) {
+        break
+      }
+    }
+    return items
   }
 
   /**
@@ -161,30 +212,25 @@ export class VirtualScrollController {
    * @param scrollTop y轴滚动距离
    * @returns 返回一个索引，找不到返回-1
    */
-  private findStartIndex(
-    items: VirtualScrollItem[],
-    startIndex: number,
-    endIndex: number,
-    scrollTop: number
-  ): number {
+  private findStartIndex(startIndex: number, endIndex: number): number {
     if (startIndex > endIndex) {
       return -1
     }
     const middleIndex = Math.floor((startIndex + endIndex) / 2)
-    const middleItem = items[middleIndex]
-    const viewSum = scrollTop + this._viewHeight
+    const middleItem = this._items[middleIndex]
+    const viewSum = this._scrollTop + this._viewHeight
     const middleItemSum = middleItem.y + middleItem.height
     if (
       viewSum < middleItem.y ||
-      (middleItem.y > scrollTop && viewSum >= middleItemSum) ||
-      (middleItem.y > scrollTop && middleItemSum > viewSum)
+      (middleItem.y > this._scrollTop && viewSum >= middleItemSum) ||
+      (middleItem.y > this._scrollTop && middleItemSum > viewSum)
     ) {
-      return this.findStartIndex(items, startIndex, middleIndex - 1, scrollTop)
+      return this.findStartIndex(startIndex, middleIndex - 1)
     }
-    if (scrollTop >= middleItemSum) {
-      return this.findStartIndex(items, middleIndex + 1, endIndex, scrollTop)
+    if (this._scrollTop >= middleItemSum) {
+      return this.findStartIndex(middleIndex + 1, endIndex)
     }
-    if (middleItem.y <= scrollTop && middleItemSum > scrollTop) {
+    if (middleItem.y <= this._scrollTop && middleItemSum > this.scrollTop) {
       return middleIndex
     }
     return -1
