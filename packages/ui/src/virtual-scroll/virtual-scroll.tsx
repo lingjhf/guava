@@ -13,6 +13,7 @@ export interface GVirtualScrollProps {
   items: GVirtualScrollItem[]
   horizontal: boolean
   buffer: number
+  change?: (scrollTop: number) => void
   renderItem?: (key: string) => JSX.Element
 }
 
@@ -114,8 +115,10 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
   onMount(() => {
     watchContainerResize()
     containerRef.addEventListener('scroll', () => {
+      const scrollTop = defaultProps.horizontal ? containerRef.scrollLeft : containerRef.scrollTop
+      defaultProps.change?.(scrollTop)
       const tempItems = controller
-        .setScrollTop(defaultProps.horizontal ? containerRef.scrollLeft : containerRef.scrollTop)
+        .setScrollTop(scrollTop)
         .currentItems.map((item) => defaultProps.items[item.index])
       setContentOffsetTop(controller.offsetTop)
       setCurrentItems(tempItems)
@@ -141,7 +144,6 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
     </div>
   )
 }
-
 
 declare module 'solid-js' {
   namespace JSX {
