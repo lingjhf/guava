@@ -25,12 +25,12 @@ export interface GScrollAreaProps {
   //默认值是auto
   type: ScrollAreaType
   children?: JSX.Element | JSX.Element[]
-  change?: (detail: ScrollDetail) => void
+  scrollChange?: (detail: ScrollDetail) => void
 }
 
 customElement<Partial<GScrollAreaProps>>(
   'g-scroll-area',
-  { scrollX: undefined, scrollY: undefined, type: undefined, change: undefined },
+  { scrollX: undefined, scrollY: undefined, type: undefined, scrollChange: undefined },
   (props) => {
     return (
       <>
@@ -39,7 +39,7 @@ customElement<Partial<GScrollAreaProps>>(
           scrollX={props.scrollX}
           scrollY={props.scrollY}
           type={props.type}
-          change={props.change}
+          scrollChange={props.scrollChange}
         >
           <slot></slot>
         </GScrollArea>
@@ -110,7 +110,7 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
     `height:${verticalSlider().height}px;top:${verticalSlider().top}px`
 
   function emitScroll() {
-    defaultProps.change?.({
+    defaultProps.scrollChange?.({
       scrollX: scrollController.scrollX,
       scrollY: scrollController.scrollY,
     })
