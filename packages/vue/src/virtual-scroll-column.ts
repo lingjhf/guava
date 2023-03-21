@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
 import type { GVirutalScrollColumnprops } from '@lingjhf/guava'
 import { defineComponent, h } from 'vue'
-import '@lingjhf/guava/lib/virtual-scroll'
+import '@lingjhf/guava/lib/virtual-scroll-column'
 import { slotToDom } from './utils'
 
 export default defineComponent({
