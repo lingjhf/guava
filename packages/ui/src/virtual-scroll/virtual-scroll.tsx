@@ -15,7 +15,7 @@ import styles from './styles.css?inline'
 
 export interface GVirtualScrollProps {
   horizontal: boolean
-  change?: (scrollTop: number) => void
+  scrollChange?: (scrollTop: number) => void
   children?: JSX.Element | JSXElement[]
 }
 
@@ -33,11 +33,11 @@ const VirtualScrollContext = createContext<VirtualScrollProviderValue>()
 
 export const useVirtualScrollContext = () => useContext(VirtualScrollContext)
 
-customElement('g-virtual-scroll', { horizontal: undefined }, (props) => {
+customElement('g-virtual-scroll', { horizontal: undefined, scrollChange: undefined }, (props) => {
   return (
     <>
       <style>{styles}</style>
-      <GVirtualScroll horizontal={props.horizontal}>
+      <GVirtualScroll horizontal={props.horizontal} scrollChange={props.scrollChange}>
         <slot></slot>
       </GVirtualScroll>
     </>
@@ -96,7 +96,7 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
     watchContainerResize()
     containerRef.addEventListener('scroll', () => {
       const scrollTop = defaultProps.horizontal ? containerRef.scrollLeft : containerRef.scrollTop
-      defaultProps.change?.(scrollTop)
+      defaultProps.scrollChange?.(scrollTop)
       controllers.forEach((item) => {
         item.controller.setScrollTop(scrollTop)
         item.change()
