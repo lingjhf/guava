@@ -1,106 +1,86 @@
 import type { JSX } from 'solid-js'
-import { createSignal, onMount, Index, mergeProps, createEffect } from 'solid-js'
+import {
+  createContext,
+  createSignal,
+  JSXElement,
+  useContext,
+  onMount,
+  mergeProps,
+  createEffect,
+  Accessor,
+} from 'solid-js'
 import { customElement } from 'solid-element'
-import { VirtualScrollController } from './controller'
+import { VirtualScrollController } from '../virtual-scroll-column'
 import styles from './styles.css?inline'
 
-export interface GVirtualScrollItem {
-  key: string
-  value: number
-}
-
 export interface GVirtualScrollProps {
-  items: GVirtualScrollItem[]
   horizontal: boolean
-  buffer: number
   change?: (scrollTop: number) => void
-  renderItem?: (key: string) => JSX.Element
+  children?: JSX.Element | JSXElement[]
 }
 
-customElement(
-  'g-virtual-scroll',
-  { items: undefined, horizontal: undefined, buffer: undefined, renderItem: undefined },
-  (props) => {
-    return (
-      <>
-        <style>{styles}</style>
-        <GVirtualScroll
-          items={props.items}
-          horizontal={props.horizontal}
-          buffer={props.buffer}
-          renderItem={props.renderItem}
-        ></GVirtualScroll>
-      </>
-    )
-  }
-)
+interface RegisterControllerOptions {
+  controller: VirtualScrollController
+  change: () => void
+}
+
+interface VirtualScrollProviderValue {
+  horizontal: Accessor<boolean>
+  registerController: (options: RegisterControllerOptions) => void
+}
+
+const VirtualScrollContext = createContext<VirtualScrollProviderValue>()
+
+export const useVirtualScrollContext = () => useContext(VirtualScrollContext)
+
+customElement('g-virtual-scroll', { horizontal: undefined }, (props) => {
+  return (
+    <>
+      <style>{styles}</style>
+      <GVirtualScroll horizontal={props.horizontal}>
+        <slot></slot>
+      </GVirtualScroll>
+    </>
+  )
+})
 
 const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
   let containerRef: HTMLElement
   const setContainerRef = (el: HTMLElement) => (containerRef = el)
-  const controller = new VirtualScrollController()
 
   const defaultProps = mergeProps<[GVirtualScrollProps, ...Partial<GVirtualScrollProps>[]]>(
     {
-      items: [],
-      buffer: 10,
       horizontal: false,
     },
     props
   )
-
-  const [contentHeight, setContentHeight] = createSignal(0)
-  const [contentOffsetTop, setContentOffsetTop] = createSignal(0)
-  const [currentItems, setCurrentItems] = createSignal<GVirtualScrollItem[]>([])
+  const [horizontal, setHorizontal] = createSignal(defaultProps.horizontal)
 
   createEffect(() => {
-    if (controller.viewHeight) {
-      const tempItems = controller
-        .initDefaultItems(defaultProps.items.map((item) => item.value))
-        .currentItems.map((item) => defaultProps.items[item.index])
-      setCurrentItems(tempItems)
-      setContentHeight(controller.totalHeight)
-    }
-  })
-
-  createEffect(() => {
-    controller.setBuffer(defaultProps.buffer)
+    setHorizontal(defaultProps.horizontal)
   })
 
   const virtualScrollClasses = () =>
     `${defaultProps.horizontal ? 'virtual-scroll-horizontal' : 'virtual-scroll-vertical'}`
 
-  const placeholderClasses = () =>
-    `${
-      defaultProps.horizontal
-        ? 'virtual-scroll-placeholder-horizontal'
-        : 'virtual-scroll-placeholder-vertical'
-    }`
+  const controllers: RegisterControllerOptions[] = []
 
-  const contentClasses = () =>
-    `${
-      defaultProps.horizontal
-        ? 'virtual-scroll-content-horizontal'
-        : 'virtual-scroll-content-vertical'
-    }`
+  function registerController(controller: RegisterControllerOptions) {
+    controllers.push(controller)
+  }
 
-  const placeholderStyles = () =>
-    `${defaultProps.horizontal ? `width:${contentHeight()}px` : `height:${contentHeight()}px`};`
-
-  const contentStyles = () =>
-    `transform:${
-      defaultProps.horizontal
-        ? `translateX(${contentOffsetTop()}px)`
-        : `translateY(${contentOffsetTop()}px)`
-    };`
+  const providerValue: VirtualScrollProviderValue = {
+    horizontal,
+    registerController,
+  }
 
   function initCurrentItems() {
-    const tempItems = controller
-      .setViewHeight(defaultProps.horizontal ? containerRef.offsetWidth : containerRef.offsetHeight)
-      .initDefaultItems(defaultProps.items.map((item) => item.value))
-      .currentItems.map((item) => defaultProps.items[item.index])
-    setCurrentItems(tempItems)
-    setContentHeight(controller.totalHeight)
+    controllers.forEach((item) => {
+      item.controller.setViewHeight(
+        defaultProps.horizontal ? containerRef.offsetWidth : containerRef.offsetHeight
+      )
+      item.change()
+    })
   }
 
   function watchContainerResize() {
@@ -117,31 +97,19 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
     containerRef.addEventListener('scroll', () => {
       const scrollTop = defaultProps.horizontal ? containerRef.scrollLeft : containerRef.scrollTop
       defaultProps.change?.(scrollTop)
-      const tempItems = controller
-        .setScrollTop(scrollTop)
-        .currentItems.map((item) => defaultProps.items[item.index])
-      setContentOffsetTop(controller.offsetTop)
-      setCurrentItems(tempItems)
+      controllers.forEach((item) => {
+        item.controller.setScrollTop(scrollTop)
+        item.change()
+      })
     })
   })
 
   return (
-    <div class={virtualScrollClasses()} ref={setContainerRef}>
-      <div class={placeholderClasses()} style={placeholderStyles()}></div>
-      <div class={contentClasses()} style={contentStyles()}>
-        <Index each={currentItems()}>
-          {(item) => (
-            <div
-              style={
-                defaultProps.horizontal ? `width:${item().value}px` : `height:${item().value}px`
-              }
-            >
-              {defaultProps.renderItem?.(item().key)}
-            </div>
-          )}
-        </Index>
+    <VirtualScrollContext.Provider value={providerValue}>
+      <div class={virtualScrollClasses()} ref={setContainerRef}>
+        {defaultProps.children}
       </div>
-    </div>
+    </VirtualScrollContext.Provider>
   )
 }
 
