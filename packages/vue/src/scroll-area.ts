@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { GScrollAreaProps } from '@lingjhf/guava'
+import type { GScrollAreaProps, ScrollDetail } from '@lingjhf/guava'
 import { defineComponent, h } from 'vue'
 import '@lingjhf/guava/lib/scroll-area'
 
@@ -8,9 +8,12 @@ export default defineComponent({
     scrollX: Number as PropType<GScrollAreaProps['scrollX']>,
     scrollY: Number as PropType<GScrollAreaProps['scrollY']>,
     type: String as PropType<GScrollAreaProps['type']>,
-    change: Function as PropType<GScrollAreaProps['change']>,
   },
-  setup(props, { slots }) {
+  emits: ['scrollChange'],
+  setup(props, { slots, emit }) {
+    function scrollChange(value: ScrollDetail) {
+      emit('scrollChange', value)
+    }
     return () =>
       h(
         'g-scroll-area',
@@ -21,9 +24,7 @@ export default defineComponent({
           ref(ref: unknown) {
             const dom = ref as GScrollAreaProps
             if (!dom) return
-            if (props.change) {
-              dom.change = props.change
-            }
+            dom.scrollChange = scrollChange
           },
         },
         {

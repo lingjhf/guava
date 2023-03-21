@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { Color as _, GColorPickerProps } from '@lingjhf/guava'
+import type { Color, GColorPickerProps } from '@lingjhf/guava'
 import { defineComponent, h } from 'vue'
 import '@lingjhf/guava/lib/color-picker'
 
@@ -8,16 +8,18 @@ export default defineComponent({
     color: String as PropType<GColorPickerProps['color']>,
     change: Function as PropType<GColorPickerProps['change']>,
   },
-  setup(props) {
+  emits: ['change'],
+  setup(props, { emit }) {
+    function change(color: Color) {
+      emit('change', color)
+    }
     return () =>
       h('g-color-picker', {
         color: props.color,
         ref(ref: unknown) {
           const dom = ref as GColorPickerProps
           if (!dom) return
-          if (props.change) {
-            dom.change = props.change
-          }
+          dom.change = change
         },
       })
   },

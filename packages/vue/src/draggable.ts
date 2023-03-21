@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { GDraggableProps } from '@lingjhf/guava'
+import type { GDraggableProps, Position } from '@lingjhf/guava'
 import { defineComponent, h } from 'vue'
 import '@lingjhf/guava/lib/draggable'
 
@@ -13,7 +13,11 @@ export default defineComponent({
     maxY: Number as PropType<GDraggableProps['maxY']>,
     change: Function as PropType<GDraggableProps['change']>,
   },
-  setup(props, { slots }) {
+  emits: ['change'],
+  setup(props, { slots, emit }) {
+    function change(value: Position) {
+      emit('change', value)
+    }
     return () =>
       h(
         'g-draggable',
@@ -27,9 +31,7 @@ export default defineComponent({
           ref(ref: unknown) {
             const dom = ref as Partial<GDraggableProps>
             if (!dom) return
-            if (props.change) {
-              dom.change = props.change
-            }
+            dom.change = change
           },
         },
         {

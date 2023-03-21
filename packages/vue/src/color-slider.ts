@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { Color as _, GColorSliderProps } from '@lingjhf/guava'
+import type { Color, GColorSliderProps } from '@lingjhf/guava'
 import { defineComponent, h } from 'vue'
 import '@lingjhf/guava/lib/color-slider'
 
@@ -10,7 +10,11 @@ export default defineComponent({
     sliderSize: Object as PropType<GColorSliderProps['sliderSize']>,
     change: Function as PropType<GColorSliderProps['change']>,
   },
-  setup(props) {
+  emits: ['change'],
+  setup(props, { emit }) {
+    function change(color: Color) {
+      emit('change', color)
+    }
     return () =>
       h('g-color-slider', {
         color: props.color,
@@ -19,9 +23,7 @@ export default defineComponent({
         ref(ref: unknown) {
           const dom = ref as GColorSliderProps
           if (!dom) return
-          if (props.change) {
-            dom.change = props.change
-          }
+          dom.change = change
         },
       })
   },
