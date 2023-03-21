@@ -24,9 +24,9 @@ export interface GDropAreaGroupProps {
   children: JSX.Element | JSX.Element[]
 }
 
-const MultiDropAreaContext = createContext<DropAreaGroupProviderValue>()
+const DropAreaGroupContext = createContext<DropAreaGroupProviderValue>()
 
-export const useMultiDropAreaContext = () => useContext(MultiDropAreaContext)
+export const useMultiDropAreaContext = () => useContext(DropAreaGroupContext)
 
 customElement<Partial<GDropAreaGroupProps>>('g-drop-area-group', () => {
   return (
@@ -127,9 +127,9 @@ const GDropAreaGroup = (props: Partial<GDropAreaGroupProps>) => {
   }
 
   return (
-    <MultiDropAreaContext.Provider value={providerValue}>
+    <DropAreaGroupContext.Provider value={providerValue}>
       {props.children}
-    </MultiDropAreaContext.Provider>
+    </DropAreaGroupContext.Provider>
   )
 }
 
