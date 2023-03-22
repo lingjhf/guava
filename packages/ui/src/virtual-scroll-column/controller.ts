@@ -98,7 +98,10 @@ export class VirtualScrollController {
    * @returns 返回当前实例
    */
   initDefaultItems(items: number[]) {
+    this._currentItems = []
     this._items = []
+    this.beforeBuffer = []
+    this.afterBuffer = []
     let totalHeight = 0
     for (let i = 0; i < items.length; i++) {
       const item = items[i]
@@ -106,9 +109,6 @@ export class VirtualScrollController {
       totalHeight += item
     }
     this._totalHeight = totalHeight
-    if (this._items.length === 0) {
-      this._currentItems = []
-    }
     return this
   }
 
