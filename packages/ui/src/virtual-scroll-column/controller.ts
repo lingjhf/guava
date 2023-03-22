@@ -22,6 +22,8 @@ export class VirtualScrollController {
   private scrollDirection = 0
   private beforeBuffer: VirtualScrollItem[] = []
   private afterBuffer: VirtualScrollItem[] = []
+  private _startIndex = 0
+  private _endIndex = 0
   constructor({
     viewHeight = 0,
     scrollTop = 0,
@@ -74,6 +76,20 @@ export class VirtualScrollController {
   get currentItems(): VirtualScrollItem[] {
     this.setCurrentItems()
     return this._currentItems
+  }
+
+  /**
+   * 返回可见范围第一个索引
+   */
+  get startIndex(): number {
+    return this._startIndex
+  }
+
+  /**
+   * 返回可见范围最后一个索引
+   */
+  get endIndex(): number {
+    return this._endIndex
   }
 
   /**
@@ -131,8 +147,10 @@ export class VirtualScrollController {
    * 设置当前可见的items
    */
   private setCurrentItems() {
-    const startIndex = this.findStartIndex(0, this._items.length)
-    if (startIndex === -1) return
+    this._startIndex = this.findStartIndex(0, this._items.length)
+    if (this._startIndex === -1) return
+    const viewItems = this.generateViewItems(this._startIndex)
+    this._endIndex = this._startIndex + viewItems.length - 1
     //判断是否需要生成新的items
     let render = true
     if (this.scrollDirection > 0) {
@@ -155,9 +173,8 @@ export class VirtualScrollController {
       }
     }
     if (render) {
-      const beforeBufferItems = this.generateBeforeBufferItems(startIndex)
-      const viewItems = this.generateViewItems(startIndex)
-      const afterBufferItems = this.generateAfterBufferItems(startIndex + viewItems.length - 1)
+      const beforeBufferItems = this.generateBeforeBufferItems(this._startIndex)
+      const afterBufferItems = this.generateAfterBufferItems(this._endIndex)
       this.beforeBuffer = beforeBufferItems
       this.afterBuffer = afterBufferItems
       this._currentItems = [...beforeBufferItems, ...viewItems, ...afterBufferItems]
