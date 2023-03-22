@@ -11,10 +11,14 @@ export interface GVirtualScrollItem {
   value: number
 }
 
+interface GVirtualScrollItemWithIndex extends GVirtualScrollItem {
+  index: number
+}
+
 export interface GVirutalScrollColumnprops {
   items: GVirtualScrollItem[]
   buffer: number
-  renderItem?: (key: string) => JSX.Element
+  renderItem?: (key: string, index: number) => JSX.Element
 }
 
 customElement(
@@ -50,7 +54,7 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
 
   const [contentHeight, setContentHeight] = createSignal(0)
   const [contentOffsetTop, setContentOffsetTop] = createSignal(0)
-  const [currentItems, setCurrentItems] = createSignal<GVirtualScrollItem[]>([])
+  const [currentItems, setCurrentItems] = createSignal<GVirtualScrollItemWithIndex[]>([])
 
   createEffect(() => {
     controller.initDefaultItems(defaultProps.items.map((item) => item.value))
@@ -83,7 +87,10 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
         : `translateY(${contentOffsetTop()}px)`
     };`
   function virtualScrollChange() {
-    const tempItems = controller.currentItems.map((item) => defaultProps.items[item.index])
+    const tempItems = controller.currentItems.map((item) => ({
+      ...defaultProps.items[item.index],
+      index: item.index,
+    }))
     setContentOffsetTop(controller.offsetTop)
     setCurrentItems(tempItems)
   }
@@ -96,7 +103,7 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
             <div
               style={context?.horizontal() ? `width:${item().value}px` : `height:${item().value}px`}
             >
-              {defaultProps.renderItem?.(item().key)}
+              {defaultProps.renderItem?.(item().key, item().index)}
             </div>
           )}
         </Index>
