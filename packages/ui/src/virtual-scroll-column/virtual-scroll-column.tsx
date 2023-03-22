@@ -120,13 +120,18 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
       <div class={placeholderClasses()} style={placeholderStyles()}></div>
       <div class={contentClasses()} style={contentStyles()}>
         <Index each={currentItems()}>
-          {(item) => (
-            <div
-              style={context?.horizontal() ? `width:${item().value}px` : `height:${item().value}px`}
-            >
-              {defaultProps.renderItem?.(item().key, item().index)}
-            </div>
-          )}
+          {(item) => {
+            const renderItem = defaultProps.renderItem?.(item().key, item().index)
+            return (
+              <div
+                style={
+                  context?.horizontal() ? `width:${item().value}px` : `height:${item().value}px`
+                }
+              >
+                {renderItem}
+              </div>
+            )
+          }}
         </Index>
       </div>
     </div>
