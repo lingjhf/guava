@@ -12,7 +12,7 @@ import {
 import { customElement } from 'solid-element'
 import { VirtualScrollController } from '../virtual-scroll-column'
 import styles from './styles.css?inline'
-
+import '../scroll-area'
 export interface GVirtualScrollProps {
   horizontal: boolean
   scrollChange?: (scrollTop: number) => void
@@ -27,6 +27,7 @@ interface RegisterControllerOptions {
 interface VirtualScrollProviderValue {
   horizontal: Accessor<boolean>
   registerController: (options: RegisterControllerOptions) => void
+  setVirtualScrollHeight: (value: number) => void
 }
 
 const VirtualScrollContext = createContext<VirtualScrollProviderValue>()
@@ -55,6 +56,7 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
     props
   )
   const [horizontal, setHorizontal] = createSignal(defaultProps.horizontal)
+  const [height, setHeight] = createSignal(0)
 
   createEffect(() => {
     setHorizontal(defaultProps.horizontal)
@@ -63,18 +65,27 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
   const virtualScrollClasses = () =>
     `${defaultProps.horizontal ? 'virtual-scroll-horizontal' : 'virtual-scroll-vertical'}`
 
+  const virtualScrollStyles = () =>
+    `${defaultProps.horizontal ? `width:${height()}px` : `height:${height()}px`}`
+
   const controllers: RegisterControllerOptions[] = []
 
   function registerController(controller: RegisterControllerOptions) {
     controllers.push(controller)
   }
+  function setVirtualScrollHeight(value: number) {
+    if (value > height()) {
+      setHeight(value)
+    }
+  }
 
   const providerValue: VirtualScrollProviderValue = {
     horizontal,
     registerController,
+    setVirtualScrollHeight,
   }
 
-  function initCurrentItems() {
+  function initViewHeight() {
     controllers.forEach((item) => {
       item.controller.setViewHeight(
         defaultProps.horizontal ? containerRef.offsetWidth : containerRef.offsetHeight
@@ -86,29 +97,32 @@ const GVirtualScroll = (props: Partial<GVirtualScrollProps>) => {
   function watchContainerResize() {
     const resizeObserver = new ResizeObserver((entries) => {
       for (let i = 0; i < entries.length; i++) {
-        initCurrentItems()
+        initViewHeight()
       }
     })
     resizeObserver.observe(containerRef)
   }
 
+  function onScrollChange({ scrollX, scrollY }) {
+    const scrollTop = defaultProps.horizontal ? scrollX : scrollY
+    defaultProps.scrollChange?.(scrollTop)
+    controllers.forEach((item) => {
+      item.controller.setScrollTop(scrollTop)
+      item.change()
+    })
+  }
+
   onMount(() => {
     watchContainerResize()
-    containerRef.addEventListener('scroll', () => {
-      const scrollTop = defaultProps.horizontal ? containerRef.scrollLeft : containerRef.scrollTop
-      defaultProps.scrollChange?.(scrollTop)
-      controllers.forEach((item) => {
-        item.controller.setScrollTop(scrollTop)
-        item.change()
-      })
-    })
   })
 
   return (
     <VirtualScrollContext.Provider value={providerValue}>
-      <div class={virtualScrollClasses()} ref={setContainerRef}>
-        {defaultProps.children}
-      </div>
+      <g-scroll-area ref={setContainerRef} scroll-change={onScrollChange}>
+        <div class={virtualScrollClasses()} style={virtualScrollStyles()}>
+          {defaultProps.children}
+        </div>
+      </g-scroll-area>
     </VirtualScrollContext.Provider>
   )
 }

@@ -72,6 +72,7 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
   createEffect(() => {
     controller.initDefaultItems(defaultProps.items.map((item) => item.value))
     setContentHeight(controller.totalHeight)
+    context?.setVirtualScrollHeight(controller.totalHeight)
   })
 
   const placeholderClasses = () =>
