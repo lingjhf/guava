@@ -19,12 +19,21 @@ export interface GVirutalScrollColumnprops {
   items: GVirtualScrollItem[]
   buffer: number
   indexRange?: (startIndex: number, endIndex: number) => void
+  firstItem?: () => void
+  lastItem?: () => void
   renderItem?: (key: string, index: number) => JSX.Element
 }
 
 customElement(
   'g-virtual-scroll-column',
-  { items: undefined, buffer: undefined, renderItem: undefined, indexRange: undefined },
+  {
+    items: undefined,
+    buffer: undefined,
+    renderItem: undefined,
+    indexRange: undefined,
+    firstItem: undefined,
+    lastItem: undefined,
+  },
   (props) => {
     return (
       <>
@@ -33,6 +42,8 @@ customElement(
           items={props.items}
           buffer={props.buffer}
           indexRange={props.indexRange}
+          firstItem={props.firstItem}
+          lastItem={props.lastItem}
           renderItem={props.renderItem}
         ></GVirutalScrollColumn>
       </>
@@ -95,6 +106,12 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
     }))
     setContentOffsetTop(controller.offsetTop)
     setCurrentItems(tempItems)
+    if (controller.startIndex === 0) {
+      defaultProps.firstItem?.()
+    }
+    if (controller.endIndex === defaultProps.items.length - 1) {
+      defaultProps.lastItem?.()
+    }
     defaultProps.indexRange?.(controller.startIndex, controller.endIndex)
   }
   return (
