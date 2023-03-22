@@ -18,12 +18,13 @@ interface GVirtualScrollItemWithIndex extends GVirtualScrollItem {
 export interface GVirutalScrollColumnprops {
   items: GVirtualScrollItem[]
   buffer: number
+  indexRange?: (startIndex: number, endIndex: number) => void
   renderItem?: (key: string, index: number) => JSX.Element
 }
 
 customElement(
   'g-virtual-scroll-column',
-  { items: undefined, buffer: undefined, renderItem: undefined },
+  { items: undefined, buffer: undefined, renderItem: undefined, indexRange: undefined },
   (props) => {
     return (
       <>
@@ -31,6 +32,7 @@ customElement(
         <GVirutalScrollColumn
           items={props.items}
           buffer={props.buffer}
+          indexRange={props.indexRange}
           renderItem={props.renderItem}
         ></GVirutalScrollColumn>
       </>
@@ -93,6 +95,7 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
     }))
     setContentOffsetTop(controller.offsetTop)
     setCurrentItems(tempItems)
+    defaultProps.indexRange?.(controller.startIndex, controller.endIndex)
   }
   return (
     <div class="virtual-scroll-column" style={containerStyles()}>
