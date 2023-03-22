@@ -147,7 +147,7 @@ export class VirtualScrollController {
    * 设置当前可见的items
    */
   private setCurrentItems() {
-    this._startIndex = this.findStartIndex(0, this._items.length)
+    this._startIndex = this.findStartIndex(0, this._items.length - 1)
     if (this._startIndex === -1) return
     const viewItems = this.generateViewItems(this._startIndex)
     this._endIndex = this._startIndex + viewItems.length - 1
