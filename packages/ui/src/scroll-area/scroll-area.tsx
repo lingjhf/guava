@@ -466,7 +466,7 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
 declare module 'solid-js' {
   namespace JSX {
     interface IntrinsicElements {
-      'g-scroll-area': Partial<GScrollAreaProps>
+      'g-scroll-area': Partial<GScrollAreaProps> & IntrinsicAttributes
     }
   }
 }
