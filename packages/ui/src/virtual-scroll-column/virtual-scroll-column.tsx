@@ -1,6 +1,6 @@
 import type { JSX } from 'solid-js'
 import { createEffect } from 'solid-js'
-import { mergeProps, Index, createSignal } from 'solid-js'
+import { mergeProps, Index, createSignal, children } from 'solid-js'
 import { customElement } from 'solid-element'
 import { useVirtualScrollContext } from '../virtual-scroll'
 import { VirtualScrollController } from './controller'
@@ -106,6 +106,15 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
       index: item.index,
     }))
     setContentOffsetTop(controller.offsetTop)
+    const cItems = currentItems()
+    if (tempItems.length > 0 && cItems.length > 0) {
+      if (
+        tempItems[0].index === cItems[0].index &&
+        tempItems[tempItems.length - 1].index === cItems[cItems.length - 1].index
+      ) {
+        return
+      }
+    }
     setCurrentItems(tempItems)
     if (controller.startIndex === 0) {
       defaultProps.firstItem?.()
@@ -115,24 +124,18 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
     }
     defaultProps.indexRange?.(controller.startIndex, controller.endIndex)
   }
+  const renderItems = children(() =>
+    currentItems().map((item) => (
+      <div style={context?.horizontal() ? `width:${item.value}px` : `height:${item.value}px`}>
+        {defaultProps.renderItem?.(item.key, item.index)}
+      </div>
+    ))
+  )
   return (
     <div class="virtual-scroll-column" style={containerStyles()}>
       <div class={placeholderClasses()} style={placeholderStyles()}></div>
       <div class={contentClasses()} style={contentStyles()}>
-        <Index each={currentItems()}>
-          {(item) => {
-            const renderItem = defaultProps.renderItem?.(item().key, item().index)
-            return (
-              <div
-                style={
-                  context?.horizontal() ? `width:${item().value}px` : `height:${item().value}px`
-                }
-              >
-                {renderItem}
-              </div>
-            )
-          }}
-        </Index>
+        {renderItems()}
       </div>
     </div>
   )
