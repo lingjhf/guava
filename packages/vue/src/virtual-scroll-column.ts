@@ -18,9 +18,9 @@ export default defineComponent({
           if (!dom) return
           dom.items = props.items ?? []
           if (slots.renderItem) {
-            dom.renderItem = (key: string) => {
+            dom.renderItem = (key: string, index: number) => {
               let renderEl: HTMLElement | null = null
-              slotToDom(slots, 'renderItem', { key }, (el) => {
+              slotToDom(slots, 'renderItem', { key, index }, (el) => {
                 renderEl = el
               })
               return renderEl
