@@ -1,6 +1,6 @@
 import type { JSX } from 'solid-js'
 import { createEffect } from 'solid-js'
-import { mergeProps, Index, createSignal, children } from 'solid-js'
+import { mergeProps, createSignal, children, onMount } from 'solid-js'
 import { customElement } from 'solid-element'
 import { useVirtualScrollContext } from '../virtual-scroll'
 import { VirtualScrollController } from './controller'
@@ -131,6 +131,10 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
       </div>
     ))
   )
+  onMount(() => {
+    controller.setViewHeight(context?.getViewHeight() ?? 0)
+    virtualScrollChange()
+  })
   return (
     <div class="virtual-scroll-column" style={containerStyles()}>
       <div class={placeholderClasses()} style={placeholderStyles()}></div>
