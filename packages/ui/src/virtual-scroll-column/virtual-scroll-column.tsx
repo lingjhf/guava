@@ -68,11 +68,13 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
   const [contentHeight, setContentHeight] = createSignal(0)
   const [contentOffsetTop, setContentOffsetTop] = createSignal(0)
   const [currentItems, setCurrentItems] = createSignal<GVirtualScrollItemWithIndex[]>([])
+  let currentItemsCopy: GVirtualScrollItemWithIndex[] = []
 
   createEffect(() => {
     controller.initDefaultItems(defaultProps.items.map((item) => item.value))
     setContentHeight(controller.totalHeight)
     context?.setVirtualScrollHeight(controller.totalHeight)
+    virtualScrollChange()
   })
 
   const placeholderClasses = () =>
@@ -106,15 +108,16 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
       index: item.index,
     }))
     setContentOffsetTop(controller.offsetTop)
-    const cItems = currentItems()
-    if (tempItems.length > 0 && cItems.length > 0) {
+    if (tempItems.length > 0 && currentItemsCopy.length > 0) {
       if (
-        tempItems[0].index === cItems[0].index &&
-        tempItems[tempItems.length - 1].index === cItems[cItems.length - 1].index
+        tempItems[0].index === currentItemsCopy[0].index &&
+        tempItems[tempItems.length - 1].index ===
+          currentItemsCopy[currentItemsCopy.length - 1].index
       ) {
         return
       }
     }
+    currentItemsCopy = tempItems
     setCurrentItems(tempItems)
     if (controller.startIndex === 0) {
       defaultProps.firstItem?.()
