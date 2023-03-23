@@ -26,7 +26,7 @@ export interface GDropAreaGroupProps {
 
 const DropAreaGroupContext = createContext<DropAreaGroupProviderValue>()
 
-export const useMultiDropAreaContext = () => useContext(DropAreaGroupContext)
+export const useDropAreaGroupContext = () => useContext(DropAreaGroupContext)
 
 customElement<Partial<GDropAreaGroupProps>>('g-drop-area-group', () => {
   return (

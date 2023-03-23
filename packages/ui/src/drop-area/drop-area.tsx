@@ -4,7 +4,7 @@ import { mergeProps, createContext, useContext, For, createEffect } from 'solid-
 import { createStore, produce } from 'solid-js/store'
 import { customElement } from 'solid-element'
 import '../drop-item'
-import { useMultiDropAreaContext } from '../drop-area-group'
+import { useDropAreaGroupContext } from '../drop-area-group'
 import { checkCrossEdge, checkCrossWidthHalf, checkCrossHeightHalf, moveItem } from '../utils'
 
 export interface ItemData {
@@ -53,7 +53,7 @@ customElement<Partial<GDropAreaProps>>(
 )
 
 const GDropArea = (props: Partial<GDropAreaProps>) => {
-  const context = useMultiDropAreaContext()
+  const context = useDropAreaGroupContext()
   let areaRef: HTMLElement
   const setAreaRef = (el: HTMLElement) => {
     areaRef = el
