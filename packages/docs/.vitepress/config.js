@@ -21,6 +21,7 @@ export default defineConfig({
           { text: 'Drop Area', link: '/components/drop-area' },
           { text: 'Progress', link: '/components/progress' },
           { text: 'Draggable', link: '/components/draggable' },
+          { text: 'Circular Menu', link: '/components/circular-menu' },
         ],
       },
     ],
