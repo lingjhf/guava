@@ -11,5 +11,5 @@ export interface Size {
 export interface SizePosition extends Position, Size {}
 
 export interface Tree {
-  children: Tree[]
+  children?: Tree[]
 }
