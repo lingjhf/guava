@@ -114,7 +114,7 @@ export function checkCrossWidthHalf(source: Position, target: SizePosition): num
 export function getTreeDeep<T extends Tree>(tree: Iterable<T>, num = 1) {
   let max = num
   for (const item of tree) {
-    if (item.children.length > 0) {
+    if (item.children && item.children.length > 0) {
       const _max = getTreeDeep(item.children, num + 1)
       if (_max > max) {
         max = _max
