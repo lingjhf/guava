@@ -1,4 +1,4 @@
-import type { Position, SizePosition } from './types'
+import type { Position, SizePosition, Tree } from './types'
 
 class PressedDrag {
   events = new Map()
@@ -109,4 +109,17 @@ export function checkCrossWidthHalf(source: Position, target: SizePosition): num
     }
   }
   return -1
+}
+
+export function getTreeDeep<T extends Tree>(tree: Iterable<T>, num = 1) {
+  let max = num
+  for (const item of tree) {
+    if (item.children.length > 0) {
+      const _max = getTreeDeep(item.children, num + 1)
+      if (_max > max) {
+        max = _max
+      }
+    }
+  }
+  return max
 }
