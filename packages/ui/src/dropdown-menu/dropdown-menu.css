@@ -1,0 +1,6 @@
+.dropdown-menu {
+  position: absolute;
+  min-width: 10px;
+  background-color: skyblue;
+  padding: 4px 0;
+}

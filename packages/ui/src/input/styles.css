@@ -1,0 +1,123 @@
+.g-input {
+  --g-input-height: 32px;
+  --g-input-bg-color: transparent;
+  --g-input-text-color: var(--g-text-color-regular);
+  --g-input-placeholder-color: var(--g-text-color-placeholder);
+  --g-input-border-color: var(--g-border-color);
+  --g-input-hover-border-color: var(--g-text-color-disabled);
+  --g-input-focus-border-color: var(--g-color-primary);
+  --g-input-border-radius: 4px;
+  --g-input-padding: 0 8px 0 8px;
+  
+  ling-height: var(--g-input-height);
+  display: flex;
+}
+
+.g-input__wrapper {
+  display: flex;
+  align-items: center;
+  background-color: var(--g-input-bg-color);
+  border-radius: var(--g-input-border-radius);
+  padding: var(--g-input-padding);
+  border: 1px solid var(--g-input-border-color);
+  box-sizing: border-box;
+}
+
+.g-input__wrapper:hover {
+  border: 1px solid var(--g-input-hover-border-color);
+}
+
+.g-input__wrapper.is-focus {
+  border: 1px solid var(--g-input-focus-border-color);
+}
+
+.g-input__inner {
+  width: 100%;
+  height: calc(var(--g-input-height) - 2px);
+  color: var(--g-input-text-color);
+  outline: none;
+  background: none;
+  border: none;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.g-input__inner::placeholder {
+  color: var(--g-input-placeholder-color);
+}
+
+.g-input__prefix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.g-input__suffix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.g-input__append {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.g-input-group--prepend > .g-input__wrapper {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.g-input-group--append > .g-input__wrapper {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.g-input__prepend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: var(--g-input-border-radius);
+  border-bottom-left-radius: var(--g-input-border-radius);
+  /*左 上 下 */
+  border-left: 1px solid var(--g-input-border-color);
+  border-top: 1px solid var(--g-input-border-color);
+  border-bottom: 1px solid var(--g-input-border-color);
+}
+
+.g-input__prepend.is-hover {
+  border-left: 1px solid var(--g-input-hover-border-color);
+  border-top: 1px solid var(--g-input-hover-border-color);
+  border-bottom: 1px solid var(--g-input-hover-border-color);
+}
+
+.g-input__prepend.is-focus {
+  border-left: 1px solid var(--g-input-focus-border-color);
+  border-top: 1px solid var(--g-input-focus-border-color);
+  border-bottom: 1px solid var(--g-input-focus-border-color);
+}
+
+.g-input__append {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: var(--g-input-border-radius);
+  border-bottom-right-radius: var(--g-input-border-radius);
+  /*右 上 下 */
+  border-right: 1px solid var(--g-input-border-color);
+  border-top: 1px solid var(--g-input-border-color);
+  border-bottom: 1px solid var(--g-input-border-color);
+}
+
+.g-input__append.is-hover {
+  border-right: 1px solid var(--g-input-hover-border-color);
+  border-top: 1px solid var(--g-input-hover-border-color);
+  border-bottom: 1px solid var(--g-input-hover-border-color);
+}
+
+.g-input__append.is-focus {
+  border-right: 1px solid var(--g-input-focus-border-color);
+  border-top: 1px solid var(--g-input-focus-border-color);
+  border-bottom: 1px solid var(--g-input-focus-border-color);
+}

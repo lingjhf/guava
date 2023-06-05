@@ -1,0 +1,86 @@
+.g-button {
+  --g-button-height: 32px;
+  --g-button-padding: 8px 15px;
+  --el-border-radius-round: 20px;
+  --g-button-text-color: var(--g-text-color-regular);
+  --g-button-border: var(--g-border-width) var(--g-border-style)
+    var(--g-border-color);
+  --g-button-color: transparent;
+
+  --g-button-hover-text-color: var(--g-color-primary);
+  --g-button-hover-border-color: var(--g-color-primary-light-7);
+  --g-button-hover-bg-color: var(--g-color-primary-light-9);
+
+  --g-button-activg-text-color: var(--g-color-primary);
+  --g-button-activg-border-color: var(--g-color-primary);
+  --g-button-activg-bg-color: var(--g-button-hover-bg-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  user-select: none;
+  outline: none;
+  cursor: pointer;
+  height: var(--g-button-height);
+  padding: var(--g-button-padding);
+  color: var(--g-button-text-color);
+  border: var(--g-button-border);
+  background-color: var(--g-button-color);
+}
+
+.g-button:hover,
+.g-button:focus {
+  color: var(--g-button-hover-text-color);
+  border-color: var(--g-button-hover-border-color);
+  background-color: var(--g-button-hover-bg-color);
+}
+
+.g-button:active {
+  color: var(--g-button-activg-text-color) !important;
+  border-color: var(--g-button-activg-border-color) !important;
+  background-color: var(--g-button-activg-bg-color) !important;
+}
+
+.g-button.is-round {
+  border-radius: var(--el-border-radius-round);
+}
+
+.g-button.is-circle {
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.g-button.is-text {
+  color: var(--g-button-text-color) !important;
+  border: 0 solid transparent;
+  background-color: transparent;
+}
+
+.g-button.is-text:hover,
+.g-button.is-text:focus {
+  color: var(--g-button-text-color) !important;
+  background-color: var(--g-fill-color-light);
+}
+
+.g-button.is-text:active {
+  color: var(--g-button-text-color) !important;
+  background-color: var(--g-fill-color) !important;
+}
+
+.g-button.is-background {
+  color: var(--g-button-text-color) !important;
+  border: 0 solid transparent;
+  background-color: var(--g-fill-color-light) !important;
+}
+
+.g-button.is-background:hover,
+.g-button.is-background:focus {
+  color: var(--g-button-text-color) !important;
+  background-color: var(--g-fill-color) !important;
+}
+
+.g-button.is-background:active {
+  color: var(--g-button-text-color) !important;
+  background-color: var(--el-fill-color-dark) !important;
+}
