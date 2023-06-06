@@ -1,7 +1,7 @@
 import { JSX, mergeProps, onMount, useContext, createContext, createSignal, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { EDropdownMenuItem } from './dropdown-menu-item'
-import { Inset } from '../types'
+import { Inset } from '../utils/types'
 
 export type DropdownSubMenuTriggerType = 'hover' | 'click'
 

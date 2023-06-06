@@ -109,7 +109,7 @@ const GDraggable = (props: Partial<GDraggableProps>) => {
   }
 
   return (
-    <div class="draggable" ref={setRef} style={styles()}>
+    <div class='draggable' ref={setRef} style={styles()}>
       {props.children}
     </div>
   )

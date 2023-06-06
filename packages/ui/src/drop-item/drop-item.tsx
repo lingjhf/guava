@@ -60,7 +60,7 @@ const GDropItem = (props: Partial<GDropItemProps>) => {
   })
 
   const drggableStyles = () => `width:${width()}px`
-  const contentStyles = () => (draggable() ? `z-index:99` : 'z-index:0')
+  const contentStyles = () => (draggable() ? 'z-index:99' : 'z-index:0')
   const placeholderstyles = () => {
     const { width, height } = contentRef.getBoundingClientRect()
     return `width:${width}px;height:${height}px`
@@ -91,7 +91,7 @@ const GDropItem = (props: Partial<GDropItemProps>) => {
   }
 
   const content = createMemo(() => (
-    <div ref={setContentRef} class="drop-item-content" style={contentStyles()}>
+    <div ref={setContentRef} class='drop-item-content' style={contentStyles()}>
       {defaultProps.render?.()}
     </div>
   ))
@@ -99,7 +99,7 @@ const GDropItem = (props: Partial<GDropItemProps>) => {
   return (
     <div ref={setDragItemRef}>
       <Show when={placeholder()} fallback={content()}>
-        <div class="drop-item-placeholder" style={placeholderstyles()}></div>
+        <div class='drop-item-placeholder' style={placeholderstyles()}></div>
         <Show when={draggable()}>
           <g-draggable x={itemPosition().x} y={itemPosition().y}>
             <div style={drggableStyles()}>{content()}</div>

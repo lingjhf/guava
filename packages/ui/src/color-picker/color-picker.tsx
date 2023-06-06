@@ -53,17 +53,17 @@ const GColorPicker = (props: Partial<GColorPickerProps>) => {
     emitChange()
   }
   return (
-    <div class="color-picker">
+    <div class='color-picker'>
       <g-color-slider color={color()} change={onSVChange}></g-color-slider>
-      <div class="color-picker-sliders-wrap">
-        <div class="color-picker-slider-item-wrap">
+      <div class='color-picker-sliders-wrap'>
+        <div class='color-picker-slider-item-wrap'>
           <g-color-hue-slider
             size={railSize}
             color={color()}
             change={onHueChange}
           ></g-color-hue-slider>
         </div>
-        <div class="color-picker-slider-item-wrap">
+        <div class='color-picker-slider-item-wrap'>
           <g-color-alpha-slider
             size={railSize}
             color={color()}

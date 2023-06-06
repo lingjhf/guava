@@ -1,5 +1,5 @@
 import { JSX, onMount, splitProps, mergeProps } from 'solid-js'
-import { CustomEventHandlersName } from '../constants'
+import { CustomEventHandlersName } from '../utils/constants'
 import './dropdown-menu-item.css'
 
 export interface EDropdownMenuItemProps extends JSX.CustomEventHandlersCamelCase<HTMLDivElement> {
@@ -16,7 +16,7 @@ export const EDropdownMenuItem = (props: Partial<EDropdownMenuItemProps>) => {
     },
     props,
   ),
-    CustomEventHandlersName,
+  CustomEventHandlersName,
   )
 
   return (

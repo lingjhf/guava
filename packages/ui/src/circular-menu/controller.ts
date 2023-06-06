@@ -23,9 +23,13 @@ export interface CircularMenuOptions {
 
 export class CircularMenuController {
   private _menus: CircularMenu[]
+
   private _x: number
+
   private _y: number
+
   private _radius: number
+
   private _menuWidth: number
 
   constructor({ menus = [], x = 0, y = 0, radius = 20, menuWidth = 30 }: CircularMenuOptions = {}) {

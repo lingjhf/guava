@@ -125,7 +125,7 @@ const GRail = (props: Partial<GRailProps>) => {
     el.addEventListener('mousedown', onSelect)
   }
   return (
-    <div ref={setRailRef} style={railStyles()} class="rail">
+    <div ref={setRailRef} style={railStyles()} class='rail'>
       {defaultProps.children}
       <g-draggable
         min-x={0}
@@ -136,7 +136,7 @@ const GRail = (props: Partial<GRailProps>) => {
         y={sliderPosition().y}
         change={onDraggableChange}
       >
-        <div class="slider" style={sliderStyles()}></div>
+        <div class='slider' style={sliderStyles()}></div>
       </g-draggable>
     </div>
   )

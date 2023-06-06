@@ -1,7 +1,7 @@
 import { Accessor, JSX, createContext, createSignal, mergeProps, useContext, Show, } from 'solid-js'
 import { Portal } from 'solid-js/web'
-import type { ValueChanged, Inset } from '../types'
-import { EButton } from '../button'
+import type { ValueChanged, Inset } from '../utils/types'
+import { GButton } from '../button'
 import './dropdown-menu.css'
 
 export type DropdownTriggerType = 'hover' | 'click' | 'contextmenu'
@@ -80,21 +80,21 @@ export const EDropdownMenu = (props: Partial<EDropdownMenuProps>) => {
     triggerRect.y += documentScrollTop
     let inset = getBottomPlacement(triggerRect, menuRect)
     switch (defaultProps.placement) {
-      case 'top':
-        inset = getTopPlacement(triggerRect, menuRect, clientHeight)
-        break
-      case 'top-start':
-        inset = getTopStartPlacement(triggerRect, menuRect, clientHeight)
-        break
-      case 'top-end':
-        inset = getTopEndPlacement(triggerRect, menuRect, clientHeight)
-        break
-      case 'bottom-start':
-        inset = getBottomStartPlacement(triggerRect, menuRect)
-        break
-      case 'bottom-end':
-        inset = getBottomEndPlacement(triggerRect, menuRect)
-        break
+    case 'top':
+      inset = getTopPlacement(triggerRect, menuRect, clientHeight)
+      break
+    case 'top-start':
+      inset = getTopStartPlacement(triggerRect, menuRect, clientHeight)
+      break
+    case 'top-end':
+      inset = getTopEndPlacement(triggerRect, menuRect, clientHeight)
+      break
+    case 'bottom-start':
+      inset = getBottomStartPlacement(triggerRect, menuRect)
+      break
+    case 'bottom-end':
+      inset = getBottomEndPlacement(triggerRect, menuRect)
+      break
     }
     setPlacementInset({ top: inset.top, right: inset.right, bottom: inset.bottom, left: inset.left })
   }
@@ -141,14 +141,14 @@ export const EDropdownMenu = (props: Partial<EDropdownMenuProps>) => {
 
   return (
     <DropdownContext.Provider value={providerValue}>
-      <EButton
+      <GButton
         ref={triggerRef}
         onClick={onTriggerClick}
         onMouseEnter={onTriggerEnter}
         onMouseLeave={onTriggerLeave}
       >
         {defaultProps.trigger}
-      </EButton>
+      </GButton>
       <Portal ref={conainerRef}>
         <Show when={isTrigger()}>
           <div class='dropdown-menu' style={dropdownMenuStyles()} ref={menuRef}>

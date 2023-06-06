@@ -18,7 +18,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        entryFileNames: () => `index.min.js`,
+        entryFileNames: () => 'index.min.js',
       },
     },
   },

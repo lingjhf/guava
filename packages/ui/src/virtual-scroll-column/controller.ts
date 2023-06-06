@@ -13,17 +13,29 @@ export interface VirtualScrollOptions {
 
 export class VirtualScrollController {
   private _viewHeight: number
+
   private _items: VirtualScrollItem[] = []
+
   private _totalHeight = 0
+
   private _offsetTop = 0
+
   private _scrollTop = 0
+
   private _currentItems: VirtualScrollItem[] = []
+
   private _buffer = 10
+
   private scrollDirection = 0
+
   private beforeBuffer: VirtualScrollItem[] = []
+
   private afterBuffer: VirtualScrollItem[] = []
+
   private _startIndex = 0
+
   private _endIndex = 0
+
   constructor({
     viewHeight = 0,
     scrollTop = 0,
@@ -35,6 +47,7 @@ export class VirtualScrollController {
     this._buffer = buffer < 0 ? this._buffer : buffer
     this.initDefaultItems(defaultItems)
   }
+
   /**
    * 返回当前可见高度
    */

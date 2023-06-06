@@ -91,15 +91,15 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
 
   createEffect(() => {
     switch (defaultProps.type) {
-      case 'visible':
-        visibleScroll()
-        break
-      case 'invisible':
-        invisibleScroll()
-        break
-      case 'auto':
-        invisibleScroll()
-        break
+    case 'visible':
+      visibleScroll()
+      break
+    case 'invisible':
+      invisibleScroll()
+      break
+    case 'auto':
+      invisibleScroll()
+      break
     }
   })
 
@@ -430,33 +430,33 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
   })
 
   return (
-    <div class="g-scrollArea" onMouseEnter={onEnterScrollArea} onMouseLeave={onLeaveScrollArea}>
-      <div ref={setViewRef} class="g-scrollArea-view">
-        <div ref={setContentRef} class="g-scrollArea-content">
+    <div class='g-scrollArea' onMouseEnter={onEnterScrollArea} onMouseLeave={onLeaveScrollArea}>
+      <div ref={setViewRef} class='g-scrollArea-view'>
+        <div ref={setContentRef} class='g-scrollArea-content'>
           {props.children}
         </div>
       </div>
       <div
         ref={setVerticalScrollbarRef}
-        class="g-scroll-vertical-bar g-invisible"
+        class='g-scroll-vertical-bar g-invisible'
         onMouseDown={onVerticalBarPressed}
       ></div>
       <div
         ref={setVerticalSliderRef}
         style={verticalSliderStyles()}
-        class="g-scroll-vertical-slider g-invisible"
+        class='g-scroll-vertical-slider g-invisible'
         onMouseDown={onVerticalSliderDrag}
       ></div>
 
       <div
         ref={setHorizontalScrollbarRef}
-        class="g-scroll-horizontal-bar g-invisible"
+        class='g-scroll-horizontal-bar g-invisible'
         onMouseDown={onHorizontalBarPressed}
       ></div>
       <div
         ref={setHorizontalSliderRef}
         style={horizontalSliderStyles()}
-        class="g-scroll-horizontal-slider g-invisible"
+        class='g-scroll-horizontal-slider g-invisible'
         onMouseDown={onHorizontalSliderDrag}
       ></div>
     </div>

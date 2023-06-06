@@ -139,7 +139,7 @@ const GVirutalScrollColumn = (props: Partial<GVirutalScrollColumnprops>) => {
     virtualScrollChange()
   })
   return (
-    <div class="virtual-scroll-column" style={containerStyles()}>
+    <div class='virtual-scroll-column' style={containerStyles()}>
       <div class={placeholderClasses()} style={placeholderStyles()}></div>
       <div class={contentClasses()} style={contentStyles()}>
         {renderItems()}

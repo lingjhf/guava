@@ -85,12 +85,12 @@ const GCircularMenu = (props: Partial<GCircularMenuProps>) => {
   }
 
   return (
-    <div class="circular-menu" style={menuContainerstyles()}>
+    <div class='circular-menu' style={menuContainerstyles()}>
       <Index each={menuPaths()}>
         {(item) => {
           return (
             <div
-              class="menu"
+              class='menu'
               style={`left:${item().origin.x}px;top:${item().origin.y}px`}
               onMouseEnter={[onEnterMenu, item()]}
               onClick={[onClickMenu, item()]}
@@ -100,12 +100,12 @@ const GCircularMenu = (props: Partial<GCircularMenuProps>) => {
           )
         }}
       </Index>
-      <svg width="100%" height="100%">
+      <svg width='100%' height='100%'>
         <Index each={menuPaths()}>
           {(item) => {
             return (
               <g>
-                <path d={item().path} fill="skyblue"></path>
+                <path d={item().path} fill='skyblue'></path>
               </g>
             )
           }}

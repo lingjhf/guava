@@ -50,19 +50,19 @@ const GColorAlphaSlider = (props: Partial<GColorAlphaSliderProps>) => {
     setSliderPosition(
       defaultProps.vertical
         ? {
-            x: 0,
-            y: alphaTransformX(
-              defaultProps.color.alpha(),
-              defaultProps.size.height - defaultProps.sliderSize.height / 2
-            ),
-          }
+          x: 0,
+          y: alphaTransformX(
+            defaultProps.color.alpha(),
+            defaultProps.size.height - defaultProps.sliderSize.height / 2
+          ),
+        }
         : {
-            x: alphaTransformX(
-              defaultProps.color.alpha(),
-              defaultProps.size.width - defaultProps.sliderSize.width
-            ),
-            y: 0,
-          }
+          x: alphaTransformX(
+            defaultProps.color.alpha(),
+            defaultProps.size.width - defaultProps.sliderSize.width
+          ),
+          y: 0,
+        }
     )
     setColor(defaultProps.color)
   })
@@ -74,8 +74,8 @@ const GColorAlphaSlider = (props: Partial<GColorAlphaSliderProps>) => {
     setColor((c) =>
       defaultProps.vertical
         ? c.alpha(
-            xTransformAlpha(value.y, defaultProps.size.height - defaultProps.sliderSize.height)
-          )
+          xTransformAlpha(value.y, defaultProps.size.height - defaultProps.sliderSize.height)
+        )
         : c.alpha(xTransformAlpha(value.x, defaultProps.size.width - defaultProps.sliderSize.width))
     )
     setSliderPosition(value)
@@ -90,7 +90,7 @@ const GColorAlphaSlider = (props: Partial<GColorAlphaSliderProps>) => {
       sliderPosition={sliderPosition()}
       change={onRailChange}
     >
-      <div class="color-alpha-slider" style={styles()}></div>
+      <div class='color-alpha-slider' style={styles()}></div>
     </g-rail>
   )
 }

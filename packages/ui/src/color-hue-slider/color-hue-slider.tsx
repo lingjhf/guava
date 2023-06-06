@@ -50,19 +50,19 @@ const GColorHueSlider = (props: Partial<GColorHueSliderProps>) => {
     setSliderPosition(
       defaultProps.vertical
         ? {
-            x: 0,
-            y: hueTransformX(
-              defaultProps.color.hue(),
-              defaultProps.size.height - defaultProps.sliderSize.height
-            ),
-          }
+          x: 0,
+          y: hueTransformX(
+            defaultProps.color.hue(),
+            defaultProps.size.height - defaultProps.sliderSize.height
+          ),
+        }
         : {
-            x: hueTransformX(
-              defaultProps.color.hue(),
-              defaultProps.size.width - defaultProps.sliderSize.width
-            ),
-            y: 0,
-          }
+          x: hueTransformX(
+            defaultProps.color.hue(),
+            defaultProps.size.width - defaultProps.sliderSize.width
+          ),
+          y: 0,
+        }
     )
     setColor(defaultProps.color)
   })
@@ -85,7 +85,7 @@ const GColorHueSlider = (props: Partial<GColorHueSliderProps>) => {
       sliderPosition={sliderPosition()}
       change={onRailChange}
     >
-      <div class="color-hue-slider"></div>
+      <div class='color-hue-slider'></div>
     </g-rail>
   )
 }

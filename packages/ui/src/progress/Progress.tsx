@@ -77,11 +77,11 @@ const GProgress = (props: Partial<GProgressProps>) => {
   const percentageStyles = () => `width:${percentageWidth()}px;background-color:${color()}`
 
   return (
-    <div ref={setProgressRef} class="g-progress-line">
-      <div class="g-progress-container">
-        <div class="g-progress-percentage" style={percentageStyles()}></div>
+    <div ref={setProgressRef} class='g-progress-line'>
+      <div class='g-progress-container'>
+        <div class='g-progress-percentage' style={percentageStyles()}></div>
       </div>
-      <div ref={setOutsideTextRef} class="g-progress-outside-text">
+      <div ref={setOutsideTextRef} class='g-progress-outside-text'>
         {defaultProps.text ? defaultProps.text(percentage()) : `${percentage()}%`}
       </div>
     </div>
