@@ -27,12 +27,8 @@
     }
   },
   "dependencies": {
-    "@lingjhf/guava": "workspace:^0.0.4",
-    "@vue/runtime-dom": "^3.2.47",
-    "vue": "^3.2.47"
-  },
-  "devDependencies": {
-    "typescript": "^4.9.5",
-    "vite": "^4.1.4"
+    "@lingjhf/guava": "workspace:^",
+    "@vue/runtime-dom": "^3.3.4",
+    "vue": "^3.3.4"
   }
 }

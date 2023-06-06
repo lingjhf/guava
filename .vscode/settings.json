@@ -1,6 +1,4 @@
 {
-  "workbench.colorTheme": "Atom One Dark",
-  "workbench.iconTheme": "material-icon-theme",
   "files.autoSave": "afterDelay",
   "editor.foldingStrategy": "indentation",
   "explorer.compactFolders": false,
@@ -9,6 +7,8 @@
     "source.fixAll": true
   },
   "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false
