@@ -1,15 +1,14 @@
 import type { JSX } from 'solid-js'
 import { mergeProps, splitProps } from 'solid-js'
-import { CustomEventHandlersName } from '../constants'
+import { CustomEventHandlersName } from '../utils/constants'
+import type { ComponentPropsWithChildren } from '../utils/types'
 import './styles.css'
 
-export interface GButtonProps extends JSX.CustomEventHandlersCamelCase<HTMLButtonElement> {
+export interface GButtonProps extends ComponentPropsWithChildren<HTMLButtonElement> {
   text: boolean
   background: boolean
   round: boolean
   circle: boolean
-  ref?: HTMLButtonElement
-  children?: JSX.Element | JSX.Element[]
 }
 
 export const GButton = (props: Partial<GButtonProps>) => {
@@ -22,7 +21,7 @@ export const GButton = (props: Partial<GButtonProps>) => {
     },
     props,
   ),
-  CustomEventHandlersName,
+    CustomEventHandlersName,
   )
 
   return (

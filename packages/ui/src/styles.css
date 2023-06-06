@@ -1,20 +1,20 @@
 :root {
-  --e-color-primary: #409eff;
-  --e-color-primary-light-3: #3375b9;
-  --e-color-primary-light-5: #2a598a;
-  --e-color-primary-light-7: #213d5b;
-  --e-color-primary-light-8: #1d3043;
-  --e-color-primary-light-9: #18222c;
+  --g-color-primary: #409eff;
+  --g-color-primary-light-3: #3375b9;
+  --g-color-primary-light-5: #2a598a;
+  --g-color-primary-light-7: #213d5b;
+  --g-color-primary-light-8: #1d3043;
+  --g-color-primary-light-9: #18222c;
 
-  --e-text-color-regular: #cfd3dc;
-  --e-text-color-secondary: #a3a6ad;
-  --e-text-color-placeholder: #8d9095;
-  --e-text-color-disabled: #6c6e72;
-  --e-border-color: #4c4d4f;
-  --e-border-width: 1px;
-  --e-border-style: solid;
-  --e-bg-color: #141414;
-  --e-fill-color: #303030;
-  --e-fill-color-light: #262727;
-  --el-fill-color-dark: #39393a;
+  --g-text-color-regular: #cfd3dc;
+  --g-text-color-secondary: #a3a6ad;
+  --g-text-color-placeholder: #8d9095;
+  --g-text-color-disabled: #6c6e72;
+  --g-border-color: #4c4d4f;
+  --g-border-width: 1px;
+  --g-border-style: solid;
+  --g-bg-color: #141414;
+  --g-fill-color: #303030;
+  --g-fill-color-light: #262727;
+  --g-fill-color-dark: #39393a;
 }

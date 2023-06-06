@@ -1,3 +1,5 @@
+import type { JSX } from 'solid-js'
+
 export interface Position {
   x: number
   y: number
@@ -23,4 +25,12 @@ export interface Inset {
   right: string
   bottom: string
   left: string
+}
+
+export interface ComponentProps<T extends HTMLElement> extends JSX.CustomEventHandlersCamelCase<T> {
+  ref?: T
+}
+
+export interface ComponentPropsWithChildren<T extends HTMLElement> extends ComponentProps<T> {
+  children?: JSX.Element | JSX.Element[]
 }
