@@ -51,6 +51,16 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9(@types/node@16.18.31)
 
+  packages/dev:
+    dependencies:
+      solid-js:
+        specifier: ^1.7.5
+        version: 1.7.5
+    devDependencies:
+      vite-plugin-solid:
+        specifier: ^2.7.0
+        version: 2.7.0(solid-js@1.7.5)(vite@4.3.9)
+
   packages/docs:
     dependencies:
       '@lingjhf/guava-vue':
