@@ -13,7 +13,7 @@
     "no-multiple-empty-lines": ["error", { "max": 1 }],
     "no-multi-spaces": "error",
     "no-undef-init": "error",
-    "indent": ["error", 2]
+    "indent": ["error", 2, { "SwitchCase": 1 }]
   },
   "overrides": [
     {
