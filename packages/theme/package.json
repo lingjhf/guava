@@ -1,0 +1,35 @@
+{
+  "name": "@lingjhf/guava-theme",
+  "version": "1.0.0",
+  "description": "theme",
+  "author": "lingjhf",
+  "license": "MIT",
+  "homepage": "https://github.com/lingjhf/guava",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lingjhf/guava"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c "
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "package.json"
+  ],
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    },
+    "./lib/*": {
+      "types": "./lib/*.d.ts",
+      "import": "./lib/*.js"
+    }
+  },
+  "keywords": [
+    "theme"
+  ]
+}
