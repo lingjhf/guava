@@ -1,0 +1,50 @@
+{
+  "name": "@lingjhf/guava",
+  "version": "0.0.4",
+  "description": "UI Components",
+  "author": "lingjhf",
+  "license": "MIT",
+  "homepage": "https://lingjhf.github.io/guava/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lingjhf/guava"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "vite build && vite build -c ./vite.config.umd.ts && rollup -c ",
+    "lint:fix": "eslint --fix ."
+  },
+  "files": [
+    "lib",
+    "umd",
+    "README.md",
+    "package.json"
+  ],
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    },
+    "./lib/*": {
+      "types": "./lib/*.d.ts",
+      "import": "./lib/*.js"
+    }
+  },
+  "keywords": [
+    "ui",
+    "web component",
+    "solid",
+    "solidjs",
+    "components"
+  ],
+  "dependencies": {
+    "@lingjhf/guava-theme": "workspace:^",
+    "@types/color": "^3.0.3",
+    "color": "^4.2.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "vite-plugin-solid": "^2.7.0"
+  }
+}
