@@ -1,0 +1,54 @@
+/* 按钮默认样式 */
+.g-button {
+  background-color: var(--bg-controls-default);
+}
+.g-button:hover {
+  background-color: var(--bg-controls-hover);
+}
+.g-button:active {
+  background-color: var(--bg-controls-active);
+}
+
+/* 按钮primary样式 */
+.g-button--primary {
+  background-color: var(--bg-brand-default);
+}
+.g-button--primary:hover {
+  background-color: var(--bg-brand-hover);
+}
+.g-button--primary:active {
+  background-color: var(--bg-brand-active);
+}
+
+/* 按钮success样式 */
+.g-button--success {
+  background-color: var(--bg-success-default);
+}
+.g-button--success:hover {
+  background-color: var(--bg-success-hover);
+}
+.g-button--success:active {
+  background-color: var(--bg-success-active);
+}
+
+/* 按钮warn样式 */
+.g-button--warn {
+  background-color: var(--bg-warn-default);
+}
+.g-button--warn:hover {
+  background-color: var(--bg-warn-hover);
+}
+.g-button--warn:active {
+  background-color: var(--bg-warn-active);
+}
+
+/* 按钮danger样式 */
+.g-button--danger {
+  background-color: var(--bg-danger-default);
+}
+.g-button--hover:hover {
+  background-color: var(--bg-danger-hover);
+}
+.g-button--hover:active {
+  background-color: var(--bg-danger-active);
+}
