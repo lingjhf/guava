@@ -53,6 +53,9 @@ importers:
 
   packages/dev:
     dependencies:
+      '@lingjhf/guava-theme':
+        specifier: workspace:^
+        version: link:../theme
       solid-js:
         specifier: ^1.7.5
         version: 1.7.5
@@ -74,8 +77,13 @@ importers:
         specifier: ^3.2.47
         version: 3.2.47
 
+  packages/theme: {}
+
   packages/ui:
     dependencies:
+      '@lingjhf/guava-theme':
+        specifier: workspace:^
+        version: link:../theme
       '@types/color':
         specifier: ^3.0.3
         version: 3.0.3

@@ -21,7 +21,7 @@ export const GButton = (props: Partial<GButtonProps>) => {
     },
     props,
   ),
-    CustomEventHandlersName,
+  CustomEventHandlersName,
   )
 
   return (

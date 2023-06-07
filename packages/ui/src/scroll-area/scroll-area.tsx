@@ -91,15 +91,15 @@ const GScrollArea = (props: Partial<GScrollAreaProps>) => {
 
   createEffect(() => {
     switch (defaultProps.type) {
-    case 'visible':
-      visibleScroll()
-      break
-    case 'invisible':
-      invisibleScroll()
-      break
-    case 'auto':
-      invisibleScroll()
-      break
+      case 'visible':
+        visibleScroll()
+        break
+      case 'invisible':
+        invisibleScroll()
+        break
+      case 'auto':
+        invisibleScroll()
+        break
     }
   })
 

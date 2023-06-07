@@ -1,27 +1,26 @@
-import type { Component } from 'solid-js';
+import type { Component } from 'solid-js'
+import { lightTheme, darktheme } from '@lingjhf/guava-theme'
+import { customElement } from 'solid-element'
 
-import logo from './logo.svg';
-import styles from './App.module.css';
+customElement(
+  'g-test',
+  (props) => {
+    return (
+      <div style='background-color:var(--bg-success-default);height:100px'></div>
+    )
+  }
+)
 
 const App: Component = () => {
-  return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
-    </div>
-  );
-};
+  const styleVars = {
 
-export default App;
+  }
+  return (
+
+    < div >
+      <g-test></g-test>
+    </div >
+  )
+}
+
+export default App

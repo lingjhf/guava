@@ -80,21 +80,21 @@ export const EDropdownMenu = (props: Partial<EDropdownMenuProps>) => {
     triggerRect.y += documentScrollTop
     let inset = getBottomPlacement(triggerRect, menuRect)
     switch (defaultProps.placement) {
-    case 'top':
-      inset = getTopPlacement(triggerRect, menuRect, clientHeight)
-      break
-    case 'top-start':
-      inset = getTopStartPlacement(triggerRect, menuRect, clientHeight)
-      break
-    case 'top-end':
-      inset = getTopEndPlacement(triggerRect, menuRect, clientHeight)
-      break
-    case 'bottom-start':
-      inset = getBottomStartPlacement(triggerRect, menuRect)
-      break
-    case 'bottom-end':
-      inset = getBottomEndPlacement(triggerRect, menuRect)
-      break
+      case 'top':
+        inset = getTopPlacement(triggerRect, menuRect, clientHeight)
+        break
+      case 'top-start':
+        inset = getTopStartPlacement(triggerRect, menuRect, clientHeight)
+        break
+      case 'top-end':
+        inset = getTopEndPlacement(triggerRect, menuRect, clientHeight)
+        break
+      case 'bottom-start':
+        inset = getBottomStartPlacement(triggerRect, menuRect)
+        break
+      case 'bottom-end':
+        inset = getBottomEndPlacement(triggerRect, menuRect)
+        break
     }
     setPlacementInset({ top: inset.top, right: inset.right, bottom: inset.bottom, left: inset.left })
   }
