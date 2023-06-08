@@ -20,11 +20,11 @@
     "README.md",
     "package.json"
   ],
-  "types": "./lib/index.d.ts",
+  "types": "./src/index.d.ts",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
-      "import": "./lib/index.js"
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
     },
     "./lib/*": {
       "types": "./lib/*.d.ts",

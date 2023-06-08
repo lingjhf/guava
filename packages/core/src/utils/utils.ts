@@ -135,12 +135,15 @@ export default function clickOutside(el: HTMLElement, accessor?: VoidCallback) {
   onCleanup(() => document.body.removeEventListener('click', onClick))
 }
 
-type SplitKey<T> = [readonly (keyof T)[], ...(readonly (keyof T)[])[]]
-type DefaultProps<T> = [T, ...Partial<T>[]]
+export type SplitKey<T> = [readonly (keyof T)[], ...(readonly (keyof T)[])[]]
+export type DefaultProps<T> = [T, ...Partial<T>[]]
 
-export function generateProps<T>(raw: Partial<T>, defaultValue: T): MergeProps<DefaultProps<T>>
-export function generateProps<T>(raw: Partial<T>, defaultValue: T, splitKeys: SplitKey<T>): SplitProps<T, SplitKey<T>>
-export function generateProps<T>(raw: Partial<T>, defaultValue: T, splitKeys?: SplitKey<T>): MergeProps<DefaultProps<T>> | SplitProps<MergeProps<DefaultProps<T>>, SplitKey<T>> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function generateProps<T extends Record<any, any>>(raw: Partial<T>, defaultValue: T): MergeProps<DefaultProps<T>>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function generateProps<T extends Record<any, any>, K extends SplitKey<T>>(raw: Partial<T>, defaultValue: T, ...splitKeys: K): SplitProps<MergeProps<DefaultProps<T>>, K>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function generateProps<T extends Record<any, any>, K extends SplitKey<T>>(raw: Partial<T>, defaultValue: T, ...splitKeys: K): MergeProps<DefaultProps<T>> | SplitProps<MergeProps<DefaultProps<T>>, K> {
   const props = mergeProps<DefaultProps<T>>(defaultValue, raw)
   if (splitKeys) {
     return splitProps(props, ...splitKeys)

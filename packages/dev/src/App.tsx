@@ -1,25 +1,19 @@
 import type { Component } from 'solid-js'
-import { lightTheme, darktheme } from '@lingjhf/guava-theme'
-import { customElement } from 'solid-element'
-
-customElement(
-  'g-test',
-  (props) => {
-    return (
-      <div style='background-color:var(--bg-success-default);height:100px'></div>
-    )
-  }
-)
+import { GConfigProvider, GBreadcrumb, GBreadcrumbItem } from '@lingjhf/guava'
+import 'virtual:uno.css'
 
 const App: Component = () => {
-  const styleVars = {
 
-  }
   return (
-
-    < div >
-      <g-test></g-test>
-    </div >
+    <div class=' w-screen h-screen bg-black'>
+      <GConfigProvider dark>
+        <GBreadcrumb>
+          <GBreadcrumbItem>a</GBreadcrumbItem>
+          <GBreadcrumbItem>b</GBreadcrumbItem>
+          <GBreadcrumbItem>c</GBreadcrumbItem>
+        </GBreadcrumb>
+      </GConfigProvider>
+    </div>
   )
 }
 
