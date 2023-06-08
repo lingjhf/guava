@@ -41,7 +41,9 @@
   "dependencies": {
     "@lingjhf/guava-theme": "workspace:^",
     "@types/color": "^3.0.3",
-    "color": "^4.2.3"
+    "color": "^4.2.3",
+    "dayjs": "^1.11.7",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

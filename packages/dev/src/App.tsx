@@ -1,17 +1,13 @@
 import type { Component } from 'solid-js'
-import { GConfigProvider, GBreadcrumb, GBreadcrumbItem } from '@lingjhf/guava'
+import { GConfigProvider, GDialog } from '@lingjhf/guava'
 import 'virtual:uno.css'
 
 const App: Component = () => {
 
   return (
-    <div class=' w-screen h-screen bg-black'>
+    <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
-        <GBreadcrumb>
-          <GBreadcrumbItem>a</GBreadcrumbItem>
-          <GBreadcrumbItem>b</GBreadcrumbItem>
-          <GBreadcrumbItem>c</GBreadcrumbItem>
-        </GBreadcrumb>
+        <GDialog visible></GDialog>
       </GConfigProvider>
     </div>
   )

@@ -1,0 +1,28 @@
+.gOverlayDialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.gDialog {
+  width: 400px;
+  box-sizing: border-box;
+  padding: 24px;
+  margin: 15vh auto 50px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.12), 0px 12px 12px rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+}
+
+.gDialogHeader {
+  height: 24px;
+}
+
+.gDialogContent {
+  padding: 8px 0 32px;
+  box-sizing: border-box;
+}
+
+.gDialogFooter {
+  height: 32px;
+}

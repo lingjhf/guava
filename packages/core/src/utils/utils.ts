@@ -145,7 +145,7 @@ export function generateProps<T extends Record<any, any>, K extends SplitKey<T>>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function generateProps<T extends Record<any, any>, K extends SplitKey<T>>(raw: Partial<T>, defaultValue: T, ...splitKeys: K): MergeProps<DefaultProps<T>> | SplitProps<MergeProps<DefaultProps<T>>, K> {
   const props = mergeProps<DefaultProps<T>>(defaultValue, raw)
-  if (splitKeys) {
+  if (splitKeys.length > 0) {
     return splitProps(props, ...splitKeys)
   }
   return props
