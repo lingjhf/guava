@@ -5,7 +5,7 @@ import 'virtual:uno.css'
 const App: Component = () => {
 
   return (
-    <div class=' w-screen h-screen bg-black'>
+    <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <GAlert ></GAlert>
       </GConfigProvider>
