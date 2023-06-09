@@ -1,4 +1,4 @@
-import { JSX, Match, Switch, createMemo } from 'solid-js'
+import { JSX, Match, Switch } from 'solid-js'
 import { Show, createSignal } from 'solid-js'
 import { ComponentPropsWithChildren, VoidCallback } from '../types'
 import { customEventHandlersName, generateProps } from '../utils'
