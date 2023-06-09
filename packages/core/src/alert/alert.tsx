@@ -34,11 +34,24 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
   const [visible, setVisible] = createSignal(true)
 
   const alertClasses = () => {
-    return `${styles.gAlert} ${typeClasses[props.type]}`
+    let classes = `${styles.gAlert} ${typeClasses[props.type]}`
+    if (props.center) {
+      classes += ` ${styles.center}`
+    }
+    return classes
   }
 
   const alertWithContentClasses = () => {
-    return `${styles.gAlertContent} ${typeClasses[props.type]}`
+    let classes = `${styles.gAlertContent} ${typeClasses[props.type]}`
+    if (props.center) {
+      classes += ` ${styles.center}`
+    }
+    return classes
+  }
+
+  function alertClose() {
+    setVisible(false)
+    props.close?.()
   }
 
   const AlertIcon = () => (
@@ -54,11 +67,6 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
       </Match>
     </Switch>
   )
-
-  function alertClose() {
-    setVisible(false)
-    props.close?.()
-  }
 
   return (
     <Show when={visible()}>
@@ -85,7 +93,7 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
             <div class={styles.gAlertContentContent}>{props.children}</div>
           </div>
           <Show when={props.closable}>
-            <div class={styles.gAlertCloseWrap} onClick={alertClose}>
+            <div class={styles.gAlertContentCloseWrap} onClick={alertClose}>
               <CloseFilled class={styles.gAlertClose} />
             </div>
           </Show>

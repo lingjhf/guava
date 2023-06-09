@@ -5,6 +5,7 @@
   box-sizing: border-box;
   height: 40px;
   padding: 0 16px;
+  position: relative;
 }
 
 .gAlertIcon {
@@ -23,7 +24,9 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  margin-left: auto;
+  position: absolute;
+  top: 8px;
+  right: 16px;
   cursor: pointer;
 }
 .gAlertClose {
@@ -65,6 +68,7 @@
   box-sizing: border-box;
   height: 76px;
   padding: 16px;
+  position: relative;
 }
 
 .gAlertContentHeader {
@@ -79,4 +83,20 @@
   padding: 4px 0 0 28px;
   font-size: 12px;
   color: var(--text-common-primary);
+}
+
+.gAlertContentCloseWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+}
+
+.center {
+  justify-content: center;
 }
