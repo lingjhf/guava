@@ -1,0 +1,124 @@
+.gButton {
+  box-sizing: border-box;
+  user-select: none;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+}
+
+.gButtonSizeDefault {
+  padding: 9px 16px;
+  font-size: 14px;
+  line-height: 22px;
+  height: 40px;
+}
+
+.gButtonSizeSmall {
+  padding: 3px 8px;
+  font-size: 12px;
+  line-height: 18px;
+  height: 24px;
+}
+
+.gButtonSizeMedium {
+  padding: 6px 12px;
+  font-size: 13px;
+  line-height: 20px;
+  height: 32px;
+}
+
+.gButtonSizeLarge {
+  padding: 12px 20px;
+  font-size: 16px;
+  line-height: 24px;
+  height: 48px;
+}
+
+.gButtonColorDefault {
+  color: var(--text-static-primary);
+  background-color: var(--bg-controls-default);
+}
+.gButtonColorDefault:hover {
+  background-color: var(--bg-controls-hover);
+}
+.gButtonColorDefault:active {
+  background-color: var(--bg-controls-active);
+}
+.gButtonColorDefaultDisabled {
+  background-color: var(--bg-controls-disabled);
+}
+
+.gButtonColorPrimary {
+  color: var(--text-static-primary);
+  background-color: var(--bg-brand-default);
+}
+.gButtonColorPrimary:hover {
+  background-color: var(--bg-brand-hover);
+}
+.gButtonColorPrimary:active {
+  background-color: var(--bg-brand-active);
+}
+.gButtonColorPrimaryDisabled {
+  background-color: var(--bg-brand-disabled);
+}
+
+.gButtonColorSuccess {
+  color: var(--text-static-primary);
+  background-color: var(--bg-success-default);
+}
+.gButtonColorSuccess:hover {
+  background-color: var(--bg-success-hover);
+}
+.gButtonColorSuccess:active {
+  background-color: var(--bg-success-active);
+}
+.gButtonColorSuccessDisabled {
+  background-color: var(--bg-success-disabled);
+}
+
+.gButtonColorWarn {
+  color: var(--text-static-primary);
+  background-color: var(--bg-warn-default);
+}
+.gButtonColorWarn:hover {
+  background-color: var(--bg-warn-hover);
+}
+.gButtonColorWarn:active {
+  background-color: var(--bg-warn-active);
+}
+.gButtonColorWarnDisabled {
+  background-color: var(--bg-warn-disabled);
+}
+
+.gButtonColorDanger {
+  color: var(--text-static-primary);
+  background-color: var(--bg-danger-default);
+}
+.gButtonColorDanger:hover {
+  background-color: var(--bg-danger-hover);
+}
+.gButtonColorDanger:active {
+  background-color: var(--bg-danger-active);
+}
+.gButtonColorDangerDisabled {
+  background-color: var(--bg-danger-disabled);
+}
+
+.gButtonColorInfo {
+  color: var(--text-static-primary);
+  background-color: var(--bg-tag-default);
+}
+.gButtonColorInfo:hover {
+  background-color: var(--bg-tag-hover);
+}
+.gButtonColorInfo:active {
+  background-color: var(--bg-tag-active);
+}
+.gButtonColorInfoDisabled {
+  background-color: var(--bg-tag-disabled);
+}
+
+.rounded {
+  border-radius: 16px;
+}

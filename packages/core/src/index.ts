@@ -1,4 +1,5 @@
 export * from './alert'
+export * from './button'
 export * from './breadcrumb'
 export * from './config-provider'
 export * from './breadcrumb'

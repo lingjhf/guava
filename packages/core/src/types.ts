@@ -5,7 +5,10 @@ export type ValueChanged<T> = (value: T) => void
 export type VoidCallback = () => void
 
 export interface ComponentProps<T extends HTMLElement> extends JSX.CustomEventHandlersCamelCase<T> {
-  ref?: T
+  ref?: JSX.HTMLAttributes<T>['ref']
+  class?: JSX.HTMLAttributes<T>['class']
+  classList?: JSX.HTMLAttributes<T>['classList']
+  style?: JSX.HTMLAttributes<T>['style']
 }
 
 export interface ComponentPropsWithChildren<T extends HTMLElement> extends ComponentProps<T> {
