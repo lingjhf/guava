@@ -1,4 +1,82 @@
 .gAlert {
   width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
   height: 40px;
+  padding: 0 16px;
+}
+
+.gAlertIcon {
+  font-size: 20px;
+}
+
+.gAlertTitle {
+  font-size: 14px;
+  padding: 0 8px;
+  color: var(--text-static-primary);
+}
+
+.gAlertCloseWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  cursor: pointer;
+}
+.gAlertClose {
+  font-size: 16px;
+  color: var(--text-common-primary);
+}
+
+.gAlertInfo {
+  background-color: var(--bg-brand-light-default);
+}
+.gAlertIconInfo {
+  color: var(--bg-brand-default);
+}
+
+.gAlertSuccess {
+  background-color: var(--bg-success-light-default);
+}
+.gAlertIconSuccess {
+  color: var(--bg-success-default);
+}
+
+.gAlertWarn {
+  background-color: var(--bg-warn-light-default);
+}
+.gAlertIconWarn {
+  color: var(--bg-warn-default);
+}
+
+.gAlertDanger {
+  background-color: var(--bg-danger-light-default);
+}
+.gAlertIconDanger {
+  color: var(--bg-danger-default);
+}
+
+.gAlertContent {
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  height: 76px;
+  padding: 16px;
+}
+
+.gAlertContentHeader {
+  display: flex;
+  align-items: center;
+  height: 22px;
+}
+
+.gAlertContentContent {
+  height: 22px;
+  box-sizing: border-box;
+  padding: 4px 0 0 28px;
+  font-size: 12px;
+  color: var(--text-common-primary);
 }
