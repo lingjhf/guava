@@ -1,9 +1,10 @@
-import { JSX, createMemo } from 'solid-js'
+import { JSX, Match, Switch, createMemo } from 'solid-js'
 import { Show, createSignal } from 'solid-js'
 import { ComponentPropsWithChildren, VoidCallback } from '../types'
 import { customEventHandlersName, generateProps } from '../utils'
 import { WarnCircleFilled } from '../icon/warn-circle-filled'
 import { CheckCircleFilled } from '../icon/check-circle-filled'
+import { CloseCircleFilled } from '../icon/close-circle-filled'
 import { CloseFilled } from '../icon/close-filled'
 import styles from './alert.module.css'
 
@@ -30,26 +31,29 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
     'danger': styles.gAlertDanger
   }
 
-  const iconTypeClasses: Record<AlertType, string> = {
-    'info': styles.gAlertIconInfo,
-    'success': styles.gAlertIconSuccess,
-    'warn': styles.gAlertIconWarn,
-    'danger': styles.gAlertIconDanger
-  }
-
   const [visible, setVisible] = createSignal(true)
 
   const alertClasses = () => {
     return `${styles.gAlert} ${typeClasses[props.type]}`
   }
 
-  const alertIconClasses = createMemo(() => {
-    return `${styles.gAlertIcon} ${iconTypeClasses[props.type]}`
-  })
-
   const alertWithContentClasses = () => {
     return `${styles.gAlertContent} ${typeClasses[props.type]}`
   }
+
+  const AlertIcon = () => (
+    <Switch fallback={<WarnCircleFilled class={`${styles.gAlertIcon} ${styles.gAlertIconInfo}`} />}>
+      <Match when={props.type === 'success'}>
+        <CheckCircleFilled class={`${styles.gAlertIcon} ${styles.gAlertIconSuccess}`} />
+      </Match>
+      <Match when={props.type === 'warn'}>
+        <WarnCircleFilled class={`${styles.gAlertIcon} ${styles.gAlertIconWarn}`} />
+      </Match>
+      <Match when={props.type === 'danger'}>
+        <CloseCircleFilled class={`${styles.gAlertIcon} ${styles.gAlertIconDanger}`} />
+      </Match>
+    </Switch>
+  )
 
   function alertClose() {
     setVisible(false)
@@ -62,13 +66,11 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
         when={props.children}
         fallback={
           <div class={alertClasses()} {...splitted} ref={props.ref}>
-            <Show when={props.type === 'success'} fallback={<WarnCircleFilled class={alertIconClasses()} />}>
-              <CheckCircleFilled class={alertIconClasses()} />
-            </Show>
+            <AlertIcon />
             <div class={styles.gAlertTitle}>{props.title}</div>
             <Show when={props.closable}>
               <div class={styles.gAlertCloseWrap} onClick={alertClose}>
-                <CloseFilled class={styles.gAlertClose}></CloseFilled>
+                <CloseFilled class={styles.gAlertClose} />
               </div>
             </Show>
           </div>
@@ -77,16 +79,14 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
         <div class={alertWithContentClasses()} {...splitted} ref={props.ref}>
           <div>
             <div class={styles.gAlertContentHeader}>
-              <Show when={props.type === 'success'} fallback={<WarnCircleFilled class={alertIconClasses()} />}>
-                <CheckCircleFilled class={alertIconClasses()} />
-              </Show>
+              <AlertIcon />
               <div class={styles.gAlertTitle}>{props.title}</div>
             </div>
             <div class={styles.gAlertContentContent}>{props.children}</div>
           </div>
           <Show when={props.closable}>
             <div class={styles.gAlertCloseWrap} onClick={alertClose}>
-              <CloseFilled class={styles.gAlertClose}></CloseFilled>
+              <CloseFilled class={styles.gAlertClose} />
             </div>
           </Show>
         </div>
