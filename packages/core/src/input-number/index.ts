@@ -1,0 +1,1 @@
+export { InputNumber as GInputNumber } from './input-number'

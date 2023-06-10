@@ -1,0 +1,1 @@
+export { Collapse as GCollapse } from './collapse'

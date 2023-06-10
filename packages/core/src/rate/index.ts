@@ -1,0 +1,1 @@
+export { Rate as GRate } from './rate'

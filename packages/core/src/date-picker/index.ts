@@ -1,0 +1,1 @@
+export { DatePicker as GDatePicker } from './date-picker'

@@ -1,0 +1,1 @@
+export { Tag as GTag } from './tag'

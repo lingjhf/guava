@@ -1,0 +1,1 @@
+export { Tree as GTree } from './tree'

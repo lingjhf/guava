@@ -1,0 +1,1 @@
+export { Pagination as GPagination } from './pagination'

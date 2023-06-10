@@ -1,0 +1,1 @@
+export { Message as GMessage } from './message'

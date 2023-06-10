@@ -1,0 +1,1 @@
+export { DropdownMenu as GDropdownMenu } from './dropdown-menu'

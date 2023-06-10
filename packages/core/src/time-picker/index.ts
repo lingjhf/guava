@@ -1,0 +1,1 @@
+export { TimePicker as GTimePicker } from './time-picker'

@@ -1,0 +1,1 @@
+export { ProgressBar as GProgressBar } from './progress-bar'
