@@ -18,7 +18,7 @@ export interface AlertProps extends ComponentPropsWithChildren<HTMLDivElement> {
 }
 
 export const Alert = (propsRaw: Partial<AlertProps>) => {
-  const [splitted, props] = generateProps(
+  const [eventHandlers, props] = generateProps(
     propsRaw,
     { type: 'info', center: false, closable: true },
     customEventHandlersName
@@ -38,6 +38,9 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
     if (props.center) {
       classes += ` ${styles.center}`
     }
+    if (props.class) {
+      classes += ` ${props.class}`
+    }
     return classes
   }
 
@@ -45,6 +48,9 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
     let classes = `${styles.gAlertContent} ${typeClasses[props.type]}`
     if (props.center) {
       classes += ` ${styles.center}`
+    }
+    if (props.class) {
+      classes += ` ${props.class}`
     }
     return classes
   }
@@ -73,7 +79,7 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
       <Show
         when={props.children}
         fallback={
-          <div class={alertClasses()} {...splitted} ref={props.ref}>
+          <div class={alertClasses()} classList={props.classList} style={props.style} ref={props.ref} {...eventHandlers}>
             <AlertIcon />
             <div class={styles.gAlertTitle}>{props.title}</div>
             <Show when={props.closable}>
@@ -84,7 +90,7 @@ export const Alert = (propsRaw: Partial<AlertProps>) => {
           </div>
         }
       >
-        <div class={alertWithContentClasses()} {...splitted} ref={props.ref}>
+        <div class={alertWithContentClasses()} classList={props.classList} style={props.style} ref={props.ref} {...eventHandlers}>
           <div>
             <div class={styles.gAlertContentHeader}>
               <AlertIcon />

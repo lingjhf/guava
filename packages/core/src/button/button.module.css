@@ -27,7 +27,7 @@
   --button-rounded: 16px;
 }
 
-.disabled {
+.gButton:disabled {
   --button-cursor: not-allowed;
 }
 

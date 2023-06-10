@@ -52,7 +52,7 @@ const jellyDisabledClasses: Record<ButtonType, string> = {
 }
 
 export const Button = (propsRaw: Partial<ButtonProps>) => {
-  const [splitted, props] = generateProps(
+  const [eventHandlers, props] = generateProps(
     propsRaw,
     {
       size: 'default',
@@ -69,9 +69,6 @@ export const Button = (propsRaw: Partial<ButtonProps>) => {
     if (props.rounded) {
       classes += ` ${styles.rounded}`
     }
-    if (props.disabled) {
-      classes += ` ${styles.disabled}`
-    }
     if (props.jelly) {
       classes += ` ${jellyTypeClasses[props.type]}`
       if (props.disabled) {
@@ -83,10 +80,22 @@ export const Button = (propsRaw: Partial<ButtonProps>) => {
         classes += ` ${typeDisabledClasses[props.type]}`
       }
     }
+    if (props.class) {
+      classes += ` ${props.class}`
+    }
     return classes
   }
 
   return (
-    <button class={buttonClasses()} {...splitted} ref={props.ref}>{props.children}</button>
+    <button
+      class={buttonClasses()}
+      classList={props.classList}
+      style={props.style}
+      ref={props.ref}
+      disabled={props.disabled}
+      {...eventHandlers}
+    >
+      {props.children}
+    </button>
   )
 }
