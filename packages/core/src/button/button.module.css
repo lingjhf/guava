@@ -1,124 +1,190 @@
 .gButton {
+  --button-rounded: 4px;
+  --button-cursor: pointer;
   box-sizing: border-box;
   user-select: none;
   outline: none;
-  cursor: pointer;
   border: none;
-  border-radius: 4px;
+  cursor: var(--button-cursor);
+  border-radius: var(--button-rounded);
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
+  padding: var(--button-padding);
+  font-size: var(--button-font-size);
+  line-height: var(--button-line-height);
+  height: var(--button-height);
 }
 
-.gButtonSizeDefault {
-  padding: 9px 16px;
-  font-size: 14px;
-  line-height: 22px;
-  height: 40px;
+.gButton:hover {
+  background-color: var(--button-bg-hover-color);
 }
 
-.gButtonSizeSmall {
-  padding: 3px 8px;
-  font-size: 12px;
-  line-height: 18px;
-  height: 24px;
-}
-
-.gButtonSizeMedium {
-  padding: 6px 12px;
-  font-size: 13px;
-  line-height: 20px;
-  height: 32px;
-}
-
-.gButtonSizeLarge {
-  padding: 12px 20px;
-  font-size: 16px;
-  line-height: 24px;
-  height: 48px;
-}
-
-.gButtonColorDefault {
-  color: var(--text-static-primary);
-  background-color: var(--bg-controls-default);
-}
-.gButtonColorDefault:hover {
-  background-color: var(--bg-controls-hover);
-}
-.gButtonColorDefault:active {
-  background-color: var(--bg-controls-active);
-}
-.gButtonColorDefaultDisabled {
-  background-color: var(--bg-controls-disabled);
-}
-
-.gButtonColorPrimary {
-  color: var(--text-static-primary);
-  background-color: var(--bg-brand-default);
-}
-.gButtonColorPrimary:hover {
-  background-color: var(--bg-brand-hover);
-}
-.gButtonColorPrimary:active {
-  background-color: var(--bg-brand-active);
-}
-.gButtonColorPrimaryDisabled {
-  background-color: var(--bg-brand-disabled);
-}
-
-.gButtonColorSuccess {
-  color: var(--text-static-primary);
-  background-color: var(--bg-success-default);
-}
-.gButtonColorSuccess:hover {
-  background-color: var(--bg-success-hover);
-}
-.gButtonColorSuccess:active {
-  background-color: var(--bg-success-active);
-}
-.gButtonColorSuccessDisabled {
-  background-color: var(--bg-success-disabled);
-}
-
-.gButtonColorWarn {
-  color: var(--text-static-primary);
-  background-color: var(--bg-warn-default);
-}
-.gButtonColorWarn:hover {
-  background-color: var(--bg-warn-hover);
-}
-.gButtonColorWarn:active {
-  background-color: var(--bg-warn-active);
-}
-.gButtonColorWarnDisabled {
-  background-color: var(--bg-warn-disabled);
-}
-
-.gButtonColorDanger {
-  color: var(--text-static-primary);
-  background-color: var(--bg-danger-default);
-}
-.gButtonColorDanger:hover {
-  background-color: var(--bg-danger-hover);
-}
-.gButtonColorDanger:active {
-  background-color: var(--bg-danger-active);
-}
-.gButtonColorDangerDisabled {
-  background-color: var(--bg-danger-disabled);
-}
-
-.gButtonColorInfo {
-  color: var(--text-static-primary);
-  background-color: var(--bg-tag-default);
-}
-.gButtonColorInfo:hover {
-  background-color: var(--bg-tag-hover);
-}
-.gButtonColorInfo:active {
-  background-color: var(--bg-tag-active);
-}
-.gButtonColorInfoDisabled {
-  background-color: var(--bg-tag-disabled);
+.gButton:active {
+  background-color: var(--button-bg-active-color);
 }
 
 .rounded {
-  border-radius: 16px;
+  --button-rounded: 16px;
+}
+
+.disabled {
+  --button-cursor: not-allowed;
+}
+
+.gButtonSizeDefault {
+  --button-padding: 9px 16px;
+  --button-font-size: 14px;
+  --button-line-height: 22px;
+  --button-height: 40px;
+}
+
+.gButtonSizeSmall {
+  --button-padding: 3px 8px;
+  --button-font-size: 12px;
+  --button-line-height: 18px;
+  --button-height: 24px;
+}
+
+.gButtonSizeMedium {
+  --button-padding: 6px 12px;
+  --button-font-size: 13px;
+  --button-line-height: 20px;
+  --button-height: 32px;
+}
+
+.gButtonSizeLarge {
+  --button-padding: 12px 20px;
+  --button-font-size: 16px;
+  --button-line-height: 24px;
+  --button-height: 48px;
+}
+
+/* default style */
+.gButtonDefault {
+  --button-text-color: var(--text-static-primary);
+  --button-bg-color: var(--bg-controls-default);
+  --button-bg-hover-color: var(--bg-controls-hover);
+  --button-bg-active-color: var(--bg-controls-active);
+}
+.gButtonDefaultDisabled {
+  --button-text-color: var(--text-static-disabled);
+  --button-bg-color: var(--bg-controls-disabled);
+  --button-bg-hover-color: var(--bg-controls-disabled);
+  --button-bg-active-color: var(--bg-controls-disabled);
+}
+.gButtonJellyDefault {
+  --button-text-color: var(--text-common-primary);
+  --button-bg-color: var(--bg-brand-light-default);
+  --button-bg-hover-color: var(--bg-brand-light-hover);
+  --button-bg-active-color: var(--bg-brand-light-active);
+}
+.gButtonJellyDefaultDisabled {
+  --button-text-color: var(--text-common-disabled);
+  --button-bg-color: var(--bg-brand-light-disabled);
+  --button-bg-hover-color: var(--bg-brand-light-disabled);
+  --button-bg-active-color: var(--bg-brand-light-disabled);
+}
+
+/* primary style */
+.gButtonPrimary {
+  --button-text-color: var(--text-static-primary);
+  --button-bg-color: var(--bg-brand-default);
+  --button-bg-hover-color: var(--bg-brand-hover);
+  --button-bg-active-color: var(--bg-brand-active);
+}
+.gButtonPrimaryDisabled {
+  --button-text-color: var(--text-static-disabled);
+  --button-bg-color: var(--bg-brand-disabled);
+  --button-bg-hover-color: var(--bg-brand-disabled);
+  --button-bg-active-color: var(--bg-brand-disabled);
+}
+.gButtonJellyPrimary {
+  --button-text-color: var(--text-brand-default);
+  --button-bg-color: var(--bg-brand-light-default);
+  --button-bg-hover-color: var(--bg-brand-light-hover);
+  --button-bg-active-color: var(--bg-brand-light-active);
+}
+.gButtonJellyPrimaryDisabled {
+  --button-text-color: var(--text-brand-disabled);
+  --button-bg-color: var(--bg-brand-light-disabled);
+  --button-bg-hover-color: var(--bg-brand-light-disabled);
+  --button-bg-active-color: var(--bg-brand-light-disabled);
+}
+
+/* success style */
+.gButtonSuccess {
+  --button-text-color: var(--text-static-primary);
+  --button-bg-color: var(--bg-success-default);
+  --button-bg-hover-color: var(--bg-success-hover);
+  --button-bg-active-color: var(--bg-success-active);
+}
+.gButtonSuccessDisabled {
+  --button-text-color: var(--text-static-disabled);
+  --button-bg-color: var(--bg-success-disabled);
+  --button-bg-hover-color: var(--bg-success-disabled);
+  --button-bg-active-color: var(--bg-success-disabled);
+}
+.gButtonJellySuccess {
+  --button-text-color: var(--text-success-default);
+  --button-bg-color: var(--bg-success-light-default);
+  --button-bg-hover-color: var(--bg-success-light-hover);
+  --button-bg-active-color: var(--bg-success-light-active);
+}
+.gButtonJellySuccessDisabled {
+  --button-text-color: var(--text-success-disabled);
+  --button-bg-color: var(--bg-success-light-disabled);
+  --button-bg-hover-color: var(--bg-success-light-disabled);
+  --button-bg-active-color: var(--bg-success-light-disabled);
+}
+
+/* warn style */
+.gButtonWarn {
+  --button-text-color: var(--text-static-primary);
+  --button-bg-color: var(--bg-warn-default);
+  --button-bg-hover-color: var(--bg-warn-hover);
+  --button-bg-active-color: var(--bg-warn-active);
+}
+.gButtonWarnDisabled {
+  --button-text-color: var(--text-static-disabled);
+  --button-bg-color: var(--bg-warn-disabled);
+  --button-bg-hover-color: var(--bg-warn-disabled);
+  --button-bg-active-color: var(--bg-warn-disabled);
+}
+.gButtonJellyWarn {
+  --button-text-color: var(--text-warn-default);
+  --button-bg-color: var(--bg-warn-light-default);
+  --button-bg-hover-color: var(--bg-warn-light-hover);
+  --button-bg-active-color: var(--bg-warn-light-active);
+}
+.gButtonJellyWarnDisabled {
+  --button-text-color: var(--text-warn-disabled);
+  --button-bg-color: var(--bg-warn-light-disabled);
+  --button-bg-hover-color: var(--bg-warn-light-disabled);
+  --button-bg-active-color: var(--bg-warn-light-disabled);
+}
+
+/* danger style */
+.gButtonDanger {
+  --button-text-color: var(--text-static-primary);
+  --button-bg-color: var(--bg-danger-default);
+  --button-bg-hover-color: var(--bg-danger-hover);
+  --button-bg-active-color: var(--bg-danger-active);
+}
+.gButtonDangerDisabled {
+  --button-text-color: var(--text-static-disabled);
+  --button-bg-color: var(--bg-danger-disabled);
+  --button-bg-hover-color: var(--bg-danger-disabled);
+  --button-bg-active-color: var(--bg-danger-disabled);
+}
+.gButtonJellyDanger {
+  --button-text-color: var(--text-danger-default);
+  --button-bg-color: var(--bg-danger-light-default);
+  --button-bg-hover-color: var(--bg-danger-light-hover);
+  --button-bg-active-color: var(--bg-danger-light-active);
+}
+.gButtonJellyDangerDisabled {
+  --button-text-color: var(--text-danger-disabled);
+  --button-bg-color: var(--bg-danger-light-disabled);
+  --button-bg-hover-color: var(--bg-danger-light-disabled);
+  --button-bg-active-color: var(--bg-danger-light-disabled);
 }
