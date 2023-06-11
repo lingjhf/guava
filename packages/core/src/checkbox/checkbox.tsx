@@ -37,7 +37,7 @@ export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
     if (checked()) {
       classes += ` ${styles.gCheckboxChecked}`
     } else if (props.indeterminate) {
-
+      classes += ` ${styles.gCheckboxIndeterminateBorder}`
     }
     return classes
   }

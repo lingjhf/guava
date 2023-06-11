@@ -38,3 +38,7 @@
   border-radius: 1px;
   background-color: var(--checkbox-bg-color-checked);
 }
+
+.gCheckboxIndeterminateBorder {
+  --checkbox-border-color: var(--checkbox-border-color-hover);
+}
