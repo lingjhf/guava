@@ -56,3 +56,7 @@
   --checkbox-border-color-hover: var(--text-common-disabled);
   --checkbox-border-color: var(--text-common-disabled);
 }
+
+.disabled {
+  cursor: not-allowed;
+}

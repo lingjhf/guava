@@ -34,6 +34,9 @@ export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
 
   const checkClasses = () => {
     let classes = `${props.class} ${styles.gCheckbox}`
+    if (props.disabled) {
+      classes += ` ${styles.disabled}`
+    }
     if (checked()) {
       classes += ` ${styles.gCheckboxChecked}`
       if (props.disabled) {
@@ -60,6 +63,7 @@ export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
   }
 
   function checkedChange() {
+    if (props.disabled) return
     setChecked(!checked())
   }
 
