@@ -1,0 +1,68 @@
+.gInput {
+  --input-border-radius: 4px;
+  --input-text-color: var(--text-common-primary);
+  --input-placeholder-color: var(--text-common-quaternary);
+  --input-bg-color: var(--bg-controls-default);
+  --input-border-color: transparent;
+  height: var(--input-height);
+  padding: var(--input-padding);
+  border-radius: var(--input-border-radius);
+  background: var(--input-bg-color);
+  box-shadow: 0 0 0 1px var(--input-border-color) inset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.gInput:hover {
+  --input-border-color: var(--border-common-default);
+}
+.gInputFocus {
+  --input-bg-color: var(--bg-controls-elevate-default);
+  --input-border-color: var(--border-brand-default) !important;
+}
+
+.gInputText {
+  color: var(--input-text-color);
+  font-size: var(--input-text-font-size);
+  line-height: var(--input-text-line-height);
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.gInputText::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+.gInputSizeDefault {
+  --input-height: 40px;
+  --input-padding: 10px 8px;
+  --input-text-font-size: 13px;
+  --input-text-line-height: 20px;
+}
+.gInputSizeSmall {
+  --input-height: 32px;
+  --input-padding: 7px 8px;
+  --input-text-font-size: 12px;
+  --input-text-line-height: 18px;
+}
+.gInputSizeLarge {
+  --input-height: 48px;
+  --input-padding: 13px 12px;
+  --input-text-font-size: 14px;
+  --input-text-line-height: 22px;
+}
+
+.gInputClearable {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.gInputClearableIcon {
+  cursor: pointer;
+  color: var(--text-common-secondary);
+}
