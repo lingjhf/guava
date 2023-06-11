@@ -36,8 +36,25 @@ export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
     let classes = `${props.class} ${styles.gCheckbox}`
     if (checked()) {
       classes += ` ${styles.gCheckboxChecked}`
+      if (props.disabled) {
+        return classes += ` ${styles.gCheckboxCheckedDisabled}`
+      }
     } else if (props.indeterminate) {
       classes += ` ${styles.gCheckboxIndeterminateBorder}`
+      if (props.disabled) {
+        return classes += ` ${styles.gCheckboxIndeterminateBorderDisabled}`
+      }
+    }
+    if (props.disabled) {
+      return classes += ` ${styles.gCheckboxDisabled}`
+    }
+    return classes
+  }
+
+  const indeterminateClasses = () => {
+    let classes = `${styles.gCheckboxIndeterminate}`
+    if (props.disabled) {
+      return classes += ` ${styles.gCheckboxIndeterminateDisabled}`
     }
     return classes
   }
@@ -59,7 +76,7 @@ export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
         <CheckFilled class={styles.gCheckboxIcon} />
       </Show>
       <Show when={!checked() && props.indeterminate}>
-        <div class={styles.gCheckboxIndeterminate}></div>
+        <div class={indeterminateClasses()}></div>
       </Show>
     </div>
   )

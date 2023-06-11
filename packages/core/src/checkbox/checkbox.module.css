@@ -1,10 +1,9 @@
 .gCheckbox {
   --checkbox-text-color: var(--text-static-primary);
   --checkbox-border-radius: 2px;
-  --checkbox-border-color: var(--border-common-default);
+  --checkbox-border-color: var(--text-common-quaternary);
   --checkbox-border-color-hover: var(--border-brand-default);
   --checkbox-bg-color: transparent;
-  --checkbox-bg-color-checked: var(--bg-brand-default);
   display: flex;
   font-size: var(--checkbox-font-size);
   width: 1em;
@@ -17,14 +16,22 @@
   background-color: var(--checkbox-bg-color);
   position: relative;
 }
-
 .gCheckbox:hover {
   --checkbox-border-color: var(--checkbox-border-color-hover);
 }
+.gCheckboxDisabled {
+  --checkbox-border-color-hover: var(--text-common-disabled);
+  --checkbox-border-color: var(--text-common-disabled);
+}
 
 .gCheckboxChecked {
-  --checkbox-border-color: var(--checkbox-border-color-hover);
-  --checkbox-bg-color: var(--checkbox-bg-color-checked);
+  --checkbox-border-color: var(--border-brand-default);
+  --checkbox-bg-color: var(--bg-brand-default);
+}
+.gCheckboxCheckedDisabled {
+  --checkbox-border-color-hover: transparent;
+  --checkbox-border-color: transparent;
+  --checkbox-bg-color: var(--bg-brand-disabled);
 }
 
 .gCheckboxIcon {
@@ -36,9 +43,16 @@
   position: absolute;
   inset: 2px;
   border-radius: 1px;
-  background-color: var(--checkbox-bg-color-checked);
+  background-color: var(--bg-brand-default);
+}
+.gCheckboxIndeterminateDisabled {
+  background-color: var(--bg-brand-disabled);
 }
 
 .gCheckboxIndeterminateBorder {
-  --checkbox-border-color: var(--checkbox-border-color-hover);
+  --checkbox-border-color: var(--border-brand-default);
+}
+.gCheckboxIndeterminateBorderDisabled {
+  --checkbox-border-color-hover: var(--text-common-disabled);
+  --checkbox-border-color: var(--text-common-disabled);
 }
