@@ -10,7 +10,7 @@ const App: Component = () => {
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class='p-2'>
-          <GCheckbox size={48}></GCheckbox>
+          <GCheckbox indeterminate></GCheckbox>
         </div>
       </GConfigProvider>
     </div>

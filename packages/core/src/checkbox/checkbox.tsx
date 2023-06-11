@@ -7,13 +7,17 @@ import styles from './checkbox.module.css'
 export interface CheckboxProps extends ComponentPropsWithChildren<HTMLDivElement> {
   size: number
   checked: boolean
+  indeterminate: boolean
+  disabled: boolean
 }
 export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
   const [eventHandlers, props] = generateProps(
     propsRaw,
     {
       size: 16,
-      checked: false
+      checked: false,
+      indeterminate: false,
+      disabled: false,
     },
     customEventHandlersName
   )
@@ -32,6 +36,8 @@ export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
     let classes = `${props.class} ${styles.gCheckbox}`
     if (checked()) {
       classes += ` ${styles.gCheckboxChecked}`
+    } else if (props.indeterminate) {
+
     }
     return classes
   }
@@ -51,6 +57,9 @@ export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
     >
       <Show when={checked()}>
         <CheckFilled class={styles.gCheckboxIcon} />
+      </Show>
+      <Show when={!checked() && props.indeterminate}>
+        <div class={styles.gCheckboxIndeterminate}></div>
       </Show>
     </div>
   )
