@@ -1,4 +1,5 @@
 .pagination {
+  --pagination-size: 24px;
   --pagination-text-color: var(--text-common-primary);
   --pagination-text-color-disabled: var(--text-common-disabled);
   --pagination-text-colorActive: var(--text-brand-default);
@@ -12,7 +13,7 @@
   --pagination-bg-colorActive-active: var(--bg-brand-light-active);
   --pagination-bg-colorActive-disabled: var(--bg-brand-light-disabled);
   display: flex;
-  height: 24px;
+  height: var(--pagination-size);
   user-select: none;
 }
 
@@ -22,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 24px;
+  min-width: var(--pagination-size);
   font-size: 14px;
   line-height: 22px;
   border-radius: 4px;

@@ -7,6 +7,7 @@ import { ChevronRightFilled } from '../icon/chevron-right-filled'
 import styles from './pagination.module.css'
 
 export interface PaginationProps extends ComponentProps<HTMLDivElement> {
+  size: number
   currentPage: number
   pageSize: number
   total: number
@@ -30,6 +31,7 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
   const [eventHandlers, props] = generateProps(
     propsRaw,
     {
+      size: 24,
       currentPage: 1,
       pageSize: 10,
       total: 0,
@@ -59,6 +61,10 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
   createEffect(on(currentPage, (v) => {
     setPagers(generatePagers(v, maxPager, totalPage()))
   }))
+
+  const paginationStyles = () => {
+    return `--pagination-size:${props.size}px;${props.style}`
+  }
 
   const paginationItemClasses = (page?: number) => {
     let classes = `${styles.paginationItem}`
@@ -162,7 +168,13 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
 
   return (
     <Show when={!(props.hideOnSinglePage && totalPage() === 1)}>
-      <div class={styles.pagination} {...eventHandlers}>
+      <div
+        style={paginationStyles()}
+        class={styles.pagination}
+        classList={props.classList}
+        ref={props.ref}
+        {...eventHandlers}
+      >
         <Show when={props.prev} >
           <div class={paginationPrev()} onClick={prev}>
             {typeof props.prev === 'boolean' ? <ChevronLeftFilled /> : props.prev}
