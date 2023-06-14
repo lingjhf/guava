@@ -17,6 +17,7 @@ export interface PaginationProps extends ComponentProps<HTMLDivElement> {
   quickPrev?: JSX.Element
   quickNext?: JSX.Element
   disabled: boolean
+  hideOnSinglePage: boolean
 }
 
 interface Pager {
@@ -36,26 +37,27 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
       prev: false,
       next: false,
       disabled: false,
+      hideOnSinglePage: false,
     },
     customEventHandlersName,
   )
 
   const [pagers, setPagers] = createSignal<Pager[]>([])
   const [currentPage, setCurrentPage] = createSignal(1)
-  let totalPage = 0
+  const [totalPage, setTotalPage] = createSignal(1)
   let maxPager = 0
 
   createEffect(() => {
     if (props.total <= 0) {
       return
     }
-    totalPage = Math.ceil(props.total / props.pageSize)
+    const totalPage = setTotalPage(Math.ceil(props.total / props.pageSize))
     maxPager = props.maxPager > totalPage ? totalPage : props.maxPager
     setCurrentPage(props.currentPage)
   })
 
   createEffect(on(currentPage, (v) => {
-    setPagers(generatePagers(v, maxPager, totalPage))
+    setPagers(generatePagers(v, maxPager, totalPage()))
   }))
 
   const paginationItemClasses = (page?: number) => {
@@ -83,7 +85,7 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
 
   const paginationNext = () => {
     let classes = `${styles.paginationNext}`
-    if (currentPage() === totalPage || props.disabled) {
+    if (currentPage() === totalPage() || props.disabled) {
       classes += ` ${styles.paginationDisabled}`
     }
     return classes
@@ -127,7 +129,7 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
 
   function next() {
     if (props.disabled) return
-    if (currentPage() + 1 > totalPage) return
+    if (currentPage() + 1 > totalPage()) return
     setCurrentPage(v => v + 1)
   }
 
@@ -146,8 +148,8 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
     if (props.disabled) return
     setCurrentPage(v => {
       let value = v + (maxPager - 2)
-      if (value > totalPage) {
-        value = totalPage
+      if (value > totalPage()) {
+        value = totalPage()
       }
       return value
     })
@@ -159,38 +161,40 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
   }
 
   return (
-    <div class={styles.pagination} {...eventHandlers}>
-      <Show when={props.prev} >
-        <div class={paginationPrev()} onClick={prev}>
-          {typeof props.prev === 'boolean' ? <ChevronLeftFilled /> : props.prev}
-        </div>
-      </Show>
-      <For each={pagers()}>
-        {
-          (item) => {
-            if (item.isQuickPrev) {
-              return <div class={paginationItemClasses()} onClick={quickPrev}>
-                {props.quickPrev ? props.quickPrev : <MoreFilled />}
-              </div>
+    <Show when={!(props.hideOnSinglePage && totalPage() === 1)}>
+      <div class={styles.pagination} {...eventHandlers}>
+        <Show when={props.prev} >
+          <div class={paginationPrev()} onClick={prev}>
+            {typeof props.prev === 'boolean' ? <ChevronLeftFilled /> : props.prev}
+          </div>
+        </Show>
+        <For each={pagers()}>
+          {
+            (item) => {
+              if (item.isQuickPrev) {
+                return <div class={paginationItemClasses()} onClick={quickPrev}>
+                  {props.quickPrev ? props.quickPrev : <MoreFilled />}
+                </div>
+              }
+              if (item.isQuickNext) {
+                return <div class={paginationItemClasses()} onClick={quickNext}>
+                  {props.quickNext ? props.quickNext : <MoreFilled />}
+                </div>
+              }
+              return (
+                <div class={paginationItemClasses(item.page)} onClick={[currentPageChange, item.page]}>
+                  {props.page ? props.page?.(item.page!) : item.page}
+                </div>
+              )
             }
-            if (item.isQuickNext) {
-              return <div class={paginationItemClasses()} onClick={quickNext}>
-                {props.quickNext ? props.quickNext : <MoreFilled />}
-              </div>
-            }
-            return (
-              <div class={paginationItemClasses(item.page)} onClick={[currentPageChange, item.page]}>
-                {props.page ? props.page?.(item.page!) : item.page}
-              </div>
-            )
           }
-        }
-      </For>
-      <Show when={props.next}>
-        <div class={paginationNext()} onClick={next}>
-          {typeof props.next === 'boolean' ? <ChevronRightFilled /> : props.next}
-        </div>
-      </Show>
-    </div>
+        </For>
+        <Show when={props.next}>
+          <div class={paginationNext()} onClick={next}>
+            {typeof props.next === 'boolean' ? <ChevronRightFilled /> : props.next}
+          </div>
+        </Show>
+      </div>
+    </Show>
   )
 }
