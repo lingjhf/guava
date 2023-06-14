@@ -1,4 +1,4 @@
-import { For, createEffect, createSignal } from 'solid-js'
+import { For, createEffect, createSignal, on } from 'solid-js'
 import { ComponentProps } from '../types'
 import { customEventHandlersName, generateProps } from '../utils'
 import { MoreFilled } from '../icon/more-filled'
@@ -31,15 +31,20 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
   const [pagers, setPagers] = createSignal<Pager[]>([])
   const [currentPage, setCurrentPage] = createSignal(1)
   let totalPage = 0
+  let maxPager = 0
 
   createEffect(() => {
     if (props.total <= 0) {
       return
     }
     totalPage = Math.ceil(props.total / props.pageSize)
+    maxPager = props.maxPager > totalPage ? totalPage : props.maxPager
     setCurrentPage(props.currentPage)
-    setPagers(generatePagers(props.currentPage, props.maxPager, totalPage))
   })
+
+  createEffect(on(currentPage, (v) => {
+    setPagers(generatePagers(v, maxPager, totalPage))
+  }))
 
   const paginationItemClasses = (page: number) => {
     let classes = `${styles.paginationItem}`
@@ -51,20 +56,24 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
 
   function generatePagers(currentPage: number, maxPager: number, totalPage: number): Pager[] {
     const pagers: Pager[] = [{ page: 1 }]
-    const a = Math.floor((maxPager - 2) / 2)
-    if (currentPage + a < maxPager) {
+    const half = Math.floor((maxPager - 2) / 2)
+    if (currentPage + half < maxPager) {
       for (let i = 2; i < maxPager; i++) {
         pagers.push({ page: i })
       }
-      pagers.push({ isQuickNext: true })
-    } else if (currentPage - a > totalPage - (maxPager - 1)) {
-      pagers.push({ isQuickPrev: true })
+      if (totalPage > maxPager) {
+        pagers.push({ isQuickNext: true })
+      }
+    } else if (currentPage - half > totalPage - (maxPager - 1)) {
+      if (totalPage - maxPager > 0) {
+        pagers.push({ isQuickPrev: true })
+      }
       for (let i = totalPage - (maxPager - 2); i < totalPage; i++) {
         pagers.push({ page: i })
       }
     } else {
       pagers.push({ isQuickPrev: true })
-      for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+      for (let i = currentPage - half; i <= currentPage + half; i++) {
         pagers.push({ page: i })
       }
       pagers.push({ isQuickNext: true })
@@ -74,30 +83,27 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
   }
 
   function quickPrev() {
-    const value = setCurrentPage(v => {
-      let value = v - (props.maxPager - 2)
+    setCurrentPage(v => {
+      let value = v - (maxPager - 2)
       if (value < 1) {
         value = 1
       }
       return value
     })
-    setPagers(generatePagers(value, props.maxPager, totalPage))
   }
 
   function quickNext() {
-    const value = setCurrentPage(v => {
-      let value = v + (props.maxPager - 2)
+    setCurrentPage(v => {
+      let value = v + (maxPager - 2)
       if (value > totalPage) {
         value = totalPage
       }
       return value
     })
-    setPagers(generatePagers(value, props.maxPager, totalPage))
   }
 
   function currentPageChange(value: number) {
     setCurrentPage(value)
-    setPagers(generatePagers(value, props.maxPager, totalPage))
   }
 
   const PaginationDefault = () => {
@@ -108,7 +114,7 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
 
   return (
     <div class={styles.pagination} {...eventHandlers}>
-      
+
       <For each={pagers()}>
         {
           (item) => {
