@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js'
-import { GConfigProvider, GInput } from '@lingjhf/guava'
+import { GConfigProvider, GInput, GPagination } from '@lingjhf/guava'
 import 'virtual:uno.css'
 
 const App: Component = () => {
@@ -10,13 +10,7 @@ const App: Component = () => {
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class='p-2 w-300px'>
-          <GInput placeholder='Enter' input={ok}></GInput>
-        </div>
-        <div class='p-2 w-300px'>
-          <GInput size='small' placeholder='Enter'></GInput>
-        </div>
-        <div class='p-2 w-300px'>
-          <GInput size='large' placeholder='Enter' clearable></GInput>
+          <GPagination total={100}></GPagination>
         </div>
       </GConfigProvider>
     </div>
