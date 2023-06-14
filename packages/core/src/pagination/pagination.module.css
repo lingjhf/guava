@@ -31,3 +31,9 @@
   background-color: var(--bg-brand-light-default);
   color: var(--text-brand-default);
 }
+.paginationItemActive:hover {
+  background-color: var(--bg-brand-light-hover);
+}
+.paginationItemActive:active {
+  background-color: var(--bg-brand-light-active);
+}

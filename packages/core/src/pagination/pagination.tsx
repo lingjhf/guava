@@ -108,6 +108,7 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
 
   return (
     <div class={styles.pagination} {...eventHandlers}>
+      
       <For each={pagers()}>
         {
           (item) => {
