@@ -4,6 +4,8 @@
   --pagination-bg-color-active: var(--bg-bgless-active);
   display: flex;
   height: 24px;
+  font-size: 14px;
+  line-height: 22px;
   user-select: none;
   color: var(--pagination-text-color);
 }
@@ -13,8 +15,6 @@
   align-items: center;
   justify-content: center;
   min-width: 24px;
-  font-size: 14px;
-  line-height: 22px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -36,4 +36,21 @@
 }
 .paginationItemActive:active {
   background-color: var(--bg-brand-light-active);
+}
+
+.paginationPrev {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  margin-right: 4px;
+  border-radius: 4px;
+}
+
+.paginationNext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  border-radius: 4px;
 }

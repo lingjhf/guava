@@ -10,7 +10,7 @@ const App: Component = () => {
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class='p-2 w-300px'>
-          <GPagination total={100}></GPagination>
+          <GPagination total={30} maxPager={11}></GPagination>
         </div>
       </GConfigProvider>
     </div>
