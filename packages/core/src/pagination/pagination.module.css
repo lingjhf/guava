@@ -26,6 +26,9 @@
   font-size: 14px;
   line-height: 22px;
   border-radius: 4px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  flex-shrink: 0;
   cursor: pointer;
   color: var(--pagination-text-color);
   background-color: var(--pagination-bg-color);

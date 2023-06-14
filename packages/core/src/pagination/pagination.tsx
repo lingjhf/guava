@@ -13,6 +13,8 @@ export interface PaginationProps extends ComponentProps<HTMLDivElement> {
   maxPager: number
   prev: boolean | JSX.Element
   next: boolean | JSX.Element
+  quickPrev?: JSX.Element
+  quickNext?: JSX.Element
   disabled: boolean
 }
 
@@ -110,7 +112,9 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
       }
       pagers.push({ isQuickNext: true })
     }
-    pagers.push({ page: totalPage })
+    if (totalPage > 1) {
+      pagers.push({ page: totalPage })
+    }
     return pagers
   }
 
@@ -157,27 +161,33 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
     <div class={styles.pagination} {...eventHandlers}>
       <Show when={props.prev} >
         <div class={paginationPrev()} onClick={prev}>
-          <ChevronLeftFilled />
+          {typeof props.prev === 'boolean' ? <ChevronLeftFilled /> : props.prev}
         </div>
       </Show>
       <For each={pagers()}>
         {
           (item) => {
             if (item.isQuickPrev) {
-              return <div class={paginationItemClasses()} onClick={quickPrev}><MoreFilled /></div>
+              return <div class={paginationItemClasses()} onClick={quickPrev}>
+                {props.quickPrev ? props.quickPrev : <MoreFilled />}
+              </div>
             }
             if (item.isQuickNext) {
-              return <div class={paginationItemClasses()} onClick={quickNext}><MoreFilled /></div>
+              return <div class={paginationItemClasses()} onClick={quickNext}>
+                {props.quickNext ? props.quickNext : <MoreFilled />}
+              </div>
             }
             return (
-              <div class={paginationItemClasses(item.page)} onClick={[currentPageChange, item.page]}>{item.page}</div>
+              <div class={paginationItemClasses(item.page)} onClick={[currentPageChange, item.page]}>
+                {item.page}
+              </div>
             )
           }
         }
       </For>
       <Show when={props.next}>
         <div class={paginationNext()} onClick={next}>
-          <ChevronRightFilled />
+          {typeof props.next === 'boolean' ? <ChevronRightFilled /> : props.next}
         </div>
       </Show>
     </div>
