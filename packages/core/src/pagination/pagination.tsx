@@ -1,13 +1,19 @@
-import { For, createEffect, createSignal, on } from 'solid-js'
+import { For, JSX, Show, createEffect, createSignal, on } from 'solid-js'
 import { ComponentProps } from '../types'
 import { customEventHandlersName, generateProps } from '../utils'
 import { MoreFilled } from '../icon/more-filled'
+import { ChevronLeftFilled } from '../icon/chevron-left-filled'
+import { ChevronRightFilled } from '../icon/chevron-right-filled'
 import styles from './pagination.module.css'
+
 export interface PaginationProps extends ComponentProps<HTMLDivElement> {
   currentPage: number
   pageSize: number
   total: number
   maxPager: number
+  prev: boolean | JSX.Element
+  next: boolean | JSX.Element
+  disabled: boolean
 }
 
 interface Pager {
@@ -24,6 +30,9 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
       pageSize: 10,
       total: 0,
       maxPager: 7,
+      prev: false,
+      next: false,
+      disabled: false,
     },
     customEventHandlersName,
   )
@@ -46,10 +55,33 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
     setPagers(generatePagers(v, maxPager, totalPage))
   }))
 
-  const paginationItemClasses = (page: number) => {
+  const paginationItemClasses = (page?: number) => {
     let classes = `${styles.paginationItem}`
+
     if (page === currentPage()) {
       classes += ` ${styles.paginationItemActive}`
+      if (props.disabled) {
+        classes += ` ${styles.paginationItemActiveDisabled}`
+      }
+    } else if (props.disabled) {
+      classes += ` ${styles.paginationDisabled}`
+    }
+
+    return classes
+  }
+
+  const paginationPrev = () => {
+    let classes = `${styles.paginationPrev}`
+    if (currentPage() === 1 || props.disabled) {
+      classes += ` ${styles.paginationDisabled}`
+    }
+    return classes
+  }
+
+  const paginationNext = () => {
+    let classes = `${styles.paginationNext}`
+    if (currentPage() === totalPage || props.disabled) {
+      classes += ` ${styles.paginationDisabled}`
     }
     return classes
   }
@@ -82,7 +114,20 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
     return pagers
   }
 
+  function prev() {
+    if (props.disabled) return
+    if (currentPage() - 1 < 1) return
+    setCurrentPage(v => v - 1)
+  }
+
+  function next() {
+    if (props.disabled) return
+    if (currentPage() + 1 > totalPage) return
+    setCurrentPage(v => v + 1)
+  }
+
   function quickPrev() {
+    if (props.disabled) return
     setCurrentPage(v => {
       let value = v - (maxPager - 2)
       if (value < 1) {
@@ -93,6 +138,7 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
   }
 
   function quickNext() {
+    if (props.disabled) return
     setCurrentPage(v => {
       let value = v + (maxPager - 2)
       if (value > totalPage) {
@@ -103,33 +149,37 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
   }
 
   function currentPageChange(value: number) {
+    if (props.disabled) return
     setCurrentPage(value)
-  }
-
-  const PaginationDefault = () => {
-    return (
-      <div></div>
-    )
   }
 
   return (
     <div class={styles.pagination} {...eventHandlers}>
-
+      <Show when={props.prev} >
+        <div class={paginationPrev()} onClick={prev}>
+          <ChevronLeftFilled />
+        </div>
+      </Show>
       <For each={pagers()}>
         {
           (item) => {
             if (item.isQuickPrev) {
-              return <div class={styles.paginationItem} onClick={quickPrev}><MoreFilled /></div>
+              return <div class={paginationItemClasses()} onClick={quickPrev}><MoreFilled /></div>
             }
             if (item.isQuickNext) {
-              return <div class={styles.paginationItem} onClick={quickNext}><MoreFilled /></div>
+              return <div class={paginationItemClasses()} onClick={quickNext}><MoreFilled /></div>
             }
             return (
-              <div class={paginationItemClasses(item.page!)} onClick={[currentPageChange, item.page]}>{item.page}</div>
+              <div class={paginationItemClasses(item.page)} onClick={[currentPageChange, item.page]}>{item.page}</div>
             )
           }
         }
       </For>
+      <Show when={props.next}>
+        <div class={paginationNext()} onClick={next}>
+          <ChevronRightFilled />
+        </div>
+      </Show>
     </div>
   )
 }
