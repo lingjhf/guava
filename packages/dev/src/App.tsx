@@ -10,9 +10,10 @@ const App: Component = () => {
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class='p-2 w-300px'>
-          <GPagination total={10000} prev={<span>prev</span>} next={<span>next</span>}
+          <GPagination total={100} prev={<span>prev</span>} next={<span>next</span>}
             quickNext={<span>qn</span>}
             quickPrev={<span>qp</span>}
+
           ></GPagination>
         </div>
       </GConfigProvider>

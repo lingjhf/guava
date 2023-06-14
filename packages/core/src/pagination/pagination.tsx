@@ -11,6 +11,7 @@ export interface PaginationProps extends ComponentProps<HTMLDivElement> {
   pageSize: number
   total: number
   maxPager: number
+  page?: (value: number) => JSX.Element
   prev: boolean | JSX.Element
   next: boolean | JSX.Element
   quickPrev?: JSX.Element
@@ -179,7 +180,7 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
             }
             return (
               <div class={paginationItemClasses(item.page)} onClick={[currentPageChange, item.page]}>
-                {item.page}
+                {props.page ? props.page?.(item.page!) : item.page}
               </div>
             )
           }
