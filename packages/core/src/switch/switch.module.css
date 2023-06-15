@@ -1,0 +1,107 @@
+.switch {
+  --switch-off-bg-color: var(--bg-controls-default);
+  --switch-off-bg-color-hover: var(--bg-controls-hover);
+  --switch-off-bg-color-active: var(--bg-controls-active);
+  --switch-off-bg-color-disabled: var(--bg-controls-disabled);
+  --switch-on-bg-color: var(--bg-brand-default);
+  --switch-on-bg-color-hover: var(--bg-brand-hover);
+  --switch-on-bg-color-active: var(--bg-brand-active);
+  --switch-on-bg-color-disabled: var(--bg-brand-disabled);
+  position: relative;
+  width: var(--switch-width);
+  height: var(--switch-height);
+  border-radius: var(--switch-border-radius);
+  cursor: pointer;
+}
+.switchDefaultSize {
+  --switch-width: 36px;
+  --switch-height: 20px;
+  --switch-border-radius: 10px;
+}
+.switchSmall {
+  --switch-width: 28px;
+  --switch-height: 16px;
+  --switch-border-radius: 8px;
+}
+.switchLarge {
+  --switch-width: 48px;
+  --switch-height: 28px;
+  --switch-border-radius: 14px;
+}
+.switchOff {
+  background-color: var(--switch-off-bg-color);
+}
+.switchOff:hover {
+  --switch-off-bg-color: var(--switch-off-bg-color-hover);
+}
+.switchOff:active {
+  --switch-off-bg-color: var(--switch-off-bg-color-active);
+}
+.switchOn {
+  background-color: var(--switch-on-bg-color);
+}
+.switchOn:hover {
+  --switch-on-bg-color: var(--switch-on-bg-color-hover);
+}
+.switchOn:active {
+  --switch-on-bg-color: var(--switch-on-bg-color-active);
+}
+
+.switchAction {
+  --switch-action-off-bg-color: var(--bg-controls-elevate-high);
+  --switch-action-off-bg-color-hover: var(--bg-controls-elevate-high);
+  --switch-action-off-bg-color-active: var(--bg-controls-elevate-high);
+  --switch-action-off-bg-color-disabled: var(--bg-controls-elevate-high);
+  --switch-action-on-bg-color: var(--bg-static-light);
+  --switch-action-on-bg-color-hover: var(--bg-static-light);
+  --switch-action-on-bg-color-active: var(--bg-static-light);
+  --switch-action-on-bg-color-disabled: var(--bg-static-light);
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  width: var(--swtich-action-width);
+  border-radius: 50%;
+}
+.switchActionDefaultSize {
+  --swtich-action-width: 16px;
+}
+.switchActionSmall {
+  --swtich-action-width: 12px;
+}
+.switchActionLarge {
+  --swtich-action-width: 24px;
+}
+.switchActionOff {
+  background-color: var(--switch-action-off-bg-color);
+}
+.switchActionOff:hover {
+  --switch-action-bg-color: var(--switch-action-off-bg-color-hover);
+}
+.switchActionOff:active {
+  --switch-action-bg-color: var(--switch-action-off-bg-color-active);
+}
+.switchActionOn {
+  background-color: var(--switch-action-on-bg-color);
+}
+.switchActionOn:hover {
+  --switch-action-on-bg-color: var(--switch-action-on-bg-color-active);
+}
+.switchAction:active {
+  --switch-action-on-bg-color: var(--switch-action-on-bg-color-hover);
+}
+
+.switchActionSmall {
+  --swtich-action-width: 12px;
+}
+
+.switchActionLarge {
+  --swtich-action-width: 24px;
+}
+
+.switchActionOff {
+  left: 2px;
+}
+
+.switchActionOn {
+  right: 2px;
+}
