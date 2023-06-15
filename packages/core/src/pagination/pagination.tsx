@@ -1,15 +1,24 @@
-import { For, createEffect, createSignal, on } from 'solid-js'
+import { For, JSX, Show, createEffect, createSignal, on } from 'solid-js'
 import { ComponentProps } from '../types'
 import { customEventHandlersName, generateProps } from '../utils'
 import { MoreFilled } from '../icon/more-filled'
 import { ChevronLeftFilled } from '../icon/chevron-left-filled'
 import { ChevronRightFilled } from '../icon/chevron-right-filled'
 import styles from './pagination.module.css'
+
 export interface PaginationProps extends ComponentProps<HTMLDivElement> {
+  size: number
   currentPage: number
   pageSize: number
   total: number
-  maxPager: 5 | 7 | 9 | 11 | 13 | 15 | 17 | 19 | 21
+  maxPager: number
+  page?: (value: number) => JSX.Element
+  prev: boolean | JSX.Element
+  next: boolean | JSX.Element
+  quickPrev?: JSX.Element
+  quickNext?: JSX.Element
+  disabled: boolean
+  hideOnSinglePage: boolean
 }
 
 interface Pager {
@@ -22,38 +31,68 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
   const [eventHandlers, props] = generateProps(
     propsRaw,
     {
+      size: 24,
       currentPage: 1,
       pageSize: 10,
       total: 0,
       maxPager: 7,
+      prev: false,
+      next: false,
+      disabled: false,
+      hideOnSinglePage: false,
     },
     customEventHandlersName,
   )
 
   const [pagers, setPagers] = createSignal<Pager[]>([])
   const [currentPage, setCurrentPage] = createSignal(1)
-  let totalPage = 0
-  let maxPager = 1
+  const [totalPage, setTotalPage] = createSignal(1)
+  let maxPager = 0
 
   createEffect(() => {
     if (props.total <= 0) {
       return
     }
-    totalPage = Math.ceil(props.total / props.pageSize)
-    if (props.maxPager > totalPage) {
-      maxPager = totalPage
-    }
+    const totalPage = setTotalPage(Math.ceil(props.total / props.pageSize))
+    maxPager = props.maxPager > totalPage ? totalPage : props.maxPager
     setCurrentPage(props.currentPage)
   })
 
   createEffect(on(currentPage, (v) => {
-    setPagers(generatePagers(v, maxPager, totalPage))
+    setPagers(generatePagers(v, maxPager, totalPage()))
   }))
 
-  const paginationItemClasses = (page: number) => {
+  const paginationStyles = () => {
+    return `--pagination-size:${props.size}px;${props.style}`
+  }
+
+  const paginationItemClasses = (page?: number) => {
     let classes = `${styles.paginationItem}`
+
     if (page === currentPage()) {
       classes += ` ${styles.paginationItemActive}`
+      if (props.disabled) {
+        classes += ` ${styles.paginationItemActiveDisabled}`
+      }
+    } else if (props.disabled) {
+      classes += ` ${styles.paginationDisabled}`
+    }
+
+    return classes
+  }
+
+  const paginationPrev = () => {
+    let classes = `${styles.paginationPrev}`
+    if (currentPage() === 1 || props.disabled) {
+      classes += ` ${styles.paginationDisabled}`
+    }
+    return classes
+  }
+
+  const paginationNext = () => {
+    let classes = `${styles.paginationNext}`
+    if (currentPage() === totalPage() || props.disabled) {
+      classes += ` ${styles.paginationDisabled}`
     }
     return classes
   }
@@ -65,9 +104,13 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
       for (let i = 2; i < maxPager; i++) {
         pagers.push({ page: i })
       }
-      pagers.push({ isQuickNext: true })
+      if (totalPage > maxPager) {
+        pagers.push({ isQuickNext: true })
+      }
     } else if (currentPage - half > totalPage - (maxPager - 1)) {
-      pagers.push({ isQuickPrev: true })
+      if (totalPage - maxPager > 0) {
+        pagers.push({ isQuickPrev: true })
+      }
       for (let i = totalPage - (maxPager - 2); i < totalPage; i++) {
         pagers.push({ page: i })
       }
@@ -78,32 +121,26 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
       }
       pagers.push({ isQuickNext: true })
     }
-    pagers.push({ page: totalPage })
-    console.log(pagers)
+    if (totalPage > 1) {
+      pagers.push({ page: totalPage })
+    }
     return pagers
   }
 
   function prev() {
-    setCurrentPage(v => {
-      let value = v - 1
-      if (value < 1) {
-        value = 1
-      }
-      return value
-    })
+    if (props.disabled) return
+    if (currentPage() - 1 < 1) return
+    setCurrentPage(v => v - 1)
   }
 
   function next() {
-    setCurrentPage(v => {
-      let value = v + 1
-      if (value > totalPage) {
-        value = totalPage
-      }
-      return value
-    })
+    if (props.disabled) return
+    if (currentPage() + 1 > totalPage()) return
+    setCurrentPage(v => v + 1)
   }
 
   function quickPrev() {
+    if (props.disabled) return
     setCurrentPage(v => {
       let value = v - (maxPager - 2)
       if (value < 1) {
@@ -114,42 +151,62 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
   }
 
   function quickNext() {
+    if (props.disabled) return
     setCurrentPage(v => {
       let value = v + (maxPager - 2)
-      if (value > totalPage) {
-        value = totalPage
+      if (value > totalPage()) {
+        value = totalPage()
       }
       return value
     })
   }
 
   function currentPageChange(value: number) {
+    if (props.disabled) return
     setCurrentPage(value)
   }
 
   return (
-    <div class={styles.pagination} {...eventHandlers}>
-      <div class={styles.paginationPrev} onClick={prev}>
-        <ChevronLeftFilled />
-      </div>
-      <For each={pagers()}>
-        {
-          (item) => {
-            if (item.isQuickPrev) {
-              return <div class={styles.paginationItem} onClick={quickPrev}><MoreFilled /></div>
+    <Show when={!(props.hideOnSinglePage && totalPage() === 1)}>
+      <div
+        style={paginationStyles()}
+        class={styles.pagination}
+        classList={props.classList}
+        ref={props.ref}
+        {...eventHandlers}
+      >
+        <Show when={props.prev} >
+          <div class={paginationPrev()} onClick={prev}>
+            {typeof props.prev === 'boolean' ? <ChevronLeftFilled /> : props.prev}
+          </div>
+        </Show>
+        <For each={pagers()}>
+          {
+            (item) => {
+              if (item.isQuickPrev) {
+                return <div class={paginationItemClasses()} onClick={quickPrev}>
+                  {props.quickPrev ? props.quickPrev : <MoreFilled />}
+                </div>
+              }
+              if (item.isQuickNext) {
+                return <div class={paginationItemClasses()} onClick={quickNext}>
+                  {props.quickNext ? props.quickNext : <MoreFilled />}
+                </div>
+              }
+              return (
+                <div class={paginationItemClasses(item.page)} onClick={[currentPageChange, item.page]}>
+                  {props.page ? props.page?.(item.page!) : item.page}
+                </div>
+              )
             }
-            if (item.isQuickNext) {
-              return <div class={styles.paginationItem} onClick={quickNext}><MoreFilled /></div>
-            }
-            return (
-              <div class={paginationItemClasses(item.page!)} onClick={[currentPageChange, item.page]}>{item.page}</div>
-            )
           }
-        }
-      </For>
-      <div class={styles.paginationNext} onClick={next}>
-        <ChevronRightFilled />
+        </For>
+        <Show when={props.next}>
+          <div class={paginationNext()} onClick={next}>
+            {typeof props.next === 'boolean' ? <ChevronRightFilled /> : props.next}
+          </div>
+        </Show>
       </div>
-    </div>
+    </Show>
   )
 }
