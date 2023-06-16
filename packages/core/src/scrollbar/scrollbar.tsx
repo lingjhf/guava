@@ -172,7 +172,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   function visibleHorizontalScrollAnimation() {
     if (!isVisibleHorizontalScroll) {
       isVisibleHorizontalScroll = true
-      horizontalScrollbarRef.classList.remove(styles.scrollbarInvisibleAnimation )
+      horizontalScrollbarRef.classList.remove(styles.scrollbarInvisibleAnimation)
       horizontalScrollbarRef.classList.add(styles.scrollbarVisibleAnimation)
       horizontalScrollbarRef.addEventListener('animationend', () => {
         horizontalScrollbarRef.classList.replace(styles.invisible, styles.scrollbarVisible)
@@ -409,7 +409,12 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   })
 
   return (
-    <div class={styles.scrollbar} onMouseEnter={onEnterScrollArea} onMouseLeave={onLeaveScrollArea}>
+    <div
+      class={styles.scrollbar}
+      ref={props.ref}
+      {...eventHandlers}
+      onMouseEnter={onEnterScrollArea}
+      onMouseLeave={onLeaveScrollArea}>
       <div ref={setViewRef} class={styles.scrollView}>
         <div ref={setContentRef} class={styles.scrollContent}>
           {props.children}
