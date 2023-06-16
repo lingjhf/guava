@@ -1,0 +1,152 @@
+/*滚动区域样式*/
+.scrollbar {
+  --scroll-vertical-slider-bg-color: var(--bg-scrollbar-default);
+  --scroll-vertical-slider-bg-color-hover: var(--bg-scrollbar-hover);
+  --scroll-horizontal-slider-bg-color: var(--bg-scrollbar-default);
+  --scroll-horizontal-slider-bg-color-hover: var(--bg-scrollbar-hover);
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/*滚动区域可见区域样式*/
+.scrollView {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: auto;
+}
+
+.scrollView::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+/*滚动区域内容样式*/
+.scrollContent {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+}
+
+/*垂直滚动栏样式*/
+.scrollVerticalBar {
+  position: absolute;
+  border-radius: 3px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 6px;
+  user-select: none;
+}
+
+/*垂直滚动条滑块样式*/
+.scrollVerticalSlider {
+  position: absolute;
+  border-radius: 3px;
+  background-color: var(--scroll-vertical-slider-bg-color);
+  width: 6px;
+  right: 0px;
+  user-select: none;
+}
+.scrollVerticalSlider:hover {
+  background-color: var(--scroll-vertical-slider-bg-color-hover);
+}
+
+/*水平滚动栏样式*/
+.scrollHorizontalBar {
+  position: absolute;
+  border-radius: 3px;
+  height: 6px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  user-select: none;
+}
+
+/*水平滚动条滑块样式*/
+.scrollHorizontalSlider {
+  position: absolute;
+  border-radius: 3px;
+  background-color: var(--scroll-horizontal-slider-bg-color);
+  height: 6px;
+  bottom: 0px;
+  user-select: none;
+}
+.scrollHorizontalSlider:hover {
+  background-color: var(--scroll-horizontal-slider-bg-color-hover);
+}
+
+.invisible {
+  opacity: 0;
+}
+
+/* 滚动条默认显示样式 */
+.scrollbarVisible {
+  opacity: 0.2;
+}
+
+/* 滑块默认显示样式 */
+.sliderVisible {
+  opacity: 1;
+}
+
+/* 滚动条显示动画 */
+.scrollbarVisibleAnimation {
+  animation: visibleScrollbarKF 300ms;
+}
+
+@keyframes visibleScrollbarKF {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.2;
+  }
+}
+
+/* 滚动条隐藏动画 */
+.scrollbarInvisibleAnimation {
+  animation: invisibleScrollbarKF 300ms;
+}
+
+@keyframes invisibleScrollbarKF {
+  from {
+    opacity: 0.2;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* 滑块显示动画 */
+.sliderVisibleAnimation {
+  animation: visibleSliderKF 300ms;
+}
+
+@keyframes visibleSliderKF {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* 滑块隐藏动画 */
+.sliderInvisibleAnimation {
+  animation: invisibleSliderKF 300ms;
+}
+
+@keyframes invisibleSliderKF {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js'
-import { GConfigProvider, GSwitch } from '@lingjhf/guava'
+import { GConfigProvider, GSwitch, GScrollbar } from '@lingjhf/guava'
 import 'virtual:uno.css'
 
 const App: Component = () => {
@@ -14,8 +14,10 @@ const App: Component = () => {
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
-        <div class='p-2 w-300px'>
-          <GSwitch size='large' loading={ok}></GSwitch>
+        <div class='w-500px h-500px'>
+          <GScrollbar type='visible'>
+            <div class='w-2000px h-2000px'></div>
+          </GScrollbar>
         </div>
       </GConfigProvider>
     </div>
