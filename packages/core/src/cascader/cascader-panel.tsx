@@ -33,6 +33,7 @@ interface CascaderOption {
   parent?: CascaderOption
   path: CascaderPath
   checked: boolean
+  indeterminate: boolean
   children: CascaderOption[]
 }
 
@@ -80,6 +81,7 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
         parent,
         level,
         checked: false,
+        indeterminate: false,
         children: [],
       }
       if (Array.isArray(option.children) && option.children.length > 0) {
@@ -121,6 +123,15 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
     }
   }
 
+  function checkedParentOption(option: CascaderOption) {
+    const checked = option.children.every(item => item.checked)
+    option.checked = checked
+    option.indeterminate = !checked
+    if (option.parent) {
+      checkedParentOption(option.parent)
+    }
+  }
+
   function triggerClick(option: CascaderOption) {
     if (props.expandTrigger === 'click') {
       expandSubOptions(option)
@@ -143,6 +154,9 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
       if (currentOption) {
         currentOption.checked = value
         checkedSubOptions(currentOption.children ?? [], value)
+        if (currentOption.parent) {
+          checkedParentOption(currentOption.parent)
+        }
       }
     }))
   }
@@ -169,6 +183,7 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
                               <GCheckbox
                                 size={14}
                                 checked={option.checked}
+                                indeterminate={option.indeterminate}
                                 change={(value) => checkboxChange(value, option)}
                               />
                             </div>
