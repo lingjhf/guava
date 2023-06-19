@@ -1,0 +1,51 @@
+.cascaderPanel {
+  display: flex;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.cascaderOptions {
+}
+
+.cascaderOption {
+  --option-width: 144px;
+  --option-height: 36px;
+  --option-expand-color: var(--text-common-tertiary);
+  --option-text-color: var(--text-common-primary);
+  --option-text-colorActive: var(--text-brand-default);
+  --option-bg-color: transparent;
+  --option-bg-color-hover: var(--bg-bgless-hover);
+  --option-bg-color-active: var(--bg-bgless-active);
+  --option-bg-colorActive: var(--bg-brand-light-default);
+  display: flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 0 8px;
+  min-width: var(--option-width);
+  height: var(--option-height);
+  color: var(--option-text-color);
+  background-color: var(--option-bg-color);
+}
+
+.cascaderOption:hover {
+  --option-bg-color: var(--option-bg-color-hover);
+}
+
+.cascaderOption:active {
+  --option-bg-color: var(--option-bg-color-active);
+}
+
+.cascaderOptionActive {
+  --option-text-color: var(--option-text-colorActive);
+  --option-bg-color: var(--option-bg-colorActive);
+}
+.cascaderOptionContent {
+  width: 100%;
+}
+.cascaderOptionExpand {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
