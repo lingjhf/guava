@@ -124,9 +124,18 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
   }
 
   function checkedParentOption(option: CascaderOption) {
-    const checked = option.children.every(item => item.checked)
-    option.checked = checked
-    option.indeterminate = !checked
+    let isAllChecked = true
+    let isAllNotChecked = false
+    for (const child of option.children) {
+      if (!child.checked) {
+        isAllChecked = false
+      }
+      if (child.checked) {
+        isAllNotChecked = true
+      }
+    }
+    option.checked = isAllChecked
+    // option.indeterminate = indeterminate
     if (option.parent) {
       checkedParentOption(option.parent)
     }
