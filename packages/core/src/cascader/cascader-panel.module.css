@@ -4,7 +4,9 @@
   line-height: 20px;
 }
 
-.cascaderOptions {
+.cascaderOptions:not(:last-child) {
+  --option-border-color: var(--border-common-default);
+  border-right: 1px solid var(--option-border-color);
 }
 
 .cascaderOption {
