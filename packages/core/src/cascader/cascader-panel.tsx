@@ -4,23 +4,25 @@ import { customEventHandlersName, generateProps } from '../utils'
 import { For, Show, createEffect, createSignal } from 'solid-js'
 import { createStore, produce } from 'solid-js/store'
 import { ChevronRightFilled } from '../icon/chevron-right-filled'
+import { CheckFilled } from '../icon/check-filled'
 import styles from './cascader-panel.module.css'
 import { GCheckbox } from '../checkbox'
 
 export type CascaderProps = Record<string, unknown>
 
+export type CascaderValue = string[] | string[][]
+
+type CascaderPath = string[]
+
 export interface CascaderPanelProps extends ComponentProps<HTMLDivElement> {
   options: CascaderProps[]
-  value: string[],
+  value: CascaderValue,
   optionName: string
   optionValue: string
   expandTrigger: 'click' | 'hover'
   multiple: boolean
-  clearable: boolean
-  disabled: boolean
-  placeholder: string
   children?: () => JSX.Element
-  change?: ValueChanged<string[]>
+  change?: ValueChanged<CascaderValue>
 }
 
 interface CascaderOption {
@@ -28,7 +30,9 @@ interface CascaderOption {
   value: string
   level: number
   active: boolean
-  path: string[]
+  parent?: CascaderOption
+  path: CascaderPath
+  checked: boolean
   children: CascaderOption[]
 }
 
@@ -42,15 +46,12 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
       optionValue: 'value',
       expandTrigger: 'click',
       multiple: false,
-      clearable: false,
-      disabled: false,
-      placeholder: ''
     },
     customEventHandlersName,
   )
 
   const [cascader, setCascader] = createStore<CascaderOption[][]>([])
-  const [currentOption, setCurrentOption] = createSignal<string[]>([])
+  const [currentOption, setCurrentOption] = createSignal<CascaderValue>([])
 
   createEffect(() => {
     setCascader([transformOptions(props.options)])
@@ -58,25 +59,31 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
 
   const cascaderOptionClasses = (option: CascaderOption) => {
     let classes = `${styles.cascaderOption}`
-    if (option.active || currentOption().join('') === option.path.join('')) {
+    if (option.active || isCurrentOption(option.path)) {
       classes += ` ${styles.cascaderOptionActive}`
     }
     return classes
   }
 
-  function transformOptions(options: CascaderProps[], path: string[] = [], level = 0): CascaderOption[] {
+  function isCurrentOption(path: CascaderPath) {
+    return currentOption().join('') === path.join('')
+  }
+
+  function transformOptions(options: CascaderProps[], parent?: CascaderOption, level = 0): CascaderOption[] {
     const newOptions: CascaderOption[] = []
     for (const option of options) {
       const newOption: CascaderOption = {
         name: option[props.optionName] as string,
         value: option[props.optionValue] as string,
         active: false,
-        path: [...path, option[props.optionValue] as string],
+        path: [...parent?.path ?? [], option[props.optionValue] as string],
+        parent,
         level,
+        checked: false,
         children: [],
       }
       if (Array.isArray(option.children) && option.children.length > 0) {
-        newOption.children = transformOptions(option.children, newOption.path, level + 1)
+        newOption.children = transformOptions(option.children, newOption, level + 1)
       }
       newOptions.push(newOption)
     }
@@ -84,11 +91,14 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
   }
 
   function expandSubOptions(option: CascaderOption) {
+    if (option.active) return
     setCascader((_, index) => index === option.level, produce(state => {
       state.forEach(item => item.active = false)
-      const index = state.findIndex(item => item.value === option.value)
-      if (index > -1) {
-        state[index].active = true
+      for (const item of state) {
+        if (item.value === option.value) {
+          item.active = true
+          break
+        }
       }
     }))
     if (option.children.length > 0) {
@@ -102,7 +112,16 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
     }
   }
 
-  function clickTrigger(option: CascaderOption) {
+  function checkedSubOptions(options: CascaderOption[], checked: boolean) {
+    for (const option of options) {
+      option.checked = checked
+      if (option.children.length > 0) {
+        checkedSubOptions(option.children, checked)
+      }
+    }
+  }
+
+  function triggerClick(option: CascaderOption) {
     if (props.expandTrigger === 'click') {
       expandSubOptions(option)
     }
@@ -112,10 +131,20 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
     }
   }
 
-  function enterTrigger(option: CascaderOption) {
+  function triggerHover(option: CascaderOption) {
     if (props.expandTrigger === 'hover' && option.children.length > 0) {
       expandSubOptions(option)
     }
+  }
+
+  function checkboxChange(value: boolean, option: CascaderOption) {
+    setCascader(produce(state => {
+      const currentOption = state[option.level].find(item => item.value === option.value)
+      if (currentOption) {
+        currentOption.checked = value
+        checkedSubOptions(currentOption.children ?? [], value)
+      }
+    }))
   }
 
   return (
@@ -132,20 +161,29 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
                         <div
                           class={cascaderOptionClasses(option)}
                           {...eventHandlers}
-                          onClick={[clickTrigger, option]}
-                          onMouseEnter={[enterTrigger, option]}
+                          onClick={[triggerClick, option]}
+                          onMouseEnter={[triggerHover, option]}
                         >
                           <Show when={props.multiple}>
-                            <GCheckbox></GCheckbox>
+                            <div class={styles.cascaderOptionCheckbox}>
+                              <GCheckbox
+                                size={14}
+                                checked={option.checked}
+                                change={(value) => checkboxChange(value, option)}
+                              />
+                            </div>
                           </Show>
                           <div class={styles.cascaderOptionContent}>
                             {option.name}
                           </div>
-                          <Show when={option.children.length > 0}>
-                            <div class={styles.cascaderOptionExpand}>
+                          <div class={styles.cascaderOptionExpand}>
+                            <Show when={option.children.length > 0}>
                               <ChevronRightFilled />
-                            </div>
-                          </Show>
+                            </Show>
+                            <Show when={!props.multiple && isCurrentOption(option.path)}>
+                              <CheckFilled />
+                            </Show>
+                          </div>
                         </div>
                       )
                     }

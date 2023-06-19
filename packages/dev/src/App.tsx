@@ -286,7 +286,7 @@ const App: Component = () => {
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class='w-500px h-500px'>
-          <GCascaderPanel expandTrigger='hover' options={options} optionName='label' change={cascaderChange}></GCascaderPanel>
+          <GCascaderPanel multiple options={options} optionName='label' change={cascaderChange}></GCascaderPanel>
         </div>
       </GConfigProvider>
     </div>
