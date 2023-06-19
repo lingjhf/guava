@@ -126,6 +126,7 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
   function checkedParentOption(option: CascaderOption) {
     let isAllChecked = true
     let isAllNotChecked = true
+    let isIndeterminate = false
     for (const child of option.children) {
       if (!child.checked) {
         isAllChecked = false
@@ -133,8 +134,14 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
       if (child.checked) {
         isAllNotChecked = false
       }
+      if (child.indeterminate) {
+        isIndeterminate = true
+      }
     }
-    if (isAllChecked) {
+    if (isIndeterminate) {
+      option.checked = false
+      option.indeterminate = true
+    } else if (isAllChecked) {
       option.checked = true
       option.indeterminate = false
     } else if (isAllNotChecked) {
@@ -149,13 +156,28 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
     }
   }
 
+  function generateMultipleValue(options: CascaderOption[]) {
+    let values: string[][] = []
+    for (const option of options) {
+      if (option.checked && option.children.length === 0) {
+        values.push([...option.path])
+      }
+      if ((option.checked || option.indeterminate) && option.children.length > 0) {
+        values = [...values, ...generateMultipleValue(option.children)]
+      }
+    }
+    return values
+  }
+
   function triggerClick(option: CascaderOption) {
     if (props.expandTrigger === 'click') {
       expandSubOptions(option)
     }
     if (option.children.length === 0) {
       setCurrentOption(option.path)
-      props.change?.([...option.path])
+      if (!props.multiple) {
+        props.change?.([...option.path])
+      }
     }
   }
 
@@ -170,12 +192,17 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
       const currentOption = state[option.level].find(item => item.value === option.value)
       if (currentOption) {
         currentOption.checked = value
+        if (!value) {
+          currentOption.indeterminate = false
+        }
         checkedSubOptions(currentOption.children ?? [], value)
         if (currentOption.parent) {
           checkedParentOption(currentOption.parent)
         }
       }
     }))
+    const values = generateMultipleValue(cascader[0])
+    props.change?.(values)
   }
 
   return (
