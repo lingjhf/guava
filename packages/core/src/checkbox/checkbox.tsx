@@ -1,6 +1,6 @@
 import { Show, createEffect, createSignal } from 'solid-js'
 import { CheckFilled } from '../icon/check-filled'
-import { ComponentPropsWithChildren } from '../types'
+import { ComponentPropsWithChildren, ValueChanged } from '../types'
 import { customEventHandlersName, generateProps } from '../utils'
 import styles from './checkbox.module.css'
 
@@ -9,6 +9,7 @@ export interface CheckboxProps extends ComponentPropsWithChildren<HTMLDivElement
   checked: boolean
   indeterminate: boolean
   disabled: boolean
+  change?: ValueChanged<boolean>
 }
 export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
   const [eventHandlers, props] = generateProps(
@@ -64,7 +65,8 @@ export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
 
   function checkedChange() {
     if (props.disabled) return
-    setChecked(!checked())
+    const value = setChecked(!checked())
+    props.change?.(value)
   }
 
   return (
