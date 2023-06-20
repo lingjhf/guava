@@ -1,6 +1,7 @@
-import type { Position, SizePosition, Tree, VoidCallback } from '../types'
-import type { MergeProps, SplitProps } from 'solid-js'
+import type { Position, SizePosition, Tree, VoidCallback, GuavaEvent, ClassList } from '../types'
+import type { MergeProps, SplitProps, JSX } from 'solid-js'
 import { mergeProps, splitProps, onCleanup } from 'solid-js'
+import { customEventHandlersName } from './constants'
 
 class PressedDrag {
   events = new Map()
@@ -149,4 +150,36 @@ export function generateProps<T extends Record<any, any>, K extends SplitKey<T>>
     return splitProps(props, ...splitKeys)
   }
   return props
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function generateSplitEventHandlersProps<T extends Record<any, any>>(raw: Partial<T>, defaultValue: T) {
+  return generateProps(raw, defaultValue, customEventHandlersName)
+}
+
+export function eventHandlerCall<T extends HTMLElement, E extends Event>(eventHandler: JSX.EventHandlerUnion<T, E>, event: GuavaEvent<T, E>) {
+  if (typeof eventHandler === 'function') {
+    eventHandler?.(event)
+  } else if (typeof eventHandler === 'object') {
+    eventHandler[0](eventHandler[1], event)
+  }
+}
+
+export function styles(s1: string[], s2?: string | JSX.CSSProperties) {
+  const s = [...s1]
+  if (s2) {
+    s.push(s2)
+  }
+  return `${s.join(';')};`
+}
+
+export function classes(c1: string[], c2?: string) {
+  const c = [...c1]
+  if (c2) {
+    c.push(c2)
+  }
+  return c.join(' ')
+}
+
+export function classList(c1: ClassList, c2?: ClassList) {
+  return { ...c1, ...c2 }
 }

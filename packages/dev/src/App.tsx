@@ -1,6 +1,7 @@
 import type { Component } from 'solid-js'
-import { GConfigProvider, GSwitch, GScrollbar, GCascaderPanel, GCard } from '@lingjhf/guava'
+import { GConfigProvider, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel } from '@lingjhf/guava'
 import 'virtual:uno.css'
+import { GuavaEvent } from '@lingjhf/guava/src/types'
 
 const App: Component = () => {
   async function ok() {
@@ -13,6 +14,9 @@ const App: Component = () => {
   }
   function cascaderChange(value: string[]) {
     console.log(value)
+  }
+  function test(v: string, e: MouseEvent) {
+    console.log('test', v, e)
   }
   const options = [
     {
@@ -296,6 +300,8 @@ const App: Component = () => {
             <div class='w-200px'></div>
           </div>
         </div> */}
+
+        <GTimePickerPanel onClick={[test, '123']}></GTimePickerPanel>
 
       </GConfigProvider>
     </div>
