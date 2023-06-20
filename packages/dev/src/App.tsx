@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js'
-import { GConfigProvider, GSwitch, GScrollbar, GCascaderPanel } from '@lingjhf/guava'
+import { GConfigProvider, GSwitch, GScrollbar, GCascaderPanel, GCard } from '@lingjhf/guava'
 import 'virtual:uno.css'
 
 const App: Component = () => {
@@ -285,9 +285,18 @@ const App: Component = () => {
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
-        <div class='w-500px h-500px'>
+        <div class=' h-300px p-20px'>
           <GCascaderPanel multiple options={options} optionName='label' change={cascaderChange}></GCascaderPanel>
         </div>
+        {/* <div class='flex h-300px'>
+          <div>
+            <div class='w-150px'></div>
+          </div>
+          <div>
+            <div class='w-200px'></div>
+          </div>
+        </div> */}
+
       </GConfigProvider>
     </div>
   )

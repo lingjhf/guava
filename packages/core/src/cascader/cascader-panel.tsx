@@ -5,8 +5,9 @@ import { For, Show, createEffect, createSignal } from 'solid-js'
 import { createStore, produce } from 'solid-js/store'
 import { ChevronRightFilled } from '../icon/chevron-right-filled'
 import { CheckFilled } from '../icon/check-filled'
-import styles from './cascader-panel.module.css'
 import { GCheckbox } from '../checkbox'
+import { GScrollbar } from '../scrollbar'
+import styles from './cascader-panel.module.css'
 
 export type CascaderProps = Record<string, unknown>
 
@@ -212,42 +213,44 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
           (options) => {
             return (
               <div class={styles.cascaderOptions}>
-                <For each={options}>
-                  {
-                    (option) => {
-                      return (
-                        <div
-                          class={cascaderOptionClasses(option)}
-                          {...eventHandlers}
-                          onClick={[triggerClick, option]}
-                          onMouseEnter={[triggerHover, option]}
-                        >
-                          <Show when={props.multiple}>
-                            <div class={styles.cascaderOptionCheckbox}>
-                              <GCheckbox
-                                size={14}
-                                checked={option.checked}
-                                indeterminate={option.indeterminate}
-                                change={(value) => checkboxChange(value, option)}
-                              />
+                <GScrollbar>
+                  <For each={options}>
+                    {
+                      (option) => {
+                        return (
+                          <div
+                            class={cascaderOptionClasses(option)}
+                            {...eventHandlers}
+                            onClick={[triggerClick, option]}
+                            onMouseEnter={[triggerHover, option]}
+                          >
+                            <Show when={props.multiple}>
+                              <div class={styles.cascaderOptionCheckbox}>
+                                <GCheckbox
+                                  size={14}
+                                  checked={option.checked}
+                                  indeterminate={option.indeterminate}
+                                  change={(value) => checkboxChange(value, option)}
+                                />
+                              </div>
+                            </Show>
+                            <div class={styles.cascaderOptionContent}>
+                              {option.name}
                             </div>
-                          </Show>
-                          <div class={styles.cascaderOptionContent}>
-                            {option.name}
+                            <div class={styles.cascaderOptionExpand}>
+                              <Show when={option.children.length > 0}>
+                                <ChevronRightFilled />
+                              </Show>
+                              <Show when={!props.multiple && isCurrentOption(option.path)}>
+                                <CheckFilled />
+                              </Show>
+                            </div>
                           </div>
-                          <div class={styles.cascaderOptionExpand}>
-                            <Show when={option.children.length > 0}>
-                              <ChevronRightFilled />
-                            </Show>
-                            <Show when={!props.multiple && isCurrentOption(option.path)}>
-                              <CheckFilled />
-                            </Show>
-                          </div>
-                        </div>
-                      )
+                        )
+                      }
                     }
-                  }
-                </For>
+                  </For>
+                </GScrollbar>
               </div>
             )
           }

@@ -1,7 +1,9 @@
 .cascaderPanel {
+  --cascader-panel-height: 226px;
   display: flex;
   font-size: 13px;
   line-height: 20px;
+  height: var(--cascader-panel-height);
 }
 
 .cascaderOptions {
