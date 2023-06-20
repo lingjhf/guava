@@ -1,9 +1,11 @@
 .card {
+  --card-bg-color: transparent;
   --card-border: 1px solid var(--border-common-default);
   --card-text-color: var(--text-common-primary);
   border-radius: 4px;
   border: var(--card-border);
   color: var(--card-text-color);
+  background-color: var(--card-bg-color);
 }
 .cardHeader {
   --card-header-padding: 16px;
