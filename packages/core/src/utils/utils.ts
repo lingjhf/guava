@@ -164,9 +164,20 @@ export function eventHandlerCall<T extends HTMLElement, E extends Event>(eventHa
   }
 }
 
-export function styles(s1: string[], s2?: string | JSX.CSSProperties) {
-  const s = [...s1]
-  if (s2) {
+export function styles(s1: string[] | JSX.CSSProperties, s2?: string | JSX.CSSProperties) {
+  let s: string[] = []
+  if (Array.isArray(s1)) {
+    s = s1
+  } else {
+    for (const key in s1) {
+      s.push(`${key}:${s1[key]}`)
+    }
+  }
+  if (typeof s2 === 'object') {
+    for (const key in s2) {
+      s.push(`${key}:${s2[key]}`)
+    }
+  } else if (typeof s2 === 'string') {
     s.push(s2)
   }
   return `${s.join(';')};`
