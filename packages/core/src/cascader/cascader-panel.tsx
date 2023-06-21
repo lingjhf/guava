@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js/jsx-runtime'
-import { ComponentProps, ValueChanged } from '../types'
-import { customEventHandlersName, generateProps } from '../utils'
+import { GuavaProps, ValueChanged } from '../types'
+import { mergeClasses, customEventHandlersName, generateProps, mergeClassList, mergeStyles } from '../utils'
 import { For, Show, createEffect, createSignal } from 'solid-js'
 import { createStore, produce } from 'solid-js/store'
 import { ChevronRightFilled } from '../icon/chevron-right-filled'
@@ -15,7 +15,7 @@ export type CascaderValue = string[] | string[][]
 
 type CascaderPath = string[]
 
-export interface CascaderPanelProps extends ComponentProps<HTMLDivElement> {
+export interface CascaderPanelProps extends GuavaProps<HTMLDivElement> {
   options: CascaderProps[]
   value: CascaderValue,
   optionName: string
@@ -207,7 +207,13 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
   }
 
   return (
-    <div class={styles.cascaderPanel}>
+    <div
+      ref={props.ref}
+      style={mergeStyles([], props.style)}
+      class={mergeClasses([styles.cascaderPanel], props.class)}
+      classList={mergeClassList({}, props.classList)}
+      {...eventHandlers}
+    >
       <For each={cascader}>
         {
           (options) => {
@@ -220,7 +226,6 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
                         return (
                           <div
                             class={cascaderOptionClasses(option)}
-                            {...eventHandlers}
                             onClick={[triggerClick, option]}
                             onMouseEnter={[triggerHover, option]}
                           >

@@ -164,7 +164,7 @@ export function eventHandlerCall<T extends HTMLElement, E extends Event>(eventHa
   }
 }
 
-export function styles(s1: string[] | JSX.CSSProperties, s2?: string | JSX.CSSProperties) {
+export function mergeStyles(s1: string[] | JSX.CSSProperties, s2?: string | JSX.CSSProperties) {
   let s: string[] = []
   if (Array.isArray(s1)) {
     s = s1
@@ -183,7 +183,7 @@ export function styles(s1: string[] | JSX.CSSProperties, s2?: string | JSX.CSSPr
   return `${s.join(';')};`
 }
 
-export function classes(c1: string[], c2?: string) {
+export function mergeClasses(c1: string[], c2?: string) {
   const c = [...c1]
   if (c2) {
     c.push(c2)
@@ -191,6 +191,6 @@ export function classes(c1: string[], c2?: string) {
   return c.join(' ')
 }
 
-export function classList(c1: ClassList, c2?: ClassList) {
+export function mergeClassList(c1: ClassList, c2?: ClassList) {
   return { ...c1, ...c2 }
 }

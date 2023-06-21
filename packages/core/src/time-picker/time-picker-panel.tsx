@@ -1,5 +1,5 @@
 import { GuavaEvent, GuavaProps } from '../types'
-import { eventHandlerCall, classes, styles, generateSplitEventHandlersProps, classList } from '../utils'
+import { eventHandlerCall, mergeClasses, generateSplitEventHandlersProps, mergeClassList, mergeStyles } from '../utils'
 
 export interface TimePickerPanelProps extends GuavaProps<HTMLDivElement> {
   click?: (v: string, e: GuavaEvent<HTMLDivElement, MouseEvent>) => void
@@ -18,9 +18,10 @@ export const TimePickerPanel = (propsRaw: Partial<TimePickerPanelProps>) => {
 
   return (
     <div
-      style={styles([], props.style)}
-      class={classes([], props.class)}
-      classList={classList({}, props.classList)}
+      ref={props.ref}
+      style={mergeStyles([], props.style)}
+      class={mergeClasses([], props.class)}
+      classList={mergeClassList({}, props.classList)}
       {...eventHandlers}
       onClick={onClick}
     >
