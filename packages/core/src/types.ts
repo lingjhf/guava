@@ -1,4 +1,4 @@
-import type { FlowProps, JSX } from 'solid-js'
+import type { ParentProps, JSX } from 'solid-js'
 
 export type ValueChanged<T> = (value: T) => void
 
@@ -22,7 +22,7 @@ export interface GuavaProps<T extends HTMLElement> extends JSX.CustomEventHandle
   style?: JSX.HTMLAttributes<T>['style']
 }
 
-export type GuavaFlowProps<T extends HTMLElement> = FlowProps<GuavaProps<T>>
+export type GuavaParentProps<T extends HTMLElement> = ParentProps<GuavaProps<T>>
 
 export type GuavaEvent<T, E extends Event> = E & {
   currentTarget: T;
