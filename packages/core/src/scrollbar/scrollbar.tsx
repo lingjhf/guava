@@ -61,8 +61,10 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   //监听滚动位置
   createEffect(() => {
+    const scrollX = props.scrollX
+    const scrollY = props.scrollY
     if (scrollController) {
-      scrollController.setScroll({ x: props.scrollX, y: props.scrollY })
+      scrollController.setScroll({ x: scrollX, y: scrollY })
       setHorizontalAndScrollX()
       setVerticalAndScrollY()
     }
