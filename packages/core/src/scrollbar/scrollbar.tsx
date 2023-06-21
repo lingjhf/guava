@@ -109,7 +109,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   //设置水平滑块位置大小和滚动位置
   function setHorizontalAndScrollX() {
     setHorizontalSlider({
-      left: scrollController.horizontalSliderX,
+      left: scrollController.horizontalSliderX + scrollController.scrollX,
       width: scrollController.horizontalSliderWidth,
     })
     viewRef.scrollLeft = scrollController.scrollX
@@ -118,7 +118,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   //设置垂直滑块位置大小和滚动位置
   function setVerticalAndScrollY() {
     setVerticalSlider({
-      top: scrollController.verticalSliderY,
+      top: scrollController.verticalSliderY + scrollController.scrollY,
       height: scrollController.verticalSliderHeight,
     })
     viewRef.scrollTop = scrollController.scrollY
@@ -383,9 +383,11 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   //滚轮滚动
   function onWheelScroll() {
     viewRef.addEventListener('scroll', () => {
-      scrollController.setScroll({ y: viewRef.scrollTop })
-      setVerticalAndScrollY()
-      emitScroll()
+      if (viewRef.scrollTop > 0) {
+        scrollController.setScroll({ y: viewRef.scrollTop })
+        setVerticalAndScrollY()
+        emitScroll()
+      }
     })
   }
 
@@ -412,16 +414,11 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   return (
     <div
-      style={{ width: `${width()}px` }}
-      class={styles.scrollbar}
-      ref={props.ref}
-      {...eventHandlers}
+      ref={setViewRef} class={styles.scrollView}
       onMouseEnter={onEnterScrollArea}
       onMouseLeave={onLeaveScrollArea}>
-      <div ref={setViewRef} class={styles.scrollView}>
-        <div ref={setContentRef} class={styles.scrollContent}>
-          {props.children}
-        </div>
+      <div ref={setContentRef} class={styles.scrollContent}>
+        {props.children}
       </div>
       <div
         ref={setVerticalScrollbarRef}
@@ -434,7 +431,6 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
         class={`${styles.scrollVerticalSlider} ${styles.invisible}`}
         onMouseDown={onVerticalSliderDrag}
       ></div>
-
       <div
         ref={setHorizontalScrollbarRef}
         class={`${styles.scrollHorizontalBar} ${styles.invisible}`}

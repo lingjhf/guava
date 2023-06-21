@@ -1,19 +1,13 @@
 /*滚动区域样式*/
-.scrollbar {
+/*滚动区域可见区域样式*/
+.scrollView {
   --scroll-vertical-slider-bg-color: var(--bg-scrollbar-default);
   --scroll-vertical-slider-bg-color-hover: var(--bg-scrollbar-hover);
   --scroll-horizontal-slider-bg-color: var(--bg-scrollbar-default);
   --scroll-horizontal-slider-bg-color-hover: var(--bg-scrollbar-hover);
-  height: 100%;
-  position: relative;
-}
-
-/*滚动区域可见区域样式*/
-.scrollView {
-  width: 100%;
-  height: 100%;
   position: relative;
   overflow: auto;
+  height: 100%;
 }
 
 .scrollView::-webkit-scrollbar {
@@ -23,8 +17,6 @@
 
 /*滚动区域内容样式*/
 .scrollContent {
-  min-width: 100%;
-  min-height: 100%;
   position: absolute;
 }
 
