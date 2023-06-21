@@ -118,7 +118,7 @@ export class ScrollController {
    * @returns 返回当前对象
    */
   setSlider(position: Partial<Position>): ScrollController {
-    if (position.x && position.x !== this.horizontalSlider.x) {
+    if (position.x !== undefined && position.x !== this.horizontalSlider.x) {
       this.horizontalSlider.x = this.getValidHorizontalSliderX(position.x)
       this.scrollPosition.x = sliderXToScrollX(
         this.horizontalSlider.x,
@@ -127,7 +127,7 @@ export class ScrollController {
         this.contentSize.width
       )
     }
-    if (position.y && position.y !== this.verticalSlider.y) {
+    if (position.y !== undefined && position.y !== this.verticalSlider.y) {
       this.verticalSlider.y = this.getValidVerticalSliderY(position.y)
       this.scrollPosition.y = sliderXToScrollX(
         this.verticalSlider.y,
@@ -145,10 +145,10 @@ export class ScrollController {
    * @returns 返回当前对象
    */
   setScroll(position: Partial<Position>): ScrollController {
-    if (position.x && position.x !== this.scrollPosition.x) {
+    if (position.x !== undefined && position.x !== this.scrollPosition.x) {
       this.setHorizontalSliderXWithScrollX(position.x)
     }
-    if (position.y && position.y !== this.scrollPosition.y) {
+    if (position.y !== undefined && position.y !== this.scrollPosition.y) {
       this.setVerticalSliderYWithScrollY(position.y)
     }
     return this
