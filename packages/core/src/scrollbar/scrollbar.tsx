@@ -51,7 +51,6 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   let scrollController: ScrollController
   const [verticalSlider, setVerticalSlider] = createSignal({ top: 0, height: 0 })
   const [horizontalSlider, setHorizontalSlider] = createSignal({ left: 0, width: 0 })
-  const [width, setWidth] = createSignal(0)
 
   const setViewRef = (el: HTMLElement) => (viewRef = el)
   const setContentRef = (el: HTMLElement) => (contentRef = el)
@@ -266,7 +265,6 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   function watchContentResize() {
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = contentRef.getBoundingClientRect()
-      setWidth(width)
       for (let i = 0; i < entries.length; i++) {
         if (isVerticalOverflow()) {
           scrollController.setContentSize({ height })
@@ -417,7 +415,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
       ref={setViewRef} class={styles.scrollView}
       onMouseEnter={onEnterScrollArea}
       onMouseLeave={onLeaveScrollArea}>
-      <div ref={setContentRef} class={styles.scrollContent}>
+      <div ref={setContentRef}>
         {props.children}
       </div>
       <div

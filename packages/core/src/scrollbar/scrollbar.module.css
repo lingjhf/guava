@@ -1,4 +1,3 @@
-/*滚动区域样式*/
 /*滚动区域可见区域样式*/
 .scrollView {
   --scroll-vertical-slider-bg-color: var(--bg-scrollbar-default);
@@ -13,11 +12,6 @@
 .scrollView::-webkit-scrollbar {
   width: 0px;
   height: 0px;
-}
-
-/*滚动区域内容样式*/
-.scrollContent {
-  position: absolute;
 }
 
 /*垂直滚动栏样式*/
