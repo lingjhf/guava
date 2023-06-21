@@ -1,0 +1,49 @@
+.timePickerPanel {
+  display: flex;
+  height: 232px;
+  position: relative;
+}
+
+.timePickerPanelColumn {
+  padding: 96px 0;
+}
+
+.timePickerPanelItem {
+  --time-picker-panel-text-color: var(--text-common-secondary);
+  --time-picker-panel-item-bg-color: var(transparent);
+  --time-picker-panel-item-bg-color-hover: var(--bg-bgless-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 32px;
+  cursor: pointer;
+  color: var(--time-picker-panel-text-color);
+  font-size: 14px;
+  line-height: 22px;
+  background-color: var(--time-picker-panel-item-bg-color);
+  user-select: none;
+}
+.timePickerPanelItem:hover {
+  --time-picker-panel-item-bg-color: var(--time-picker-panel-item-bg-color-hover);
+}
+
+.timePickerPanelSelected {
+  --time-picker-panel-text-color: var(--text-common-primary);
+  height: 40px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  box-sizing: border-box;
+}
+
+.timePickerPanelSelectedBorder {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 96px;
+  height: 40px;
+  --time-picker-panel-border-color-selected: 1px solid var(--border-common-default);
+  border-top: var(--time-picker-panel-border-color-selected);
+  border-bottom: var(--time-picker-panel-border-color-selected);
+}

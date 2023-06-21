@@ -289,24 +289,10 @@ const App: Component = () => {
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
-
         <div class=' h-300px p-20px flex'>
-          {/* <GScrollbar type='visible'>
-            <div class='h-2000px w-200px'></div>
-          </GScrollbar> */}
-          <GCascaderPanel multiple options={options} optionName='label' change={cascaderChange}></GCascaderPanel>
+          <GTimePickerPanel SS={false}></GTimePickerPanel>
+          {/* <GCascaderPanel multiple options={options} optionName='label' change={cascaderChange}></GCascaderPanel> */}
         </div>
-        {/* <div class='flex h-300px'>
-          <div>
-            <div class='w-150px'></div>
-          </div>
-          <div>
-            <div class='w-200px'></div>
-          </div>
-        </div> */}
-
-        {/* <GTimePickerPanel onClick={[test, '123']}></GTimePickerPanel> */}
-
       </GConfigProvider>
     </div>
   )
