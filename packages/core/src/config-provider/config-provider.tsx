@@ -8,10 +8,14 @@ export interface ConfigProviderProps extends ComponentPropsWithChildren<HTMLDivE
 
 export const ConfigProvider = (propsRaw: Partial<ConfigProviderProps>) => {
   const props = generateProps(propsRaw, { dark: false })
+
+  for (const key in props.dark ? darktheme : lightTheme) {
+    document.documentElement.style.setProperty(key, darktheme[key])
+  }
   function styles() {
     return props.dark ? darktheme : lightTheme
   }
   return (
-    <div style={styles()} ref={props.ref}>{props.children}</div>
+    <div ref={props.ref}>{props.children}</div>
   )
 }

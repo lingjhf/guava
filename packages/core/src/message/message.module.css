@@ -1,0 +1,48 @@
+.message {
+  --message-text-color: var(--text-static-primary);
+  --message-bg-color: none;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 9px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  box-sizing: border-box;
+  color: var(--message-text-color);
+  background-color: var(--message-bg-color);
+}
+
+.messageDefault {
+  --message-bg-color: var(--bg-brand-default);
+}
+
+.messageSuccess {
+  --message-bg-color: var(--bg-success-default);
+}
+
+.messageWarn {
+  --message-bg-color: var(--bg-warn-default);
+}
+
+.messageDanger {
+  --message-bg-color: var(--bg-danger-default);
+}
+
+.messageContent {
+  display: flex;
+  align-items: center;
+}
+
+.messageIcon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.messageClosable {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-left: 8px;
+  cursor: pointer;
+}
