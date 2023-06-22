@@ -119,7 +119,7 @@ export const Message = (propsRaw: Partial<MessageProps>) => {
 
   return (
     <Show when={visible()}>
-      <Portal ref={setMessageRef}>
+      <Portal ref={setMessageRef} {...eventHandlers}>
         <div class={styles.messageContent} >
           <MessageIcon />
           <div>{props.message}</div>
