@@ -1,12 +1,12 @@
 import type { JSX } from 'solid-js'
 import { Show, createEffect, createSignal } from 'solid-js'
 import { CloseCircleFilled } from '../icon/close-circle-filled'
-import { ComponentPropsWithChildren, ValueChanged } from '../types'
-import { customEventHandlersName, generateProps } from '../utils'
+import { GuavaInputEvent, GuavaProps, ValueChanged } from '../types'
+import { customEventHandlersName, eventHandlerCall, generateProps } from '../utils'
 import styles from './input.module.css'
 
 export type InputSize = 'default' | 'small' | 'large'
-export interface InputProps extends ComponentPropsWithChildren<HTMLInputElement> {
+export interface InputProps extends GuavaProps<HTMLInputElement> {
   value: string
   placeholder?: string
   clearable: boolean
@@ -15,10 +15,8 @@ export interface InputProps extends ComponentPropsWithChildren<HTMLInputElement>
   append?: JSX.Element
   prefix?: JSX.Element
   suffix?: JSX.Element
-  input?: ValueChanged<string>
+  input?: (v: string, e: GuavaInputEvent<InputEvent>) => void
   change?: ValueChanged<string>
-  focusIn?: ValueChanged<FocusEvent>
-  focusOut?: ValueChanged<FocusEvent>
 }
 
 const sizeClasses: Record<InputSize, string> = {
@@ -53,21 +51,22 @@ export const Input = (propsRaw: Partial<InputProps>) => {
     return classes
   }
 
-  function input(e: InputEvent) {
+  function input(e: GuavaInputEvent<InputEvent>) {
     const target = e.target as HTMLInputElement
     setInputValue(target.value)
-    props.input?.(target.value)
+    props.input?.(target.value, e)
     change(target.value)
+    eventHandlers.onInput && eventHandlerCall(eventHandlers.onInput, e)
   }
 
-  function focusIn(e: FocusEvent) {
+  function focusIn(e: GuavaInputEvent<FocusEvent>) {
     setIsFocus(true)
-    props.focusIn?.(e)
+    eventHandlers.onFocusIn && eventHandlerCall(eventHandlers.onFocusIn, e)
   }
 
-  function focusOut(e: FocusEvent) {
+  function focusOut(e: GuavaInputEvent<FocusEvent>) {
     setIsFocus(false)
-    props.focusOut?.(e)
+    eventHandlers.onFocusOut && eventHandlerCall(eventHandlers.onFocusOut, e)
   }
 
   function mouseEnter() {
@@ -88,7 +87,8 @@ export const Input = (propsRaw: Partial<InputProps>) => {
   }
 
   return (
-    <div class={inputClasses()}
+    <div
+      class={inputClasses()}
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}
     >

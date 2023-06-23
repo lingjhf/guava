@@ -15,7 +15,13 @@ export interface ComponentPropsWithChildren<T extends HTMLElement> extends Compo
   children?: JSX.Element | JSX.Element[]
 }
 
-export interface GuavaProps<T extends HTMLElement> extends JSX.CustomEventHandlersCamelCase<T> {
+export interface CustomEventHandlers<T extends HTMLElement> extends JSX.CustomEventHandlersCamelCase<T> {
+
+  onFocusIn?: JSX.HTMLAttributes<T>['onFocusIn']
+  onFocusOut?: JSX.HTMLAttributes<T>['onFocusOut']
+}
+
+export interface GuavaProps<T extends HTMLElement> extends CustomEventHandlers<T> {
   ref?: JSX.HTMLAttributes<T>['ref']
   class?: JSX.HTMLAttributes<T>['class']
   classList?: JSX.HTMLAttributes<T>['classList']
@@ -27,6 +33,11 @@ export type GuavaParentProps<T extends HTMLElement> = ParentProps<GuavaProps<T>>
 export type GuavaEvent<T, E extends Event> = E & {
   currentTarget: T;
   target: Element;
+}
+
+export type GuavaInputEvent<E extends Event> = E & {
+  currentTarget: HTMLInputElement;
+  target: HTMLInputElement;
 }
 
 export interface Position {

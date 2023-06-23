@@ -1,6 +1,6 @@
-import type { JSX } from 'solid-js'
+import type { CustomEventHandlers } from '../types'
 
-export const customEventHandlersName: (keyof JSX.CustomEventHandlersCamelCase<HTMLElement>)[] = [
+export const customEventHandlersName: (keyof CustomEventHandlers<HTMLElement>)[] = [
   'onAbort',
   'onAnimationEnd',
   'onAnimationIteration',
@@ -74,4 +74,6 @@ export const customEventHandlersName: (keyof JSX.CustomEventHandlersCamelCase<HT
   'onVolumeChange',
   'onWaiting',
   'onWheel',
+  'onFocusIn',
+  'onFocusOut',
 ]
