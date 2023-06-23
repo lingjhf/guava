@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js'
-import { GConfigProvider, GAlert, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel, showMessage } from '@lingjhf/guava'
+import { GConfigProvider, GAlert, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel, GInput, GInputNumber } from '@lingjhf/guava'
 import 'virtual:uno.css'
 
 const App: Component = () => {
@@ -285,14 +285,14 @@ const App: Component = () => {
       ],
     },
   ]
-  showMessage({ message: 'Message content1', duration: 0, closable: true })
-  showMessage({ message: 'Message content2', duration: 0, closable: true })
-  showMessage({ message: 'Message content3', duration: 0, closable: true })
-  showMessage({ message: 'Message content4', duration: 0, closable: true })
+
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
-        <div class=' h-300px p-20px flex'>
+        <div class=' flex flex-col  h-300px p-20px flex'>
+          <GInput></GInput>
+          <div class='h-20px'></div>
+          <GInputNumber step={2}></GInputNumber>
           {/* <GTimePickerPanel SS={false}></GTimePickerPanel> */}
         </div>
       </GConfigProvider>

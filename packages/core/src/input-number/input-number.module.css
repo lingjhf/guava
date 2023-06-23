@@ -1,0 +1,69 @@
+.inputNumber {
+  display: flex;
+}
+
+.inputNumberSizeDefault {
+  --input-height: 40px;
+  --input-step-wrap-width: 20px;
+}
+.inputNumberSizeSmall {
+  --input-height: 32px;
+  --input-step-wrap-width: 16px;
+}
+.inputNumberSizeLarge {
+  --input-height: 48px;
+  --input-step-wrap-width: 24px;
+}
+
+.inputNumberInputWrap {
+  width: 100%;
+}
+
+.inputNumberStepWrap {
+  --input-number-step-wrap-bg-color: var(--bg-controls-elevate-default);
+  --input-number-step-wrap-border-color: var(--border-common-default);
+  display: flex;
+  flex-direction: column;
+  width: var(--input-step-wrap-width);
+  height: var(--input-height);
+  border-radius: 4px;
+  margin-left: 4px;
+  box-sizing: border-box;
+  background-color: var(--input-number-step-wrap-bg-color);
+  box-shadow: 0 0 0 1px var(--input-number-step-wrap-border-color) inset;
+}
+
+.inputNumberAdd {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 4px 2px 0 2px;
+}
+.inputNumberSubtract {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 0 2px 4px 2px;
+}
+
+.inputNumberStep {
+  --input-number-step-bg-color: transparent;
+  --input-number-step-bg-color-hover: var(--bg-bgless-hover);
+  --input-number-step-bg-color-active: var(--bg-bgless-active);
+  --input-number-step-text-color: var(--text-common-tertiary);
+  --input-number-step-text-color-hover: var(--text-common-primary);
+  --input-number-step-text-color-active: var(--text-common-primary);
+  display: flex;
+  box-sizing: border-box;
+  height: 100%;
+  cursor: pointer;
+  background-color: var(--input-number-step-bg-color);
+  color: var(--input-number-step-text-color);
+  user-select: none;
+}
+.inputNumberStep:hover {
+  --input-number-step-bg-color: var(--input-number-step-bg-color-hover);
+  --input-number-step-text-color: var(--input-number-step-text-color-hover);
+}
+.inputNumberStep:active {
+  --input-number-step-bg-color: var(--input-number-step-bg-color-active);
+  --input-number-step-text-color: var(--input-number-step-text-color-active);
+}
