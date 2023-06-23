@@ -1,0 +1,8 @@
+.rate {
+  display: flex;
+}
+
+.rateItem {
+  cursor: pointer;
+  padding-left: 4px;
+}
