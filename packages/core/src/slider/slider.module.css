@@ -1,0 +1,12 @@
+.slider {
+  position: relative;
+}
+
+.sliderProgress {
+  position: absolute;
+}
+
+.sliderCursor {
+  position: absolute;
+  
+}
