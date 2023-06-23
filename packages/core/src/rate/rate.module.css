@@ -1,8 +1,15 @@
 .rate {
+  --rate-color: var(--text-common-quaternary);
+  --rate-color-hover: var(--text-brand-default);
   display: flex;
 }
 
 .rateItem {
   cursor: pointer;
   padding-left: 4px;
+  color: var(--rate-color);
+}
+
+.rateItem:hover {
+  color: var(--rate-color-hover);
 }
