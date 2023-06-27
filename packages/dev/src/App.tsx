@@ -1,5 +1,5 @@
-import type { Component } from 'solid-js'
-import { GConfigProvider, GAlert, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel, GInput, GInputNumber, GRate } from '@lingjhf/guava'
+import { createSignal, type Component, For } from 'solid-js'
+import { GConfigProvider, GAlert, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel, GInput, GInputNumber, GRate, GButton, GList, GListItem, GListSubheader } from '@lingjhf/guava'
 import 'virtual:uno.css'
 
 const App: Component = () => {
@@ -286,15 +286,26 @@ const App: Component = () => {
     },
   ]
 
+  const [items, setItems] = createSignal([1, 2, 3, 4, 5])
+
+  function change() {
+    setItems([1, 3, 5])
+  }
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
+        <button onClick={change}>ok</button>
         <div class=' flex flex-col  h-300px p-20px flex'>
-          <GInput></GInput>
-          <div class='h-20px'></div>
-          <GInputNumber step={2}></GInputNumber>
-          <GRate></GRate>
-          {/* <GTimePickerPanel SS={false}></GTimePickerPanel> */}
+          <GList >
+            <GListSubheader>Title</GListSubheader>
+            <For each={items()}>
+              {
+                (item) => {
+                  return <GListItem>{item}</GListItem>
+                }
+              }
+            </For>
+          </GList>
         </div>
       </GConfigProvider>
     </div>

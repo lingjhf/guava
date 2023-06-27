@@ -1,0 +1,13 @@
+.list {
+  --list-bg-color: var(--bg-common-highest);
+  --list-border-radius: 4px;
+  --list-padding: 8px 0;
+  --list-nav-padding: 8px;
+  border-radius: var(--list-border-radius);
+  padding: var(--list-padding);
+  background-color: var(--list-bg-color);
+}
+
+.listNav {
+  --list-padding: var(--list-nav-padding);
+}

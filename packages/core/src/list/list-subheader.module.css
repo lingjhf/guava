@@ -1,0 +1,5 @@
+.listSubheader {
+  --list-item-text-color: var(--text-common-primary);
+  padding: 7px 8px;
+  color: var(--list-item-text-color);
+}
