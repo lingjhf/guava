@@ -13,7 +13,7 @@ export default defineConfig([
         return `${chunkInfo.name}.d.ts`
       },
       manualChunks(id) {
-        const pkgName = id.match(/ui\/src\/(.*?)\//)
+        const pkgName = id.match(/core\/src\/(.*?)\//)
         if (pkgName) {
           return `${pkgName[1]}`
         }
