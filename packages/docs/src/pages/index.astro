@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro'
-import { GConfigProvider } from '@lingjhf/guava'
+import { GConfigProvider, GButton } from '@lingjhf/guava'
+import '@lingjhf/guava/lib/button.css'
 ---
 
 <BaseLayout pageTitle="home">
-  <GConfigProvider client:only="solid-js" />
+  <GConfigProvider dark client:only="solid-js">
+    <GButton client:only="solid-js" />
+  </GConfigProvider>
 </BaseLayout>

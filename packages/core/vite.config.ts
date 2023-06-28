@@ -12,6 +12,7 @@ export default defineConfig({
     port: 3000,
   },
   build: {
+    cssCodeSplit: true,
     target: 'esnext',
     outDir: 'lib',
     lib: {

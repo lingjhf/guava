@@ -29,7 +29,8 @@
     "./lib/*": {
       "types": "./lib/*.d.ts",
       "import": "./lib/*.js"
-    }
+    },
+    "./*": "./*"
   },
   "keywords": [
     "ui",

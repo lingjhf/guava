@@ -4,5 +4,5 @@ import UnoCSS from 'unocss/astro'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [solidJs(), UnoCSS(),]
+  integrations: [solidJs(), UnoCSS(),],
 })

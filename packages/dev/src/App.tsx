@@ -1,7 +1,7 @@
 import { createSignal, type Component, For } from 'solid-js'
 import { GConfigProvider, GAlert, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel, GInput, GInputNumber, GRate, GButton, GList, GListItem, GListSubheader } from '@lingjhf/guava'
 import 'virtual:uno.css'
-
+import '@lingjhf/guava/lib/list.css'
 const App: Component = () => {
   async function ok() {
     await new Promise((resolve) => {
