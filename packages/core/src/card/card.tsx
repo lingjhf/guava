@@ -1,15 +1,15 @@
 import { Show, JSX } from 'solid-js'
-import { ComponentPropsWithChildren } from '../types'
-import { customEventHandlersName, generateProps } from '../utils'
+import { GuavaParentProps } from '../types'
+import { generateSplitEventHandlersProps } from '../utils'
 import styles from './card.module.css'
 
-export interface CardProps extends ComponentPropsWithChildren<HTMLDivElement> {
+export interface CardProps extends GuavaParentProps<HTMLDivElement> {
   header?: JSX.Element
   footer?: JSX.Element
 }
 
 export const Card = (propsRaw: Partial<CardProps>) => {
-  const [eventHandlers, props] = generateProps(propsRaw, {}, customEventHandlersName)
+  const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, {})
   return (
     <div class={styles.card} {...eventHandlers}>
       <Show when={props.header}>

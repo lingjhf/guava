@@ -2,7 +2,7 @@ import type { JSX } from 'solid-js'
 import { Show, createEffect, createSignal } from 'solid-js'
 import { CloseCircleFilled } from '../icon/close-circle-filled'
 import { GuavaInputEvent, GuavaProps, ValueChanged } from '../types'
-import { customEventHandlersName, eventHandlerCall, generateProps } from '../utils'
+import { eventHandlerCall, generateSplitEventHandlersProps } from '../utils'
 import styles from './input.module.css'
 
 export type InputSize = 'default' | 'small' | 'large'
@@ -26,14 +26,13 @@ const sizeClasses: Record<InputSize, string> = {
 }
 
 export const Input = (propsRaw: Partial<InputProps>) => {
-  const [eventHandlers, props] = generateProps(
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
     {
       value: '',
       clearable: false,
       size: 'default'
-    },
-    customEventHandlersName
+    }
   )
   const [inputValue, setInputValue] = createSignal('')
   const [isHover, setIsHover] = createSignal(false)

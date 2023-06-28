@@ -1,15 +1,8 @@
 ---
+import BaseLayout from '../components/BaseLayout.astro'
+import { GConfigProvider } from '@lingjhf/guava'
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" />
-    <title>title</title>
-  </head>
-  <body>
-    <div class="w-100px h-100px bg-blue-100"></div>
-  </body>
-</html>
+<BaseLayout pageTitle="home">
+  <GConfigProvider client:only="solid-js" />
+</BaseLayout>

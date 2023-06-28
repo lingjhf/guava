@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'solid-js'
-import type { ComponentPropsWithChildren, ValueChanged } from '../types'
-import { generateProps, customEventHandlersName } from '../utils'
+import type { GuavaParentProps, ValueChanged } from '../types'
+import { generateSplitEventHandlersProps } from '../utils'
 import type { BreadcrumbItemValue } from './breadcrumb-item'
 import styles from './breadcrumb.module.css'
 
@@ -18,13 +18,13 @@ export const useBreadcrumbContext = () => {
   }
   return context
 }
-export interface BreadcrumbProps extends ComponentPropsWithChildren<HTMLDivElement> {
+export interface BreadcrumbProps extends GuavaParentProps<HTMLDivElement> {
   size: 'default' | 'medium' | 'large'
   onSelected?: ValueChanged<BreadcrumbItemValue>
 }
 
 export const Breadcrumb = (propsRaw: Partial<BreadcrumbProps>) => {
-  const [splitted, props] = generateProps(propsRaw, { size: 'default' }, customEventHandlersName)
+  const [splitted, props] = generateSplitEventHandlersProps(propsRaw, { size: 'default' })
   let index = 0
   const providerValue: BreadcrumbProviderValue = {
     registerItem,

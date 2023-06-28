@@ -1,6 +1,6 @@
-import { ComponentProps, } from '../types'
+import { GuavaProps } from '../types'
 
-export interface TreeProps extends ComponentProps<HTMLDivElement> {
+export interface TreeProps extends GuavaProps<HTMLDivElement> {
   data: []
   nodeKey: string
 }

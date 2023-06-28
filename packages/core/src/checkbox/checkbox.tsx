@@ -1,10 +1,10 @@
 import { Show, createEffect, createSignal } from 'solid-js'
 import { CheckFilled } from '../icon/check-filled'
-import { ComponentPropsWithChildren, ValueChanged } from '../types'
-import { customEventHandlersName, generateProps } from '../utils'
+import { GuavaParentProps, ValueChanged } from '../types'
+import { generateSplitEventHandlersProps } from '../utils'
 import styles from './checkbox.module.css'
 
-export interface CheckboxProps extends ComponentPropsWithChildren<HTMLDivElement> {
+export interface CheckboxProps extends GuavaParentProps<HTMLDivElement> {
   size: number
   checked: boolean
   indeterminate: boolean
@@ -12,7 +12,7 @@ export interface CheckboxProps extends ComponentPropsWithChildren<HTMLDivElement
   change?: ValueChanged<boolean>
 }
 export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
-  const [eventHandlers, props] = generateProps(
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
     {
       size: 16,
@@ -20,7 +20,6 @@ export const Checkbox = (propsRaw: Partial<CheckboxProps>) => {
       indeterminate: false,
       disabled: false,
     },
-    customEventHandlersName
   )
 
   const [checked, setChecked] = createSignal(false)

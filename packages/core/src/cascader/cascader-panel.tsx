@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js/jsx-runtime'
 import { GuavaProps, ValueChanged } from '../types'
-import { mergeClasses, customEventHandlersName, generateProps, mergeClassList, mergeStyles } from '../utils'
+import { mergeClasses, mergeClassList, mergeStyles, generateSplitEventHandlersProps } from '../utils'
 import { For, Show, createEffect, createSignal } from 'solid-js'
 import { createStore, produce } from 'solid-js/store'
 import { ChevronRightFilled } from '../icon/chevron-right-filled'
@@ -39,7 +39,7 @@ interface CascaderOption {
 }
 
 export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
-  const [eventHandlers, props] = generateProps(
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
     {
       options: [],
@@ -48,8 +48,7 @@ export const CascaderPanel = (propsRaw: Partial<CascaderPanelProps>) => {
       optionValue: 'value',
       expandTrigger: 'click',
       multiple: false,
-    },
-    customEventHandlersName,
+    }
   )
 
   const [cascader, setCascader] = createStore<CascaderOption[][]>([])

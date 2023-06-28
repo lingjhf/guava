@@ -1,7 +1,7 @@
 import { JSX, Match, Switch } from 'solid-js'
 import { Show, createSignal } from 'solid-js'
-import { ComponentPropsWithChildren, VoidCallback } from '../types'
-import { customEventHandlersName, generateProps } from '../utils'
+import { GuavaParentProps, VoidCallback } from '../types'
+import { generateSplitEventHandlersProps } from '../utils'
 import { WarnCircleFilled } from '../icon/warn-circle-filled'
 import { CheckCircleFilled } from '../icon/check-circle-filled'
 import { CloseCircleFilled } from '../icon/close-circle-filled'
@@ -9,7 +9,7 @@ import { CloseFilled } from '../icon/close-filled'
 import styles from './alert.module.css'
 
 export type AlertType = 'info' | 'success' | 'warn' | 'danger'
-export interface AlertProps extends ComponentPropsWithChildren<HTMLDivElement> {
+export interface AlertProps extends GuavaParentProps<HTMLDivElement> {
   title?: JSX.Element
   type: AlertType
   center: boolean
@@ -18,10 +18,9 @@ export interface AlertProps extends ComponentPropsWithChildren<HTMLDivElement> {
 }
 
 export const Alert = (propsRaw: Partial<AlertProps>) => {
-  const [eventHandlers, props] = generateProps(
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
-    { type: 'info', center: false, closable: true },
-    customEventHandlersName
+    { type: 'info', center: false, closable: true }
   )
 
   const typeClasses: Record<AlertType, string> = {

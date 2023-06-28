@@ -1,10 +1,10 @@
 import { createSignal } from 'solid-js'
-import { ComponentProps } from '../types'
+import { GuavaProps } from '../types'
 import styles from './switch.module.css'
-import { customEventHandlersName, generateProps } from '../utils'
+import { generateSplitEventHandlersProps } from '../utils'
 
 export type SwitchType = 'default' | 'small' | 'large'
-export interface SwitchProps extends ComponentProps<HTMLDivElement> {
+export interface SwitchProps extends GuavaProps<HTMLDivElement> {
   off: boolean
   size: SwitchType,
   loading: boolean | (() => Promise<unknown>)
@@ -25,7 +25,7 @@ const actionSizeClasses = {
 
 export const Switch = (propsRaw: Partial<SwitchProps>) => {
 
-  const [eventHandlers, props] = generateProps(
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
     {
       off: true,
@@ -33,7 +33,6 @@ export const Switch = (propsRaw: Partial<SwitchProps>) => {
       loading: false,
       disabled: false
     },
-    customEventHandlersName,
   )
 
   const [off, setOffset] = createSignal(true)

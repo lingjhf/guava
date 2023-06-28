@@ -1,17 +1,17 @@
-import type { ComponentPropsWithChildren } from '../types'
-import { generateProps, customEventHandlersName } from '../utils'
+import type { GuavaParentProps } from '../types'
+import { generateSplitEventHandlersProps } from '../utils'
 import { useBreadcrumbContext } from './breadcrumb'
 
 export type BreadcrumbItemValue = string | number
 
-export interface BreadcrumbItemProps extends ComponentPropsWithChildren<HTMLDivElement> {
+export interface BreadcrumbItemProps extends GuavaParentProps<HTMLDivElement> {
   value?: BreadcrumbItemValue
   disabled: boolean
 }
 
 export const BreadcrumbItem = (propsRaw: Partial<BreadcrumbItemProps>) => {
   const breadcrumbContext = useBreadcrumbContext()
-  const [splitted, props] = generateProps(propsRaw, { disabled: false }, customEventHandlersName)
+  const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, { disabled: false })
 
   const index = breadcrumbContext.registerItem()
 
@@ -20,6 +20,6 @@ export const BreadcrumbItem = (propsRaw: Partial<BreadcrumbItemProps>) => {
     breadcrumbContext.onSelected?.(value)
   }
   return (
-    <div {...splitted} ref={props.ref} onClick={onItemSelect}>{props.children}</div>
+    <div {...eventHandlers} ref={props.ref} onClick={onItemSelect}>{props.children}</div>
   )
 }

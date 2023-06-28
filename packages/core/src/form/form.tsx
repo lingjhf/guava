@@ -1,7 +1,7 @@
-import { ComponentPropsWithChildren } from '../types'
+import { GuavaParentProps } from '../types'
 import * as yup from 'yup'
 
-export interface FormProps extends ComponentPropsWithChildren<HTMLDivElement> {
+export interface FormProps extends GuavaParentProps<HTMLDivElement> {
   label: string
 }
 

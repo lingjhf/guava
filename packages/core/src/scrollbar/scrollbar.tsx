@@ -1,7 +1,7 @@
 import { createSignal, createEffect, onMount } from 'solid-js'
 import { ScrollController } from './controller'
-import { ComponentPropsWithChildren } from '../types'
-import { customEventHandlersName, generateProps, createPressedDrag } from '../utils'
+import { GuavaParentProps } from '../types'
+import { createPressedDrag, generateSplitEventHandlersProps } from '../utils'
 import styles from './scrollbar.module.css'
 
 export type ScrollbarType = 'auto' | 'visible' | 'invisible'
@@ -11,7 +11,7 @@ export interface ScrollDetail {
   scrollY: number
 }
 
-export interface ScrollbarProps extends ComponentPropsWithChildren<HTMLDivElement> {
+export interface ScrollbarProps extends GuavaParentProps<HTMLDivElement> {
   //滚动条x轴位置
   scrollX: number
 
@@ -28,14 +28,13 @@ export interface ScrollbarProps extends ComponentPropsWithChildren<HTMLDivElemen
 
 export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
-  const [eventHandlers, props] = generateProps(
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
     {
       scrollX: 0,
       scrollY: 0,
       type: 'auto',
     },
-    customEventHandlersName
   )
 
   let viewRef: HTMLElement

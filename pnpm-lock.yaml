@@ -112,6 +112,9 @@ importers:
       '@astrojs/solid-js':
         specifier: ^2.2.0
         version: 2.2.0(@babel/core@7.22.5)(solid-js@1.7.5)(vite@4.3.9)
+      '@lingjhf/guava':
+        specifier: workspace:^
+        version: link:../core
       astro:
         specifier: ^2.7.0
         version: 2.7.0(@types/node@16.18.31)

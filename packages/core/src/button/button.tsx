@@ -1,10 +1,10 @@
-import { ComponentPropsWithChildren } from '../types'
-import { customEventHandlersName, generateProps } from '../utils'
+import { GuavaParentProps } from '../types'
+import { generateSplitEventHandlersProps } from '../utils'
 import styles from './button.module.css'
 
 export type ButtonSize = 'default' | 'small' | 'medium' | 'large'
 export type ButtonType = 'default' | 'primary' | 'success' | 'warn' | 'danger'
-export interface ButtonProps extends ComponentPropsWithChildren<HTMLButtonElement> {
+export interface ButtonProps extends GuavaParentProps<HTMLButtonElement> {
   size: ButtonSize,
   type: ButtonType,
   jelly: boolean,
@@ -52,7 +52,7 @@ const jellyDisabledClasses: Record<ButtonType, string> = {
 }
 
 export const Button = (propsRaw: Partial<ButtonProps>) => {
-  const [eventHandlers, props] = generateProps(
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
     {
       size: 'default',
@@ -61,7 +61,6 @@ export const Button = (propsRaw: Partial<ButtonProps>) => {
       rounded: false,
       disabled: false
     },
-    customEventHandlersName,
   )
 
   const buttonClasses = () => {

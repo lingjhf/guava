@@ -1,22 +1,20 @@
-import { ComponentProps } from '../types'
-import { customEventHandlersName, generateProps } from '../utils'
-import { CloseCircleFilled } from '../icon/close-circle-filled'
+import { GuavaProps } from '../types'
+import { generateSplitEventHandlersProps } from '../utils'
 
-export interface CascaderProps extends ComponentProps<HTMLDivElement> {
+export interface CascaderProps extends GuavaProps<HTMLDivElement> {
   clearable: boolean
   disabled: boolean
   placeholder: string
 }
 
 export const Cascader = (propsRaw: Partial<CascaderProps>) => {
-  const [eventHandlers, props] = generateProps(
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
     {
       clearable: false,
       disabled: false,
       placeholder: '',
     },
-    customEventHandlersName
   )
   return (
     <div></div>

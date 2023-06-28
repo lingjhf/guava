@@ -1,12 +1,12 @@
 import { For, JSX, Show, createEffect, createSignal, on } from 'solid-js'
-import { ComponentProps } from '../types'
-import { customEventHandlersName, generateProps } from '../utils'
+import { GuavaProps } from '../types'
+import { generateSplitEventHandlersProps } from '../utils'
 import { MoreFilled } from '../icon/more-filled'
 import { ChevronLeftFilled } from '../icon/chevron-left-filled'
 import { ChevronRightFilled } from '../icon/chevron-right-filled'
 import styles from './pagination.module.css'
 
-export interface PaginationProps extends ComponentProps<HTMLDivElement> {
+export interface PaginationProps extends GuavaProps<HTMLDivElement> {
   size: number
   currentPage: number
   pageSize: number
@@ -28,7 +28,7 @@ interface Pager {
 }
 
 export const Pagination = (propsRaw: Partial<PaginationProps>) => {
-  const [eventHandlers, props] = generateProps(
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
     {
       size: 24,
@@ -40,8 +40,7 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
       next: false,
       disabled: false,
       hideOnSinglePage: false,
-    },
-    customEventHandlersName,
+    }
   )
 
   const [pagers, setPagers] = createSignal<Pager[]>([])
