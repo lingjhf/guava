@@ -1,6 +1,6 @@
 import { createEffect, createSignal, onCleanup } from 'solid-js'
 import { GuavaParentProps } from '../types'
-import { userListContext } from './list'
+import { useListContext } from './list'
 import styles from './list-item.module.css'
 import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
 
@@ -10,7 +10,7 @@ export interface ListItemProps extends GuavaParentProps<HTMLDivElement> {
 
 export const ListItem = (propsRaw: Partial<ListItemProps>) => {
   const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, { items: [] })
-  const { nav, addItem, removeItem, activeItem } = userListContext()
+  const { nav, addItem, removeItem, activeItem } = useListContext()
   const [selected, setSelected] = createSignal(false)
   const index = addItem(selected, setSelected)
 
