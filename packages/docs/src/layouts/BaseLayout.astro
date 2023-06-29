@@ -17,6 +17,8 @@ const { pageTitle } = Astro.props
     <title>{pageTitle}</title>
   </head>
   <body>
-    <slot />
+    <div class="bg-#1A1A1A h-screen w-screen">
+      <slot />
+    </div>
   </body>
 </html>

@@ -1,8 +1,30 @@
 ---
 import BaseLayout from './BaseLayout.astro'
-import { GButton, GConfigProvider } from '@lingjhf/guava'
+import { GList, GListItem, GListSubheader, GConfigProvider } from '@lingjhf/guava'
+
+export interface Props {
+  pageTitle: string
+}
+
+const { pageTitle } = Astro.props
+const navs = [
+  {
+    title: '',
+    items: [''],
+  },
+]
 ---
 
-<BaseLayout>
-  <GConfigProvider dark client:only="solid-js" />
+<BaseLayout pageTitle={pageTitle}>
+  <GConfigProvider dark client:only="solid-js">
+    <div class="w-full h-full flex">
+      <div class="w-300px">
+        <GList nav client:only="solid-js">
+          <GListItem client:only="solid-js">{1}</GListItem>
+          <!-- <GListItem client:only="solid-js">{1}</GListItem>
+          <GListItem client:only="solid-js">{1}</GListItem> -->
+        </GList>
+      </div>
+    </div>
+  </GConfigProvider>
 </BaseLayout>

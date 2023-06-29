@@ -1,7 +1,6 @@
 import { createSignal, type Component, For } from 'solid-js'
 import { GConfigProvider, GAlert, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel, GInput, GInputNumber, GRate, GButton, GList, GListItem, GListSubheader } from '@lingjhf/guava'
 import 'virtual:uno.css'
-import '@lingjhf/guava/lib/list.css'
 const App: Component = () => {
   async function ok() {
     await new Promise((resolve) => {
@@ -296,7 +295,7 @@ const App: Component = () => {
       <GConfigProvider dark>
         <button onClick={change}>ok</button>
         <div class=' flex flex-col  h-300px p-20px flex'>
-          <GList >
+          <GList nav>
             <GListSubheader>Title</GListSubheader>
             <For each={items()}>
               {
