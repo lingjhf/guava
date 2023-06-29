@@ -1,9 +1,9 @@
-import {For} from 'solid-js'
+import { For } from 'solid-js'
 import { GScrollbar, GList, GListItem, GListSubheader } from '@lingjhf/guava'
 
-interface NavigationBarItem {
-  title: '',
-  items: [{ title: '' }]
+export interface NavigationBarItem {
+  title: string,
+  items: NavigationBarItem[]
 }
 
 interface NavigationBarProps {
@@ -15,7 +15,26 @@ export const NavigationBar = (props: NavigationBarProps) => {
   return (
     <GScrollbar>
       <GList>
-<For each={}></For>
+        <For each={props.items}>
+          {
+            (item) => {
+              return (
+                <>
+                  <GListSubheader>{item.title}</GListSubheader>
+                  <For each={item.items}>
+                    {
+                      (item) => {
+                        return (
+                          <GListItem>{item.title}</GListItem>
+                        )
+                      }
+                    }
+                  </For>
+                </>
+              )
+            }
+          }
+        </For>
       </GList>
     </GScrollbar>
   )
