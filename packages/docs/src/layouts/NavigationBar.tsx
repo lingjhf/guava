@@ -2,8 +2,8 @@ import { For } from 'solid-js'
 import { GScrollbar, GList, GListItem } from '@lingjhf/guava'
 
 export interface NavigationBarItem {
-  title: string,
-  items?: NavigationBarItem[]
+  title: string
+  url?: string
 }
 
 interface NavigationBarProps {
@@ -19,7 +19,11 @@ export const NavigationBar = (props: NavigationBarProps) => {
           {
             (item) => {
               return (
-                <GListItem>{item.title}</GListItem>
+                <a class='decoration-none' href={item.url ?? ''}>
+                  <GListItem>
+                    {item.title}
+                  </GListItem>
+                </a>
               )
             }
           }

@@ -1,57 +1,27 @@
 ---
 import BaseLayout from './BaseLayout.astro'
-import { GConfigProvider } from '@lingjhf/guava'
-import { NavigationBar, NavigationBarItem } from './NavigationBar'
+import { NavigationBar } from './NavigationBar'
+import type { NavigationBarItem } from './NavigationBar'
+const componentsPosts = await Astro.glob('../pages/components/*.mdx')
 
-export interface Props {
-  pageTitle: string
-}
-const { pageTitle } = Astro.props
-
-const navItems: NavigationBarItem[] = [
-  { title: 'Alert' },
-  { title: 'Breadcrumb' },
-  { title: 'Button' },
-  { title: 'Calendar' },
-  { title: 'Card' },
-  { title: 'Cascader' },
-  { title: 'Collapse' },
-  { title: 'Config Provider' },
-  { title: 'Date picker' },
-  { title: 'Dialog' },
-  { title: 'Drawer' },
-  { title: 'Dropdown Menu' },
-  { title: 'Form' },
-  { title: 'Input' },
-  { title: 'Input Number' },
-  { title: 'List' },
-  { title: 'Message' },
-  { title: 'Notification' },
-  { title: 'Pagination' },
-  { title: 'Popover' },
-  { title: 'Progress Bar' },
-  { title: 'Radio' },
-  { title: 'Rate' },
-  { title: 'Scrollbar' },
-  { title: 'Select' },
-  { title: 'Slider' },
-  { title: 'Steps' },
-  { title: 'Switch' },
-  { title: 'Table' },
-  { title: 'Tabs' },
-  { title: 'Tag' },
-  { title: 'Time Picker' },
-  { title: 'Tooltip' },
-  { title: 'Tree' },
-]
+const navItems = componentsPosts.map((item) => {
+  return {
+    title:
+      item.frontmatter.name
+        ?.replace(/(\w)/, (a: string) => a.toUpperCase())
+        ?.replaceAll('-', ' ') ?? '',
+    url: item.url,
+  }
+}) as NavigationBarItem[]
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-  <GConfigProvider dark client:only="solid-js">
-    <div class="w-screen h-screen flex">
-      <div class="w-300px h-full">
-        <NavigationBar client:only="solid-js" items={navItems} />
-      </div>
+<BaseLayout pageTitle={''}>
+  <div class="w-screen h-screen flex">
+    <div class="w-300px h-full">
+      <NavigationBar client:only="solid-js" items={navItems} />
     </div>
-  </GConfigProvider>
+    <div class="w-full h-full">
+      <slot />
+    </div>
+  </div>
 </BaseLayout>
