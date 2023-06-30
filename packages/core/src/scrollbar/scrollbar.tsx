@@ -1,7 +1,7 @@
 import { createSignal, createEffect, onMount } from 'solid-js'
 import { ScrollController } from './controller'
 import { GuavaParentProps } from '../types'
-import { createPressedDrag, generateSplitEventHandlersProps } from '../utils'
+import { createPressedDrag, generateSplitEventHandlersProps, mergeClassList, mergeClasses, mergeStyles } from '../utils'
 import styles from './scrollbar.module.css'
 
 export type ScrollbarType = 'auto' | 'visible' | 'invisible'
@@ -413,7 +413,10 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   return (
     <div
-      ref={setViewRef} class={styles.scrollView}
+      ref={setViewRef}
+      style={mergeStyles([], props.style)}
+      class={mergeClasses([styles.scrollView], props.class)}
+      classList={mergeClassList({}, props.classList)}
       onMouseEnter={onEnterScrollArea}
       onMouseLeave={onLeaveScrollArea}>
       <div ref={setContentRef}>

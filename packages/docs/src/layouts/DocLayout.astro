@@ -1,23 +1,56 @@
 ---
 import BaseLayout from './BaseLayout.astro'
 import { GConfigProvider } from '@lingjhf/guava'
-import { NavigationBar,NavigationBarItem } from './NavigationBar'
+import { NavigationBar, NavigationBarItem } from './NavigationBar'
 
 export interface Props {
   pageTitle: string
 }
 const { pageTitle } = Astro.props
 
-const items:NavigationBarItem[] = [
-  {title:""}
+const navItems: NavigationBarItem[] = [
+  { title: 'Alert' },
+  { title: 'Breadcrumb' },
+  { title: 'Button' },
+  { title: 'Calendar' },
+  { title: 'Card' },
+  { title: 'Cascader' },
+  { title: 'Collapse' },
+  { title: 'Config Provider' },
+  { title: 'Date picker' },
+  { title: 'Dialog' },
+  { title: 'Drawer' },
+  { title: 'Dropdown Menu' },
+  { title: 'Form' },
+  { title: 'Input' },
+  { title: 'Input Number' },
+  { title: 'List' },
+  { title: 'Message' },
+  { title: 'Notification' },
+  { title: 'Pagination' },
+  { title: 'Popover' },
+  { title: 'Progress Bar' },
+  { title: 'Radio' },
+  { title: 'Rate' },
+  { title: 'Scrollbar' },
+  { title: 'Select' },
+  { title: 'Slider' },
+  { title: 'Steps' },
+  { title: 'Switch' },
+  { title: 'Table' },
+  { title: 'Tabs' },
+  { title: 'Tag' },
+  { title: 'Time Picker' },
+  { title: 'Tooltip' },
+  { title: 'Tree' },
 ]
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <GConfigProvider dark client:only="solid-js">
-    <div class="w-full h-full flex">
-      <div class="w-300px">
-        <NavigationBar items={navs} />
+    <div class="w-screen h-screen flex">
+      <div class="w-300px h-full">
+        <NavigationBar client:only="solid-js" items={navItems} />
       </div>
     </div>
   </GConfigProvider>
