@@ -1,0 +1,1 @@
+export { Copy as GCopy } from './copy'

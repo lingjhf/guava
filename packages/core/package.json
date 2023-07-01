@@ -20,11 +20,11 @@
     "README.md",
     "package.json"
   ],
-  "types": "./lib/index.d.ts",
+  "types": "./src/index.ts",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
-      "import": "./lib/index.js"
+      "types": "./src/index.ts",
+      "import": "./src/index.js"
     },
     "./lib/*": {
       "types": "./lib/*.d.ts",
@@ -44,6 +44,7 @@
     "@types/color": "^3.0.3",
     "color": "^4.2.3",
     "dayjs": "^1.11.7",
+    "highlight.js": "^11.8.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {

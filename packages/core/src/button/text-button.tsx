@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from './button'
+import { Button, type ButtonProps } from './button'
 import styles from './text-button.module.css'
 
 export const TextButton = (props: Partial<ButtonProps>) => {

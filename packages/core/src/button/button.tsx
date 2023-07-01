@@ -1,4 +1,4 @@
-import { GuavaParentProps } from '../types'
+import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import styles from './button.module.css'
 
