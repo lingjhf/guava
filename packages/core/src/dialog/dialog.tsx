@@ -1,6 +1,7 @@
-import { JSX, Show, createEffect, createSignal } from 'solid-js'
+import type { JSX } from 'solid-js'
+import { Show, createEffect, createSignal } from 'solid-js'
 import { Portal } from 'solid-js/web'
-import { GuavaParentProps } from '../types'
+import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import styles from './dialog.module.css'
 

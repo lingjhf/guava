@@ -1,6 +1,6 @@
 import { lightTheme, darktheme } from '@lingjhf/guava-theme'
 import { generateProps } from '../utils'
-import { GuavaParentProps } from '../types'
+import type { GuavaParentProps } from '../types'
 
 export interface ConfigProviderProps extends GuavaParentProps<HTMLDivElement> {
   dark: boolean

@@ -1,6 +1,6 @@
 import { createSignal, createEffect, onMount } from 'solid-js'
 import { ScrollController } from './controller'
-import { GuavaParentProps } from '../types'
+import type { GuavaParentProps } from '../types'
 import { createPressedDrag, generateSplitEventHandlersProps, mergeClassList, mergeClasses, mergeStyles } from '../utils'
 import styles from './scrollbar.module.css'
 

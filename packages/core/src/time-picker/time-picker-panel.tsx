@@ -1,7 +1,7 @@
 import { createEffect, createSignal, For, on, Show } from 'solid-js'
-import { GuavaProps } from '../types'
+import type { GuavaProps } from '../types'
 import { mergeClasses, generateSplitEventHandlersProps, mergeClassList, mergeStyles } from '../utils'
-import { GScrollbar, ScrollDetail } from '../scrollbar'
+import { GScrollbar, type ScrollDetail } from '../scrollbar'
 import styles from './time-picker-panel.module.css'
 
 export interface TimePickerPanelProps extends GuavaProps<HTMLDivElement> {

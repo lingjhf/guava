@@ -1,5 +1,6 @@
-import { For, JSX, createEffect, createSignal } from 'solid-js'
-import { GuavaProps, ValueChanged } from '../types'
+import type { JSX } from 'solid-js'
+import { For, createEffect, createSignal } from 'solid-js'
+import type { GuavaProps, ValueChanged } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import { StarOutlined } from '../icon/star-outlined'
 import styles from './rate.module.css'

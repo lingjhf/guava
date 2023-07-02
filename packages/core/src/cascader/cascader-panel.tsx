@@ -1,5 +1,5 @@
-import { JSX } from 'solid-js/jsx-runtime'
-import { GuavaProps, ValueChanged } from '../types'
+import type { JSX } from 'solid-js/jsx-runtime'
+import type { GuavaProps, ValueChanged } from '../types'
 import { mergeClasses, mergeClassList, mergeStyles, generateSplitEventHandlersProps } from '../utils'
 import { For, Show, createEffect, createSignal } from 'solid-js'
 import { createStore, produce } from 'solid-js/store'

@@ -1,19 +1,23 @@
-import { createContext, useContext, Accessor, Setter, createSignal, createEffect } from 'solid-js'
-import { GuavaParentProps } from '../types'
-import styles from './list.module.css'
+import type { Accessor, Setter } from 'solid-js'
+import { createContext, useContext, createSignal, createEffect } from 'solid-js'
+import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
+import styles from './list.module.css'
+
+export type ListValue = string | number
 
 interface ListProviderValue {
   nav: Accessor<boolean>
-  addItem: (item: Accessor<boolean>, setItem: Setter<boolean>) => number
-  removeItem: (index: number) => void
-  activeItem: (index: number) => void
+  addItem: (item: Accessor<boolean>, setItem: Setter<boolean>, key?: ListValue) => ListValue
+  removeItem: (itemKey: ListValue) => void
+  activeItem: (itemKey: ListValue) => void
 }
 
 export const ListContext = createContext<ListProviderValue>()
 export const useListContext = () => useContext(ListContext)!
 
 export interface ListProps extends GuavaParentProps<HTMLDivElement> {
+  value?: ListValue
   nav: boolean
 }
 
@@ -22,7 +26,7 @@ export const List = (propsRaw: Partial<ListProps>) => {
   const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, { nav: false })
 
   let index = 0
-  const items = new Map<number, { item: Accessor<boolean>, setItem: Setter<boolean> }>()
+  const items = new Map<ListValue, { item: Accessor<boolean>, setItem: Setter<boolean> }>()
   const [nav, setNav] = createSignal(props.nav)
 
   const listClasses = () => {
@@ -37,20 +41,24 @@ export const List = (propsRaw: Partial<ListProps>) => {
     setNav(props.nav)
   })
 
-  function addItem(item: Accessor<boolean>, setItem: Setter<boolean>) {
-    items.set(index, { item, setItem })
-    return index++
+  createEffect(() => {
+    activeItem(props.value)
+  })
+
+  function addItem(item: Accessor<boolean>, setItem: Setter<boolean>, key?: ListValue) {
+    items.set(key ?? index, { item, setItem })
+    return key ?? index++
   }
 
-  function removeItem(index: number) {
-    items.delete(index)
+  function removeItem(itemKey: ListValue) {
+    items.delete(itemKey)
   }
 
-  function activeItem(index: number) {
-    for (const [i, { item, setItem }] of items.entries()) {
-      if (i === index && !item()) {
+  function activeItem(itemKey?: ListValue) {
+    for (const [key, { item, setItem }] of items.entries()) {
+      if (key === itemKey && !item()) {
         setItem(true)
-      } else if (i !== index && item()) {
+      } else if (key !== itemKey && item()) {
         setItem(false)
       }
     }
@@ -64,7 +72,7 @@ export const List = (propsRaw: Partial<ListProps>) => {
   }
   return (
     <ListContext.Provider value={providerValue}>
-      <div class={mergeClasses(listClasses())}>
+      <div class={mergeClasses(listClasses())} {...eventHandlers}>
         {propsRaw.children}
       </div>
     </ListContext.Provider>

@@ -1,4 +1,2 @@
-import { ConfigProvider, ConfigProviderProps } from './config-provider'
-
-export { ConfigProvider as GConfigProvider }
-export type { ConfigProviderProps }
+export { ConfigProvider as GConfigProvider } from './config-provider'
+export type { ConfigProviderProps } from './config-provider'

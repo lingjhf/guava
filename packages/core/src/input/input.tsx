@@ -1,7 +1,7 @@
 import type { JSX } from 'solid-js'
 import { Show, createEffect, createSignal } from 'solid-js'
 import { CloseCircleFilled } from '../icon/close-circle-filled'
-import { GuavaInputEvent, GuavaProps, ValueChanged } from '../types'
+import type { GuavaInputEvent, GuavaProps, ValueChanged } from '../types'
 import { eventHandlerCall, generateSplitEventHandlersProps } from '../utils'
 import styles from './input.module.css'
 

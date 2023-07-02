@@ -1,4 +1,4 @@
-import { GuavaParentProps } from '../types'
+import type { GuavaParentProps } from '../types'
 
 export interface FormItemProps extends GuavaParentProps<HTMLDivElement> {
   label: string

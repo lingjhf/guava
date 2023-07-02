@@ -1,5 +1,5 @@
 import { createSignal } from 'solid-js'
-import { GuavaProps } from '../types'
+import type { GuavaProps } from '../types'
 import styles from './switch.module.css'
 import { generateSplitEventHandlersProps } from '../utils'
 

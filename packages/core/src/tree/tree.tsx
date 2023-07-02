@@ -1,4 +1,4 @@
-import { GuavaProps } from '../types'
+import type { GuavaProps } from '../types'
 
 export interface TreeProps extends GuavaProps<HTMLDivElement> {
   data: []

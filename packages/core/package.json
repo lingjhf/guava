@@ -20,17 +20,16 @@
     "README.md",
     "package.json"
   ],
-  "types": "./src/index.ts",
+  "types": "./lib/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "import": "./src/index.js"
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
     },
     "./lib/*": {
       "types": "./lib/*.d.ts",
       "import": "./lib/*.js"
-    },
-    "./*": "./*"
+    }
   },
   "keywords": [
     "ui",

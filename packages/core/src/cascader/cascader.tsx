@@ -1,4 +1,4 @@
-import { GuavaProps } from '../types'
+import type { GuavaProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 
 export interface CascaderProps extends GuavaProps<HTMLDivElement> {

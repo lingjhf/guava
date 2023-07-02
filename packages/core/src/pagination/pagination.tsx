@@ -1,5 +1,6 @@
-import { For, JSX, Show, createEffect, createSignal, on } from 'solid-js'
-import { GuavaProps } from '../types'
+import type { JSX } from 'solid-js'
+import { For, Show, createEffect, createSignal, on } from 'solid-js'
+import type { GuavaProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import { MoreFilled } from '../icon/more-filled'
 import { ChevronLeftFilled } from '../icon/chevron-left-filled'

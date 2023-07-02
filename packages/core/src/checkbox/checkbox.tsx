@@ -1,6 +1,6 @@
 import { Show, createEffect, createSignal } from 'solid-js'
 import { CheckFilled } from '../icon/check-filled'
-import { GuavaParentProps, ValueChanged } from '../types'
+import type { GuavaParentProps, ValueChanged } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import styles from './checkbox.module.css'
 

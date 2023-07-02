@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js/jsx-runtime'
+import type { JSX } from 'solid-js/jsx-runtime'
 import { generateSplitEventHandlersProps } from '../utils'
 import styles from './slider.module.css'
 

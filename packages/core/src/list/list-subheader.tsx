@@ -1,4 +1,4 @@
-import { GuavaParentProps } from '../types'
+import type { GuavaParentProps } from '../types'
 import styles from './list-subheader.module.css'
 
 export const ListSubheader = (props: GuavaParentProps<HTMLDivElement>) => {

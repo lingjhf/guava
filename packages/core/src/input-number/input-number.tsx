@@ -1,9 +1,9 @@
 import { createEffect, createSignal } from 'solid-js'
-import { GInput, InputSize } from '../input'
+import { GInput, type InputSize } from '../input'
 import { ChevronUpFilled } from '../icon/chevron-up-filled'
 import { ChevronDownFilled } from '../icon/chevron-down-filled'
 import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
-import { GuavaInputEvent, GuavaProps } from '../types'
+import type { GuavaInputEvent, GuavaProps } from '../types'
 import styles from './input-number.module.css'
 
 export interface InputNumberProps extends GuavaProps<HTMLInputElement> {

@@ -1,5 +1,5 @@
 import { Show, type JSX } from 'solid-js'
-import { type GuavaParentProps } from '../types'
+import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import styles from './card.module.css'
 

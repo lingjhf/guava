@@ -1,5 +1,5 @@
 import { Portal, Show } from 'solid-js/web'
-import { GuavaParentProps, ValueChanged } from '../types'
+import type { GuavaParentProps, ValueChanged } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import { Match, Switch, createEffect, createSignal } from 'solid-js'
 import { InfoCircleOutlined } from '../icon/info-circle-outlined'

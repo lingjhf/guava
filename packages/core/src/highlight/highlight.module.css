@@ -1,0 +1,23 @@
+.highlight {
+  --highlight-bg-color: transparent;
+  padding: 16px 48px 16px 16px;
+  position: relative;
+}
+
+.highlightPre {
+  margin: 0;
+}
+
+.highlightCode {
+  padding: 0 !important;
+  background-color: var(--highlight-bg-color);
+}
+
+.highlightLanguage {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--text-common-quaternary);
+}

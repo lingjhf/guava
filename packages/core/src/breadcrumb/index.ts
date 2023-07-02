@@ -1,5 +1,4 @@
-import { Breadcrumb, BreadcrumbProps } from './breadcrumb'
-import { BreadcrumbItem, BreadcrumbItemProps } from './breadcrumb-item'
-
-export { Breadcrumb as GBreadcrumb, BreadcrumbItem as GBreadcrumbItem }
-export type { BreadcrumbProps, BreadcrumbItemProps }
+export { Breadcrumb as GBreadcrumb } from './breadcrumb'
+export {BreadcrumbItem as GBreadcrumbItem} from './breadcrumb-item'
+export type { BreadcrumbProps } from './breadcrumb'
+export type {BreadcrumbItemProps} from './breadcrumb-item'
