@@ -22,7 +22,7 @@ const pathname = Astro.url.pathname
     <div class="h-full w-300px">
       <NavigationBar client:only="solid-js" value={pathname} items={navItems} />
     </div>
-    <div class="h-full w-full">
+    <div class="h-full w-full p-32px box-border">
       <slot />
     </div>
   </div>
