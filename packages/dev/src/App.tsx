@@ -291,20 +291,18 @@ const App: Component = () => {
     setItems([1, 3, 5])
   }
   const code = `
-import fukc from 'fuck';
+import xx from 'fuck'
 
-const a = 10;
-function func(){
-
+function test(){
+  
 }
             `
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
-        <div class='flex items-center justify-center'>
-          <GHightlight>
-            {code}
-          </GHightlight>
+        <div class=' px-100px'>
+          <GCard></GCard>
+          <GHightlight code={code} />
           {/* <GCopy></GCopy> */}
           {/* <GList nav>
             <GListSubheader>Title</GListSubheader>
