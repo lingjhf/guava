@@ -20,7 +20,7 @@ export const NavigationBar = (props: NavigationBarProps) => {
           {
             (item) => {
               return (
-                <a class='decoration-none' href={item.url ?? ''}>
+                <a href={item.url ?? ''}>
                   <GListItem value={item.url}>
                     {item.title}
                   </GListItem>
