@@ -11,7 +11,7 @@ const navItems = componentsPosts.map((item) => {
       basename(item.url!)
         ?.replace(/(\w)/, (a: string) => a.toUpperCase())
         ?.replaceAll('-', ' ') ?? '',
-    url: item.url,
+    url: `${item.url}/`,
   }
 }) as NavigationBarItem[]
 const pathname = Astro.url.pathname
