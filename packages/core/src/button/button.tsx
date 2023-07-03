@@ -13,42 +13,42 @@ export interface ButtonProps extends GuavaParentProps<HTMLButtonElement> {
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
-  'default': styles.gButtonSizeDefault,
-  'small': styles.gButtonSizeSmall,
-  'medium': styles.gButtonSizeMedium,
-  'large': styles.gButtonSizeLarge
+  'default': styles.buttonSizeDefault,
+  'small': styles.buttonSizeSmall,
+  'medium': styles.buttonSizeMedium,
+  'large': styles.buttonSizeLarge
 }
 
 const typeClasses: Record<ButtonType, string> = {
-  'default': styles.gButtonDefault,
-  'primary': styles.gButtonPrimary,
-  'success': styles.gButtonSuccess,
-  'warn': styles.gButtonWarn,
-  'danger': styles.gButtonDanger,
+  'default': styles.buttonDefault,
+  'primary': styles.buttonPrimary,
+  'success': styles.buttonSuccess,
+  'warn': styles.buttonWarn,
+  'danger': styles.buttonDanger,
 }
 
 const typeDisabledClasses: Record<ButtonType, string> = {
-  'default': styles.gButtonDefaultDisabled,
-  'primary': styles.gButtonPrimaryDisabled,
-  'success': styles.gButtonSuccessDisabled,
-  'warn': styles.gButtonWarnDisabled,
-  'danger': styles.gButtonDangerDisabled,
+  'default': styles.buttonDefaultDisabled,
+  'primary': styles.buttonPrimaryDisabled,
+  'success': styles.buttonSuccessDisabled,
+  'warn': styles.buttonWarnDisabled,
+  'danger': styles.buttonDangerDisabled,
 }
 
 const jellyTypeClasses: Record<ButtonType, string> = {
-  'default': styles.gButtonJellyDefault,
-  'primary': styles.gButtonJellyPrimary,
-  'success': styles.gButtonJellySuccess,
-  'warn': styles.gButtonJellyWarn,
-  'danger': styles.gButtonJellyDanger,
+  'default': styles.buttonJellyDefault,
+  'primary': styles.buttonJellyPrimary,
+  'success': styles.buttonJellySuccess,
+  'warn': styles.buttonJellyWarn,
+  'danger': styles.buttonJellyDanger,
 }
 
 const jellyDisabledClasses: Record<ButtonType, string> = {
-  'default': styles.gButtonJellyDefaultDisabled,
-  'primary': styles.gButtonJellyPrimaryDisabled,
-  'success': styles.gButtonJellySuccessDisabled,
-  'warn': styles.gButtonJellyWarnDisabled,
-  'danger': styles.gButtonJellyDangerDisabled,
+  'default': styles.buttonJellyDefaultDisabled,
+  'primary': styles.buttonJellyPrimaryDisabled,
+  'success': styles.buttonJellySuccessDisabled,
+  'warn': styles.buttonJellyWarnDisabled,
+  'danger': styles.buttonJellyDangerDisabled,
 }
 
 export const Button = (propsRaw: Partial<ButtonProps>) => {
@@ -64,7 +64,7 @@ export const Button = (propsRaw: Partial<ButtonProps>) => {
   )
 
   const buttonClasses = () => {
-    let classes = `${styles.gButton} ${sizeClasses[props.size]}`
+    let classes = `${styles.button} ${sizeClasses[props.size]}`
     if (props.rounded) {
       classes += ` ${styles.rounded}`
     }

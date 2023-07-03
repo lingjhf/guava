@@ -1,4 +1,4 @@
-.gButton {
+.button {
   --button-rounded: 4px;
   --button-cursor: pointer;
   box-sizing: border-box;
@@ -15,11 +15,11 @@
   height: var(--button-height);
 }
 
-.gButton:hover {
+.button:hover {
   background-color: var(--button-bg-color-hover);
 }
 
-.gButton:active {
+.button:active {
   background-color: var(--button-bg-color-active);
 }
 
@@ -27,32 +27,32 @@
   --button-rounded: 16px;
 }
 
-.gButton:disabled {
+.button:disabled {
   --button-cursor: not-allowed;
 }
 
-.gButtonSizeDefault {
+.buttonSizeDefault {
   --button-padding: 9px 16px;
   --button-font-size: 14px;
   --button-line-height: 22px;
   --button-height: 40px;
 }
 
-.gButtonSizeSmall {
+.buttonSizeSmall {
   --button-padding: 3px 8px;
   --button-font-size: 12px;
   --button-line-height: 18px;
   --button-height: 24px;
 }
 
-.gButtonSizeMedium {
+.buttonSizeMedium {
   --button-padding: 6px 12px;
   --button-font-size: 13px;
   --button-line-height: 20px;
   --button-height: 32px;
 }
 
-.gButtonSizeLarge {
+.buttonSizeLarge {
   --button-padding: 12px 20px;
   --button-font-size: 16px;
   --button-line-height: 24px;
@@ -60,25 +60,25 @@
 }
 
 /* default style */
-.gButtonDefault {
+.buttonDefault {
   --button-text-color: var(--text-common-primary);
   --button-bg-color: var(--bg-controls-default);
   --button-bg-color-hover: var(--bg-controls-hover);
   --button-bg-color-active: var(--bg-controls-active);
 }
-.gButtonDefaultDisabled {
+.buttonDefaultDisabled {
   --button-text-color: var(--text-common-disabled);
   --button-bg-color: var(--bg-controls-disabled);
   --button-bg-color-hover: var(--bg-controls-disabled);
   --button-bg-color-active: var(--bg-controls-disabled);
 }
-.gButtonJellyDefault {
+.buttonJellyDefault {
   --button-text-color: var(--text-common-primary);
   --button-bg-color: var(--bg-brand-light-default);
   --button-bg-color-hover: var(--bg-brand-light-hover);
   --button-bg-color-active: var(--bg-brand-light-active);
 }
-.gButtonJellyDefaultDisabled {
+.buttonJellyDefaultDisabled {
   --button-text-color: var(--text-common-disabled);
   --button-bg-color: var(--bg-brand-light-disabled);
   --button-bg-color-hover: var(--bg-brand-light-disabled);
@@ -86,25 +86,25 @@
 }
 
 /* primary style */
-.gButtonPrimary {
+.buttonPrimary {
   --button-text-color: var(--text-static-primary);
   --button-bg-color: var(--bg-brand-default);
   --button-bg-color-hover: var(--bg-brand-hover);
   --button-bg-color-active: var(--bg-brand-active);
 }
-.gButtonPrimaryDisabled {
+.buttonPrimaryDisabled {
   --button-text-color: var(--text-static-disabled);
   --button-bg-color: var(--bg-brand-disabled);
   --button-bg-color-hover: var(--bg-brand-disabled);
   --button-bg-color-active: var(--bg-brand-disabled);
 }
-.gButtonJellyPrimary {
+.buttonJellyPrimary {
   --button-text-color: var(--text-brand-default);
   --button-bg-color: var(--bg-brand-light-default);
   --button-bg-color-hover: var(--bg-brand-light-hover);
   --button-bg-color-active: var(--bg-brand-light-active);
 }
-.gButtonJellyPrimaryDisabled {
+.buttonJellyPrimaryDisabled {
   --button-text-color: var(--text-brand-disabled);
   --button-bg-color: var(--bg-brand-light-disabled);
   --button-bg-color-hover: var(--bg-brand-light-disabled);
@@ -112,25 +112,25 @@
 }
 
 /* success style */
-.gButtonSuccess {
+.buttonSuccess {
   --button-text-color: var(--text-static-primary);
   --button-bg-color: var(--bg-success-default);
   --button-bg-color-hover: var(--bg-success-hover);
   --button-bg-color-active: var(--bg-success-active);
 }
-.gButtonSuccessDisabled {
+.buttonSuccessDisabled {
   --button-text-color: var(--text-static-disabled);
   --button-bg-color: var(--bg-success-disabled);
   --button-bg-color-hover: var(--bg-success-disabled);
   --button-bg-color-active: var(--bg-success-disabled);
 }
-.gButtonJellySuccess {
+.buttonJellySuccess {
   --button-text-color: var(--text-success-default);
   --button-bg-color: var(--bg-success-light-default);
   --button-bg-color-hover: var(--bg-success-light-hover);
   --button-bg-color-active: var(--bg-success-light-active);
 }
-.gButtonJellySuccessDisabled {
+.buttonJellySuccessDisabled {
   --button-text-color: var(--text-success-disabled);
   --button-bg-color: var(--bg-success-light-disabled);
   --button-bg-color-hover: var(--bg-success-light-disabled);
@@ -138,25 +138,25 @@
 }
 
 /* warn style */
-.gButtonWarn {
+.buttonWarn {
   --button-text-color: var(--text-static-primary);
   --button-bg-color: var(--bg-warn-default);
   --button-bg-color-hover: var(--bg-warn-hover);
   --button-bg-color-active: var(--bg-warn-active);
 }
-.gButtonWarnDisabled {
+.buttonWarnDisabled {
   --button-text-color: var(--text-static-disabled);
   --button-bg-color: var(--bg-warn-disabled);
   --button-bg-color-hover: var(--bg-warn-disabled);
   --button-bg-color-active: var(--bg-warn-disabled);
 }
-.gButtonJellyWarn {
+.buttonJellyWarn {
   --button-text-color: var(--text-warn-default);
   --button-bg-color: var(--bg-warn-light-default);
   --button-bg-color-hover: var(--bg-warn-light-hover);
   --button-bg-color-active: var(--bg-warn-light-active);
 }
-.gButtonJellyWarnDisabled {
+.buttonJellyWarnDisabled {
   --button-text-color: var(--text-warn-disabled);
   --button-bg-color: var(--bg-warn-light-disabled);
   --button-bg-color-hover: var(--bg-warn-light-disabled);
@@ -164,25 +164,25 @@
 }
 
 /* danger style */
-.gButtonDanger {
+.buttonDanger {
   --button-text-color: var(--text-static-primary);
   --button-bg-color: var(--bg-danger-default);
   --button-bg-color-hover: var(--bg-danger-hover);
   --button-bg-color-active: var(--bg-danger-active);
 }
-.gButtonDangerDisabled {
+.buttonDangerDisabled {
   --button-text-color: var(--text-static-disabled);
   --button-bg-color: var(--bg-danger-disabled);
   --button-bg-color-hover: var(--bg-danger-disabled);
   --button-bg-color-active: var(--bg-danger-disabled);
 }
-.gButtonJellyDanger {
+.buttonJellyDanger {
   --button-text-color: var(--text-danger-default);
   --button-bg-color: var(--bg-danger-light-default);
   --button-bg-color-hover: var(--bg-danger-light-hover);
   --button-bg-color-active: var(--bg-danger-light-active);
 }
-.gButtonJellyDangerDisabled {
+.buttonJellyDangerDisabled {
   --button-text-color: var(--text-danger-disabled);
   --button-bg-color: var(--bg-danger-light-disabled);
   --button-bg-color-hover: var(--bg-danger-light-disabled);
