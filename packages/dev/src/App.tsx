@@ -1,5 +1,5 @@
 import { createSignal, type Component, For } from 'solid-js'
-import { GConfigProvider, GCopy, GHightlight, GAlert, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel, GInput, GInputNumber, GRate, GButton, GList, GListItem, GListSubheader } from '@lingjhf/guava'
+import { GConfigProvider, GTextButton, GCopy, GHightlight, GAlert, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel, GInput, GInputNumber, GRate, GButton, GList, GListItem, GListSubheader } from '@lingjhf/guava'
 import 'virtual:uno.css'
 const App: Component = () => {
   async function ok() {
@@ -291,18 +291,21 @@ const App: Component = () => {
     setItems([1, 3, 5])
   }
   const code = `
-import xx from 'fuck'
+from xx import xxx
 
-function test(){
-  
-}
+def main():
+  pass
             `
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class=' px-100px'>
           <GCard></GCard>
-          <GHightlight code={code} />
+
+          <GButton >Button</GButton>
+          <GButton variant='text' >Button</GButton>
+          <GButton variant='text' icon ></GButton>
+          <GHightlight code={code} language='python' />
           {/* <GCopy></GCopy> */}
           {/* <GList nav>
             <GListSubheader>Title</GListSubheader>

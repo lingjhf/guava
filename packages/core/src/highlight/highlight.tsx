@@ -1,6 +1,8 @@
 import type { GuavaProps } from '../types'
 import { createSignal, onMount } from 'solid-js'
 import { generateSplitEventHandlersProps } from '../utils'
+import { GButton } from '../button'
+import { CopyOutlined } from '../icon/copy-outlined'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 import styles from './highlight.module.css'
@@ -38,6 +40,9 @@ export const Hightlight = (propsRaw: Partial<HightlightProps>) => {
   })
   return (
     <div class={styles.highlight}>
+      <GButton class={styles.highlightCopy} variant='text' icon size='medium'>
+        <CopyOutlined></CopyOutlined>
+      </GButton>
       <span class={styles.highlightLanguage}>{currentLanguage()}</span>
       <pre class={styles.highlightPre}>
         <code ref={codeRef!} class={styles.highlightCode}>

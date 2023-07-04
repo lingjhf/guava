@@ -1,15 +1,16 @@
 import type { GuavaParentProps } from '../types'
-import { generateSplitEventHandlersProps } from '../utils'
+import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
 import styles from './button.module.css'
 
 export type ButtonSize = 'default' | 'small' | 'medium' | 'large'
 export type ButtonType = 'default' | 'primary' | 'success' | 'warn' | 'danger'
 export interface ButtonProps extends GuavaParentProps<HTMLButtonElement> {
-  size: ButtonSize,
-  type: ButtonType,
-  jelly: boolean,
+  size: ButtonSize
+  type: ButtonType
   rounded: boolean
   disabled: boolean
+  icon: boolean
+  variant?: 'text' | 'jelly'
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -51,38 +52,55 @@ const jellyDisabledClasses: Record<ButtonType, string> = {
   'danger': styles.buttonJellyDangerDisabled,
 }
 
+const iconSizeClasses: Record<ButtonSize, string> = {
+  'default': styles.iconButtonSizeDefault,
+  'small': styles.iconButtonSizeSmall,
+  'medium': styles.iconButtonSizeMedium,
+  'large': styles.iconButtonSizeLarge
+}
+
 export const Button = (propsRaw: Partial<ButtonProps>) => {
   const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
     {
       size: 'default',
       type: 'default',
-      jelly: false,
       rounded: false,
-      disabled: false
+      disabled: false,
+      icon: false,
     },
   )
 
   const buttonClasses = () => {
-    let classes = `${styles.button} ${sizeClasses[props.size]}`
-    if (props.rounded) {
-      classes += ` ${styles.rounded}`
-    }
-    if (props.jelly) {
-      classes += ` ${jellyTypeClasses[props.type]}`
-      if (props.disabled) {
-        classes += ` ${jellyDisabledClasses[props.type]}`
-      }
+    const classes = [styles.button, sizeClasses[props.size]]
+    if (props.icon) {
+      classes.push(iconSizeClasses[props.size])
     } else {
-      classes += ` ${typeClasses[props.type]}`
-      if (props.disabled) {
-        classes += ` ${typeDisabledClasses[props.type]}`
-      }
+      classes.push(sizeClasses[props.size])
     }
-    if (props.class) {
-      classes += ` ${props.class}`
+    if (props.rounded) {
+      classes.push(styles.rounded)
     }
-    return classes
+    switch (props.variant) {
+      case 'jelly':
+        classes.push(jellyTypeClasses[props.type])
+        if (props.disabled) {
+          classes.push(jellyDisabledClasses[props.type])
+        }
+        break
+      case 'text':
+        classes.push(styles.textButton)
+        if (props.disabled) {
+          classes.push(styles.textButtonDisabled)
+        }
+        break
+      default:
+        classes.push(typeClasses[props.type])
+        if (props.disabled) {
+          classes.push(typeDisabledClasses[props.type])
+        }
+    }
+    return mergeClasses(classes, props.class)
   }
 
   return (

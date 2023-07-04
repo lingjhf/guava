@@ -188,3 +188,40 @@
   --button-bg-color-hover: var(--bg-danger-light-disabled);
   --button-bg-color-active: var(--bg-danger-light-disabled);
 }
+
+.textButton {
+  --button-text-color: var(--text-common-primary);
+  --button-bg-color: transparent;
+  --button-bg-color-hover: var(--bg-bgless-hover);
+  --button-bg-color-active: var(--bg-bgless-active);
+}
+
+.textButtonDisabled {
+  --button-bg-color: transparent;
+  --button-bg-color-hover: transparent;
+  --button-bg-color-active: transparent;
+}
+
+.iconButtonSizeDefault {
+  --button-padding: 4px;
+  --button-font-size: 16px;
+  --button-height: 24px;
+}
+
+.iconButtonSizeSmall {
+  --button-padding: 4px;
+  --button-font-size: 12px;
+  --button-height: 20px;
+}
+
+.iconButtonSizeMedium {
+  --button-padding: 8px;
+  --button-font-size: 16px;
+  --button-height: 32px;
+}
+
+.iconButtonSizeLarge {
+  --button-padding: 10px;
+  --button-font-size: 20px;
+  --button-height: 40px;
+}
