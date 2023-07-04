@@ -1,9 +1,26 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
+import { CodeExample } from '../../components/code-example'
+import { GButton } from '@lingjhf/guava'
+
+const baseCode = `
+<GButton>Button</GButton>
+<GButton type="primary">Button</GButton>
+<GButton type="success">Button</GButton>
+<GButton type="warn">Button</GButton>
+<GButton type="danger">Button</GButton>
+`
 ---
 
 <DocLayout>
   <h1>Button</h1>
   <p>提供一个常用按钮</p>
   <h2>基础用法</h2>
+  <CodeExample client:only="solid-js" code={baseCode}>
+    <GButton client:only="solid-js">Button</GButton>
+    <GButton client:only="solid-js" type="primary">Button</GButton>
+    <GButton client:only="solid-js" type="success">Button</GButton>
+    <GButton client:only="solid-js" type="warn">Button</GButton>
+    <GButton client:only="solid-js" type="danger">Button</GButton>
+  </CodeExample>
 </DocLayout>

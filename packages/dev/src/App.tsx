@@ -294,7 +294,7 @@ const App: Component = () => {
 from xx import xxx
 
 def main():
-  pass
+  a = '123'
             `
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
