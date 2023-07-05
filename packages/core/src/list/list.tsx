@@ -1,5 +1,5 @@
 import type { Accessor, Setter } from 'solid-js'
-import { createContext, useContext, createSignal, createEffect } from 'solid-js'
+import { createContext, useContext, createSignal, createEffect, on } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
 import styles from './list.module.css'
@@ -41,9 +41,9 @@ export const List = (propsRaw: Partial<ListProps>) => {
     setNav(props.nav)
   })
 
-  createEffect(() => {
+  createEffect(on(() => props.value, () => {
     activeItem(props.value)
-  })
+  }))
 
   function addItem(item: Accessor<boolean>, setItem: Setter<boolean>, key?: ListValue) {
     items.set(key ?? index, { item, setItem })

@@ -1,0 +1,54 @@
+.listGroupHeader {
+  --list-item-text-color: var(--text-common-primary);
+  --list-item-text-color-selected: var(--text-brand-default);
+  --list-item-bg-color: transparent;
+  --list-item-bg-color-hover: var(--bg-bgless-hover);
+  --list-item-bg-color-active: var(--bg-bgless-active);
+  --list-item-bg-color-selected: var(--bg-brand-light-default);
+  --list-item-border-radius: 0;
+  --list-item-nav-border-radius: 4px;
+  padding: 7px 8px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--list-item-text-color);
+  background-color: var(--list-item-bg-color);
+  border-radius: var(--list-item-border-radius);
+  display: flex;
+  align-items: center;
+}
+
+.listGroupHeader:hover {
+  --list-item-bg-color: var(--list-item-bg-color-hover);
+}
+
+.listGroupHeader:active {
+  --list-item-bg-color: var(--list-item-bg-color-active);
+}
+
+.listGroupHeaderSelected {
+  --list-item-bg-color: var(--list-item-bg-color-selected);
+  --list-item-text-color: var(--list-item-text-color-selected);
+}
+
+.listGroupHeaderNav {
+  --list-item-border-radius: var(--list-item-nav-border-radius);
+}
+
+.listGroupHeaderNav:not(:last-child) {
+  margin-bottom: 4px;
+}
+
+.listGroupHeaderIcon {
+  font-size: 16px;
+  margin-left: auto;
+}
+
+.listGroupChildren {
+  height: 0px;
+  overflow: hidden;
+}
+
+.listGroupChildrenExpand {
+  height: auto;
+  overflow: hidden;
+}
