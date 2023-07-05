@@ -3,6 +3,7 @@ import type { FlowProps } from 'solid-js'
 
 export interface CodeExampleProps extends FlowProps {
   code: string
+  language?: string | undefined
 }
 
 export const CodeExample = (props: CodeExampleProps) => {
@@ -13,7 +14,7 @@ export const CodeExample = (props: CodeExampleProps) => {
         {props.children}
       </div>
       <div>
-        <GHightlight code={props.code} />
+        <GHightlight code={props.code} language={props.language ?? ''} />
       </div>
     </GCard>
   )

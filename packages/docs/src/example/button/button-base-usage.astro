@@ -1,0 +1,20 @@
+---
+import { CodeExample } from '../../components/code-example'
+import { GButton } from '@lingjhf/guava'
+
+const code = `
+<GButton>Button</GButton>
+<GButton type="primary">Button</GButton>
+<GButton type="success">Button</GButton>
+<GButton type="warn">Button</GButton>
+<GButton type="danger">Button</GButton>
+`
+---
+
+<CodeExample client:only="solid-js" code={code} language="jsx">
+  <GButton client:only="solid-js">Button</GButton>
+  <GButton client:only="solid-js" type="primary">Button</GButton>
+  <GButton client:only="solid-js" type="success">Button</GButton>
+  <GButton client:only="solid-js" type="warn">Button</GButton>
+  <GButton client:only="solid-js" type="danger">Button</GButton>
+</CodeExample>

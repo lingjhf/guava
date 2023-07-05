@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro'
 import { NavigationBar } from './NavigationBar'
 import type { NavigationBarItem } from './NavigationBar'
 import { basename } from 'path'
+import { GScrollbar } from '@lingjhf/guava'
 
 const componentsPosts = await Astro.glob('../pages/components/*.astro')
 const navItems = componentsPosts.map((item) => {
@@ -22,8 +23,12 @@ const pathname = Astro.url.pathname
     <div class="h-full w-300px">
       <NavigationBar client:only="solid-js" value={pathname} items={navItems} />
     </div>
-    <div class="h-full w-full p-32px box-border">
-      <slot />
+    <div class="h-full w-full">
+      <GScrollbar client:only="solid-js">
+        <div class="p-32px">
+          <slot />
+        </div>
+      </GScrollbar>
     </div>
   </div>
 </BaseLayout>

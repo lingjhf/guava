@@ -1,26 +1,23 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
-import { CodeExample } from '../../components/code-example'
-import { GButton } from '@lingjhf/guava'
-
-const baseCode = `
-<GButton>Button</GButton>
-<GButton type="primary">Button</GButton>
-<GButton type="success">Button</GButton>
-<GButton type="warn">Button</GButton>
-<GButton type="danger">Button</GButton>
-`
+import BaseUsage from '../../example/button/button-base-usage.astro'
+import DisabledUsage from '../../example/button/button-disabled-usage.astro'
+import TextUsage from '../../example/button/text-button-usage.astro'
+import JellyUsage from '../../example/button/jelly-button-usage.astro'
+import IconUsage from '../../example/button/icon-button-usage.astro'
 ---
 
 <DocLayout>
   <h1>Button</h1>
   <p>提供一个常用按钮</p>
   <h2>基础用法</h2>
-  <CodeExample client:only="solid-js" code={baseCode}>
-    <GButton client:only="solid-js">Button</GButton>
-    <GButton client:only="solid-js" type="primary">Button</GButton>
-    <GButton client:only="solid-js" type="success">Button</GButton>
-    <GButton client:only="solid-js" type="warn">Button</GButton>
-    <GButton client:only="solid-js" type="danger">Button</GButton>
-  </CodeExample>
+  <BaseUsage />
+  <h2>禁用状态</h2>
+  <DisabledUsage />
+  <h2>文字按钮</h2>
+  <TextUsage />
+  <h2>果冻按钮</h2>
+  <JellyUsage />
+  <h2>图标按钮</h2>
+  <IconUsage />
 </DocLayout>
