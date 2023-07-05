@@ -11,7 +11,11 @@ export interface ListItemProps extends GuavaParentProps<HTMLDivElement> {
 
 export const ListItem = (propsRaw: Partial<ListItemProps>) => {
   const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, {})
-  const { nav, addItem, removeItem, activeItem } = useListContext()
+  const listContext = useListContext()
+  if (!listContext) {
+    throw Error('list context is undefined')
+  }
+  const { nav, addItem, removeItem, activeItem } = listContext
   const [selected, setSelected] = createSignal(false)
   const itemKey = addItem(selected, setSelected, props.value)
 

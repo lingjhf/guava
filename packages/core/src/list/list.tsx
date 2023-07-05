@@ -14,7 +14,7 @@ interface ListProviderValue {
 }
 
 export const ListContext = createContext<ListProviderValue>()
-export const useListContext = () => useContext(ListContext)!
+export const useListContext = () => useContext(ListContext)
 
 export interface ListProps extends GuavaParentProps<HTMLDivElement> {
   value?: ListValue
