@@ -1,5 +1,5 @@
-import type { Accessor, JSX, Setter } from 'solid-js'
-import { createContext, useContext, createSignal, createEffect, Show } from 'solid-js'
+import type { Accessor, JSX, } from 'solid-js'
+import { createContext, useContext, createSignal, Show } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import type { ListValue } from './list'
 import { useListContext } from './list'
