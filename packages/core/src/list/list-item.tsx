@@ -7,10 +7,13 @@ import { useListGroupContext } from './list-group'
 import styles from './list-item.module.css'
 export interface ListItemProps extends GuavaParentProps<HTMLDivElement> {
   value?: ListValue
+  defaultExpandActive: boolean
 }
 
 export const ListItem = (propsRaw: Partial<ListItemProps>) => {
-  const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, {})
+  const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, {
+    defaultExpandActive: false
+  })
   const listContext = useListContext()
   const listContextGroup = useListGroupContext()
   if (!listContext) {

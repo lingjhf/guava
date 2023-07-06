@@ -14,6 +14,7 @@ export interface ListGroupProviderValue {
   removeItem: (itemKey: ListValue) => void
   activeGroup: () => void
   inactiveGroup: () => void
+  expandGroup: () => void
 }
 
 export const ListGroupContext = createContext<ListGroupProviderValue>()
@@ -88,6 +89,11 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
   }
 
   function expandGroup() {
+    setExpand(true)
+    listGroupContext?.expandGroup()
+  }
+
+  function clickExpandGroup() {
     setExpand(v => !v)
   }
 
@@ -97,11 +103,12 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
     removeItem,
     activeGroup,
     inactiveGroup,
+    expandGroup,
   }
   return (
     <ListGroupContext.Provider value={providerValue}>
       <div >
-        <div class={groupHeaderClasses()} style={levelStyles()} onClick={expandGroup}>
+        <div class={groupHeaderClasses()} style={levelStyles()} onClick={clickExpandGroup}>
           {props.header}
           <Show when={expand()} fallback={<ChevronDownFilled class={styles.listGroupHeaderIcon} />}>
             <ChevronUpFilled class={styles.listGroupHeaderIcon} />

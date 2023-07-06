@@ -76,6 +76,7 @@ export const List = (propsRaw: Partial<ListProps>) => {
     active?.setItem(true)
     inactive?.groupContext?.inactiveGroup()
     active?.groupContext?.activeGroup()
+    active?.groupContext?.expandGroup()
   }
 
   const providerValue = {
