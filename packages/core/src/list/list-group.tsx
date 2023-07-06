@@ -11,6 +11,8 @@ import styles from './list-group.module.css'
 interface ListGroupProviderValue {
   addItem: (item: Accessor<boolean>, key: ListValue) => void
   removeItem: (itemKey: ListValue) => void
+  activeGroup: () => void
+  inactiveGroup: () => void
 }
 
 export const ListGroupContext = createContext<ListGroupProviderValue>()
@@ -32,12 +34,12 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
   }
   const items = new Map<ListValue, { item: Accessor<boolean> }>()
   const [expand, setExpand] = createSignal(false)
-  const [selected, setSelected] = createSignal(false)
+  const [active, setActive] = createSignal(false)
 
   const groupHeaderClasses = () => {
     const classes = [styles.listGroupHeader]
-    if (selected()) {
-      classes.push(styles.listGroupHeaderSelected)
+    if (active()) {
+      classes.push(styles.listGroupHeaderActive)
     }
     if (listContext.nav()) {
       classes.push(styles.listGroupHeaderNav)
@@ -62,6 +64,17 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
 
   function removeItem(itemKey: ListValue) {
     items.delete(itemKey)
+    listGroupContext?.removeItem(itemKey)
+  }
+
+  function activeGroup() {
+    setActive(true)
+    listGroupContext?.activeGroup()
+  }
+
+  function inactiveGroup() {
+    setActive(false)
+    listGroupContext?.inactiveGroup()
   }
 
   function expandGroup() {
@@ -71,6 +84,8 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
   const providerValue = {
     addItem,
     removeItem,
+    activeGroup,
+    inactiveGroup,
   }
   return (
     <ListGroupContext.Provider value={providerValue}>

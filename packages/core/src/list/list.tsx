@@ -55,13 +55,17 @@ export const List = (propsRaw: Partial<ListProps>) => {
   }
 
   function activeItem(itemKey?: ListValue) {
+    let active: Setter<boolean> | undefined
+    let inactive: Setter<boolean> | undefined
     for (const [key, { item, setItem }] of items.entries()) {
       if (key === itemKey && !item()) {
-        setItem(true)
+        active = setItem
       } else if (key !== itemKey && item()) {
-        setItem(false)
+        inactive = setItem
       }
     }
+    inactive?.(false)
+    active?.(true)
   }
 
   const providerValue = {
