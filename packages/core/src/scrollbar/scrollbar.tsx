@@ -422,7 +422,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
       classList={mergeClassList({}, props.classList)}
       onMouseEnter={onEnterScrollArea}
       onMouseLeave={onLeaveScrollArea}>
-      <div ref={setContentRef}>
+      <div ref={setContentRef} class={styles.scrollContent}>
         {props.children}
       </div>
       <div
