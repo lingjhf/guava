@@ -51,7 +51,7 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
     } else {
       listContextGroup?.inactiveGroup()
     }
-  }))
+  }, { defer: true }))
 
   onCleanup(() => {
     removeItem(itemKey)
