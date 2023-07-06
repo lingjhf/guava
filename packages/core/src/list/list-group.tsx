@@ -8,7 +8,7 @@ import { ChevronUpFilled } from '../icon/chevron-up-filled'
 import { ChevronDownFilled } from '../icon/chevron-down-filled'
 import styles from './list-group.module.css'
 
-interface ListGroupProviderValue {
+export interface ListGroupProviderValue {
   level: number
   addItem: (item: Accessor<boolean>, key: ListValue) => void
   removeItem: (itemKey: ListValue) => void

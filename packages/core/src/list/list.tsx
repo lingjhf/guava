@@ -1,6 +1,7 @@
 import type { Accessor, Setter } from 'solid-js'
 import { createContext, useContext, createSignal, createEffect, on } from 'solid-js'
 import type { GuavaParentProps } from '../types'
+import type { ListGroupProviderValue } from './list-group'
 import { generateSplitEventHandlersProps, mergeClasses, mergeStyles } from '../utils'
 import styles from './list.module.css'
 
@@ -8,7 +9,7 @@ export type ListValue = string | number
 
 interface ListProviderValue {
   nav: Accessor<boolean>
-  addItem: (item: Accessor<boolean>, setItem: Setter<boolean>, key?: ListValue) => ListValue
+  addItem: (item: ItemMapValue, key?: ListValue) => ListValue
   removeItem: (itemKey: ListValue) => void
   activeItem: (itemKey: ListValue) => void
 }
@@ -21,12 +22,19 @@ export interface ListProps extends GuavaParentProps<HTMLDivElement> {
   nav: boolean
 }
 
+interface ItemMapValue {
+  item: Accessor<boolean>
+  setItem: Setter<boolean>
+  groupContext?: ListGroupProviderValue
+
+}
+
 export const List = (propsRaw: Partial<ListProps>) => {
 
   const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, { nav: false })
 
   let index = 0
-  const items = new Map<ListValue, { item: Accessor<boolean>, setItem: Setter<boolean> }>()
+  const items = new Map<ListValue, ItemMapValue>()
   const [nav, setNav] = createSignal(props.nav)
 
   const listClasses = () => {
@@ -45,8 +53,8 @@ export const List = (propsRaw: Partial<ListProps>) => {
     activeItem(props.value)
   }))
 
-  function addItem(item: Accessor<boolean>, setItem: Setter<boolean>, key?: ListValue) {
-    items.set(key ?? index, { item, setItem })
+  function addItem(item: ItemMapValue, key?: ListValue) {
+    items.set(key ?? index, item)
     return key ?? index++
   }
 
@@ -55,17 +63,19 @@ export const List = (propsRaw: Partial<ListProps>) => {
   }
 
   function activeItem(itemKey?: ListValue) {
-    let active: Setter<boolean> | undefined
-    let inactive: Setter<boolean> | undefined
-    for (const [key, { item, setItem }] of items.entries()) {
-      if (key === itemKey && !item()) {
-        active = setItem
-      } else if (key !== itemKey && item()) {
-        inactive = setItem
+    let active: ItemMapValue | undefined
+    let inactive: ItemMapValue | undefined
+    for (const [key, value] of items.entries()) {
+      if (key === itemKey && !value.item()) {
+        active = value
+      } else if (key !== itemKey && value.item()) {
+        inactive = value
       }
     }
-    inactive?.(false)
-    active?.(true)
+    inactive?.setItem(false)
+    active?.setItem(true)
+    inactive?.groupContext?.inactiveGroup()
+    active?.groupContext?.activeGroup()
   }
 
   const providerValue = {

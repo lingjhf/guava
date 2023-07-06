@@ -2,10 +2,9 @@ import { createEffect, createSignal, on, onCleanup } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import type { ListValue } from './list'
 import { useListContext } from './list'
-import styles from './list-item.module.css'
 import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
 import { useListGroupContext } from './list-group'
-
+import styles from './list-item.module.css'
 export interface ListItemProps extends GuavaParentProps<HTMLDivElement> {
   value?: ListValue
 }
@@ -19,7 +18,7 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
   }
   const { nav, addItem, removeItem, activeItem } = listContext
   const [active, setActive] = createSignal(false)
-  const itemKey = addItem(active, setActive, props.value)
+  const itemKey = addItem({ item: active, setItem: setActive, groupContext: listContextGroup }, props.value)
 
   const itemClasses = () => {
     const classes = [styles.listItem]
@@ -41,17 +40,9 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
   createEffect(on(() => props.value, () => {
     if (props.value !== undefined && props.value !== itemKey) {
       removeItem(itemKey)
-      addItem(active, setActive, props.value)
+      addItem({ item: active, setItem: setActive, groupContext: listContextGroup }, props.value)
     }
   }))
-
-  createEffect(on(active, (value) => {
-    if (value) {
-      listContextGroup?.activeGroup()
-    } else {
-      listContextGroup?.inactiveGroup()
-    }
-  }, { defer: true }))
 
   onCleanup(() => {
     removeItem(itemKey)
