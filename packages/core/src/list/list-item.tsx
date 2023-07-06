@@ -7,13 +7,12 @@ import { useListGroupContext } from './list-group'
 import styles from './list-item.module.css'
 export interface ListItemProps extends GuavaParentProps<HTMLDivElement> {
   value?: ListValue
-  link: boolean
+  link?: string
   defaultExpandActive: boolean
 }
 
 export const ListItem = (propsRaw: Partial<ListItemProps>) => {
   const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, {
-    link: false,
     defaultExpandActive: false
   })
   const listContext = useListContext()
@@ -59,7 +58,7 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
   }
   return (
     <Show when={props.link} fallback={<div class={itemClasses()} style={levelStyles()} onClick={selectedItem}>{props.children}</div>}>
-      <a class={itemClasses()} style={levelStyles()} onClick={selectedItem}>{props.children}</a>
+      <a href={props.link} class={itemClasses()} style={levelStyles()} onClick={selectedItem}>{props.children}</a>
     </Show>
   )
 }
