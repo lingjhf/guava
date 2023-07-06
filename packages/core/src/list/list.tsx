@@ -1,7 +1,7 @@
 import type { Accessor, Setter } from 'solid-js'
 import { createContext, useContext, createSignal, createEffect, on } from 'solid-js'
 import type { GuavaParentProps } from '../types'
-import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
+import { generateSplitEventHandlersProps, mergeClasses, mergeStyles } from '../utils'
 import styles from './list.module.css'
 
 export type ListValue = string | number
@@ -34,7 +34,7 @@ export const List = (propsRaw: Partial<ListProps>) => {
     if (nav()) {
       classes.push(styles.listNav)
     }
-    return classes
+    return mergeClasses(classes)
   }
 
   createEffect(() => {
@@ -76,7 +76,7 @@ export const List = (propsRaw: Partial<ListProps>) => {
   }
   return (
     <ListContext.Provider value={providerValue}>
-      <div class={mergeClasses(listClasses())} {...eventHandlers}>
+      <div class={listClasses()} style={mergeStyles({}, props.style)} {...eventHandlers}>
         {propsRaw.children}
       </div>
     </ListContext.Provider>
