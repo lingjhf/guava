@@ -44,6 +44,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   let horizontalSliderRef: HTMLElement
   let verticalSliderRef: HTMLElement
   let isAction = false
+  let isEnter = false
   let isLeave = false
   let isVisibleHorizontalScroll = false
   let isVisibleVerticalScroll = false
@@ -239,19 +240,19 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = viewRef.getBoundingClientRect()
       for (let i = 0; i < entries.length; i++) {
+        scrollController.setViewSize({ height })
+        setVerticalAndScrollY()
         if (isVerticalOverflow()) {
-          scrollController.setViewSize({ height })
-          setVerticalAndScrollY()
-          if (props.type === 'visible') {
+          if (props.type === 'visible' || (props.type === 'auto' && isEnter)) {
             visibleVerticalScrollAnimation()
           }
         } else if (props.type === 'visible') {
           invisibleVerticalScrollAnimation()
         }
+        scrollController.setViewSize({ width })
+        setHorizontalAndScrollX()
         if (isHorizontalOverflow()) {
-          scrollController.setViewSize({ width })
-          setHorizontalAndScrollX()
-          if (props.type === 'visible') {
+          if (props.type === 'visible' || (props.type === 'auto' && isEnter)) {
             visibleHorizontalScrollAnimation()
           }
         } else if (props.type === 'visible') {
@@ -267,19 +268,19 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = contentRef.getBoundingClientRect()
       for (let i = 0; i < entries.length; i++) {
+        scrollController.setContentSize({ height })
+        setVerticalAndScrollY()
         if (isVerticalOverflow()) {
-          scrollController.setContentSize({ height })
-          setVerticalAndScrollY()
-          if (props.type === 'visible') {
+          if (props.type === 'visible' || (props.type === 'auto' && isEnter)) {
             visibleVerticalScrollAnimation()
           }
         } else if (props.type === 'visible') {
           invisibleVerticalScrollAnimation()
         }
+        scrollController.setContentSize({ width })
+        setHorizontalAndScrollX()
         if (isHorizontalOverflow()) {
-          scrollController.setContentSize({ width })
-          setHorizontalAndScrollX()
-          if (props.type === 'visible') {
+          if (props.type === 'visible' || (props.type === 'auto' && isEnter)) {
             visibleHorizontalScrollAnimation()
           }
         } else if (props.type === 'visible') {
@@ -292,6 +293,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   //鼠标进入滚动区域显示滚动条
   function onEnterScrollArea() {
+    isEnter = true
     isLeave = false
     if (props.type === 'auto') {
       visibleScrollbarAnimation()
@@ -300,6 +302,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   //鼠标离开滚动区域隐藏滚动条
   function onLeaveScrollArea() {
+    isEnter = false
     isLeave = true
     if (props.type === 'auto' && !isAction) {
       invisibleScrollbarAnimation()
