@@ -1,4 +1,4 @@
-import { createEffect, createSignal, on, onCleanup } from 'solid-js'
+import { Show, createEffect, createSignal, on, onCleanup } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import type { ListValue } from './list'
 import { useListContext } from './list'
@@ -7,11 +7,13 @@ import { useListGroupContext } from './list-group'
 import styles from './list-item.module.css'
 export interface ListItemProps extends GuavaParentProps<HTMLDivElement> {
   value?: ListValue
+  link: boolean
   defaultExpandActive: boolean
 }
 
 export const ListItem = (propsRaw: Partial<ListItemProps>) => {
   const [eventHandlers, props] = generateSplitEventHandlersProps(propsRaw, {
+    link: false,
     defaultExpandActive: false
   })
   const listContext = useListContext()
@@ -31,7 +33,7 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
     if (nav()) {
       classes.push(styles.listItemNav)
     }
-    return classes
+    return mergeClasses(classes)
   }
 
   const levelStyles = () => {
@@ -56,6 +58,8 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
     activeItem(itemKey)
   }
   return (
-    <div class={mergeClasses(itemClasses())} style={levelStyles()} onClick={selectedItem}>{props.children}</div>
+    <Show when={props.link} fallback={<div class={itemClasses()} style={levelStyles()} onClick={selectedItem}>{props.children}</div>}>
+      <a class={itemClasses()} style={levelStyles()} onClick={selectedItem}>{props.children}</a>
+    </Show>
   )
 }

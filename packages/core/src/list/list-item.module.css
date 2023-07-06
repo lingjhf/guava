@@ -7,6 +7,7 @@
   --list-item-bg-color-active: var(--bg-brand-light-default);
   --list-item-border-radius: 0;
   --list-item-nav-border-radius: 4px;
+  display: flex;
   padding: 7px 8px;
   font-size: 12px;
   line-height: 18px;

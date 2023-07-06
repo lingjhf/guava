@@ -27,10 +27,8 @@ export const NavigationBar = (props: NavigationBarProps) => {
               )
             }
             return (
-              <GListItem value={item.url}>
-                <a class='w-full h-full flex decoration-none color-unset' href={item.url ?? ''}>
-                  {item.title}
-                </a>
+              <GListItem link value={item.url}>
+                {item.title}
               </GListItem>
             )
           }
