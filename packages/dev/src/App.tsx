@@ -8,12 +8,14 @@ const App: Component = () => {
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class=' px-100px'>
-          <GList >
+          <GList value={'1-1-3'} nav>
+            <GListItem>1-1-1</GListItem>
+            <GListItem>1-1-1</GListItem>
             <GListGroup header={'1'}>
               <GListGroup header={'1-1'}>
                 <GListItem>1-1-1</GListItem>
                 <GListItem>1-1-2</GListItem>
-                <GListItem>1-1-3</GListItem>
+                <GListItem value='1-1-3'>1-1-3</GListItem>
               </GListGroup>
             </GListGroup>
             <GListGroup header={'2'}>
@@ -21,7 +23,6 @@ const App: Component = () => {
                 <GListItem>2-1-1</GListItem>
               </GListGroup>
             </GListGroup>
-
           </GList>
         </div>
       </GConfigProvider>

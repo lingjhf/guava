@@ -5,22 +5,35 @@ import type { NavigationBarItem } from './NavigationBar'
 import { basename } from 'path'
 import { GScrollbar } from '@lingjhf/guava'
 
-const componentsPosts = await Astro.glob('../pages/components/*.astro')
-const navItems = componentsPosts.map((item) => {
+function urlToNav(url: string) {
   return {
     title:
-      basename(item.url!)
+      basename(url)
         ?.replace(/(\w)/, (a: string) => a.toUpperCase())
         ?.replaceAll('-', ' ') ?? '',
-    url: `${item.url}/`,
+    url: `${url}/`,
   }
-}) as NavigationBarItem[]
+}
+const gettingStartedPosts = await Astro.glob('../pages/getting-started/*.astro')
+const componentsPosts = await Astro.glob('../pages/components/*.astro')
+
+const navItems = [
+  {
+    title: 'Getting started',
+    children: gettingStartedPosts.map((item) => urlToNav(item.url!)),
+  },
+  {
+    title: 'Components',
+    children: componentsPosts.map((item) => urlToNav(item.url!)),
+  },
+] as NavigationBarItem[]
+
 const pathname = Astro.url.pathname
 ---
 
 <BaseLayout pageTitle={''}>
   <div class="flex h-screen w-screen">
-    <div class="h-full w-300px">
+    <div class="h-full w-300px bg-[var(--bg-common-highest)]">
       <NavigationBar client:only="solid-js" value={pathname} items={navItems} />
     </div>
     <div class="h-full w-full">
