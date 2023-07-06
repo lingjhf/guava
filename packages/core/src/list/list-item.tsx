@@ -32,6 +32,12 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
     return classes
   }
 
+  const levelStyles = () => {
+    if (listContextGroup?.level) {
+      return { 'padding-left': `${listContextGroup.level * 32}px` }
+    }
+  }
+
   createEffect(on(() => props.value, () => {
     if (props.value !== undefined && props.value !== itemKey) {
       removeItem(itemKey)
@@ -49,12 +55,13 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
 
   onCleanup(() => {
     removeItem(itemKey)
+    listContextGroup?.removeItem(itemKey)
   })
 
   function selectedItem() {
     activeItem(itemKey)
   }
   return (
-    <div class={mergeClasses(itemClasses())} onClick={selectedItem}>{props.children}</div>
+    <div class={mergeClasses(itemClasses())} style={levelStyles()} onClick={selectedItem}>{props.children}</div>
   )
 }

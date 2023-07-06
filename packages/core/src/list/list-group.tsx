@@ -9,6 +9,7 @@ import { ChevronDownFilled } from '../icon/chevron-down-filled'
 import styles from './list-group.module.css'
 
 interface ListGroupProviderValue {
+  level: number
   addItem: (item: Accessor<boolean>, key: ListValue) => void
   removeItem: (itemKey: ListValue) => void
   activeGroup: () => void
@@ -32,6 +33,7 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
   if (!listContext) {
     throw Error('list context is undefined')
   }
+  const level = props.level ?? (listGroupContext ? ++listGroupContext.level : 0)
   const items = new Map<ListValue, { item: Accessor<boolean> }>()
   const [expand, setExpand] = createSignal(false)
   const [active, setActive] = createSignal(false)
@@ -57,6 +59,12 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
     return mergeClasses(classes)
   }
 
+  const levelStyles = () => {
+    if (level > 0) {
+      return { 'padding-left': `${level * 32}px` }
+    }
+  }
+
   function addItem(item: Accessor<boolean>, key: ListValue) {
     items.set(key, { item })
     listGroupContext?.addItem(item, key)
@@ -68,11 +76,13 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
   }
 
   function activeGroup() {
+    if (active()) return
     setActive(true)
     listGroupContext?.activeGroup()
   }
 
   function inactiveGroup() {
+    if (!active()) return
     setActive(false)
     listGroupContext?.inactiveGroup()
   }
@@ -82,6 +92,7 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
   }
 
   const providerValue = {
+    level,
     addItem,
     removeItem,
     activeGroup,
@@ -90,7 +101,7 @@ export const ListGroup = (propsRaw: Partial<ListGroupProps>) => {
   return (
     <ListGroupContext.Provider value={providerValue}>
       <div >
-        <div class={groupHeaderClasses()} onClick={expandGroup}>
+        <div class={groupHeaderClasses()} style={levelStyles()} onClick={expandGroup}>
           {props.header}
           <Show when={expand()} fallback={<ChevronDownFilled class={styles.listGroupHeaderIcon} />}>
             <ChevronUpFilled class={styles.listGroupHeaderIcon} />
