@@ -1,0 +1,25 @@
+.tab {
+  padding: 6px 8px;
+  font-size: 13px;
+  line-height: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.tab:hover {
+  background-color: var(--tab-bg-color-hover);
+}
+
+.tab:active {
+  background-color: var(--tab-bg-color-active);
+}
+
+.tabSlider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  pointer-events: none;
+  background-color: var(--border-brand-default);
+}

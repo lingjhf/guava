@@ -1,0 +1,12 @@
+.tabs {
+  --tab-bg-color-hover: var(--bg-bgless-hover);
+  --tab-bg-color-active: var(--bg-bgless-active);
+  --tab-text-color: var(--text-common-primary);
+  display: flex;
+  color: var(--tab-text-color);
+  user-select: none;
+}
+
+.tabsContent {
+  display: flex;
+}

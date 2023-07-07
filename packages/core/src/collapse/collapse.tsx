@@ -1,4 +1,4 @@
-import { createContext, type Accessor, type JSX, type Setter, useContext } from 'solid-js'
+import { createContext, type Accessor, type Setter, useContext } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import styles from './collapse.module.css'
