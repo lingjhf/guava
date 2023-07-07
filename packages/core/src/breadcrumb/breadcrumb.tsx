@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'solid-js'
+import { createContext, useContext, type JSX } from 'solid-js'
 import type { GuavaParentProps, ValueChanged } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import type { BreadcrumbItemValue } from './breadcrumb-item'
@@ -20,6 +20,7 @@ export const useBreadcrumbContext = () => {
 }
 export interface BreadcrumbProps extends GuavaParentProps<HTMLDivElement> {
   size: 'default' | 'medium' | 'large'
+  separator?: JSX.Element
   onSelected?: ValueChanged<BreadcrumbItemValue>
 }
 

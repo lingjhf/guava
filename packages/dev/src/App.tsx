@@ -1,29 +1,18 @@
-import { createSignal, type Component, For } from 'solid-js'
-import { GConfigProvider, GCopy, GHightlight, GAlert, GSwitch, GScrollbar, GCascaderPanel, GCard, GTimePickerPanel, GInput, GInputNumber, GRate, GButton, GList, GListGroup, GListItem, GListSubheader } from '@lingjhf/guava'
+
+import { GConfigProvider, GBreadcrumb, GBreadcrumbItem, GCollapse, GCollapseItem } from '@lingjhf/guava'
 
 import 'virtual:uno.css'
-const App: Component = () => {
+const App = () => {
 
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class=' px-100px'>
-          <GList value={'1-1-3'} nav>
-            <GListItem>1-1-1</GListItem>
-            <GListItem>1-1-1</GListItem>
-            <GListGroup header={'1'}>
-              <GListGroup header={'1-1'}>
-                <GListItem>1-1-1</GListItem>
-                <GListItem>1-1-2</GListItem>
-                <GListItem value='1-1-3'>1-1-3</GListItem>
-              </GListGroup>
-            </GListGroup>
-            <GListGroup header={'2'}>
-              <GListGroup header={'2-1'}>
-                <GListItem>2-1-1</GListItem>
-              </GListGroup>
-            </GListGroup>
-          </GList>
+          <GCollapse accordion >
+            <GCollapseItem header={'Title'}>123</GCollapseItem>
+            <GCollapseItem header={'Title'}>abc</GCollapseItem>
+            <GCollapseItem header={'Title'}>cab</GCollapseItem>
+          </GCollapse>
         </div>
       </GConfigProvider>
     </div>

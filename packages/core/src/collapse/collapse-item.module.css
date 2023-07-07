@@ -1,0 +1,44 @@
+.collapseItem:not(:last-child) {
+  border-bottom: var(--collapse-border);
+}
+
+.collapseItemHeader {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 22px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.collapseItemContent {
+  --collapse-bg-color: var(--bg-common-lower);
+  background-color: var(--collapse-bg-color);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.collapseItemContentFold {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.collapseItemContentExpand {
+  height: auto;
+}
+
+.collapseItemHeaderTitle {
+  width: 100%;
+}
+
+.collapseItemHeaderTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-left: 16px;
+  font-size: 12px;
+  width: 40px;
+  height: 100%;
+}

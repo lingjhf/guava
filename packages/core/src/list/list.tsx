@@ -7,6 +7,12 @@ import styles from './list.module.css'
 
 export type ListValue = string | number
 
+interface ItemMapValue {
+  item: Accessor<boolean>
+  setItem: Setter<boolean>
+  groupContext?: ListGroupProviderValue
+}
+
 interface ListProviderValue {
   nav: Accessor<boolean>
   addItem: (item: ItemMapValue, key?: ListValue) => ListValue
@@ -14,20 +20,13 @@ interface ListProviderValue {
   activeItem: (itemKey: ListValue) => void
 }
 
-export const ListContext = createContext<ListProviderValue>()
-export const useListContext = () => useContext(ListContext)
-
 export interface ListProps extends GuavaParentProps<HTMLDivElement> {
   value?: ListValue
   nav: boolean
 }
 
-interface ItemMapValue {
-  item: Accessor<boolean>
-  setItem: Setter<boolean>
-  groupContext?: ListGroupProviderValue
-
-}
+export const ListContext = createContext<ListProviderValue>()
+export const useListContext = () => useContext(ListContext)
 
 export const List = (propsRaw: Partial<ListProps>) => {
 

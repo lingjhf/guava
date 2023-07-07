@@ -1,0 +1,9 @@
+.collapse {
+  --collapse-text-color: var(--text-common-primary);
+  --collapse-border: 1px solid var(--border-common-default);
+  --collapse-border-radius: 8px;
+  color: var(--collapse-text-color);
+  border: var(--collapse-border);
+  border-radius: var(--collapse-border-radius);
+  overflow: hidden;
+}
