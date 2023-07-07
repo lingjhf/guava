@@ -36,7 +36,7 @@
 .collapseItemHeaderTrigger {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   margin-left: 16px;
   font-size: 12px;
   width: 40px;
