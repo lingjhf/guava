@@ -1,4 +1,4 @@
-import { createContext, type Accessor, type Setter, useContext } from 'solid-js'
+import { createContext, type Accessor, type Setter, useContext, createEffect, on } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import styles from './collapse.module.css'
@@ -34,6 +34,15 @@ export const Collapse = (propsRaw: Partial<CollapseProps>) => {
   )
   let index = 0
   const items = new Map<CollapseValue, ItemMapValue>()
+
+  createEffect(on(() => props.values, () => {
+    for (const value of items.values()) {
+      value.setItem(false)
+    }
+    for (const key of props.values) {
+      items.get(key)?.setItem(true)
+    }
+  }))
 
   function addItem(item: ItemMapValue, key?: CollapseValue) {
     items.set(key ?? index, item)

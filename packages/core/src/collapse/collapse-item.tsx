@@ -1,4 +1,4 @@
-import { Show, type JSX, createSignal } from 'solid-js'
+import { Show, type JSX, createSignal, createEffect, on } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
 import { useCollapseContext } from './collapse'
@@ -31,6 +31,13 @@ export const CollapseItem = (propsRaw: Partial<CollapseItemProps>) => {
     }
     return mergeClasses(classes)
   }
+
+  createEffect(on(() => props.value, () => {
+    if (props.value !== undefined && props.value !== itemKey) {
+      collapseContext.removeItem(itemKey)
+      collapseContext.addItem({ item: expand, setItem: setExpand }, props.value)
+    }
+  }))
 
   function clickExpand() {
     collapseContext?.activeItem(itemKey)

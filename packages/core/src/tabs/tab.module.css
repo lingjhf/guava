@@ -1,9 +1,22 @@
 .tab {
-  padding: 6px 8px;
-  font-size: 13px;
-  line-height: 20px;
   cursor: pointer;
   position: relative;
+}
+
+.tabDefault {
+  padding: 7px 12px;
+  font-size: 12px;
+  line-height: 18px;
+}
+.tabSmall {
+  padding: 3px 12px;
+  font-size: 12px;
+  line-height: 18px;
+}
+.tabLarge {
+  padding: 10px 16px;
+  font-size: 14px;
+  line-height: 22px;
 }
 
 .tab:hover {
@@ -14,6 +27,10 @@
   background-color: var(--tab-bg-color-active);
 }
 
+.tabActive {
+  color: var(--tab-text-colorActive);
+}
+
 .tabSlider {
   position: absolute;
   bottom: 0;
@@ -21,5 +38,5 @@
   right: 0;
   height: 2px;
   pointer-events: none;
-  background-color: var(--border-brand-default);
+  background-color: var(--tab-slider-bg-color);
 }
