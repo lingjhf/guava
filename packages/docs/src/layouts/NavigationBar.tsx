@@ -27,7 +27,7 @@ export const NavigationBar = (props: NavigationBarProps) => {
               )
             }
             return (
-              <GListItem link value={item.url}>
+              <GListItem link={item.url} value={item.url}>
                 {item.title}
               </GListItem>
             )
