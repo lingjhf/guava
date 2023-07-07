@@ -11,7 +11,7 @@
   },
   "type": "module",
   "scripts": {
-    "build": "vite build && vite build -c ./vite.config.umd.ts && rollup -c ",
+    "core:build": "vite build && vite build -c ./vite.config.umd.ts && rollup -c ",
     "lint:fix": "eslint --fix ."
   },
   "files": [

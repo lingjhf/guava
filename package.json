@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "build": "pnpm run -r build",
+    "build": "pnpm run -r core:build",
     "docs": "pnpm run -r docs:build"
   },
   "dependencies": {
