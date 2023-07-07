@@ -1,5 +1,5 @@
 
-import { GConfigProvider, GBreadcrumb, GBreadcrumbItem, GCollapse, GCollapseItem } from '@lingjhf/guava'
+import { GConfigProvider, GTabs, GTab } from '@lingjhf/guava'
 
 import 'virtual:uno.css'
 const App = () => {
@@ -8,11 +8,13 @@ const App = () => {
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class=' px-100px'>
-          <GCollapse accordion >
-            <GCollapseItem header={'Title'}>123</GCollapseItem>
-            <GCollapseItem header={'Title'}>abc</GCollapseItem>
-            <GCollapseItem header={'Title'}>cab</GCollapseItem>
-          </GCollapse>
+          <GTabs size='large'>
+            <GTab >One</GTab>
+            <GTab>Tow</GTab>
+            <GTab>Three</GTab>
+            <GTab>Four</GTab>
+            <GTab>Five</GTab>
+          </GTabs>
         </div>
       </GConfigProvider>
     </div>
