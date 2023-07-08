@@ -8,6 +8,6 @@ export default defineConfig({
   integrations: [
     solidJs(),
     mdx(),
-    UnoCSS(),
+    UnoCSS({ extraContent: { filesystem: ['src/example/**/*'] } }),
   ],
 })
