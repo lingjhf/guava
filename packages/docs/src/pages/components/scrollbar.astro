@@ -1,7 +1,15 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
+import { ScrollbarBaseUsage } from '../../example/scrollbar/scrollbar-base-usage'
+import { ScrollbarHorizontalUsage } from '../../example/scrollbar/scrollbar-horizontal-usage'
 ---
 
 <DocLayout>
   <h1>Scrollbar</h1>
+
+  <h2>基础用法</h2>
+  <ScrollbarBaseUsage client:only="solid-js" />
+
+  <h2>水平滚动条</h2>
+  <ScrollbarHorizontalUsage client:only="solid-js" />
 </DocLayout>
