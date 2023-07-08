@@ -8,7 +8,7 @@ export const ScrollbarBaseUsage = () => {
   <GScrollbar>
     <For each={Array.from({ length: 20 })}>
       {
-        (_, index) => <div class=' bg-blue-400 m-8px h-50px flex items-center justify-center'>{index()}</div>
+        (_, index) => <div class='bg-[var(--bg-brand-light-default)] m-8px h-50px flex items-center justify-center'>{index()}</div>
       }
     </For>
   </GScrollbar>
@@ -21,7 +21,7 @@ export const ScrollbarBaseUsage = () => {
         <GScrollbar>
           <For each={Array.from({ length: 20 })}>
             {
-              (_, index) => <div class=' bg-blue-400 m-8px h-50px flex items-center justify-center'>{index()}</div>
+              (_, index) => <div class='bg-[var(--bg-brand-light-default)] m-8px h-50px flex items-center justify-center'>{index()}</div>
             }
           </For>
         </GScrollbar>
