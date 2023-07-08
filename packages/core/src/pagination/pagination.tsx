@@ -114,7 +114,7 @@ export const Pagination = (propsRaw: Partial<PaginationProps>) => {
       for (let i = totalPage - (maxPager - 2); i < totalPage; i++) {
         pagers.push({ page: i })
       }
-    } else {
+    } else if (totalPage > 1) {
       pagers.push({ isQuickPrev: true })
       for (let i = currentPage - half; i <= currentPage + half; i++) {
         pagers.push({ page: i })
