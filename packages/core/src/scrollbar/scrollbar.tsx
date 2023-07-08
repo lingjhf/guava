@@ -99,18 +99,18 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   //判断是否水平溢出
   function isHorizontalOverflow() {
-    return contentRef.getBoundingClientRect().width > viewRef.getBoundingClientRect().width
+    return viewRef.scrollWidth > viewRef.getBoundingClientRect().width
   }
 
   //判断是否垂直溢出
   function isVerticalOverflow() {
-    return contentRef.getBoundingClientRect().height > viewRef.getBoundingClientRect().height
+    return viewRef.scrollHeight > viewRef.getBoundingClientRect().height
   }
 
   //设置水平滑块位置大小和滚动位置
   function setHorizontalAndScrollX() {
     setHorizontalSlider({
-      left: scrollController.horizontalSliderX + scrollController.scrollX,
+      left: scrollController.horizontalSliderX,
       width: scrollController.horizontalSliderWidth,
     })
     viewRef.scrollLeft = scrollController.scrollX
@@ -119,7 +119,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   //设置垂直滑块位置大小和滚动位置
   function setVerticalAndScrollY() {
     setVerticalSlider({
-      top: scrollController.verticalSliderY + scrollController.scrollY,
+      top: scrollController.verticalSliderY,
       height: scrollController.verticalSliderHeight,
     })
     viewRef.scrollTop = scrollController.scrollY
@@ -266,7 +266,8 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
   //监听内容大小对滚动条进行改变
   function watchContentResize() {
     const resizeObserver = new ResizeObserver((entries) => {
-      const { width, height } = contentRef.getBoundingClientRect()
+      const width = viewRef.scrollWidth
+      const height = viewRef.scrollHeight
       for (let i = 0; i < entries.length; i++) {
         scrollController.setContentSize({ height })
         setVerticalAndScrollY()
@@ -395,10 +396,9 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   onMount(() => {
     const { width: viewWidth, height: viewHeight } = viewRef.getBoundingClientRect()
-    const { width: contentWidth, height: contentHeight } = contentRef.getBoundingClientRect()
     scrollController = new ScrollController({
       viewSize: { width: viewWidth, height: viewHeight },
-      contentSize: { width: contentWidth, height: contentHeight },
+      contentSize: { width: viewRef.scrollWidth, height: viewRef.scrollHeight },
       scrollPosition: { x: props.scrollX, y: props.scrollY },
     })
     setVerticalSlider({
@@ -416,14 +416,15 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   return (
     <div
-      ref={setViewRef}
       style={mergeStyles([], props.style)}
       class={mergeClasses([styles.scrollView], props.class)}
       classList={mergeClassList({}, props.classList)}
       onMouseEnter={onEnterScrollArea}
       onMouseLeave={onLeaveScrollArea}>
-      <div ref={setContentRef}>
-        {props.children}
+      <div ref={setViewRef} class={styles.scrollContent}>
+        <div ref={setContentRef}>
+          {props.children}
+        </div>
       </div>
       <div
         ref={setVerticalScrollbarRef}
