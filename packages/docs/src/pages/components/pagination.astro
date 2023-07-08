@@ -1,7 +1,11 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
+import { PaginationBaseUsage } from '../../example/pagination/pagination-base-usage'
 ---
 
 <DocLayout>
   <h1>Pagination</h1>
+
+  <h2>基础用法</h2>
+  <PaginationBaseUsage client:only="solid-js" />
 </DocLayout>
