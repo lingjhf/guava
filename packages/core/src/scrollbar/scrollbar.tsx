@@ -99,12 +99,12 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   //判断是否水平溢出
   function isHorizontalOverflow() {
-    return viewRef.scrollWidth > viewRef.getBoundingClientRect().width
+    return viewRef.scrollWidth > viewRef.offsetWidth
   }
 
   //判断是否垂直溢出
   function isVerticalOverflow() {
-    return viewRef.scrollHeight > viewRef.getBoundingClientRect().height
+    return viewRef.scrollHeight > viewRef.offsetHeight
   }
 
   //设置水平滑块位置大小和滚动位置
