@@ -42,8 +42,8 @@ export const CodeExample = (props: CodeExampleProps) => {
       </GScrollbar>
       <div class='h-48px box-border p-2 flex border border-t border-t-solid border-t-[var(--border-common-default)]'>
         <div class=' ml-auto'>
-          <GButton size='medium' variant='text'>
-            <Show when={copied()} fallback={<CopyOutlined class=' text-[20px]' onClick={copyCode} />}>
+          <GButton size='medium' variant='text' onClick={copyCode}>
+            <Show when={copied()} fallback={<CopyOutlined class=' text-[20px]' />}>
               <CheckFilled class='text-[20px]'></CheckFilled>
             </Show>
           </GButton>
