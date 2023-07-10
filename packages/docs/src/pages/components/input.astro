@@ -1,9 +1,19 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
-import InputBaseUsage from '../../example/input/input-base-usage.astro'
+import { InputBaseUsage } from '../../example/input/input-base-usage'
+import { InputClearableUsage } from '../../example/input/input-clearable-usage'
+import { InputSizeUsage } from '../../example/input/input-size-usage'
 ---
 
 <DocLayout>
   <h1>Input</h1>
-  <InputBaseUsage />
+
+  <h2>基础用法</h2>
+  <InputBaseUsage client:only="solid-js" />
+
+  <h2>一键清空</h2>
+  <InputClearableUsage client:only="solid-js" />
+
+  <h2>尺寸</h2>
+  <InputSizeUsage client:only="solid-js" />
 </DocLayout>
