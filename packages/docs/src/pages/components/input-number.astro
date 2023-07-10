@@ -1,6 +1,8 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
 import { InputNumberBaseUsage } from '../../example/input-number/input-number-base-usage'
+import { InputNumberLimitUsage } from '../../example/input-number/input-number-limit-usage'
+import { InputNumberStepUsage } from '../../example/input-number/input-number-step-usage'
 ---
 
 <DocLayout>
@@ -8,4 +10,10 @@ import { InputNumberBaseUsage } from '../../example/input-number/input-number-ba
 
   <h2>基础用法</h2>
   <InputNumberBaseUsage client:only="solid-js" />
+
+  <h2>限制</h2>
+  <InputNumberLimitUsage client:only="solid-js" />
+
+  <h2>步进</h2>
+  <InputNumberStepUsage client:only="solid-js" />
 </DocLayout>
