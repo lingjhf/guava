@@ -1,7 +1,19 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
+import { MessageBaseUsage } from '../../example/message/message-base-usage'
+import { MessageClosableUsage } from '../../example/message/message-closable-usage'
+import { MessageTypeUsage } from '../../example/message/message-type-usage'
 ---
 
 <DocLayout>
   <h1>Message</h1>
+
+  <h2>基础用法</h2>
+  <MessageBaseUsage client:only="solid-js" />
+
+  <h2>类型</h2>
+  <MessageTypeUsage client:only="solid-js" />
+
+  <h2>手动关闭</h2>
+  <MessageClosableUsage client:only="solid-js" />
 </DocLayout>
