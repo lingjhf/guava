@@ -47,7 +47,7 @@ export const CodeExample = (props: CodeExampleProps) => {
               <CheckFilled class='text-[20px]'></CheckFilled>
             </Show>
           </GButton>
-          <GButton size='medium' variant='text'><CodeOutlined class=' text-[20px]' onClick={showCode} /></GButton>
+          <GButton size='medium' variant='text' onClick={showCode}><CodeOutlined class=' text-[20px]' /></GButton>
         </div>
       </div>
       <div style={codeStyles()}>
