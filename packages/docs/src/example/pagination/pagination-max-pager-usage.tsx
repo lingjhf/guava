@@ -1,14 +1,14 @@
 import { CodeExample } from '../../components/code-example'
 import { GPagination } from '@lingjhf/guava'
 
-export const PaginationBaseUsage = () => {
+export const PaginationMaxPagerUsage = () => {
   const code = `
-  <GPagination total={100}></GPagination>
+  <GPagination total={1000} maxPager={11}></GPagination>
   `
 
   return (
     <CodeExample code={code} language='jsx'>
-      <GPagination total={100}></GPagination>
+      <GPagination total={1000} maxPager={11}></GPagination>
     </CodeExample>
   )
 }
