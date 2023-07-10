@@ -1,23 +1,28 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
-import BaseUsage from '../../example/button/button-base-usage.astro'
-import DisabledUsage from '../../example/button/button-disabled-usage.astro'
-import TextUsage from '../../example/button/text-button-usage.astro'
-import JellyUsage from '../../example/button/jelly-button-usage.astro'
-import IconUsage from '../../example/button/icon-button-usage.astro'
+import { ButtonBaseUsage } from '../../example/button/button-base-usage'
+import { ButtonDisabledUsage } from '../../example/button/button-disabled-usage'
+import { TextButtonUsage } from '../../example/button/text-button-usage'
+import { JellyButtonUsage } from '../../example/button/jelly-button-usage'
+import { IconButtonUsage } from '../../example/button/icon-button-usage'
 ---
 
 <DocLayout>
   <h1>Button</h1>
   <p>提供一个常用按钮</p>
+
   <h2>基础用法</h2>
-  <BaseUsage />
+  <ButtonBaseUsage client:only="solid-js" />
+
   <h2>禁用状态</h2>
-  <DisabledUsage />
+  <ButtonDisabledUsage client:only="solid-js" />
+
   <h2>文字按钮</h2>
-  <TextUsage />
+  <TextButtonUsage client:only="solid-js" />
+
   <h2>果冻按钮</h2>
-  <JellyUsage />
+  <JellyButtonUsage client:only="solid-js" />
+
   <h2>图标按钮</h2>
-  <IconUsage />
+  <IconButtonUsage client:only="solid-js" />
 </DocLayout>

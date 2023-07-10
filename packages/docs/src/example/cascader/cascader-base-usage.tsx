@@ -1,6 +1,14 @@
----
 import { CodeExample } from '../../components/code-example'
 import { GCascaderPanel } from '@lingjhf/guava'
+
+const code = `
+export const Example = () => {
+  return (
+    <GCheckbox/>
+  )
+}
+`
+
 const options = [
   {
     value: 'guide',
@@ -270,11 +278,11 @@ const options = [
   },
 ]
 
-const code = `
-<GCascaderPanel optionName="label" options={options} />
-`
----
+export const CascaderBaseUsage = () => {
+  return (
+    <CodeExample code={code} language='jsx'>
+      <GCascaderPanel optionName='label' options={options} />
+    </CodeExample>
+  )
+}
 
-<CodeExample client:only="solid-js" code={code} language="jsx">
-  <GCascaderPanel client:only="solid-js" optionName="label" options={options} />
-</CodeExample>

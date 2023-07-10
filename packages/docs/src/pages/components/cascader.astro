@@ -1,11 +1,15 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
-import CascaderPanelUsage from '../../example/cascader/cascader-panel-usage.astro'
+import { CascaderBaseUsage } from '../../example/cascader/cascader-base-usage'
+import { CascaderPanelUsage } from '../../example/cascader/cascader-panel-usage'
 ---
 
 <DocLayout>
   <h1>Cascader</h1>
 
+  <h2>基础用法</h2>
+  <CascaderBaseUsage client:only="solid-js" />
+
   <h2>级联面板</h2>
-  <CascaderPanelUsage />
+  <CascaderPanelUsage client:only="solid-js" />
 </DocLayout>
