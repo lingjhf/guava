@@ -1,5 +1,6 @@
 ---
-import { GConfigProvider } from '@lingjhf/guava'
+import { GConfigProvider, GButton } from '@lingjhf/guava'
+import { GithubOutlined } from '../components/github-outlined'
 import '../styles/global.css'
 
 interface Props {
@@ -26,6 +27,9 @@ const { pageTitle } = Astro.props
           <a href="/">
             <div>Guava</div>
           </a>
+          <GButton client:only="solid-js" class="ml-auto" variant="text">
+            <a href="https://github.com/lingjhf/guava"> <GithubOutlined class="text-[22px]" /></a>
+          </GButton>
         </div>
         <div class="h-[calc(100%-64px)]">
           <slot />
