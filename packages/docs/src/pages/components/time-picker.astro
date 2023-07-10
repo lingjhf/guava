@@ -1,15 +1,15 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
-import TimePickerBaseUsage from '../../example/time-picker/time-picker-base-usage.astro'
-import TimePickerPanelUsage from '../../example/time-picker/time-picker-panel-usage.astro'
+import { TimePickerBaseUsage } from '../../example/time-picker/time-picker-base-usage'
+import { TimePickerPanelUsage } from '../../example/time-picker/time-picker-panel-usage'
 ---
 
 <DocLayout>
   <h1>Time picker</h1>
 
   <h2>基础用法</h2>
-  <TimePickerBaseUsage />
+  <TimePickerBaseUsage client:only="solid-js" />
 
-  <h2>事件选择器面板</h2>
-  <TimePickerPanelUsage />
+  <h2>时间选择器面板</h2>
+  <TimePickerPanelUsage client:only="solid-js" />
 </DocLayout>
