@@ -16,17 +16,19 @@ export const Example = () => {
 export const JellyButtonUsage = () => {
   return (
     <CodeExample code={code} language='jsx'>
-      <div class='m-2'>
-        <GButton variant='jelly'>Button</GButton>
-      </div>
-      <div class='m-2'>
-        <GButton type='success' variant='jelly'>Button</GButton>
-      </div>
-      <div class='m-2'>
-        <GButton type='warn' variant='jelly'>Button</GButton>
-      </div>
-      <div class='m-2'>
-        <GButton type='danger' variant='jelly'>Button</GButton>
+      <div class='flex'>
+        <div class='m-2'>
+          <GButton variant='jelly'>Button</GButton>
+        </div>
+        <div class='m-2'>
+          <GButton type='success' variant='jelly'>Button</GButton>
+        </div>
+        <div class='m-2'>
+          <GButton type='warn' variant='jelly'>Button</GButton>
+        </div>
+        <div class='m-2'>
+          <GButton type='danger' variant='jelly'>Button</GButton>
+        </div>
       </div>
     </CodeExample>
   )

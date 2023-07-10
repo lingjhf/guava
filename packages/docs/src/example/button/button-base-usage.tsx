@@ -16,17 +16,19 @@ export const Example = () => {
 export const ButtonBaseUsage = () => {
   return (
     <CodeExample code={code} language='jsx'>
-      <div class='m-2'>
-        <GButton>Button</GButton>
-      </div>
-      <div class='m-2'>
-        <GButton type='success'>Button</GButton>
-      </div>
-      <div class='m-2'>
-        <GButton type='warn'>Button</GButton>
-      </div>
-      <div class='m-2'>
-        <GButton type='danger'>Button</GButton>
+      <div class='flex'>
+        <div class='m-2'>
+          <GButton>Button</GButton>
+        </div>
+        <div class='m-2'>
+          <GButton type='success'>Button</GButton>
+        </div>
+        <div class='m-2'>
+          <GButton type='warn'>Button</GButton>
+        </div>
+        <div class='m-2'>
+          <GButton type='danger'>Button</GButton>
+        </div>
       </div>
     </CodeExample>
   )
