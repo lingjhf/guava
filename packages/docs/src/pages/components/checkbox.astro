@@ -1,11 +1,23 @@
 ---
-import CheckboxBaseUsage from '../../example/checkbox/checkbox-base-usage.astro'
 import DocLayout from '../../layouts/DocLayout.astro'
+import { CheckboxBaseUsage } from '../../example/checkbox/checkbox-base-usage'
+import { CheckboxDisabledUsage } from '../../example/checkbox/checkbox-disabled-usage'
+import { CheckboxIndeterminate } from '../../example/checkbox/checkbox-indeterminate-usage'
+import { CheckboxSizeUsage } from '../../example/checkbox/checkbox-size-usage'
 ---
 
 <DocLayout>
   <h1>Checkbox</h1>
 
   <h2>基础用法</h2>
-  <CheckboxBaseUsage />
+  <CheckboxBaseUsage client:only="solid-js" />
+
+  <h2>禁用状态</h2>
+  <CheckboxDisabledUsage client:only="solid-js" />
+
+  <h2>不定状态</h2>
+  <CheckboxIndeterminate client:only="solid-js" />
+
+  <h2>尺寸</h2>
+  <CheckboxSizeUsage client:only="solid-js" />
 </DocLayout>
