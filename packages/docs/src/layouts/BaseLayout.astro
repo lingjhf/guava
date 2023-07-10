@@ -21,13 +21,13 @@ const { pageTitle } = Astro.props
     <GConfigProvider dark client:only="solid-js">
       <div class="h-screen w-screen flex flex-col bg-#1A1A1A text-[var(--text-common-primary)]">
         <div
-          class="h-64px bg-[var(--bg-common-highest)] flex items-center px-10px flex-shrink-0 border-b border-b-[var(--border-common-default)] border-b-solid"
+          class="h-64px box-border bg-[var(--bg-common-highest)] flex items-center px-10px flex-shrink-0 border-b border-b-[var(--border-common-default)] border-b-solid"
         >
           <a href="/">
             <div>Guava</div>
           </a>
         </div>
-        <div class="h-full relative">
+        <div class="h-[calc(100%-64px)]">
           <slot />
         </div>
       </div>

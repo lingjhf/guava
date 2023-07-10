@@ -1,5 +1,5 @@
 import type { GuavaProps } from '../types'
-import { createSignal, onMount } from 'solid-js'
+import { Show, createSignal, onMount } from 'solid-js'
 import { generateSplitEventHandlersProps } from '../utils'
 import { GButton } from '../button'
 import { CopyOutlined } from '../icon/copy-outlined'
@@ -51,11 +51,13 @@ export const Hightlight = (propsRaw: Partial<HightlightProps>) => {
 
   return (
     <div class={styles.highlight}>
-      <GButton class={styles.highlightCopy} variant='text' icon size='medium' onClick={copyCode}>
-        {
-          copied() ? <CheckFilled /> : <CopyOutlined />
-        }
-      </GButton>
+      <Show when={props.copy}>
+        <GButton class={styles.highlightCopy} variant='text' icon size='medium' onClick={copyCode}>
+          {
+            copied() ? <CheckFilled /> : <CopyOutlined />
+          }
+        </GButton>
+      </Show>
       <span class={styles.highlightLanguage}>{currentLanguage()}</span>
       <pre class={styles.highlightPre}>
         <code ref={codeRef!} class={styles.highlightCode}>
