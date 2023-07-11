@@ -1,5 +1,5 @@
-import { For } from 'solid-js'
-import { GScrollbar, GList, GListGroup, GListItem } from '@lingjhf/guava'
+import { For, Show, createSignal } from 'solid-js'
+import { GScrollbar, GList, GListGroup, GListItem, GDrawer } from '@lingjhf/guava'
 
 export interface NavigationBarItem {
   title: string
@@ -13,6 +13,23 @@ interface NavigationBarProps {
 }
 
 export const NavigationBar = (props: NavigationBarProps) => {
+
+  const [visibleDrawer, setVisibleDrawer] = createSignal(false)
+  let ltMd = false
+  function watchResize() {
+    if (window.innerWidth < 768) {
+      if (!ltMd) {
+        setVisibleDrawer(true)
+      }
+      ltMd = true
+    } else {
+      if (ltMd) {
+        setVisibleDrawer(false)
+      }
+      ltMd = false
+    }
+  }
+  window.addEventListener('resize', watchResize)
 
   function generateNavigation(items: NavigationBarItem[]) {
     return (
@@ -37,11 +54,22 @@ export const NavigationBar = (props: NavigationBarProps) => {
     )
   }
 
+  function navigation() {
+    return (
+      <GScrollbar class='h-full'>
+        <GList value={props.value} nav>
+          {generateNavigation(props.items)}
+        </GList>
+      </GScrollbar>
+    )
+  }
+
   return (
-    <GScrollbar class='h-full'>
-      <GList value={props.value} nav>
-        {generateNavigation(props.items)}
-      </GList>
-    </GScrollbar>
+    <Show when={visibleDrawer()} fallback={navigation()}>
+      <GDrawer>
+        {navigation()}
+      </GDrawer>
+    </Show>
+
   )
 }
