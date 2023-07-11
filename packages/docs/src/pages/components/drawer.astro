@@ -1,7 +1,19 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
+import { DrawerBaseUsage } from '../../example/drawer/drawer-base-usage'
+import { DrawerHeaderUsage } from '../../example/drawer/drawer-header-usage'
+import { DrawerFooterUsage } from '../../example/drawer/drawer-footer-usage'
 ---
 
 <DocLayout>
   <h1>Drawer</h1>
+
+  <h2>基础用法</h2>
+  <DrawerBaseUsage client:only="solid-js" />
+
+  <h2>自定义头部</h2>
+  <DrawerHeaderUsage client:only="solid-js" />
+
+  <h2>自定义页脚</h2>
+  <DrawerFooterUsage client:only="solid-js" />
 </DocLayout>
