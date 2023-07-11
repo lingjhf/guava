@@ -83,7 +83,6 @@ export const Drawer = (propsRaw: Partial<DrawerProps>) => {
         </div>
         <div class={styles.drawerContent} >
           {props.children}
-          asdf
         </div>
         <Show when={props.footer}>
           <div class={styles.drawerFooter}>{props.footer}</div>

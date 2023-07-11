@@ -12,6 +12,7 @@ export const ConfigProvider = (propsRaw: Partial<ConfigProviderProps>) => {
   for (const key in props.dark ? darktheme : lightTheme) {
     document.documentElement.style.setProperty(key, darktheme[key])
   }
+  document.documentElement.style.setProperty('color', 'var(--text-common-primary)')
   function styles() {
     return props.dark ? darktheme : lightTheme
   }

@@ -1,1 +1,1 @@
-export { Drawer as GDrawer } from './drawer'
+export { Drawer as GDrawer, type DrawerProps, type DrawerPosition } from './drawer'
