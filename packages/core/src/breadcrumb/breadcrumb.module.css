@@ -1,3 +1,11 @@
-.g-breadcrumb {
+.breadcrumb {
+  --breadcrumb-item-text-color: var(--text-common-tertiary);
+  --breadcrumb-item-bg-color: transparent;
+  --breadcrumb-item-bg-color-hover: var(--bg-bgless-hover);
+  --breadcrumb-item-bg-color-active: var(--bg-bgless-active);
+  --breadcrumb-item-selected-text-color: var(--text-brand-default);
+  --breadcrumb-item-selected-bg-color: transparent;
+  --breadcrumb-item-selected-bg-color-hover: var(--bg-brand-light-default);
+  --breadcrumb-item-selected-bg-color-active: var(--bg-brand-light-hover);
   display: flex;
 }

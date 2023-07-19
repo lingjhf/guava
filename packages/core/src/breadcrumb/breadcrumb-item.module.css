@@ -1,0 +1,48 @@
+.breadcrumbItem {
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--breadcrumb-item-text-color);
+  background-color: var(--breadcrumb-item-bg-color);
+}
+
+.breadcrumbItemDefault {
+  border-radius: 2px;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 0 4px;
+}
+
+.breadcrumbItemSmall {
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0 4px;
+}
+
+.breadcrumbItemLarge {
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 1px 8px;
+}
+
+.breadcrumbItem:hover {
+  --breadcrumb-item-bg-color: var(--breadcrumb-item-bg-color-hover);
+}
+
+.breadcrumbItem:active {
+  --breadcrumb-item-bg-color: var(--breadcrumb-item-bg-color-active);
+}
+
+.breadcrumbItemSelected {
+  --breadcrumb-item-text-color: var(--breadcrumb-item-selected-text-color);
+  --breadcrumb-item-bg-color: var(--breadcrumb-item-selected-bg-color);
+}
+
+.breadcrumbItemSelected:hover {
+  --breadcrumb-item-bg-color: var(--breadcrumb-item-selected-bg-color-hover);
+}
+
+.breadcrumbItemSelected:active {
+  --breadcrumb-item-bg-color: var(--breadcrumb-item-selected-bg-color-active);
+}

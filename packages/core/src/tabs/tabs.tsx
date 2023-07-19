@@ -23,11 +23,6 @@ export interface TabsProviderValue {
   activeItem: (key?: TabValue) => void
 }
 
-export interface CollapseProps extends GuavaParentProps<HTMLDivElement> {
-  accordion: boolean
-  values: TabValue
-}
-
 export const TabsContext = createContext<TabsProviderValue>()
 export const useTabsContext = () => useContext(TabsContext)
 
