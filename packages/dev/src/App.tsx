@@ -17,7 +17,7 @@ const App = () => {
       <GConfigProvider dark>
         <div class=' px-100px'>
           <GButton onClick={change}>change</GButton>
-          <GBreadcrumb>
+          <GBreadcrumb size='large'>
             <For each={items()}>
               {
                 (item) => {

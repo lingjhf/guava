@@ -3,7 +3,7 @@ import { GBreadcrumb, GBreadcrumbItem } from '@lingjhf/guava'
 
 const code = `
 `
-export const AlertBaseUsage = () => {
+export const BreadcrumbBaseUsage = () => {
   return (
     <CodeExample code={code} language='jsx'>
       <div class='my-2'>
