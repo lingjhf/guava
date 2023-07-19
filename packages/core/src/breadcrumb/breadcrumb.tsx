@@ -40,7 +40,6 @@ export const Breadcrumb = (propsRaw: Partial<BreadcrumbProps>) => {
 
   let breadcrumbRef: HTMLDivElement
   let index = 0
-  let length = 0
   const items = new Map<BreadcrumbItemValue, ItemMapValue>()
 
   createEffect(on(() => props.value, () => {
@@ -48,21 +47,23 @@ export const Breadcrumb = (propsRaw: Partial<BreadcrumbProps>) => {
   }))
 
   function addItem(item: ItemMapValue, key?: BreadcrumbItemValue) {
-    length++
-    items.set(key ?? index, item)
-    const elIndex = Array.prototype.findIndex.call(
-      breadcrumbRef.querySelectorAll(`.${breadcrumbItemStyles.breadcrumbItem}`),
-      (el) => el === item.ref
-    )
-    
-    return key ?? index++
+    const itemKey = key ?? index++
+    items.set(itemKey, item)
+    const children = breadcrumbRef.querySelectorAll(`.${breadcrumbItemStyles.breadcrumbItem}`)
+    const elIndex = Array.prototype.findIndex.call(children, (el) => el === item.ref)
+    if (elIndex === children.length - 1) {
+      item.setShowSeparator(false)
+      for (const [key, value] of items.entries()) {
+        if (key !== itemKey) {
+          value.setShowSeparator(true)
+        }
+      }
+    }
+    return itemKey
   }
 
   function removeItem(itemKey: BreadcrumbItemValue) {
-    const deleted = items.delete(itemKey)
-    if (deleted) {
-      length--
-    }
+    items.delete(itemKey)
   }
 
   function activeItem(itemKey?: BreadcrumbItemValue) {
