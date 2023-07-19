@@ -55,7 +55,7 @@ export const BreadcrumbItem = (propsRaw: Partial<BreadcrumbItemProps>) => {
       <div class={itemClasses()} onClick={clickActive} ref={breadcrumbItemRef!}>
         {props.children}
       </div>
-      <Show when={showSeparator()}><div>/</div></Show>
+      <Show when={showSeparator()}><div class={sizeClasses[breadcrumbContext.size]}>/</div></Show>
     </div>
   )
 }
