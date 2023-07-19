@@ -1,4 +1,4 @@
-import { createContext, type Accessor, type Setter, useContext, createEffect, on, createSignal, children } from 'solid-js'
+import { createContext, type Accessor, type Setter, useContext, createEffect, on, createSignal, children, onMount } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import type { BreadcrumbItemValue } from './breadcrumb-item'
@@ -10,6 +10,7 @@ interface ItemMapValue {
   setItem: Setter<boolean>
   showSeparator: Accessor<boolean>
   setShowSeparator: Setter<boolean>
+  ref: HTMLDivElement
 }
 
 export type BreadcrumbSize = 'default' | 'small' | 'large'
@@ -39,22 +40,29 @@ export const Breadcrumb = (propsRaw: Partial<BreadcrumbProps>) => {
 
   let breadcrumbRef: HTMLDivElement
   let index = 0
+  let length = 0
   const items = new Map<BreadcrumbItemValue, ItemMapValue>()
-  const [length, setLength] = createSignal(0)
 
   createEffect(on(() => props.value, () => {
     activeItem(props.value)
   }))
 
   function addItem(item: ItemMapValue, key?: BreadcrumbItemValue) {
+    length++
     items.set(key ?? index, item)
-    setLength(v => v + 1)
+    const elIndex = Array.prototype.findIndex.call(
+      breadcrumbRef.querySelectorAll(`.${breadcrumbItemStyles.breadcrumbItem}`),
+      (el) => el === item.ref
+    )
+    
     return key ?? index++
   }
 
   function removeItem(itemKey: BreadcrumbItemValue) {
-    setLength(v => v - 1)
-    items.delete(itemKey)
+    const deleted = items.delete(itemKey)
+    if (deleted) {
+      length--
+    }
   }
 
   function activeItem(itemKey?: BreadcrumbItemValue) {
@@ -71,7 +79,7 @@ export const Breadcrumb = (propsRaw: Partial<BreadcrumbProps>) => {
     size: props.size,
     addItem,
     removeItem,
-    activeItem
+    activeItem,
   }
   return (
     <BreadcrumbContext.Provider value={providerValue}>

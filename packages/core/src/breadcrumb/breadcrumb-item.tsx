@@ -1,4 +1,4 @@
-import { createEffect, createSignal, on, onCleanup } from 'solid-js'
+import { createEffect, createSignal, on, onCleanup, onMount } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
 import { useBreadcrumbContext, type BreadcrumbSize } from './breadcrumb'
@@ -26,9 +26,11 @@ export const BreadcrumbItem = (propsRaw: Partial<BreadcrumbItemProps>) => {
     throw Error('breadcrumb context is undefined')
   }
 
+  let breadcrumbItemRef: HTMLDivElement
   const [active, setActive] = createSignal(false)
   const [showSeparator, setShowSeparator] = createSignal(false)
-  let itemKey = breadcrumbContext.addItem({ item: active, setItem: setActive, showSeparator, setShowSeparator }, props.value)
+  // let itemKey = breadcrumbContext.addItem({ item: active, setItem: setActive, showSeparator, setShowSeparator }, props.value)
+  let itemKey: BreadcrumbItemValue
   const itemClasses = () => {
     const classes = [styles.breadcrumbItem, sizeClasses[breadcrumbContext.size]]
     if (active()) {
@@ -38,10 +40,8 @@ export const BreadcrumbItem = (propsRaw: Partial<BreadcrumbItemProps>) => {
   }
 
   createEffect(on(() => props.value, () => {
-    if (props.value !== undefined && props.value !== itemKey) {
-      breadcrumbContext.removeItem(itemKey)
-      itemKey = breadcrumbContext.addItem({ item: active, setItem: setActive, showSeparator, setShowSeparator }, props.value)
-    }
+    breadcrumbContext.removeItem(itemKey)
+    itemKey = breadcrumbContext.addItem({ item: active, setItem: setActive, showSeparator, setShowSeparator, ref: breadcrumbItemRef }, props.value)
   }))
 
   onCleanup(() => {
@@ -52,7 +52,7 @@ export const BreadcrumbItem = (propsRaw: Partial<BreadcrumbItemProps>) => {
     breadcrumbContext!.activeItem(itemKey)
   }
   return (
-    <div class={itemClasses()} onClick={clickActive}>
+    <div class={itemClasses()} onClick={clickActive} ref={breadcrumbItemRef!}>
       {props.children}
     </div>
   )
