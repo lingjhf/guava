@@ -28,7 +28,7 @@ export const BreadcrumbItem = (propsRaw: Partial<BreadcrumbItemProps>) => {
 
   let breadcrumbItemRef: HTMLDivElement
   const [active, setActive] = createSignal(false)
-  const [showSeparator, setShowSeparator] = createSignal(false)
+  const [showSeparator, setShowSeparator] = createSignal(true)
   // let itemKey = breadcrumbContext.addItem({ item: active, setItem: setActive, showSeparator, setShowSeparator }, props.value)
   let itemKey: BreadcrumbItemValue
   const itemClasses = () => {
