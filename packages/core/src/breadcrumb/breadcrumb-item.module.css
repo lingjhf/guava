@@ -1,3 +1,7 @@
+.breadcrumbItemWrap {
+  display: flex;
+}
+
 .breadcrumbItem {
   font-weight: 600;
   cursor: pointer;
