@@ -379,6 +379,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
           y: sliderY + e.pageY - startEvent.pageY,
         })
         setVerticalAndScrollY()
+        emitScroll()
       })
       .onEnd(onActionEndLeaveScrollArea)
       .action()
