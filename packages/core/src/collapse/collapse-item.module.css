@@ -7,6 +7,7 @@
   align-items: center;
   padding: 12px 16px;
   font-size: 14px;
+  font-weight: 600;
   line-height: 22px;
   box-sizing: border-box;
   cursor: pointer;
@@ -16,6 +17,8 @@
   --collapse-bg-color: var(--bg-common-lower);
   background-color: var(--collapse-bg-color);
   padding: 16px;
+  font-size: 12px;
+  font-weight: 400;
   box-sizing: border-box;
 }
 
