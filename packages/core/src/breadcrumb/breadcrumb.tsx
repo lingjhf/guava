@@ -1,4 +1,4 @@
-import { createContext, type Accessor, type Setter, useContext, createEffect, on, createSignal, children, onMount } from 'solid-js'
+import { createContext, type Accessor, type Setter, useContext, createEffect, on, createSignal, children, onMount, type JSX } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import type { BreadcrumbItemValue } from './breadcrumb-item'
@@ -20,6 +20,7 @@ export interface BreadcrumbProviderValue {
   addItem: (item: ItemMapValue, key?: BreadcrumbItemValue) => BreadcrumbItemValue
   removeItem: (key: BreadcrumbItemValue) => void
   activeItem: (key?: BreadcrumbItemValue) => void
+  separator?: () => JSX.Element
 }
 
 export const BreadcrumbContext = createContext<BreadcrumbProviderValue>()
@@ -28,6 +29,7 @@ export const useBreadcrumbContext = () => useContext(BreadcrumbContext)
 export interface BreadcrumbProps extends GuavaParentProps<HTMLDivElement> {
   value?: BreadcrumbItemValue
   size: BreadcrumbSize
+  separator?: () => JSX.Element
 }
 
 export const Breadcrumb = (propsRaw: Partial<BreadcrumbProps>) => {
@@ -81,6 +83,7 @@ export const Breadcrumb = (propsRaw: Partial<BreadcrumbProps>) => {
     addItem,
     removeItem,
     activeItem,
+    separator: props.separator
   }
   return (
     <BreadcrumbContext.Provider value={providerValue}>
