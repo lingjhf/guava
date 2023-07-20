@@ -39,7 +39,7 @@ export const VirtualList = (propsRaw: Partial<VirtualListProps>) => {
   context?.registerController({ controller, change: virtualScrollChange })
 
   createEffect(() => {
-    controller.initDefaultItems(props.items.map((item) => item.value))
+    controller.initDefaultItems(props.items.map((item) => item.height))
     setContentHeight(controller.totalHeight)
     context?.setVirtualScrollHeight(controller.totalHeight)
     virtualScrollChange()
