@@ -1,26 +1,26 @@
-import { type JSX, createEffect,createSignal, children, onMount } from 'solid-js'
+import { type JSX, createEffect, createSignal, children, onMount } from 'solid-js'
 import { useVirtualScrollContext } from './virtual-scroll'
 import { VirtualScrollController } from './controller'
-import type { GuavaParentProps } from '../types'
+import type { GuavaParentProps, GuavaProps } from '../types'
 import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
 import styles from './virtual-list.module.css'
 
 export interface VirtualListItem {
   key: string
-  value: number
+  height: number
 }
 
 interface VirtualListItemWithIndex extends VirtualListItem {
   index: number
 }
 
-export interface VirtualListProps extends GuavaParentProps<HTMLDivElement> {
+export interface VirtualListProps extends GuavaProps<HTMLDivElement> {
   items: VirtualListItem[]
   buffer: number
   indexRange?: (startIndex: number, endIndex: number) => void
   firstItem?: () => void
   lastItem?: () => void
-  renderItem?: (key: string, index: number) => JSX.Element
+  children?: (key: string, index: number) => JSX.Element
 }
 
 export const VirtualList = (propsRaw: Partial<VirtualListProps>) => {
@@ -100,8 +100,8 @@ export const VirtualList = (propsRaw: Partial<VirtualListProps>) => {
 
   const renderItems = children(() =>
     currentItems().map((item) => (
-      <div style={context?.horizontal() ? `width:${item.value}px` : `height:${item.value}px`}>
-        {props.renderItem?.(item.key, item.index)}
+      <div style={context?.horizontal() ? `width:${item.height}px` : `height:${item.height}px`}>
+        {props.children?.(item.key, item.index)}
       </div>
     ))
   )
