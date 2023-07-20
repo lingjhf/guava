@@ -1,0 +1,42 @@
+.virtualList {
+  position: relative;
+}
+
+.virtualListHorizontal {
+  height: 100%;
+}
+
+.virtualListVertical {
+  width: 100%;
+}
+
+.virtualListContentVertical {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.virtualListContentHorizontal {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.virtualListPlaceholderHorizontal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.virtualListPlaceholderVertical {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}

@@ -416,6 +416,7 @@ export const Scrollbar = (propsRaw: Partial<ScrollbarProps>) => {
 
   return (
     <div
+      ref={props.ref}
       style={mergeStyles([], props.style)}
       class={mergeClasses([styles.scrollView], props.class)}
       classList={mergeClassList({}, props.classList)}

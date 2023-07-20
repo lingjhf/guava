@@ -1,0 +1,9 @@
+.virtualScrollVertical {
+  display: flex;
+}
+
+.virtualScrollHorizontal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
