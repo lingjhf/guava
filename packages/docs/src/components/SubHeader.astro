@@ -1,0 +1,11 @@
+---
+import { Anchor } from './anchor'
+
+interface Props {
+  anchor: string
+}
+
+const { anchor } = Astro.props
+---
+
+<h2><Anchor name={anchor} client:load /><span class="ml-1"><slot /></span></h2>

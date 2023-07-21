@@ -4,25 +4,25 @@ import { VirtualScrollBaseUsage } from '../../example/virtual-scroll/virtual-scr
 import { VirtualScrollHorizontalUsage } from '../../example/virtual-scroll/virtual-scroll-horizontal-usage'
 import { VirtualScrollMultipleListUsage } from '../../example/virtual-scroll/virtual-scroll-multiple-list-usage'
 import { VirtualScrollMillionUsage } from '../../example/virtual-scroll/virtual-scroll-million-usage'
-import { Anchor } from '../../components/anchor'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Virtual scroll</h1>
 
-  <h2><Anchor name="base" client:load /><span class="ml-1">基础用法</span></h2>
+  <SubHeader anchor="base">基础用法</SubHeader>
   <div style="height:398px">
     <VirtualScrollBaseUsage client:only="solid-js" />
   </div>
-  <h2><Anchor name="horizontal" client:load /><span class="ml-1">水平虚拟滚动</span></h2>
+  <SubHeader anchor="horizontal">水平虚拟滚动</SubHeader>
   <div style="height:138px">
     <VirtualScrollHorizontalUsage client:only="solid-js" />
   </div>
-  <h2><Anchor name="multiple" client:load /><span class="ml-1">多个虚拟列表</span></h2>
+  <SubHeader anchor="multiple">多个虚拟列表</SubHeader>
   <div style="height:398px">
     <VirtualScrollMultipleListUsage client:only="solid-js" />
   </div>
-  <h2><Anchor name="million" client:load /><span class="ml-1">百万数据</span></h2>
+  <SubHeader anchor="million">百万数据</SubHeader>
   <div style="height:398px">
     <VirtualScrollMillionUsage client:only="solid-js" />
   </div>
