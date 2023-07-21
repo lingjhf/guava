@@ -1,6 +1,6 @@
 import { CodeExample } from '../../components/code-example'
 import { GVirtualScroll, GVirtualList } from '@lingjhf/guava'
-import { Suspense, lazy, type Component } from 'solid-js'
+import { Suspense } from 'solid-js'
 
 const VirtualScrollBaseUsageLazy = () => {
   const code = `

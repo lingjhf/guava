@@ -1,4 +1,4 @@
-import { onMount, type JSX } from 'solid-js'
+import { onMount } from 'solid-js'
 
 export interface AnchorProps {
   name: string

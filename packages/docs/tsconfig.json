@@ -3,6 +3,6 @@
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true
   }
 }
