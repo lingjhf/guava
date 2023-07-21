@@ -26,17 +26,3 @@
   left: 0;
   bottom: 0;
 }
-
-.virtualListPlaceholderHorizontal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-}
-
-.virtualListPlaceholderVertical {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}

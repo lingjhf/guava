@@ -31,7 +31,6 @@ export const VirtualList = (propsRaw: Partial<VirtualListProps>) => {
   )
 
   let currentItemsCopy: VirtualListItemWithIndex[] = []
-  const [contentHeight, setContentHeight] = createSignal(0)
   const [contentOffsetTop, setContentOffsetTop] = createSignal(0)
   const [currentItems, setCurrentItems] = createSignal<VirtualListItemWithIndex[]>([])
   const controller = new VirtualScrollController()
@@ -40,16 +39,9 @@ export const VirtualList = (propsRaw: Partial<VirtualListProps>) => {
 
   createEffect(() => {
     controller.initDefaultItems(props.items.map((item) => item.height))
-    setContentHeight(controller.totalHeight)
     context?.setVirtualScrollHeight(controller.totalHeight)
     virtualScrollChange()
   })
-
-  const placeholderClasses = () =>
-    `${context?.horizontal()
-      ? styles.virtualListPlaceholderHorizontal
-      : styles.virtualListPlaceholderVertical
-    }`
 
   const contentClasses = () =>
     `${context?.horizontal()
@@ -62,9 +54,6 @@ export const VirtualList = (propsRaw: Partial<VirtualListProps>) => {
 
     return mergeClasses(classes)
   }
-
-  const placeholderStyles = () =>
-    `${context?.horizontal() ? `width:${contentHeight()}px` : `height:${contentHeight()}px`};`
 
   const contentStyles = () =>
     `transform:${context?.horizontal()
@@ -113,7 +102,6 @@ export const VirtualList = (propsRaw: Partial<VirtualListProps>) => {
 
   return (
     <div class={containerClasses()}>
-      <div class={placeholderClasses()} style={placeholderStyles()}></div>
       <div class={contentClasses()} style={contentStyles()}>
         {renderItems()}
       </div>
