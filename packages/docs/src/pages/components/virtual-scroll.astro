@@ -3,6 +3,7 @@ import DocLayout from '../../layouts/DocLayout.astro'
 import { VirtualScrollBaseUsage } from '../../example/virtual-scroll/virtual-scroll-base-usage'
 import { VirtualScrollHorizontalUsage } from '../../example/virtual-scroll/virtual-scroll-horizontal-usage'
 import { VirtualScrollMultipleListUsage } from '../../example/virtual-scroll/virtual-scroll-multiple-list-usage'
+import { VirtualScrollMillionUsage } from '../../example/virtual-scroll/virtual-scroll-million-usage'
 ---
 
 <DocLayout>
@@ -16,4 +17,7 @@ import { VirtualScrollMultipleListUsage } from '../../example/virtual-scroll/vir
 
   <h2>多个虚拟列表</h2>
   <VirtualScrollMultipleListUsage client:only="solid-js" />
+
+  <h2>百万数据</h2>
+  <VirtualScrollMillionUsage client:only="solid-js" />
 </DocLayout>

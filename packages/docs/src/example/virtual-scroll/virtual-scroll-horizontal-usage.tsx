@@ -4,7 +4,7 @@ import { GVirtualScroll, GVirtualList } from '@lingjhf/guava'
 export const VirtualScrollHorizontalUsage = () => {
   const code = `
   `
-  const items = Array.from({ length: 100000 }).map((_, index) => ({ key: `${index + 1}`, height: 80 }))
+  const items = Array.from({ length: 10000 }).map((_, index) => ({ key: `${index + 1}`, height: 80 }))
   return (
     <CodeExample code={code} language='jsx'>
 
