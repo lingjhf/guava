@@ -4,6 +4,7 @@ import { NavigationBar } from '../components/NavigationBar'
 import type { NavigationBarItem } from '../components/NavigationBar'
 import { basename } from 'path'
 import { GScrollbar } from '@lingjhf/guava'
+import { Content } from './content'
 
 function urlToNav(url: string) {
   return {
@@ -34,12 +35,12 @@ const pathname = Astro.url.pathname
 <BaseLayout pageTitle={''}>
   <div class="flex w-full h-full">
     <NavigationBar client:only="solid-js" value={pathname} items={navItems} />
-    <div class="h-full w-[calc(100%-300px)]">
+    <Content client:load>
       <GScrollbar client:only="solid-js">
         <div class="p-24px">
           <slot />
         </div>
       </GScrollbar>
-    </div>
+    </Content>
   </div>
 </BaseLayout>
