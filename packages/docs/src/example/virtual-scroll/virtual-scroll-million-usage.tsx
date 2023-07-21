@@ -11,7 +11,7 @@ export const VirtualScrollMillionUsage = () => {
         <GVirtualScroll>
           <GVirtualList items={items}>{
             (key) => {
-              return <div class='bg-[var(--bg-brand-light-default)] h-32px flex items-center justify-center'>{key}</div>
+              return <div class='bg-[var(--bg-brand-light-default)] h-16px text-12px flex items-center justify-center'>{key}</div>
             }
           }</GVirtualList>
         </GVirtualScroll>
