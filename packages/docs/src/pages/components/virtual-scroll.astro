@@ -4,20 +4,26 @@ import { VirtualScrollBaseUsage } from '../../example/virtual-scroll/virtual-scr
 import { VirtualScrollHorizontalUsage } from '../../example/virtual-scroll/virtual-scroll-horizontal-usage'
 import { VirtualScrollMultipleListUsage } from '../../example/virtual-scroll/virtual-scroll-multiple-list-usage'
 import { VirtualScrollMillionUsage } from '../../example/virtual-scroll/virtual-scroll-million-usage'
+import { Anchor } from '../../components/anchor'
 ---
 
 <DocLayout>
   <h1>Virtual scroll</h1>
 
-  <h2>基础用法</h2>
-  <VirtualScrollBaseUsage client:only="solid-js" />
-
-  <h2>水平虚拟滚动</h2>
-  <VirtualScrollHorizontalUsage client:only="solid-js" />
-
-  <h2>多个虚拟列表</h2>
-  <VirtualScrollMultipleListUsage client:only="solid-js" />
-
-  <h2>百万数据</h2>
-  <VirtualScrollMillionUsage client:only="solid-js" />
+  <h2><Anchor name="base" client:load /><span class="ml-1">基础用法</span></h2>
+  <div style="height:398px">
+    <VirtualScrollBaseUsage client:only="solid-js" />
+  </div>
+  <h2><Anchor name="horizontal" client:load /><span class="ml-1">水平虚拟滚动</span></h2>
+  <div style="height:138px">
+    <VirtualScrollHorizontalUsage client:only="solid-js" />
+  </div>
+  <h2><Anchor name="multiple" client:load /><span class="ml-1">多个虚拟列表</span></h2>
+  <div style="height:398px">
+    <VirtualScrollMultipleListUsage client:only="solid-js" />
+  </div>
+  <h2><Anchor name="million" client:load /><span class="ml-1">百万数据</span></h2>
+  <div style="height:398px">
+    <VirtualScrollMillionUsage client:only="solid-js" />
+  </div>
 </DocLayout>
