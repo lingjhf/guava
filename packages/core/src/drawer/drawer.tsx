@@ -1,7 +1,7 @@
 
 import { createEffect, createSignal, Show, type JSX } from 'solid-js'
 import type { GuavaParentProps, VoidCallback } from '../types'
-import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
+import { generateSplitEventHandlersProps, mergeClasses, mergeStyles } from '../utils'
 import styles from './drawer.module.css'
 import { GButton } from '../button'
 import { CloseFilled } from '../icon/close-filled'
@@ -11,6 +11,7 @@ export interface DrawerProps extends GuavaParentProps<HTMLDivElement> {
   visible: boolean
   position: DrawerPosition
   size: string
+  showHeader: boolean
   showClose: boolean
   header?: JSX.Element
   footer?: JSX.Element
@@ -27,7 +28,7 @@ const positionClasses: Record<DrawerPosition, string> = {
 export const Drawer = (propsRaw: Partial<DrawerProps>) => {
   const [eventHandlers, props] = generateSplitEventHandlersProps(
     propsRaw,
-    { visible: false, position: 'left', size: '30%', showClose: true }
+    { visible: false, position: 'left', size: '30%', showHeader: true, showClose: true }
   )
 
   const [visible, setVisible] = createSignal(false)
@@ -56,7 +57,7 @@ export const Drawer = (propsRaw: Partial<DrawerProps>) => {
     } else if (props.position === 'top' || props.position === 'bottom') {
       styles.height = props.size
     }
-    return styles
+    return mergeStyles(styles, props.style)
   }
 
   function close() {
@@ -71,16 +72,18 @@ export const Drawer = (propsRaw: Partial<DrawerProps>) => {
   return (
     <div class={styles.drawerOverlay} style={overlayStyles()} onClick={close}>
       <div class={drawerClasses()} style={drawerStyles()} onClick={clickDrawer}>
-        <div class={styles.drawerHeader}>
-          <div class={styles.drawerHeaderContent}>
-            {props.header}
+        <Show when={props.showHeader}>
+          <div class={styles.drawerHeader}>
+            <div class={styles.drawerHeaderContent}>
+              {props.header}
+            </div>
+            <Show when={props.showClose}>
+              <GButton variant='text' size='medium' onClick={close}>
+                <CloseFilled class={styles.drawerHeaderClose} />
+              </GButton>
+            </Show>
           </div>
-          <Show when={props.showClose}>
-            <GButton variant='text' size='medium' onClick={close}>
-              <CloseFilled class={styles.drawerHeaderClose} />
-            </GButton>
-          </Show>
-        </div>
+        </Show>
         <div class={styles.drawerContent} >
           {props.children}
         </div>

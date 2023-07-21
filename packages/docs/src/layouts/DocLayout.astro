@@ -33,9 +33,7 @@ const pathname = Astro.url.pathname
 
 <BaseLayout pageTitle={''}>
   <div class="flex w-full h-full">
-    <div class="w-300px h-full bg-[var(--bg-common-highest)]">
-      <NavigationBar client:only="solid-js" value={pathname} items={navItems} />
-    </div>
+    <NavigationBar client:only="solid-js" value={pathname} items={navItems} />
     <div class="h-full w-[calc(100%-300px)]">
       <GScrollbar client:only="solid-js">
         <div class="p-24px">

@@ -4,10 +4,12 @@
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 1024;
 }
 
 .drawer {
   --drawer-bg-color: var(--bg-common-default);
+  --drawer-content-padding: 0 16px;
   display: flex;
   flex-direction: column;
   background-color: var(--drawer-bg-color);
@@ -62,7 +64,7 @@
 
 .drawerContent {
   height: 100%;
-  padding: 0 16px;
+  padding: var(--drawer-content-padding);
 }
 
 .drawerFooter {

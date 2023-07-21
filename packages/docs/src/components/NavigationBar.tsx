@@ -1,5 +1,6 @@
-import { For, Show, createSignal } from 'solid-js'
+import { For, Show } from 'solid-js'
 import { GScrollbar, GList, GListGroup, GListItem, GDrawer } from '@lingjhf/guava'
+import { store, setStore } from '../store/store'
 
 export interface NavigationBarItem {
   title: string
@@ -14,22 +15,31 @@ interface NavigationBarProps {
 
 export const NavigationBar = (props: NavigationBarProps) => {
 
-  const [visibleDrawer, setVisibleDrawer] = createSignal(false)
   let ltMd = false
+  if (window.innerWidth < 768) {
+    if (!ltMd) {
+      setStore('drawer', true)
+    }
+    ltMd = true
+  }
   function watchResize() {
     if (window.innerWidth < 768) {
       if (!ltMd) {
-        setVisibleDrawer(true)
+        setStore('drawer', true)
       }
       ltMd = true
     } else {
       if (ltMd) {
-        setVisibleDrawer(false)
+        setStore('drawer', false)
       }
       ltMd = false
     }
   }
   window.addEventListener('resize', watchResize)
+
+  function drawerClose() {
+    setStore('visible', false)
+  }
 
   function generateNavigation(items: NavigationBarItem[]) {
     return (
@@ -64,11 +74,17 @@ export const NavigationBar = (props: NavigationBarProps) => {
     )
   }
 
-  return (
-    <Show when={visibleDrawer()} fallback={navigation()}>
-      <GDrawer>
-        {navigation()}
+  function drawerNavigation() {
+    return (
+      <GDrawer style='--drawer-content-padding:0px' showHeader={false} visible={store.visible} size='300px' close={drawerClose}>
+        <div class='h-full bg-[var(--bg-common-highest)]'>{navigation()}</div>
       </GDrawer>
+    )
+  }
+
+  return (
+    <Show when={store.drawer} fallback={<div class='w-300px h-full bg-[var(--bg-common-highest)]'>{navigation()}</div>}>
+      {drawerNavigation()}
     </Show>
 
   )
