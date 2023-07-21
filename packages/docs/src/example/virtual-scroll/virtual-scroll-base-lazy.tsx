@@ -2,7 +2,7 @@ import { CodeExample } from '../../components/code-example'
 import { GVirtualScroll, GVirtualList } from '@lingjhf/guava'
 import { Suspense, lazy, type Component } from 'solid-js'
 
-const VirtualScrollBaseUsageExample = () => {
+const VirtualScrollBaseUsageLazy = () => {
   const code = `
   `
   const items = Array.from({ length: 10000 }).map((_, index) => ({ key: `${index + 1}`, height: 40 }))
@@ -23,4 +23,4 @@ const VirtualScrollBaseUsageExample = () => {
   )
 }
 
-export default VirtualScrollBaseUsageExample
+export default VirtualScrollBaseUsageLazy
