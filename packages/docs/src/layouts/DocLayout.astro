@@ -3,8 +3,10 @@ import BaseLayout from './BaseLayout.astro'
 import { NavigationBar } from '../components/NavigationBar'
 import type { NavigationBarItem } from '../components/NavigationBar'
 import { basename } from 'path'
-import { GScrollbar } from '@lingjhf/guava'
+import { GButton, GScrollbar } from '@lingjhf/guava'
 import { Content } from './content'
+import { ExpandNavigationBar } from '../components/expand-navigation-bar'
+import { GithubOutlined } from '../components/github-outlined'
 
 function urlToNav(url: string) {
   return {
@@ -33,14 +35,29 @@ const pathname = Astro.url.pathname
 ---
 
 <BaseLayout pageTitle={''}>
-  <div class="flex w-full h-full">
-    <NavigationBar client:only="solid-js" value={pathname} items={navItems} />
-    <Content client:load>
-      <GScrollbar client:only="solid-js">
-        <div class="p-24px">
-          <slot />
-        </div>
-      </GScrollbar>
-    </Content>
+  <div class="h-screen w-screen flex flex-col bg-#1A1A1A text-[var(--text-common-primary)]">
+    <div
+      class="h-64px box-border bg-[var(--bg-common-highest)] flex items-center px-10px flex-shrink-0 border-b border-b-[var(--border-common-default)] border-b-solid"
+    >
+      <ExpandNavigationBar client:only="solid-js" />
+      <a class="ml-2" href="/">
+        <div class="font-bold">Guava</div>
+      </a>
+      <GButton client:only="solid-js" class="ml-auto" variant="text">
+        <a href="https://github.com/lingjhf/guava"> <GithubOutlined class="text-[22px]" /></a>
+      </GButton>
+    </div>
+    <div class="h-[calc(100%-64px)]">
+      <div class="flex w-full h-full">
+        <NavigationBar client:only="solid-js" value={pathname} items={navItems} />
+        <Content client:load>
+          <GScrollbar client:only="solid-js">
+            <div class="p-24px">
+              <slot />
+            </div>
+          </GScrollbar>
+        </Content>
+      </div>
+    </div>
   </div>
 </BaseLayout>

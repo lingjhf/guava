@@ -11,5 +11,9 @@
   "editor.detectIndentation": false,
   "css.validate": false,
   "less.validate": false,
-  "scss.validate": false
+  "scss.validate": false,
+  "windicss.includeLanguages": {
+    "astro": "html"
+  },
+  "windicss.sortOnSave": false
 }

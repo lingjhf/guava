@@ -1,35 +1,56 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { GButton } from '@lingjhf/guava'
-import './index.css'
+import { GButton, GScrollbar } from '@lingjhf/guava'
+import '../styles/index.css'
 
 const pageTitle = 'Guava'
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="lg:pt-144px lg:pb-64px lg:px-64px sm:pt-144px sm:pb-64px sm:px-48px">
-    <div class="m-auto flex flex-col lg:flex-row max-w-1152px">
-      <div class="text-center lg:text-left lg:max-w-592px flex-shrink-0">
-        <h1 class="name">
-          <span>Guava</span>
-        </h1>
-        <p class="desc">UI Component</p>
-        <div class="actions">
-          <a href="/getting-started/installation/">
-            <GButton
-              client:only="solid-js"
-              class="font-bold"
-              type="primary"
-              style="--button-rounded: 20px;"
+  <div class="bg-#1A1A1A h-screen">
+    <div class="w-full h-full">
+      <GScrollbar client:only="solid-js">
+        <div
+          class="lg:pt-144px lg:pb-64px lg:px-64px sm:pt-144px sm:pb-64px sm:px-48px pt-144px px-48px pb-48px"
+        >
+          <div class="container flex flex-col lg:flex-row lg:justify-center mx-auto">
+            <div
+              class="lg:w-592px flex-shrink-0 text-center lg:text-left order-2 sm:order-2 lg:order-1"
             >
-              Getting Started
-            </GButton>
-          </a>
+              <h1 class="name main-text">
+                <span>Guava</span>
+              </h1>
+              <p class="main-text">Works With Any Framework</p>
+              <p class="main-desc text-[var(--text-common-tertiary)]">
+                UI components built with solidJS
+              </p>
+              <div class="actions">
+                <a href="/getting-started/installation/" class="p-6px">
+                  <GButton
+                    client:only="solid-js"
+                    class="font-bold"
+                    type="primary"
+                    style="--button-rounded: 20px;"
+                  >
+                    Getting Started
+                  </GButton>
+                </a>
+                <a href="https://github.com/lingjhf/guava" class="p-6px">
+                  <GButton client:only="solid-js" class="font-bold" style="--button-rounded: 20px;">
+                    View on Github
+                  </GButton>
+                </a>
+              </div>
+            </div>
+            <div class="w-full order-1 sm:order-1">
+              <div
+                class="image-bg w-192px h-192px lg:w-320px lg:h-320px sm:w-256px sm:h-256px mx-auto"
+              >
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="lg:w-full">
-        <div class="image-bg"></div>
-      </div>
+      </GScrollbar>
     </div>
   </div>
 </BaseLayout>

@@ -1,7 +1,5 @@
 ---
 import { GConfigProvider, GButton } from '@lingjhf/guava'
-import { GithubOutlined } from '../components/github-outlined'
-import { ExpandNavigationBar } from '../components/expand-navigation-bar'
 import '../styles/global.css'
 
 interface Props {
@@ -21,22 +19,7 @@ const { pageTitle } = Astro.props
   </head>
   <body>
     <GConfigProvider dark client:only="solid-js">
-      <div class="h-screen w-screen flex flex-col bg-#1A1A1A text-[var(--text-common-primary)]">
-        <div
-          class="h-64px box-border bg-[var(--bg-common-highest)] flex items-center px-10px flex-shrink-0 border-b border-b-[var(--border-common-default)] border-b-solid"
-        >
-          <ExpandNavigationBar client:only="solid-js" />
-          <a class="ml-2" href="/">
-            <div class="font-bold">Guava</div>
-          </a>
-          <GButton client:only="solid-js" class="ml-auto" variant="text">
-            <a href="https://github.com/lingjhf/guava"> <GithubOutlined class="text-[22px]" /></a>
-          </GButton>
-        </div>
-        <div class="h-[calc(100%-64px)]">
-          <slot />
-        </div>
-      </div>
+      <slot />
     </GConfigProvider>
   </body>
 </html>
