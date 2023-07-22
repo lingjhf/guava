@@ -3,17 +3,18 @@ import DocLayout from '../../layouts/DocLayout.astro'
 import { InputNumberBaseUsage } from '../../example/input-number/input-number-base-usage'
 import { InputNumberLimitUsage } from '../../example/input-number/input-number-limit-usage'
 import { InputNumberStepUsage } from '../../example/input-number/input-number-step-usage'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Input number</h1>
 
-  <h2>基础用法</h2>
+  <SubHeader anchor="base">基础用法</SubHeader>
   <InputNumberBaseUsage client:only="solid-js" />
 
-  <h2>限制</h2>
+  <SubHeader anchor="limit">限制</SubHeader>
   <InputNumberLimitUsage client:only="solid-js" />
 
-  <h2>步进</h2>
+  <SubHeader anchor="step">步进</SubHeader>
   <InputNumberStepUsage client:only="solid-js" />
 </DocLayout>

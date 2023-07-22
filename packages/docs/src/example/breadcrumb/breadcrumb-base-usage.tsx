@@ -1,21 +1,12 @@
-import { CodeExample } from '../../components/code-example'
-import { GBreadcrumb, GBreadcrumbItem } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-`
+const BreadcrumbBaseLazy = lazy(() => import('./breadcrumb-base-lazy'))
+
 export const BreadcrumbBaseUsage = () => {
   return (
-    <CodeExample code={code} language='jsx'>
-      <div class='my-2'>
-        <GBreadcrumb >
-          <GBreadcrumbItem>Breadcrumb node</GBreadcrumbItem>
-          <GBreadcrumbItem>Breadcrumb node</GBreadcrumbItem>
-          <GBreadcrumbItem>Breadcrumb node</GBreadcrumbItem>
-          <GBreadcrumbItem>Breadcrumb node</GBreadcrumbItem>
-          <GBreadcrumbItem>Breadcrumb node</GBreadcrumbItem>
-        </GBreadcrumb>
-      </div>
-    </CodeExample>
+    <Loading>
+      <BreadcrumbBaseLazy />
+    </Loading>
   )
 }
-

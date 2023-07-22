@@ -1,11 +1,12 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
 import { BreadcrumbBaseUsage } from '../../example/breadcrumb/breadcrumb-base-usage'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Breadcrumb</h1>
 
-  <h2>基础用法</h2>
+  <SubHeader anchor="base">基础用法</SubHeader>
   <BreadcrumbBaseUsage client:only="solid-js" />
 </DocLayout>

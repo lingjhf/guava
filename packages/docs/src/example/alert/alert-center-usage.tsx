@@ -1,22 +1,13 @@
-import { CodeExample } from '../../components/code-example'
-import { GAlert } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-export const Example = () => {
-  return (
-    <div>
-      <GAlert title='info alert' center />
-    </div>
-  )
-}
-`
+const AlertCenterLazy = lazy(() => import('./alert-center-lazy'))
+
 export const AlertCenterUsage = () => {
+
   return (
-    <CodeExample code={code} language='jsx'>
-      <div class='my-2'>
-        <GAlert title='info alert' center />
-      </div>
-    </CodeExample>
+    <Loading>
+      <AlertCenterLazy />
+    </Loading>
   )
 }
-

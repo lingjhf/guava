@@ -2,14 +2,15 @@
 import DocLayout from '../../layouts/DocLayout.astro'
 import { CollapseBaseUsage } from '../../example/collapse/collapse-base-usage'
 import { CollapseAccordionUsage } from '../../example/collapse/collapse-accordion-usage'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Collapse</h1>
 
-  <h2>基础用法</h2>
+  <SubHeader anchor="base">基础用法</SubHeader>
   <CollapseBaseUsage client:only="solid-js" />
 
-  <h2>手风琴</h2>
+  <SubHeader anchor="accordion">手风琴</SubHeader>
   <CollapseAccordionUsage client:only="solid-js" />
 </DocLayout>

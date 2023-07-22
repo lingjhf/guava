@@ -3,17 +3,18 @@ import DocLayout from '../../layouts/DocLayout.astro'
 import { MessageBaseUsage } from '../../example/message/message-base-usage'
 import { MessageClosableUsage } from '../../example/message/message-closable-usage'
 import { MessageTypeUsage } from '../../example/message/message-type-usage'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Message</h1>
 
-  <h2>基础用法</h2>
+  <SubHeader anchor="base">基础用法</SubHeader>
   <MessageBaseUsage client:only="solid-js" />
 
-  <h2>类型</h2>
+  <SubHeader anchor="type">类型</SubHeader>
   <MessageTypeUsage client:only="solid-js" />
 
-  <h2>手动关闭</h2>
+  <SubHeader anchor="closable">手动关闭</SubHeader>
   <MessageClosableUsage client:only="solid-js" />
 </DocLayout>

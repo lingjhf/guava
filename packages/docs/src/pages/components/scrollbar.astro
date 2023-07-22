@@ -2,14 +2,15 @@
 import DocLayout from '../../layouts/DocLayout.astro'
 import { ScrollbarBaseUsage } from '../../example/scrollbar/scrollbar-base-usage'
 import { ScrollbarHorizontalUsage } from '../../example/scrollbar/scrollbar-horizontal-usage'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Scrollbar</h1>
 
-  <h2>基础用法</h2>
+  <SubHeader anchor="base">基础用法</SubHeader>
   <ScrollbarBaseUsage client:only="solid-js" />
 
-  <h2>水平滚动条</h2>
+  <SubHeader anchor="horizontal">水平滚动条</SubHeader>
   <ScrollbarHorizontalUsage client:only="solid-js" />
 </DocLayout>

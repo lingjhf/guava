@@ -3,17 +3,18 @@ import DocLayout from '../../layouts/DocLayout.astro'
 import { PaginationBaseUsage } from '../../example/pagination/pagination-base-usage'
 import { PaginationMaxPagerUsage } from '../../example/pagination/pagination-max-pager-usage'
 import { PaginationPrevNextUsage } from '../../example/pagination/pagination-prev-next-usage'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Pagination</h1>
 
-  <h2>基础用法</h2>
+  <SubHeader anchor="base">基础用法</SubHeader>
   <PaginationBaseUsage client:only="solid-js" />
 
-  <h2>上一页，下一页</h2>
+  <SubHeader anchor="prev-next">上一页，下一页</SubHeader>
   <PaginationPrevNextUsage client:only="solid-js" />
 
-  <h2>最多显示页码</h2>
+  <SubHeader anchor="max-pager">最多显示页码</SubHeader>
   <PaginationMaxPagerUsage client:only="solid-js" />
 </DocLayout>

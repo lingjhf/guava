@@ -2,14 +2,15 @@
 import DocLayout from '../../layouts/DocLayout.astro'
 import { TimePickerBaseUsage } from '../../example/time-picker/time-picker-base-usage'
 import { TimePickerPanelUsage } from '../../example/time-picker/time-picker-panel-usage'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Time picker</h1>
 
-  <h2>基础用法</h2>
+  <SubHeader anchor="base">基础用法</SubHeader>
   <TimePickerBaseUsage client:only="solid-js" />
 
-  <h2>时间选择器面板</h2>
+  <SubHeader anchor="panel">时间选择器面板</SubHeader>
   <TimePickerPanelUsage client:only="solid-js" />
 </DocLayout>
