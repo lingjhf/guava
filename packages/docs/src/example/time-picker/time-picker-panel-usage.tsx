@@ -1,14 +1,13 @@
-import { CodeExample } from '../../components/code-example'
-import { GTimePickerPanel } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
+
+const TimePickerPanelLazy = lazy(() => import('./time-picker-panel-lazy'))
 
 export const TimePickerPanelUsage = () => {
-  const code = `
-  <GTimePickerPanel></GTimePickerPanel>
-  `
-
   return (
-    <CodeExample code={code} language='jsx'>
-      <GTimePickerPanel />
-    </CodeExample>
+    <Loading>
+      <TimePickerPanelLazy />
+    </Loading>
   )
 }
+
