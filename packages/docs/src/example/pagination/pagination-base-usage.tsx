@@ -1,14 +1,12 @@
-import { CodeExample } from '../../components/code-example'
-import { GPagination } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
+
+const PaginationBaseLazy = lazy(() => import('./pagination-base-lazy'))
 
 export const PaginationBaseUsage = () => {
-  const code = `
-  <GPagination total={100}></GPagination>
-  `
-
   return (
-    <CodeExample code={code} language='jsx'>
-      <GPagination total={100}></GPagination>
-    </CodeExample>
+    <Loading>
+      <PaginationBaseLazy />
+    </Loading>
   )
 }

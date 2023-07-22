@@ -1,27 +1,13 @@
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-import { CodeExample } from '../../components/code-example'
-import { GTabs, GTab } from '@lingjhf/guava'
+const TabsBaseLazy = lazy(() => import('./tabs-base-lazy'))
 
 export const TabsBaseUsage = () => {
-  const code = `
-  <GTabs value={0}>
-      <GTab>One</GTab>
-      <GTab>Two</GTab>
-      <GTab>Three</GTab>
-      <GTab>Four</GTab>
-      <GTab>Five</GTab>
-  </GTabs>
-  `
-
   return (
-    <CodeExample code={code} language='jsx'>
-      <GTabs value={0}>
-        <GTab >One</GTab>
-        <GTab >Two</GTab>
-        <GTab >Three</GTab>
-        <GTab >Four</GTab>
-        <GTab >Five</GTab>
-      </GTabs>
-    </CodeExample>
+    <Loading>
+      <TabsBaseLazy />
+    </Loading>
   )
 }
+

@@ -1,15 +1,13 @@
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-import { CodeExample } from '../../components/code-example'
-import { GSwitch } from '@lingjhf/guava'
+const SwitchBaseLazy = lazy(() => import('./switch-base-lazy'))
 
 export const SwitchBaseUsage = () => {
-  const code = `
-  <GSwitch />
-  `
-
   return (
-    <CodeExample code={code} language='jsx'>
-      <GSwitch />
-    </CodeExample>
+    <Loading>
+      <SwitchBaseLazy />
+    </Loading>
   )
 }
+
