@@ -1,2 +1,1 @@
-export { Message as GMessage, showMessage } from './message'
-export type { MessageProps, MessageType } from './message'
+export { Message as GMessage, showMessage, type MessageProps, type MessageType } from './message'

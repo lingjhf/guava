@@ -1,11 +1,11 @@
 import { CodeExample } from '../../components/code-example'
-import { showMessage, GButton } from '@lingjhf/guava'
+import { showMessage, GButton, type MessageType } from '@lingjhf/guava'
 
 export default function MessageTypeLazy() {
   const code = `
 
   `
-  function messageChange(type: string) {
+  function messageChange(type: MessageType) {
     showMessage({ message: 'Message', type })
   }
   return (
