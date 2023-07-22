@@ -2,7 +2,7 @@
 import DocLayout from '../../layouts/DocLayout.astro'
 import { CheckboxBaseUsage } from '../../example/checkbox/checkbox-base-usage'
 import { CheckboxDisabledUsage } from '../../example/checkbox/checkbox-disabled-usage'
-import { CheckboxIndeterminate } from '../../example/checkbox/checkbox-indeterminate-usage'
+import { CheckboxIndeterminateUsage } from '../../example/checkbox/checkbox-indeterminate-usage'
 import { CheckboxSizeUsage } from '../../example/checkbox/checkbox-size-usage'
 import SubHeader from '../../components/SubHeader.astro'
 ---
@@ -17,7 +17,7 @@ import SubHeader from '../../components/SubHeader.astro'
   <CheckboxDisabledUsage client:only="solid-js" />
 
   <SubHeader anchor="indeterminate">不定状态</SubHeader>
-  <CheckboxIndeterminate client:only="solid-js" />
+  <CheckboxIndeterminateUsage client:only="solid-js" />
 
   <SubHeader anchor="size">尺寸</SubHeader>
   <CheckboxSizeUsage client:only="solid-js" />

@@ -1,18 +1,12 @@
-import { CodeExample } from '../../components/code-example'
-import { GCheckbox } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-export const Example = () => {
-  return (
-    <GCheckbox/>
-  )
-}
-`
+const CheckboxBaseLazy = lazy(() => import('./checkbox-base-lazy'))
+
 export const CheckboxBaseUsage = () => {
   return (
-    <CodeExample code={code} language='jsx'>
-      <GCheckbox />
-    </CodeExample>
+    <Loading>
+      <CheckboxBaseLazy />
+    </Loading>
   )
 }
-

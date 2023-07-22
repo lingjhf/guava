@@ -1,28 +1,12 @@
-import { CodeExample } from '../../components/code-example'
-import { GCheckbox } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-export const Example = () => {
-  return (
-    <GCheckbox/>
-  )
-}
-`
+const CheckboxSizeLazy = lazy(() => import('./checkbox-size-lazy'))
+
 export const CheckboxSizeUsage = () => {
   return (
-    <CodeExample code={code} language='jsx'>
-      <div class='flex'>
-        <div class='mr-2'>
-          <GCheckbox size={40} />
-        </div>
-        <div class='mr-2'>
-          <GCheckbox size={32} />
-        </div>
-        <div class='mr-2'>
-          <GCheckbox size={28} />
-        </div>
-      </div>
-    </CodeExample>
+    <Loading>
+      <CheckboxSizeLazy />
+    </Loading>
   )
 }
-

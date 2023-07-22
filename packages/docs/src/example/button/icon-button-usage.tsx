@@ -1,36 +1,13 @@
-import { CodeExample } from '../../components/code-example'
-import { GButton } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-export const Example = () => {
-  return (
-    <div>
-      <GButton disabled>Button</GButton>
-      <GButton type='success' disabled>Button</GButton>
-      <GButton type='warn' disabled>Button</GButton>
-      <GButton type='danger' disabled>Button</GButton>
-    </div>
-  )
-}
-`
+const IconButtonLazy = lazy(() => import('./icon-button-lazy'))
+
 export const IconButtonUsage = () => {
   return (
-    <CodeExample code={code} language='jsx'>
-      <div class='flex'>
-        <div class='m-2'>
-          <GButton disabled>Button</GButton>
-        </div>
-        <div class='m-2'>
-          <GButton type='success' disabled>Button</GButton>
-        </div>
-        <div class='m-2'>
-          <GButton type='warn' disabled>Button</GButton>
-        </div>
-        <div class='m-2'>
-          <GButton type='danger' disabled>Button</GButton>
-        </div>
-      </div>
-    </CodeExample>
+    <Loading>
+      <IconButtonLazy />
+    </Loading>
   )
 }
 
