@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { GButton, GScrollbar } from '@lingjhf/guava'
+import { GithubOutlined } from '../components/github-outlined'
 import '../styles/index.css'
 
 const pageTitle = 'Guava'
@@ -24,7 +25,7 @@ const pageTitle = 'Guava'
               <p class="main-desc text-[var(--text-common-tertiary)]">
                 UI components built with solidJS
               </p>
-              <div class="actions">
+              <div class="pt-32px flex justify-center lg:justify-start">
                 <a href="/getting-started/installation/" class="p-6px">
                   <GButton
                     client:only="solid-js"
@@ -37,7 +38,9 @@ const pageTitle = 'Guava'
                 </a>
                 <a href="https://github.com/lingjhf/guava" class="p-6px">
                   <GButton client:only="solid-js" class="font-bold" style="--button-rounded: 20px;">
-                    View on Github
+                    <div class="flex items-center">
+                      <GithubOutlined class="mr-2 text-16px" /> Github
+                    </div>
                   </GButton>
                 </a>
               </div>

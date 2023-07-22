@@ -11,10 +11,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-.actions {
-  padding-top: 32px;
-}
-
 .main-text {
   @apply m-0 line-height-40px text-32px lg:mx-auto lg:text-56px lg:line-height-64px lg:font-bold sm:text-48px sm:line-height-56px;
 }
