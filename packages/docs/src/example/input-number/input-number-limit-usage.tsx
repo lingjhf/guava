@@ -1,18 +1,13 @@
-import { CodeExample } from '../../components/code-example'
-import { GInputNumber } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-export const Example = () => {
-  return (
-    <GInputNumber min={0} max={10} />
-  )
-}
-`
+const InputNumberLimitLazy = lazy(() => import('./input-number-limit-lazy'))
+
 export const InputNumberLimitUsage = () => {
   return (
-    <CodeExample code={code} language='jsx'>
-      <GInputNumber min={0} max={10} />
-    </CodeExample>
+    <Loading>
+      <InputNumberLimitLazy />
+    </Loading>
   )
 }
 

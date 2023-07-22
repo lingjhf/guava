@@ -1,18 +1,13 @@
-import { CodeExample } from '../../components/code-example'
-import { GInputNumber } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-export const Example = () => {
-  return (
-    <GInputNumber/>
-  )
-}
-`
+const InputNumberBaseLazy = lazy(() => import('./input-number-base-lazy'))
+
 export const InputNumberBaseUsage = () => {
   return (
-    <CodeExample code={code} language='jsx'>
-      <GInputNumber placeholder='请输入' />
-    </CodeExample>
+    <Loading>
+      <InputNumberBaseLazy />
+    </Loading>
   )
 }
 

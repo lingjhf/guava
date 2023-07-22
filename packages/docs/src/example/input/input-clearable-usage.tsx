@@ -1,18 +1,13 @@
-import { CodeExample } from '../../components/code-example'
-import { GInput } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-export const Example = () => {
-  return (
-    <GInput clearable />
-  )
-}
-`
+const InputClearableLazy = lazy(() => import('./input-clearable-lazy'))
+
 export const InputClearableUsage = () => {
   return (
-    <CodeExample code={code} language='jsx'>
-      <GInput clearable placeholder='clearable' />
-    </CodeExample>
+    <Loading>
+      <InputClearableLazy />
+    </Loading>
   )
 }
 

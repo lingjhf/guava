@@ -1,30 +1,13 @@
-import { CodeExample } from '../../components/code-example'
-import { GInput } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-export const Example = () => {
-  return (
-    <div>
-      <GInput size='large' />
-      <GInput />
-      <GInput size='small' />
-    </div>
-  )
-}
-`
+const InputSizeLazy = lazy(() => import('./input-size-lazy'))
+
 export const InputSizeUsage = () => {
   return (
-    <CodeExample code={code} language='jsx'>
-      <div class='my-2'>
-        <GInput size='large' placeholder='large' />
-      </div>
-      <div class='my-2'>
-        <GInput placeholder='default' />
-      </div>
-      <div class='my-2'>
-        <GInput size='small' placeholder='small' />
-      </div>
-    </CodeExample>
+    <Loading>
+      <InputSizeLazy />
+    </Loading>
   )
 }
 
