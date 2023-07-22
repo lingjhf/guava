@@ -1,14 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { GButton } from '@lingjhf/guava'
+import './index.css'
 
 const pageTitle = 'Guava'
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="h-full w-full flex items-center justify-center">
-    <a href="/getting-started/installation/">
-      <GButton client:only="solid-js" type="primary" size="large">Get Started</GButton>
-    </a>
+    <div class="flex items-center justify-center">
+      <div>
+        <h1 class="name">
+          <span>Guava</span>
+        </h1>
+        <p class="desc">UI Component</p>
+        <div class="actions">
+          <a href="/getting-started/installation/">
+            <GButton
+              client:only="solid-js"
+              class="font-bold"
+              type="primary"
+              style="--button-rounded: 20px;"
+            >
+              Getting Started
+            </GButton>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </BaseLayout>
