@@ -1,34 +1,14 @@
-import { CodeExample } from '../../components/code-example'
-import { GCollapse, GCollapseItem } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
+const CollapseBaseLazy = lazy(() => import('./collapse-base-lazy'))
 
-`
 export const CollapseBaseUsage = () => {
 
   return (
-    <CodeExample code={code} language='jsx'>
-      <GCollapse>
-        <GCollapseItem header={'Collapse item1'}>
-          <p>Collapse content</p>
-          <p>Collapse content</p>
-          <p>Collapse content</p>
-          <p>Collapse content</p>
-        </GCollapseItem>
-        <GCollapseItem header={'Collapse item1'}>
-          <p>Collapse content</p>
-          <p>Collapse content</p>
-          <p>Collapse content</p>
-          <p>Collapse content</p>
-        </GCollapseItem>
-        <GCollapseItem header={'Collapse item1'}>
-          <p>Collapse content</p>
-          <p>Collapse content</p>
-          <p>Collapse content</p>
-          <p>Collapse content</p>
-        </GCollapseItem>
-      </GCollapse>
-    </CodeExample>
+    <Loading>
+      <CollapseBaseLazy />
+    </Loading>
   )
 }
 
