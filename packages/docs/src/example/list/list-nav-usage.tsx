@@ -1,22 +1,13 @@
-import { CodeExample } from '../../components/code-example'
-import { GList, GListItem } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
 
-const code = `
-export const Example = () => {
-  return (
-    <GInputNumber step={10} />
-  )
-}
-`
+const ListNavLazy = lazy(() => import('./list-nav-lazy'))
+
 export const ListNavUsage = () => {
   return (
-    <CodeExample code={code} language='jsx'>
-      <GList value={0} nav>
-        <GListItem>Item one</GListItem>
-        <GListItem>Item two</GListItem>
-        <GListItem>Item three</GListItem>
-      </GList>
-    </CodeExample>
+    <Loading>
+      <ListNavLazy />
+    </Loading>
   )
 }
 

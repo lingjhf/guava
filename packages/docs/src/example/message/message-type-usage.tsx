@@ -1,30 +1,13 @@
-import { CodeExample } from '../../components/code-example'
-import { showMessage, GButton } from '@lingjhf/guava'
+import { lazy } from 'solid-js'
+import { Loading } from '../../components/loading'
+
+const MessageTypeLazy = lazy(() => import('./message-type-lazy'))
 
 export const MessageTypeUsage = () => {
-  const code = `
-
-  `
-  function messageChange(type?: string) {
-    showMessage({ message: 'Message', type })
-  }
   return (
-    <CodeExample code={code} language='jsx'>
-
-      <div class='flex'>
-        <div class='m-2'>
-          <GButton onClick={[messageChange, 'default']}>Button</GButton>
-        </div>
-        <div class='m-2'>
-          <GButton onClick={[messageChange, 'success']}>Success</GButton>
-        </div>
-        <div class='m-2'>
-          <GButton onClick={[messageChange, 'warn']}>Warn</GButton>
-        </div>
-        <div class='m-2'>
-          <GButton onClick={[messageChange, 'danger']}>Danger</GButton>
-        </div>
-      </div>
-    </CodeExample>
+    <Loading>
+      <MessageTypeLazy />
+    </Loading>
   )
 }
+
