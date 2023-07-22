@@ -1,0 +1,20 @@
+.colorSlider {
+  position: relative;
+  user-select: none;
+}
+
+.colorSlider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, #000000);
+}
+
+.slider {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
+}

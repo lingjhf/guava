@@ -1,0 +1,15 @@
+.colorPicker {
+  width: 240px;
+  background-color: #121212;
+}
+
+.colorPickerSlidersWrap {
+  padding: 8px;
+}
+
+.colorPickerSliderItemWrap {
+  display: flex;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,12 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro'
+import { CollapseBaseUsage } from '../../example/collapse/collapse-base-usage'
+import SubHeader from '../../components/SubHeader.astro'
+---
+
+<DocLayout>
+  <h1>Rail</h1>
+
+  <SubHeader anchor="base">基础用法</SubHeader>
+  <CollapseBaseUsage client:only="solid-js" />
+</DocLayout>

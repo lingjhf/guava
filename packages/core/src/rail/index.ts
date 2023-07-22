@@ -1,0 +1,1 @@
+export { Rail as GRail, type RailProps } from './rail'
