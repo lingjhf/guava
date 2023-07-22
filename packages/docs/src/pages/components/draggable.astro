@@ -1,6 +1,6 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
-import { CollapseBaseUsage } from '../../example/collapse/collapse-base-usage'
+import { DraggableBaseUsage } from '../../example/draggable/draggable-base-usage'
 import SubHeader from '../../components/SubHeader.astro'
 ---
 
@@ -8,5 +8,5 @@ import SubHeader from '../../components/SubHeader.astro'
   <h1>Draggable</h1>
 
   <SubHeader anchor="base">基础用法</SubHeader>
-  <CollapseBaseUsage client:only="solid-js" />
+  <DraggableBaseUsage client:only="solid-js" />
 </DocLayout>

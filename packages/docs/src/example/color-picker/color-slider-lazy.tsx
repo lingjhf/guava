@@ -1,18 +1,18 @@
 import { CodeExample } from '../../components/code-example'
-import { GColoPicker } from '@lingjhf/guava'
+import { GColorSlider } from '@lingjhf/guava'
 
 const code = `
 
 `
 
-const ColorPickerBaseLazy = () => {
+const ColorSliderLazy = () => {
 
   return (
     <CodeExample code={code} language='jsx'>
-      <GColoPicker></GColoPicker>
+      <GColorSlider></GColorSlider>
     </CodeExample>
   )
 }
 
-export default ColorPickerBaseLazy
+export default ColorSliderLazy
 

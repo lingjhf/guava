@@ -1,6 +1,9 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
-import { CollapseBaseUsage } from '../../example/collapse/collapse-base-usage'
+import { ColorPickerBaseUsage } from '../../example/color-picker/color-picker-base-usage'
+import { ColorSliderUsage } from '../../example/color-picker/color-slider-usage'
+import { ColorHueSliderUsage } from '../../example/color-picker/color-hue-slider-usage'
+import { ColorAphaSliderUsage } from '../../example/color-picker/color-alpha-slider-usage'
 import SubHeader from '../../components/SubHeader.astro'
 ---
 
@@ -8,5 +11,14 @@ import SubHeader from '../../components/SubHeader.astro'
   <h1>Color picker</h1>
 
   <SubHeader anchor="base">基础用法</SubHeader>
-  <CollapseBaseUsage client:only="solid-js" />
+  <ColorPickerBaseUsage client:only="solid-js" />
+
+  <SubHeader anchor="base">单独使用颜色面板</SubHeader>
+  <ColorSliderUsage client:only="solid-js" />
+
+  <SubHeader anchor="base">单独使用hue</SubHeader>
+  <ColorHueSliderUsage client:only="solid-js" />
+
+  <SubHeader anchor="base">单独使用alpha</SubHeader>
+  <ColorAphaSliderUsage client:only="solid-js" />
 </DocLayout>
