@@ -52,6 +52,14 @@ const jellyDisabledClasses: Record<ButtonType, string> = {
   'danger': styles.buttonJellyDangerDisabled,
 }
 
+const textTypeClasses: Record<ButtonType, string> = {
+  'default': styles.textButtonDefault,
+  'primary': styles.textButtonPrimary,
+  'success': styles.textButtonSuccess,
+  'warn': styles.textButtonWarn,
+  'danger': styles.textButtonDanger,
+}
+
 const iconSizeClasses: Record<ButtonSize, string> = {
   'default': styles.iconButtonSizeDefault,
   'small': styles.iconButtonSizeSmall,
@@ -89,7 +97,7 @@ export const Button = (propsRaw: Partial<ButtonProps>) => {
         }
         break
       case 'text':
-        classes.push(styles.textButton)
+        classes.push(textTypeClasses[props.type])
         if (props.disabled) {
           classes.push(styles.textButtonDisabled)
         }

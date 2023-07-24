@@ -16,10 +16,12 @@
 }
 
 .button:hover {
+  color: var(--button-text-color-hover);
   background-color: var(--button-bg-color-hover);
 }
 
 .button:active {
+  color: var(--button-text-color-active);
   background-color: var(--button-bg-color-active);
 }
 
@@ -85,6 +87,15 @@
   --button-bg-color-active: var(--bg-brand-light-disabled);
 }
 
+.textButtonDefault {
+  --button-text-color: var(--text-common-primary);
+  --button-text-color-hover: var(--text-common-secondary);
+  --button-text-color-active: var(--text-common-tertiary);
+  --button-bg-color: transparent;
+  --button-bg-color-hover: transparent;
+  --button-bg-color-active: transparent;
+}
+
 /* primary style */
 .buttonPrimary {
   --button-text-color: var(--text-static-primary);
@@ -109,6 +120,15 @@
   --button-bg-color: var(--bg-brand-light-disabled);
   --button-bg-color-hover: var(--bg-brand-light-disabled);
   --button-bg-color-active: var(--bg-brand-light-disabled);
+}
+
+.textButtonPrimary {
+  --button-text-color: var(--text-brand-default);
+  --button-text-color-hover: var(--text-brand-hover);
+  --button-text-color-active: var(--text-brand-active);
+  --button-bg-color: transparent;
+  --button-bg-color-hover: transparent;
+  --button-bg-color-active: transparent;
 }
 
 /* success style */
@@ -137,6 +157,15 @@
   --button-bg-color-active: var(--bg-success-light-disabled);
 }
 
+.textButtonSuccess {
+  --button-text-color: var(--text-success-default);
+  --button-text-color-hover: var(--text-success-hover);
+  --button-text-color-active: var(--text-success-active);
+  --button-bg-color: transparent;
+  --button-bg-color-hover: transparent;
+  --button-bg-color-active: transparent;
+}
+
 /* warn style */
 .buttonWarn {
   --button-text-color: var(--text-static-primary);
@@ -161,6 +190,15 @@
   --button-bg-color: var(--bg-warn-light-disabled);
   --button-bg-color-hover: var(--bg-warn-light-disabled);
   --button-bg-color-active: var(--bg-warn-light-disabled);
+}
+
+.textButtonWarn {
+  --button-text-color: var(--text-warn-default);
+  --button-text-color-hover: var(--text-warn-hover);
+  --button-text-color-active: var(--text-warn-active);
+  --button-bg-color: transparent;
+  --button-bg-color-hover: transparent;
+  --button-bg-color-active: transparent;
 }
 
 /* danger style */
@@ -189,14 +227,10 @@
   --button-bg-color-active: var(--bg-danger-light-disabled);
 }
 
-.textButton {
-  --button-text-color: var(--text-common-primary);
-  --button-bg-color: transparent;
-  --button-bg-color-hover: var(--bg-bgless-hover);
-  --button-bg-color-active: var(--bg-bgless-active);
-}
-
-.textButtonDisabled {
+.textButtonDanger {
+  --button-text-color: var(--text-danger-default);
+  --button-text-color-hover: var(--text-danger-hover);
+  --button-text-color-active: var(--text-danger-active);
   --button-bg-color: transparent;
   --button-bg-color-hover: transparent;
   --button-bg-color-active: transparent;
