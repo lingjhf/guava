@@ -2,6 +2,7 @@ import { createSignal } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import { useFormContext } from './form'
+import styles from './form-item.module.css'
 
 export interface FormItemProps extends GuavaParentProps<HTMLDivElement> {
   label?: string
@@ -17,7 +18,7 @@ export const FormItem = (propsRaw: Partial<FormItemProps>) => {
   const formContext = useFormContext()
   const [message, setMessage] = createSignal('')
   formContext?.addItem(props.name, setMessage)
-  
+
   return (
     <div>
       <div></div>
