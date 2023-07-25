@@ -13,6 +13,7 @@
 
 .formItemLabel {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   font-size: 13px;
   font-style: normal;
@@ -43,6 +44,7 @@
 
 .formItemMessageWrap {
   position: relative;
+  width: 100%;
 }
 
 .formItemMessage {

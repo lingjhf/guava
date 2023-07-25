@@ -29,7 +29,7 @@ export default function FormValidateLazy() {
 
   return (
     <CodeExample code={code} language='jsx'>
-      <div>
+      <div class='w-300px'>
         <GForm form={form()} validator={validator} >
           <GFormItem label='Name' name='name' required>
             <GInput value={form().name} input={inputName}></GInput>
@@ -39,7 +39,7 @@ export default function FormValidateLazy() {
           </GFormItem>
         </GForm>
 
-        <div class='flex justify-center'>
+        <div class='flex justify-end'>
           <GButton class='mr-2' type='primary' onClick={() => validator.clearValidated()}>clear</GButton>
 
           <GButton onClick={() => { setForm(validator.reset()) }}>reset</GButton>
