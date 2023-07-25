@@ -38,7 +38,8 @@ export const Form = (propsRaw: Partial<FormProps>) => {
   })
 
   props.validator?.setForm(props.form, false)
-  props.validator?.addVdalidateListener(validate)
+  props.validator?.addValidateListener(validate)
+  props.validator?.addValidateFieldListener(validateField)
   props.validator?.addClearVdalidateListener(clearValidated)
 
   const itemsMap = new Map<string, ItemMapValue>()
@@ -67,6 +68,26 @@ export const Form = (propsRaw: Partial<FormProps>) => {
   createEffect(on(() => props.labelAlign, (value) => {
     setLabelAlign(value)
   }))
+
+  function validateField(name: string, valided: FormValidated) {
+
+    const value = itemsMap.get(name)
+    if (valided.form) {
+      if (value) {
+        value.setMessage('')
+        value.setValidated(false)
+      }
+    } else if (valided.error) {
+      if (value) {
+        for (const error of valided.error?.errors ?? []) {
+          if (typeof error === 'object') {
+            value.setMessage(error[name])
+            value.setValidated(true)
+          }
+        }
+      }
+    }
+  }
 
   function validate(valided: FormValidated) {
     let errors = {}

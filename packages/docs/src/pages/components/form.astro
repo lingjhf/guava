@@ -1,7 +1,16 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
+import { FormBaseUsage } from '../../example/form/form-base-usage'
+import { FormValidateUsage } from '../../example/form/form-validate-usage'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Form</h1>
+
+  <SubHeader anchor="base">基础用法</SubHeader>
+  <FormBaseUsage client:only="solid-js" />
+
+  <SubHeader anchor="validate">表单校验</SubHeader>
+  <FormValidateUsage client:only="solid-js" />
 </DocLayout>
