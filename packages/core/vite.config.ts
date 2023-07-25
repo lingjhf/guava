@@ -54,6 +54,7 @@ export default defineConfig({
         'yup',
         'highlight.js',
         'dayjs',
+        'mitt',
       ],
       output: {
         entryFileNames(chunkInfo) {
