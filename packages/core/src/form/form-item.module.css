@@ -1,12 +1,60 @@
-.formItem{
-
+.formItem {
+  margin-bottom: 4px;
 }
 
-.formItemLabel{
-
+.formItemWrap {
+  display: flex;
+  margin-bottom: 18px;
 }
 
+.formItemWrapTop {
+  flex-direction: column;
+}
 
-.formItemMessage{
-  
+.formItemLabel {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 20px;
+  margin-right: 8px;
+}
+
+.formItemLabelLeft {
+  justify-content: flex-start;
+}
+
+.formItemLabelCenter {
+  justify-content: center;
+}
+
+.formItemLabelRight {
+  justify-content: flex-end;
+}
+
+.formItemLabelTop {
+  margin-bottom: 4px;
+}
+
+.formLabelRequired {
+  margin-right: 4px;
+  color: var(--form-item-message-text-color);
+}
+
+.formItemMessageWrap {
+  position: relative;
+}
+
+.formItemMessage {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  color: var(--form-item-message-text-color);
+}
+
+.formItemMessageDanger .input {
+  --input-border-color: var(--border-danger-default) !important;
 }

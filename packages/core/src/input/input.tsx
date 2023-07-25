@@ -20,9 +20,9 @@ export interface InputProps extends GuavaProps<HTMLInputElement> {
 }
 
 const sizeClasses: Record<InputSize, string> = {
-  'default': styles.gInputSizeDefault,
-  'small': styles.gInputSizeSmall,
-  'large': styles.gInputSizeLarge
+  'default': styles.inputSizeDefault,
+  'small': styles.inputSizeSmall,
+  'large': styles.inputSizeLarge
 }
 
 export const Input = (propsRaw: Partial<InputProps>) => {
@@ -43,9 +43,9 @@ export const Input = (propsRaw: Partial<InputProps>) => {
   })
 
   const inputClasses = () => {
-    let classes = `${styles.gInput} ${sizeClasses[props.size]}`
+    let classes = `${styles.input} ${sizeClasses[props.size]}`
     if (isFocus()) {
-      classes += ` ${styles.gInputFocus}`
+      classes += ` ${styles.inputFocus}`
     }
     return classes
   }
@@ -92,7 +92,7 @@ export const Input = (propsRaw: Partial<InputProps>) => {
       onMouseLeave={mouseLeave}
     >
       <input
-        class={styles.gInputText}
+        class={styles.inputText}
         value={inputValue()}
         placeholder={props.placeholder}
         ref={props.ref}
@@ -102,9 +102,9 @@ export const Input = (propsRaw: Partial<InputProps>) => {
         onFocusOut={focusOut}
       ></input>
       <Show when={props.clearable}>
-        <div class={styles.gInputClearable}>
+        <div class={styles.inputClearable}>
           <Show when={inputValue() && (isHover() || isFocus())}>
-            <CloseCircleFilled class={styles.gInputClearableIcon} onClick={clear} />
+            <CloseCircleFilled class={styles.inputClearableIcon} onClick={clear} />
           </Show>
         </div>
       </Show>

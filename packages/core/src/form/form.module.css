@@ -1,0 +1,3 @@
+.form {
+  --form-item-message-text-color: var(--text-danger-default);
+}

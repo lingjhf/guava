@@ -23,6 +23,12 @@ function InjectImportCss(): PluginOption {
 export default defineConfig({
   plugins: [solidPlugin(), InjectImportCss()],
   css: {
+    modules: {
+      localsConvention: 'camelCase',
+      generateScopedName(name, filename, css) {
+        return name
+      }
+    },
     postcss: {
       plugins: [autoprefixer({ overrideBrowserslist: [] })],
     },

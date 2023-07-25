@@ -1,4 +1,4 @@
-.gInput {
+.input {
   --input-border-radius: 4px;
   --input-text-color: var(--text-common-primary);
   --input-placeholder-color: var(--text-common-quaternary);
@@ -13,15 +13,15 @@
   display: flex;
   align-items: center;
 }
-.gInput:hover {
+.input:hover {
   --input-border-color: var(--border-common-default);
 }
-.gInputFocus {
+.inputFocus {
   --input-bg-color: var(--bg-controls-elevate-default);
   --input-border-color: var(--border-brand-default) !important;
 }
 
-.gInputText {
+.inputText {
   color: var(--input-text-color);
   font-size: var(--input-text-font-size);
   line-height: var(--input-text-line-height);
@@ -32,37 +32,37 @@
   background: none;
 }
 
-.gInputText::placeholder {
+.inputText::placeholder {
   color: var(--input-placeholder-color);
 }
 
-.gInputSizeDefault {
+.inputSizeDefault {
   --input-height: 40px;
   --input-padding: 10px 8px;
   --input-text-font-size: 13px;
   --input-text-line-height: 20px;
 }
-.gInputSizeSmall {
+.inputSizeSmall {
   --input-height: 32px;
   --input-padding: 7px 8px;
   --input-text-font-size: 12px;
   --input-text-line-height: 18px;
 }
-.gInputSizeLarge {
+.inputSizeLarge {
   --input-height: 48px;
   --input-padding: 13px 12px;
   --input-text-font-size: 14px;
   --input-text-line-height: 22px;
 }
 
-.gInputClearable {
+.inputClearable {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
   margin-left: 8px;
 }
 
-.gInputClearableIcon {
+.inputClearableIcon {
   cursor: pointer;
   color: var(--text-common-secondary);
 }

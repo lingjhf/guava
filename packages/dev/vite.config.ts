@@ -18,6 +18,14 @@ export default defineConfig({
       }
     ]
   }),],
+  css: {
+    modules: {
+      localsConvention: 'camelCase',
+      generateScopedName(name, filename, css) {
+        return name
+      }
+    },
+  },
   server: {
     port: 3000,
   },

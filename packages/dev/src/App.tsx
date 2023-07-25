@@ -1,4 +1,4 @@
-import { GConfigProvider, GForm, GFormItem, FormValidator, yup, GInput } from '@lingjhf/guava'
+import { GConfigProvider, GForm, GFormItem, FormValidator, yup, GInput, GButton } from '@lingjhf/guava'
 import { For, createSignal } from 'solid-js'
 
 import 'virtual:uno.css'
@@ -6,34 +6,40 @@ const App = () => {
 
   function TestValidate() {
 
-    const form = {
-      name: 'xxxx@gmail.com'
-    }
+    const [form, setForm] = createSignal({
+      name: '',
+      age: 0
+    })
 
     const validator = new FormValidator({
-      form: form,
       schema: yup.object({
         name: yup.string().required({ name: 'name is required' }).max(10, { name: 'max 10' }).email({ name: 'email' }),
         age: yup.number().required({ age: 'age is required' })
       })
     })
 
-    async function test() {
-      const valided = await validator.validate({ abortEarly: false })
-      console.log(valided.error?.errors)
+    function inputName(value: string) {
+      setForm(v => ({ ...v, name: value }))
     }
-    test()
+
+    function inputAge(value: string) {
+      setForm(v => ({ ...v, age: Number(value) }))
+    }
+
     return (
-      <GForm validator={validator} >
-        <GFormItem name='name'>
-          <GInput></GInput>
+      <GForm form={form()} validator={validator} labelAlign='left' labelPosition='top'>
+        <GFormItem label='Name' name='name' required>
+          <GInput value={form().name} input={inputName}></GInput>
         </GFormItem>
-        <GFormItem name='age'>
-          <GInput></GInput>
+        <GFormItem label='Age' name='age' required>
+          <GInput value={(form().age ?? '').toString()} input={inputAge} ></GInput>
         </GFormItem>
+        {/* 清除校验 */}
+        <GButton onClick={() => validator.clearValidated()}>clear</GButton>
+        {/* 重置 */}
+        <GButton onClick={() => { setForm(validator.reset()) }}>reset</GButton>
       </GForm>
     )
-
   }
 
   return (
