@@ -22,14 +22,16 @@ export default function FormBaseLazy() {
 
   return (
     <CodeExample code={code} language='jsx'>
-      <GForm >
-        <GFormItem label='Name' name='name' >
-          <GInput value={form().name} input={inputName}></GInput>
-        </GFormItem>
-        <GFormItem label='Email' name='email' >
-          <GInput value={form().email} input={inputEmail} ></GInput>
-        </GFormItem>
-      </GForm>
+      <div class='w-300px'>
+        <GForm >
+          <GFormItem label='Name' name='name' >
+            <GInput value={form().name} input={inputName}></GInput>
+          </GFormItem>
+          <GFormItem label='Email' name='email' >
+            <GInput value={form().email} input={inputEmail} ></GInput>
+          </GFormItem>
+        </GForm>
+      </div>
     </CodeExample>
   )
 }
