@@ -38,7 +38,7 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
   }
 
   const levelStyles = () => {
-    return { 'padding-left': `${level * 32}px` }
+    return { 'padding-left': `${level > 0 ? level * 32 : 7}px` }
   }
 
   createEffect(on(() => props.value, () => {
