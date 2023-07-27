@@ -8,7 +8,8 @@ import styles from './list-item.module.css'
 export interface ListItemProps extends GuavaParentProps<HTMLDivElement> {
   value?: ListValue
   link?: string
-  defaultExpandActive: boolean
+  defaultExpandActive: boolean,
+  level?: number
 }
 
 export const ListItem = (propsRaw: Partial<ListItemProps>) => {
@@ -16,13 +17,14 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
     defaultExpandActive: false
   })
   const listContext = useListContext()
-  const listContextGroup = useListGroupContext()
+  const listGroupContext = useListGroupContext()
   if (!listContext) {
     throw Error('list context is undefined')
   }
   const { nav, addItem, removeItem, activeItem } = listContext
   const [active, setActive] = createSignal(false)
-  const itemKey = addItem({ item: active, setItem: setActive, groupContext: listContextGroup }, props.value)
+  const itemKey = addItem({ item: active, setItem: setActive, groupContext: listGroupContext }, props.value)
+  const level = props.level ?? (listGroupContext ? listGroupContext.level + 1 : 0)
 
   const itemClasses = () => {
     const classes = [styles.listItem]
@@ -36,21 +38,19 @@ export const ListItem = (propsRaw: Partial<ListItemProps>) => {
   }
 
   const levelStyles = () => {
-    if (listContextGroup?.level) {
-      return { 'padding-left': `${listContextGroup.level * 32}px` }
-    }
+    return { 'padding-left': `${level * 32}px` }
   }
 
   createEffect(on(() => props.value, () => {
     if (props.value !== undefined && props.value !== itemKey) {
       removeItem(itemKey)
-      addItem({ item: active, setItem: setActive, groupContext: listContextGroup }, props.value)
+      addItem({ item: active, setItem: setActive, groupContext: listGroupContext }, props.value)
     }
   }))
 
   onCleanup(() => {
     removeItem(itemKey)
-    listContextGroup?.removeItem(itemKey)
+    listGroupContext?.removeItem(itemKey)
   })
 
   function selectedItem() {
