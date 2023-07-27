@@ -1,4 +1,4 @@
-import { GConfigProvider, GForm, GFormItem, FormValidator, yup, GInput, GButton, GList, GListGroup, GListItem } from '@lingjhf/guava'
+import { GConfigProvider, GForm, GFormItem, FormValidator, yup, GInput, GButton, GList, GListGroup, GListItem, GTable, TableColumn } from '@lingjhf/guava'
 import { For, createSignal } from 'solid-js'
 
 import 'virtual:uno.css'
@@ -42,25 +42,18 @@ const App = () => {
     )
   }
 
+  const columns: TableColumn[] = [
+    { label: '名称', prop: 'name' },
+    { label: '年龄', prop: 'age' },
+  ]
+
+  const data = [{ name: 'jack', age: 18 }]
+
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class=' px-100px'>
-          <GList value={0}>
-            <GListItem>Item one</GListItem>
-            <GListGroup header={'Group 1'}>
-              <GListItem>Item 1-1</GListItem>
-              <GListItem>Item 1-2</GListItem>
-              <GListItem>Item 1-3</GListItem>
-              <GListGroup header={'Group 1-1'}>
-                <GListItem>Item 1-1-1</GListItem>
-                <GListItem>Item 1-1-2</GListItem>
-                <GListItem>Item 1-1-3</GListItem>
-              </GListGroup>
-            </GListGroup>
-            <GListItem>Item two</GListItem>
-            <GListItem>Item three</GListItem>
-          </GList>
+          <GTable columns={columns} data={data}></GTable>
         </div>
       </GConfigProvider>
     </div>
