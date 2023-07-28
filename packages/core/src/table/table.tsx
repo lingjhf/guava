@@ -84,7 +84,10 @@ export const Table = (propsRaw: Partial<TableProps>) => {
   return (
     <div class={styles.table} style={tableStyles()}>
       <div class={styles.tableHeader} ref={headerRef!}>
-        <table style={`width:${tableWidth()}px;table-layout: fixed; border-collapse: collapse;`}>
+        <table style={`width:${tableWidth()}px;table-layout: fixed; border-collapse: collapse;`}
+          cell-padding='0'
+          cell-spacing='0'
+        >
           <colgroup>
             <For each={columns()}>
               {
@@ -98,7 +101,7 @@ export const Table = (propsRaw: Partial<TableProps>) => {
                 {
                   (column) => {
                     return (
-                      <th>{column.label}</th>
+                      <th class={styles.tableHeaderCell}>{column.label}</th>
                     )
                   }
                 }
