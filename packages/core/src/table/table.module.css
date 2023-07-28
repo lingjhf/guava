@@ -1,27 +1,19 @@
 .table {
-  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .tableHeader {
-  display: flex;
   overflow: hidden;
-  flex-shrink: 0;
-}
-
-.tableRow {
-  display: flex;
 }
 
 .tableCell {
-  display: flex;
   padding: 9px 16px;
   align-items: center;
   border-bottom: 1px solid var(--border-grid-horizontal);
   font-size: 13px;
   line-height: 20px;
-  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .tableCellFixed {

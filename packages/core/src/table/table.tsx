@@ -84,18 +84,31 @@ export const Table = (propsRaw: Partial<TableProps>) => {
   return (
     <div class={styles.table} style={tableStyles()}>
       <div class={styles.tableHeader} ref={headerRef!}>
-        <For each={columns()}>
-          {
-            (column) => {
-              return (
-                <TableColumn {...column}></TableColumn>
-              )
-            }
-          }
-        </For>
+        <table style={`width:${tableWidth()}px;table-layout: fixed; border-collapse: collapse;`}>
+          <colgroup>
+            <For each={columns()}>
+              {
+                (column) => <col id={column.className} width={column.width}></col>
+              }
+            </For>
+          </colgroup>
+          <thead>
+            <tr>
+              <For each={columns()}>
+                {
+                  (column) => {
+                    return (
+                      <th>{column.label}</th>
+                    )
+                  }
+                }
+              </For>
+            </tr>
+          </thead>
+        </table>
       </div>
       <GScrollbar scrollChange={scrollChange}>
-        <table style={`width:${tableWidth()}px;table-layout: fixed;`}>
+        <table style={`width:${tableWidth()}px;table-layout: fixed; border-collapse: collapse;`}>
           <colgroup>
             <For each={columns()}>
               {
@@ -113,8 +126,10 @@ export const Table = (propsRaw: Partial<TableProps>) => {
                         {
                           (column) => {
                             return (
-                              <td class={column.className}>
-                                {column.prop ? item[column.prop] : null}
+                              <td class={mergeClasses([styles.tableCell, column.className])}>
+                                <div >
+                                  {column.prop ? item[column.prop] : null}
+                                </div>
                               </td>
                             )
                           }
