@@ -7,6 +7,17 @@
   overflow: hidden;
 }
 
+.tableHeaderCell {
+  --table-header-field-bg-color: #2c2c2c;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  background-color: var(--table-header-field-bg-color);
+  text-align: left;
+  box-sizing: border-box;
+}
+
 .tableCell {
   padding: 9px 16px;
   align-items: center;
