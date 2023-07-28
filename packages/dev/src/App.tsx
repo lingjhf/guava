@@ -1,4 +1,4 @@
-import { GConfigProvider, GForm, GFormItem, FormValidator, yup, GInput, GButton, GList, GListGroup, GListItem, GTable, TableColumn } from '@lingjhf/guava'
+import { GConfigProvider, GForm, GFormItem, FormValidator, yup, GInput, GButton, GList, GListGroup, GListItem, GTable, type TableColumn } from '@lingjhf/guava'
 import { For, createSignal } from 'solid-js'
 
 import 'virtual:uno.css'
@@ -43,17 +43,78 @@ const App = () => {
   }
 
   const columns: TableColumn[] = [
-    { label: '名称', prop: 'name' },
-    { label: '年龄', prop: 'age' },
+    { label: 'Date', prop: 'date', width: 150, fixed: true },
+    { label: 'Name', prop: 'name', width: 120 },
+    { label: 'State', prop: 'state', width: 120 },
+    { label: 'City', prop: 'city', width: 320 },
+    { label: 'Address', prop: 'address', width: 600 },
+    { label: 'Zip', prop: 'zip', width: 120 },
   ]
 
-  const data = [{ name: 'jack', age: 18 }]
+  const data = [
+    {
+      date: '2016-05-03',
+      name: 'Tom',
+      state: 'California',
+      city: 'Los Angeles',
+      address: 'No. 189, Grove St, Los Angeles',
+      zip: 'CA 90036',
+    },
+    {
+      date: '2016-05-02',
+      name: 'Tom',
+      state: 'California',
+      city: 'Los Angeles',
+      address: 'No. 189, Grove St, Los Angeles',
+      zip: 'CA 90036',
+    },
+    {
+      date: '2016-05-04',
+      name: 'Tom',
+      state: 'California',
+      city: 'Los Angeles',
+      address: 'No. 189, Grove St, Los Angeles',
+      zip: 'CA 90036',
+    },
+    {
+      date: '2016-05-01',
+      name: 'Tom',
+      state: 'California',
+      city: 'Los Angeles',
+      address: 'No. 189, Grove St, Los Angeles',
+      zip: 'CA 90036',
+    },
+    {
+      date: '2016-05-08',
+      name: 'Tom',
+      state: 'California',
+      city: 'Los Angeles',
+      address: 'No. 189, Grove St, Los Angeles',
+      zip: 'CA 90036',
+    },
+    {
+      date: '2016-05-06',
+      name: 'Tom',
+      state: 'California',
+      city: 'Los Angeles',
+      address: 'No. 189, Grove St, Los Angeles',
+      zip: 'CA 90036',
+    },
+    {
+      date: '2016-05-07',
+      name: 'Tom',
+      state: 'California',
+      city: 'Los Angeles',
+      address: 'No. 189, Grove St, Los Angeles',
+      zip: 'CA 90036',
+    },
+  ]
 
   return (
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class=' px-100px'>
-          <GTable columns={columns} data={data}></GTable>
+          <GTable columns={columns} data={data} style='width:100%' height={250} ></GTable>
         </div>
       </GConfigProvider>
     </div>
