@@ -1,4 +1,4 @@
-import { For, createContext, createMemo, onMount, useContext } from 'solid-js'
+import { For, createContext, createMemo, createSignal, onMount, useContext } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps, mergeClasses, mergeStyles } from '../utils'
 import { TableColumn, type TableColumnProps } from './table-column'
@@ -14,7 +14,7 @@ export interface TableColumn {
   prop?: string
   align?: 'left' | 'center' | 'right'
   fixed?: boolean
-  width?: string | number
+  width?: number
 }
 export interface TableProps extends GuavaParentProps<HTMLDivElement> {
   data: Record<string, any>[]
@@ -42,6 +42,8 @@ export const Table = (propsRaw: Partial<TableProps>) => {
   )
 
   let headerRef: HTMLDivElement
+  const [tableWidth, setTableWidth] = createSignal(0)
+
   const tableStyles = () => {
     const styles = [
       `height:${typeof props.height === 'number' ? `${props.height}px` : props.height}`
@@ -49,17 +51,22 @@ export const Table = (propsRaw: Partial<TableProps>) => {
     return mergeStyles(styles, props.style)
   }
 
-  const columns = createMemo(() => {
-    return props.columns.map(column => {
-      const width = column.width ?? '100%'
+  const columns = createMemo<TableColumnProps[]>(() => {
+    let totalWidth = 0
+    const columns = props.columns.map((column, index) => {
+      const width = column.width ?? 80
+      totalWidth += width
       return {
         label: column.label ?? '',
         prop: column.prop ?? '',
         align: column.align ?? 'left',
         fixed: column.fixed ?? false,
-        width: typeof width === 'number' ? `${width}px` : width
+        width,
+        className: `tableColumn_${index}`
       }
     })
+    setTableWidth(totalWidth)
+    return columns
   })
 
   function cellClasses(column: TableColumnProps) {
@@ -88,27 +95,38 @@ export const Table = (propsRaw: Partial<TableProps>) => {
         </For>
       </div>
       <GScrollbar scrollChange={scrollChange}>
-        <For each={props.data}>
-          {
-            (item) => {
-              return (
-                <div class={styles.tableRow}>
-                  <For each={columns()}>
-                    {
-                      (column) => {
-                        return (
-                          <div class={cellClasses(column)} style={`width:${column.width};left:0`}>
-                            {column.prop ? item[column.prop] : null}
-                          </div>
-                        )
-                      }
-                    }
-                  </For>
-                </div>
-              )
-            }
-          }
-        </For>
+        <table style={`width:${tableWidth()}px;table-layout: fixed;`}>
+          <colgroup>
+            <For each={columns()}>
+              {
+                (column) => <col id={column.className} width={column.width}></col>
+              }
+            </For>
+          </colgroup>
+          <tbody>
+            <For each={props.data}>
+              {
+                (item) => {
+                  return (
+                    <tr >
+                      <For each={columns()}>
+                        {
+                          (column) => {
+                            return (
+                              <td class={column.className}>
+                                {column.prop ? item[column.prop] : null}
+                              </td>
+                            )
+                          }
+                        }
+                      </For>
+                    </tr>
+                  )
+                }
+              }
+            </For>
+          </tbody>
+        </table>
       </GScrollbar>
     </div >
   )

@@ -5,7 +5,8 @@ export interface TableColumnProps {
   prop: string
   align: 'left' | 'center' | 'right'
   fixed: boolean
-  width: string
+  width: number
+  className: string
 }
 
 export const TableColumn = (props: TableColumnProps) => {
