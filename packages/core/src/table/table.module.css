@@ -3,8 +3,14 @@
   flex-direction: column;
 }
 
-.tableHeader {
+.tableHeaderWrap {
+  flex-shrink: 0;
   overflow: hidden;
+}
+
+.tableHeader {
+  table-layout: fixed;
+  border-collapse: collapse;
 }
 
 .tableHeaderCell {
@@ -16,6 +22,10 @@
   background-color: var(--table-header-field-bg-color);
   text-align: left;
   box-sizing: border-box;
+}
+
+.tableBodyWrap{
+  
 }
 
 .tableCell {

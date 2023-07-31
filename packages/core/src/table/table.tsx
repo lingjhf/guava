@@ -83,8 +83,8 @@ export const Table = (propsRaw: Partial<TableProps>) => {
 
   return (
     <div class={styles.table} style={tableStyles()}>
-      <div class={styles.tableHeader} ref={headerRef!}>
-        <table style={`width:${tableWidth()}px;table-layout: fixed; border-collapse: collapse;`}
+      <div class={styles.tableHeaderWrap} ref={headerRef!}>
+        <table class={styles.tableHeader} style={`width:${tableWidth()}px;`}
           cell-padding='0'
           cell-spacing='0'
         >
