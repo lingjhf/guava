@@ -315,6 +315,7 @@ export function scrollXToSliderX(
   viewW: number,
   contentW: number
 ): number {
+  if (contentW - viewW === 0) return 0
   return scrollX * ((viewW - sliderW) / (contentW - viewW))
 }
 
