@@ -35,11 +35,9 @@ export const CodeExample = (props: CodeExampleProps) => {
 
   return (
     <div class=' box-border overflow-hidden border border-solid border-[var(--border-common-default)] rounded-2'>
-      <GScrollbar>
-        <div class='p-24px'>
-          {props.children}
-        </div>
-      </GScrollbar>
+      <div class='p-24px'>
+        {props.children}
+      </div>
       <div class='h-48px box-border p-2 flex border border-t border-t-solid border-t-[var(--border-common-default)]'>
         <div class=' ml-auto'>
           <GButton size='medium' variant='text' onClick={copyCode}>

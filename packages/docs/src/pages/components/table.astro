@@ -1,7 +1,16 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro'
+import { TabsBaseUsage } from '../../example/table/table-base-usage'
+import { TableFixedUsage } from '../../example/table/table-fixed-usage'
+import SubHeader from '../../components/SubHeader.astro'
 ---
 
 <DocLayout>
   <h1>Table</h1>
+
+  <SubHeader anchor="base">基础用法</SubHeader>
+  <TabsBaseUsage client:only="solid-js" />
+
+  <SubHeader anchor="base">固定列</SubHeader>
+  <TableFixedUsage client:only="solid-js" />
 </DocLayout>
