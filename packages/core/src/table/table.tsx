@@ -1,21 +1,17 @@
-import { For, createContext, createMemo, createSignal, onMount, useContext } from 'solid-js'
+import { For, createMemo, createSignal } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps, mergeClasses, mergeStyles } from '../utils'
-import { TableColumn, type TableColumnProps } from './table-column'
 import { GScrollbar, type ScrollDetail } from '../scrollbar'
 import styles from './table.module.css'
-
-export interface TableProviderValue {
-  addColumn: (props: TableColumnProps) => void
-}
 
 export interface TableColumn {
   label?: string
   prop?: string
   align?: 'left' | 'center' | 'right'
-  fixed?: boolean
+  fixed?: 'left' | 'right'
   width?: number
 }
+
 export interface TableProps extends GuavaParentProps<HTMLDivElement> {
   data: Record<string, any>[]
   columns: TableColumn[]
@@ -24,9 +20,16 @@ export interface TableProps extends GuavaParentProps<HTMLDivElement> {
   height: string | number
 }
 
-const TableContext = createContext<TableProviderValue>()
-
-export const useTableContext = () => useContext(TableContext)
+interface TableColumnProps {
+  label: string
+  prop: string
+  align: 'left' | 'center' | 'right'
+  fixed?: 'left' | 'right',
+  fixedLeft: number,
+  fixedRight: number,
+  width: number
+  className: string
+}
 
 export const Table = (propsRaw: Partial<TableProps>) => {
 
@@ -53,21 +56,51 @@ export const Table = (propsRaw: Partial<TableProps>) => {
 
   const columns = createMemo<TableColumnProps[]>(() => {
     let totalWidth = 0
+    const fixedLeftColumns: TableColumnProps[] = []
+    const fixedRightColumns: TableColumnProps[] = []
     const columns = props.columns.map((column, index) => {
       const width = column.width ?? 80
       totalWidth += width
-      return {
+      const columnProps = {
         label: column.label ?? '',
         prop: column.prop ?? '',
         align: column.align ?? 'left',
-        fixed: column.fixed ?? false,
+        fixed: column.fixed,
+        fixedLeft: 0,
+        fixedRight: 0,
         width,
         className: `tableColumn_${index}`
       }
+      if (column.fixed === 'left') {
+        fixedLeftColumns.push(columnProps)
+      }
+      if (column.fixed === 'right') {
+        fixedRightColumns.unshift(columnProps)
+      }
+
+      return columnProps
     })
+    let fixedLeft = 0
+    let fixedRight = 0
+    for (const column of fixedLeftColumns) {
+      column.fixedLeft += fixedLeft
+      fixedLeft += column.width
+    }
+    for (const column of fixedRightColumns) {
+      column.fixedRight += fixedRight
+      fixedRight += column.width
+    }
     setTableWidth(totalWidth)
     return columns
   })
+
+  function headerCellClasses(column: TableColumnProps) {
+    const classes = [styles.tableHeaderCell]
+    if (column.fixed) {
+      classes.push(styles.tableCellFixed)
+    }
+    return mergeClasses(classes)
+  }
 
   function cellClasses(column: TableColumnProps) {
     const classes = [styles.tableCell]
@@ -75,6 +108,16 @@ export const Table = (propsRaw: Partial<TableProps>) => {
       classes.push(styles.tableCellFixed)
     }
     return mergeClasses(classes)
+  }
+
+  function cellStyles(column: TableColumnProps) {
+    if (column.fixed === 'left') {
+      return `left:${column.fixedLeft}px;`
+    }
+    if (column.fixed === 'right') {
+      return `right:${column.fixedRight}px`
+    }
+    return ''
   }
 
   function scrollChange(detail: ScrollDetail) {
@@ -101,7 +144,7 @@ export const Table = (propsRaw: Partial<TableProps>) => {
                 {
                   (column) => {
                     return (
-                      <th class={styles.tableHeaderCell}>{column.label}</th>
+                      <th class={headerCellClasses(column)} style={cellStyles(column)}>{column.label}</th>
                     )
                   }
                 }
@@ -111,7 +154,7 @@ export const Table = (propsRaw: Partial<TableProps>) => {
         </table>
       </div>
       <GScrollbar scrollChange={scrollChange}>
-        <table style={`width:${tableWidth()}px;table-layout: fixed; border-collapse: collapse;`}>
+        <table class={styles.tableBody} style={`width:${tableWidth()}px;`}>
           <colgroup>
             <For each={columns()}>
               {
@@ -124,13 +167,13 @@ export const Table = (propsRaw: Partial<TableProps>) => {
               {
                 (item) => {
                   return (
-                    <tr >
+                    <tr>
                       <For each={columns()}>
                         {
                           (column) => {
                             return (
-                              <td class={mergeClasses([styles.tableCell, column.className])}>
-                                <div >
+                              <td class={cellClasses(column)} style={cellStyles(column)}>
+                                <div>
                                   {column.prop ? item[column.prop] : null}
                                 </div>
                               </td>

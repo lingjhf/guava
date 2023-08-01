@@ -14,23 +14,26 @@
 }
 
 .tableHeaderCell {
-  --table-header-field-bg-color: #2c2c2c;
+  --table-header-cell-bg-color: #2c2c2c;
   padding: 10px 16px;
   font-size: 14px;
   font-weight: 600;
   line-height: 22px;
-  background-color: var(--table-header-field-bg-color);
+  background-color: var(--table-header-cell-bg-color);
   text-align: left;
   box-sizing: border-box;
 }
 
-.tableBodyWrap{
-  
+.tableBody {
+  table-layout: fixed;
+  border-collapse: collapse;
 }
 
 .tableCell {
+  --table-cell-bg-color: #1a1a1a;
   padding: 9px 16px;
   align-items: center;
+  background-color: var(--table-cell-bg-color);
   border-bottom: 1px solid var(--border-grid-horizontal);
   font-size: 13px;
   line-height: 20px;
