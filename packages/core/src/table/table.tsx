@@ -1,4 +1,4 @@
-import { For, createMemo, createSignal } from 'solid-js'
+import { For, createSignal, onMount } from 'solid-js'
 import type { GuavaParentProps } from '../types'
 import { generateSplitEventHandlersProps, mergeClasses, mergeStyles } from '../utils'
 import { GScrollbar, type ScrollDetail } from '../scrollbar'
@@ -44,8 +44,10 @@ export const Table = (propsRaw: Partial<TableProps>) => {
     }
   )
 
+  let tableRef: HTMLDivElement
   let headerRef: HTMLDivElement
   const [tableWidth, setTableWidth] = createSignal(0)
+  const [columns, setColumns] = createSignal<TableColumnProps[]>([])
 
   const tableStyles = () => {
     const styles = [
@@ -54,12 +56,47 @@ export const Table = (propsRaw: Partial<TableProps>) => {
     return mergeStyles(styles, props.style)
   }
 
-  const columns = createMemo<TableColumnProps[]>(() => {
+  const headerCellClasses = (column: TableColumnProps) => {
+    const classes = [styles.tableHeaderCell]
+    if (column.fixed) {
+      classes.push(styles.tableCellFixed)
+    }
+    return mergeClasses(classes)
+  }
+
+  const cellClasses = (column: TableColumnProps) => {
+    const classes = [styles.tableCell]
+    if (column.fixed) {
+      classes.push(styles.tableCellFixed)
+    }
+    return mergeClasses(classes)
+  }
+
+  const cellStyles = (column: TableColumnProps) => {
+    if (column.fixed === 'left') {
+      return `left:${column.fixedLeft}px;`
+    }
+    if (column.fixed === 'right') {
+      return `right:${column.fixedRight}px`
+    }
+    return ''
+  }
+
+  onMount(() => {
+    initColumns()
+    window.addEventListener('resize', () => {
+      initColumns()
+    })
+  })
+
+  function initColumns() {
+    let { width: tableWidth } = tableRef.getBoundingClientRect()
     let totalWidth = 0
+    const notSetWidthColumns: TableColumnProps[] = []
     const fixedLeftColumns: TableColumnProps[] = []
     const fixedRightColumns: TableColumnProps[] = []
     const columns = props.columns.map((column, index) => {
-      const width = column.width ?? 80
+      const width = column.width ?? 0
       totalWidth += width
       const columnProps = {
         label: column.label ?? '',
@@ -70,6 +107,11 @@ export const Table = (propsRaw: Partial<TableProps>) => {
         fixedRight: 0,
         width,
         className: `tableColumn_${index}`
+      }
+      if (!width) {
+        notSetWidthColumns.push(columnProps)
+      } else {
+        tableWidth -= width
       }
       if (column.fixed === 'left') {
         fixedLeftColumns.push(columnProps)
@@ -82,6 +124,11 @@ export const Table = (propsRaw: Partial<TableProps>) => {
     })
     let fixedLeft = 0
     let fixedRight = 0
+    let notSetWidth = tableWidth / notSetWidthColumns.length
+    notSetWidth = notSetWidth < 80 ? 80 : notSetWidth
+    for (const column of notSetWidthColumns) {
+      column.width = notSetWidth
+    }
     for (const column of fixedLeftColumns) {
       column.fixedLeft += fixedLeft
       fixedLeft += column.width
@@ -91,33 +138,7 @@ export const Table = (propsRaw: Partial<TableProps>) => {
       fixedRight += column.width
     }
     setTableWidth(totalWidth)
-    return columns
-  })
-
-  function headerCellClasses(column: TableColumnProps) {
-    const classes = [styles.tableHeaderCell]
-    if (column.fixed) {
-      classes.push(styles.tableCellFixed)
-    }
-    return mergeClasses(classes)
-  }
-
-  function cellClasses(column: TableColumnProps) {
-    const classes = [styles.tableCell]
-    if (column.fixed) {
-      classes.push(styles.tableCellFixed)
-    }
-    return mergeClasses(classes)
-  }
-
-  function cellStyles(column: TableColumnProps) {
-    if (column.fixed === 'left') {
-      return `left:${column.fixedLeft}px;`
-    }
-    if (column.fixed === 'right') {
-      return `right:${column.fixedRight}px`
-    }
-    return ''
+    setColumns(columns)
   }
 
   function scrollChange(detail: ScrollDetail) {
@@ -125,7 +146,7 @@ export const Table = (propsRaw: Partial<TableProps>) => {
   }
 
   return (
-    <div class={styles.table} style={tableStyles()}>
+    <div class={styles.table} style={tableStyles()} ref={tableRef!}>
       <div class={styles.tableHeaderWrap} ref={headerRef!}>
         <table class={styles.tableHeader} style={`width:${tableWidth()}px;`}
           cell-padding='0'
