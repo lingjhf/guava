@@ -83,7 +83,7 @@ export const NavigationBar = (props: NavigationBarProps) => {
   }
 
   return (
-    <Show when={store.drawer} fallback={<div class='w-300px h-full bg-[var(--bg-common-highest)]'>{navigation()}</div>}>
+    <Show when={store.drawer} fallback={<div class='w-300px flex-shrink-0 h-full bg-[var(--bg-common-highest)]'>{navigation()}</div>}>
       {drawerNavigation()}
     </Show>
 
