@@ -12,10 +12,10 @@ const App = () => {
     })
 
     const validator = new FormValidator({
-      schema: yup.object({
+      schema: {
         name: yup.string().required({ name: 'name is required' }).max(10, { name: 'max 10' }).email({ name: 'email' }),
         age: yup.number().required({ age: 'age is required' })
-      })
+      }
     })
 
     function inputName(value: string) {
@@ -43,12 +43,12 @@ const App = () => {
   }
 
   const columns: TableColumn[] = [
-    { label: 'Date', prop: 'date', width: 150, fixed: true },
-    { label: 'Name', prop: 'name', width: 120 },
-    { label: 'State', prop: 'state', width: 120 },
-    { label: 'City', prop: 'city', width: 320 },
+    { label: 'Date', prop: 'date', width: 150, },
+    { label: 'Name', prop: 'name', width: 120, },
+    { label: 'State', prop: 'state', width: 120, },
+    { label: 'City', prop: 'city', },
     { label: 'Address', prop: 'address', width: 600 },
-    { label: 'Zip', prop: 'zip', width: 120 },
+    { label: 'Zip', prop: 'zip', width: 120, },
   ]
 
   const data = [
