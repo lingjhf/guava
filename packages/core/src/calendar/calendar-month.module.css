@@ -1,0 +1,61 @@
+.calendarMonthWeekHeaderItem {
+  text-align: center;
+  width: 140px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  border-bottom: var(--calendar-border);
+}
+
+.calendarMonthDate {
+  width: 140px;
+  height: 152px;
+  padding: 4px 0;
+  box-sizing: border-box;
+  border-bottom: var(--calendar-border);
+  border-right: var(--calendar-border);
+}
+
+.calendarMonthDate:hover {
+  background-color: var(--calendar-date-bg-color-hover);
+}
+
+.calendarMonthWeekend {
+  background-color: var(--calendar-weekend-bg-color-default);
+}
+
+.calendarMonthWeekend:hover {
+  background-color: var(--calendar-weekend-bg-color-hover);
+}
+
+.calendarMonthDateHeader {
+  display: flex;
+  height: 24px;
+  padding: 0 4px;
+}
+
+.calendarMonthDateHeaderText {
+  padding: 2px 4px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.calendarMonthHeaderDefaultText {
+  color: var(--text-common-tertiary);
+}
+
+.calendarMonthHeaderWeekendText {
+  color: var(--text-common-secondary);
+}
+
+.calendarMonthHeaderCurrentMonthText {
+  color: var(--text-common-primary);
+}
+
+.calendarMonthDateHeaderTodayText {
+  color: var(--text-static-primary);
+}

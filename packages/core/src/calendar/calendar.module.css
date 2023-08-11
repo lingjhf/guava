@@ -1,0 +1,6 @@
+.calendar {
+  --calendar-border: 1px solid var(--border-common-default);
+  --calendar-date-bg-color-hover: var(--bg-bgless-hover);
+  --calendar-weekend-bg-color-default: var(--bg-controls-degrade-default);
+  --calendar-weekend-bg-color-hover: var(--bg-controls-hover);
+}

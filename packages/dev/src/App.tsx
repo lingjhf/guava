@@ -1,4 +1,4 @@
-import { GConfigProvider, GForm, GFormItem, FormValidator, yup, GInput, GButton, GList, GListGroup, GListItem, GTable, type TableColumn } from '@lingjhf/guava'
+import { GConfigProvider, GForm, GFormItem, FormValidator, yup, GInput, GButton, GList, GListGroup, GListItem, GTable, type TableColumn, GCalendar } from '@lingjhf/guava'
 import { For, createSignal } from 'solid-js'
 
 import 'virtual:uno.css'
@@ -114,7 +114,7 @@ const App = () => {
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class=' px-100px'>
-          <GTable columns={columns} data={data} style='width:100%' height={250} ></GTable>
+          <GCalendar></GCalendar>
         </div>
       </GConfigProvider>
     </div>

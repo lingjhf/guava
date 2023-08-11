@@ -1,0 +1,9 @@
+.dateSwitch {
+  display: flex;
+  padding: 12px;
+  height: 24px;
+}
+
+.dateSwitchIcon {
+  font-size: 16px;
+}
