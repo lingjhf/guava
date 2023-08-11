@@ -38,7 +38,10 @@ export const DateSwitch = (propsRaw: Partial<DateSwitchProps>) => {
           {props.renderNext}
         </Show>
       </GButton>
-      <GButton type='primary' variant='jelly' size='small'>
+      <GButton
+        class={styles.dateSwitchToday} type='primary' variant='jelly' size='small'
+        onClick={props.today}
+      >
         <Show when={props.renderToday} fallback={'Today'}>
           {props.renderToday}
         </Show>
