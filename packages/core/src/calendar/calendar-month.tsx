@@ -58,7 +58,7 @@ export const CalendarMonth = () => {
   return (
     <div class={styles.calendarMonth}>
       <div>
-        <DateSwitch prev={prevMonth} next={nextMonth} today={today}>{currentDate().format('MM YYYY')}</DateSwitch>
+        <DateSwitch prev={prevMonth} next={nextMonth} today={today}>{currentDate().format('MMM YYYY')}</DateSwitch>
       </div>
       <div class={styles.calendarMonthWeekHeader}>
         <GWeekHeader firstWeekDay={Week.Monday} renderWeekDay={
