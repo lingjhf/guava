@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { GWeekContainer } from '../month'
+import { GWeekContainer } from '../date'
 import styles from './calendar-week.module.css'
 
 export const CalendarWeek = () => {
