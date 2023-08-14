@@ -1,0 +1,23 @@
+.calendarWeekHeaderItem {
+  flex-shrink: 0;
+  text-align: center;
+  width: 140px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  border-bottom: var(--calendar-border);
+}
+
+.calendarWeekDate:hover {
+  background-color: var(--calendar-date-bg-color-hover);
+}
+
+.calendarWeekWeekend {
+  background-color: var(--calendar-weekend-bg-color-default);
+}
+
+.calendarWeekWeekend:hover {
+  background-color: var(--calendar-weekend-bg-color-hover);
+}

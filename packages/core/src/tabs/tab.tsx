@@ -34,7 +34,7 @@ export const Tab = (propsRaw: Partial<TabProps>) => {
     if (active()) {
       classes.push(styles.tabActive)
     }
-    return mergeClasses(classes)
+    return mergeClasses(classes, props.class)
   }
 
   createEffect(on(() => props.value, () => {

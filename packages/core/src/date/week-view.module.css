@@ -1,0 +1,14 @@
+.weekHour {
+  height: 60px;
+  box-sizing: border-box;
+}
+
+.weekViewWeekDay {
+  text-align: center;
+  width: 140px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}

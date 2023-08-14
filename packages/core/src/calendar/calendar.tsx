@@ -3,6 +3,7 @@ import { generateSplitEventHandlersProps } from '../utils'
 import dayjs from 'dayjs'
 import type { GuavaProps } from '../types'
 import { CalendarMonth } from './calendar-month'
+import { CalendarWeek } from './calendar-week'
 import styles from './calendar.module.css'
 
 export interface CalendarProps extends GuavaProps<HTMLDivElement> {
@@ -33,7 +34,8 @@ export const Calendar = (propsRaw: Partial<CalendarProps>) => {
   }
   return (
     <div class={styles.calendar}>
-      <CalendarMonth></CalendarMonth>
+      {/* <CalendarMonth></CalendarMonth> */}
+      <CalendarWeek></CalendarWeek>
     </div>
   )
 }

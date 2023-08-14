@@ -1,20 +1,9 @@
-import { GMonthView, GWeekHeader } from '../date'
-import styles from './calendar-month.module.css'
 import dayjs from 'dayjs'
-import { Week, isWeekend } from '../date'
+import { GMonthContainer, Week, isWeekend } from '../month'
 import { mergeClasses } from '../utils'
 import { createSignal } from 'solid-js'
 import { DateSwitch } from './date-switch'
-
-const weekDayTextMap: Record<Week, string> = {
-  0: 'SUN',
-  1: 'MON',
-  2: 'TUE',
-  3: 'WED',
-  4: 'THU',
-  5: 'FRI',
-  6: 'SAT'
-}
+import styles from './calendar-month.module.css'
 
 export const CalendarMonth = () => {
 
@@ -60,26 +49,28 @@ export const CalendarMonth = () => {
       <div>
         <DateSwitch prev={prevMonth} next={nextMonth} today={today}>{currentDate().format('MMM YYYY')}</DateSwitch>
       </div>
-      <div class={styles.calendarMonthWeekHeader}>
-        <GWeekHeader firstWeekDay={Week.Monday} renderWeekDay={
+      <GMonthContainer
+        currentDate={currentDate()}
+        firstWeekDay={Week.Monday}
+        renderWeekDay={
           (week) => (
             <div class={styles.calendarMonthWeekHeaderItem}>
-              {weekDayTextMap[week]}
+              {week.format('ddd')}
             </div>
           )
-        } />
-      </div>
-      <GMonthView currentDate={currentDate()} firstWeekDay={Week.Monday} renderDate={
-        (date) => (
-          <div class={dateClasses(date)}>
-            <div class={styles.calendarMonthDateHeader}>
-              <div class={dateTextClasses(date)}>
-                {date.date()}
+        }
+        renderDate={
+          (date) => (
+            <div class={dateClasses(date)}>
+              <div class={styles.calendarMonthDateHeader}>
+                <div class={dateTextClasses(date)}>
+                  {date.date()}
+                </div>
               </div>
             </div>
-          </div>
-        )
-      } />
+          )
+        }
+      />
     </div >
   )
 }

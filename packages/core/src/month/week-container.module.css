@@ -1,0 +1,24 @@
+.weekContainer {
+  display: flex;
+  flex-direction: column;
+  width: 1040px;
+}
+
+.weekContainerHeader {
+  display: flex;
+}
+
+.weekContainerHeaderPlaceholder {
+  width: 60px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border-common-default);
+}
+
+.weekContainerHeaderItem {
+  padding: 0;
+}
+
+.weekContainerRow {
+  display: flex;
+  height: 100%;
+}
