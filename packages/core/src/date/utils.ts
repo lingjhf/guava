@@ -10,15 +10,20 @@ export enum Week {
   Saturday = 6,
 }
 
-export function generateWeekDays(firstWeekDay: Week = Week.Sunday) {
-  const days: Week[] = []
-  let weekDay = firstWeekDay
-  while (days.length < 7) {
-    days.push(weekDay)
-    weekDay += 1
-    if (weekDay > Week.Saturday) {
-      weekDay = Week.Sunday
+export function generateWeekDays(currentDate: dayjs.Dayjs, firstWeekDay: Week = Week.Sunday): dayjs.Dayjs[] {
+  const days: dayjs.Dayjs[] = []
+  let day = currentDate
+  while (true) {
+    days.push(day)
+    if (day.day() === firstWeekDay) {
+      break
     }
+    day = currentDate.subtract(1, 'day')
+  }
+  day = currentDate
+  while (days.length < 7) {
+    day = day.add(1, 'day')
+    days.push(day)
   }
   return days
 }

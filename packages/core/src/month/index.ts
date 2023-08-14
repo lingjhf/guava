@@ -1,5 +1,0 @@
-export { MonthContainer as GMonthContainer } from './month-container'
-export { WeekContainer as GWeekContainer } from './week-container'
-export { DayContainer as GDayContainer } from './day-container'
-export { HourLine as GHourLine } from './hour-line'
-export * from './utils'

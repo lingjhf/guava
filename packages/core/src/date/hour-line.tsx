@@ -1,10 +1,11 @@
-import { For, type JSX } from 'solid-js'
+import { For, type JSX, type JSXElement } from 'solid-js'
 import type { GuavaProps } from '../types'
 import { generateSplitEventHandlersProps } from '../utils'
 import styles from './hour-line.module.css'
 
 export interface HourLineProps extends GuavaProps<HTMLDivElement> {
-  renderHour?: (weekDay: number) => JSX.Element
+  renderHour?: (hour: number) => JSX.Element
+  renderRow?: () => JSXElement
 }
 
 export const HourLine = (propsRaw: Partial<HourLineProps>) => {
@@ -27,6 +28,7 @@ export const HourLine = (propsRaw: Partial<HourLineProps>) => {
                 </div>
               </div>
               <div class={styles.hourLineRow}>
+                {props.renderRow?.()}
               </div>
             </div>
           )
