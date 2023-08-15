@@ -15,13 +15,12 @@ export const HourLine = (propsRaw: Partial<HourLineProps>) => {
     propsRaw,
     {}
   )
-  const minutePercentage = 100 / (24 * 60)
+
   const hours = Array.from({ length: 24 }, (_, k) => k)
-  const [currentTimeTop, setCurrentTimeTop] = createSignal(0)
+  const [currentTimeTop, setCurrentTimeTop] = createSignal(getCurrentTimeTop())
 
   const intervalId = setInterval(() => {
-    const currentTime = dayjs()
-    const top = (currentTime.hour() * 60 + currentTime.minute()) * minutePercentage
+    const top = getCurrentTimeTop()
     if (top !== currentTimeTop()) {
       setCurrentTimeTop(top)
     }
@@ -30,6 +29,12 @@ export const HourLine = (propsRaw: Partial<HourLineProps>) => {
   onCleanup(() => {
     clearInterval(intervalId)
   })
+
+  function getCurrentTimeTop() {
+    const currentTime = dayjs()
+    const minutePercentage = 100 / (24 * 60)
+    return (currentTime.hour() * 60 + currentTime.minute()) * minutePercentage
+  }
 
   return (
     <div class={styles.hourLine}>
