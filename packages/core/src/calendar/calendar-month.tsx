@@ -1,8 +1,6 @@
 import dayjs from 'dayjs'
 import { GMonthContainer, Week, isWeekend } from '../date'
 import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
-import { createSignal } from 'solid-js'
-import { DateSwitch } from './date-switch'
 import styles from './calendar-month.module.css'
 import type { GuavaProps } from '../types'
 
