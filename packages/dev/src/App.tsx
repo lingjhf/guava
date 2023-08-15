@@ -114,7 +114,7 @@ const App = () => {
     <div class=' h-screen bg-#1A1A1A w-screen'>
       <GConfigProvider dark>
         <div class=' px-100px'>
-          <GCalendar></GCalendar>
+          <GCalendar type='week'></GCalendar>
         </div>
       </GConfigProvider>
     </div>

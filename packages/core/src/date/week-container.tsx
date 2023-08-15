@@ -12,6 +12,7 @@ export interface WeekContainerProps extends GuavaProps<HTMLDivElement> {
   firstWeekDay: Week
   currentDate: dayjs.Dayjs
   renderWeekDay?: (day: dayjs.Dayjs) => JSX.Element
+  renderAllDay?: JSX.Element
   renderHour?: (hour: number) => JSX.Element
   renderWeekDayHour?: (day: dayjs.Dayjs) => JSX.Element
 }
@@ -24,7 +25,6 @@ export const WeekContainer = (propsRaw: Partial<WeekContainerProps>) => {
       firstWeekDay: Week.Sunday, currentDate: dayjs()
     }
   )
-
   const weekDays = createMemo(() => generateWeekDays(props.currentDate, props.firstWeekDay))
   return (
     <div class={styles.weekContainer}>
@@ -42,15 +42,16 @@ export const WeekContainer = (propsRaw: Partial<WeekContainerProps>) => {
           </For>
         </GTabs>
       </div>
-      <GScrollbar style={'height:660px'}>
+      {props.renderAllDay}
+      <GScrollbar>
         <HourLine
           renderHour={(hour) => props.renderHour?.(hour)}
           renderRow={
-            () => (
+            (hour) => (
               <div class={styles.weekContainerRow}>
                 <For each={weekDays()}>
                   {
-                    (weekDay) => props.renderWeekDayHour?.(weekDay)
+                    (weekDay) => props.renderWeekDayHour?.(weekDay.set('hour', hour))
                   }
                 </For>
               </div>

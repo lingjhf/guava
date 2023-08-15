@@ -1,7 +1,14 @@
-.hourLine {
-  --hourLine-border: 1px solid var(--border-common-default);
+.hourLine{
+  position: relative;
+}
+
+.hourLineCurrentTime{
+position: absolute;
+}
+
+.hourLineRow {
   display: flex;
-  height: 60px;
+  height: 68px;
 }
 
 .hourLineTimeWrap {
@@ -9,9 +16,7 @@
   justify-content: center;
   position: relative;
   flex-shrink: 0;
-  width: 60px;
-  box-sizing: border-box;
-  border-right: var(--hourLine-border);
+  width: 72px;
 }
 
 .hourLineTime {
@@ -20,10 +25,4 @@
   font-weight: 400;
   line-height: 20px;
   bottom: -10px;
-}
-
-.hourLineRow {
-  box-sizing: border-box;
-  width: 100%;
-  border-bottom: var(--hourLine-border);
 }
