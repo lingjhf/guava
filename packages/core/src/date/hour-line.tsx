@@ -15,9 +15,7 @@ export const HourLine = (propsRaw: Partial<HourLineProps>) => {
     propsRaw,
     {}
   )
-  const totalHeight = 24 * 68
-  const totalMinute = 24 * 60
-  const minutePercentage = totalMinute / totalHeight
+  const minutePercentage = 100 / (24 * 60)
   const hours = Array.from({ length: 24 }, (_, k) => k)
   const [currentTimeTop, setCurrentTimeTop] = createSignal(0)
 
@@ -35,7 +33,9 @@ export const HourLine = (propsRaw: Partial<HourLineProps>) => {
 
   return (
     <div class={styles.hourLine}>
-      <div class={styles.hourLineCurrentTime} style={`top:${currentTimeTop()}px`}></div>
+      <div class={styles.hourLineCurrentTime} style={`top:${currentTimeTop()}%`}>
+        <div class={styles.hourLineCurrentTimeCursor}></div>
+      </div>
       <For each={hours}>
         {
           (hour) => (

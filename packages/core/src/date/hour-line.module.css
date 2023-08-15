@@ -1,9 +1,22 @@
-.hourLine{
+.hourLine {
   position: relative;
 }
 
-.hourLineCurrentTime{
-position: absolute;
+.hourLineCurrentTime {
+  position: absolute;
+  left: 72px;
+  right: 0;
+  border-top: 1px solid var(--border-warn-default);
+}
+
+.hourLineCurrentTimeCursor {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  top: -3px;
+  left: -3px;
+  background-color: var(--border-warn-default);
 }
 
 .hourLineRow {
