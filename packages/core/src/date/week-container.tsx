@@ -26,12 +26,11 @@ export const WeekContainer = (propsRaw: Partial<WeekContainerProps>) => {
   )
 
   const weekDays = createMemo(() => generateWeekDays(props.currentDate, props.firstWeekDay))
-
   return (
     <div class={styles.weekContainer}>
       <div class={styles.weekContainerHeader}>
         <div class={styles.weekContainerHeaderPlaceholder}></div>
-        <GTabs>
+        <GTabs value={props.currentDate.day()}>
           <For each={weekDays()}>
             {
               (weekDay) => (

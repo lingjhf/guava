@@ -10,14 +10,20 @@
   border-bottom: var(--calendar-border);
 }
 
-.calendarWeekDate:hover {
+.calendarWeekCell{
+  width: 100%;
+  box-sizing: border-box;
+  border-right: var(--calendar-border);
+}
+
+.calendarWeekCell:hover {
   background-color: var(--calendar-date-bg-color-hover);
 }
 
-.calendarWeekWeekend {
+.calendarWeekWeekendCell {
   background-color: var(--calendar-weekend-bg-color-default);
 }
 
-.calendarWeekWeekend:hover {
+.calendarWeekWeekendCell:hover {
   background-color: var(--calendar-weekend-bg-color-hover);
 }

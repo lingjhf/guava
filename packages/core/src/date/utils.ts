@@ -14,11 +14,11 @@ export function generateWeekDays(currentDate: dayjs.Dayjs, firstWeekDay: Week = 
   const days: dayjs.Dayjs[] = []
   let day = currentDate
   while (true) {
-    days.push(day)
+    days.unshift(day)
     if (day.day() === firstWeekDay) {
       break
     }
-    day = currentDate.subtract(1, 'day')
+    day = day.subtract(1, 'day')
   }
   day = currentDate
   while (days.length < 7) {

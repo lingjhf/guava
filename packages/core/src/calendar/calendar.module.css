@@ -3,4 +3,8 @@
   --calendar-date-bg-color-hover: var(--bg-bgless-hover);
   --calendar-weekend-bg-color-default: var(--bg-controls-degrade-default);
   --calendar-weekend-bg-color-hover: var(--bg-controls-hover);
+  border: var(--calendar-border);
+  border-radius: 8px;
+  display: inline-flex;
+  flex-direction: column;
 }

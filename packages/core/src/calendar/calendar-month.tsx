@@ -1,16 +1,28 @@
 import dayjs from 'dayjs'
 import { GMonthContainer, Week, isWeekend } from '../date'
-import { mergeClasses } from '../utils'
+import { generateSplitEventHandlersProps, mergeClasses } from '../utils'
 import { createSignal } from 'solid-js'
 import { DateSwitch } from './date-switch'
 import styles from './calendar-month.module.css'
+import type { GuavaProps } from '../types'
 
-export const CalendarMonth = () => {
+export interface CalendarMonthProps extends GuavaProps<HTMLDivElement> {
+  currentDate: dayjs.Dayjs
+  firstWeekDay: Week
+}
 
-  const [currentDate, setCurrentDate] = createSignal(dayjs())
+export const CalendarMonth = (propsRaw: Partial<CalendarMonthProps>) => {
 
-  const dateClasses = (date: dayjs.Dayjs) => {
-    const classes = [styles.calendarMonthDate]
+  const [eventHandlers, props] = generateSplitEventHandlersProps(
+    propsRaw,
+    {
+      currentDate: dayjs(),
+      firstWeekDay: Week.Sunday,
+    }
+  )
+
+  const cellClasses = (date: dayjs.Dayjs) => {
+    const classes = [styles.calendarMonthCell]
     if (isWeekend(date)) {
       classes.push(styles.calendarMonthWeekend)
     }
@@ -19,11 +31,11 @@ export const CalendarMonth = () => {
 
   const dateTextClasses = (date: dayjs.Dayjs) => {
     const classes = [styles.calendarMonthDateHeaderText]
-    if (date === currentDate()) {
+    if (date === props.currentDate) {
       classes.push(styles.calendarMonthDateHeaderTodayText)
-    } else if (date.month() === currentDate().month() && isWeekend(date)) {
+    } else if (date.month() === props.currentDate.month() && isWeekend(date)) {
       classes.push(styles.calendarMonthHeaderWeekendText)
-    } else if (date.month() === currentDate().month()) {
+    } else if (date.month() === props.currentDate.month()) {
       classes.push(styles.calendarMonthHeaderCurrentMonthText)
     } else {
       classes.push(styles.calendarMonthHeaderDefaultText)
@@ -31,46 +43,28 @@ export const CalendarMonth = () => {
     return mergeClasses(classes)
   }
 
-  function prevMonth() {
-    setCurrentDate(v => v.subtract(1, 'month'))
-  }
-
-  function nextMonth() {
-
-    setCurrentDate(v => v.add(1, 'month'))
-  }
-
-  function today() {
-    setCurrentDate(dayjs())
-  }
-
   return (
-    <div class={styles.calendarMonth}>
-      <div>
-        <DateSwitch prev={prevMonth} next={nextMonth} today={today}>{currentDate().format('MMM YYYY')}</DateSwitch>
-      </div>
-      <GMonthContainer
-        currentDate={currentDate()}
-        firstWeekDay={Week.Monday}
-        renderWeekDay={
-          (week) => (
-            <div class={styles.calendarMonthWeekHeaderItem}>
-              {week.format('ddd')}
-            </div>
-          )
-        }
-        renderDate={
-          (date) => (
-            <div class={dateClasses(date)}>
-              <div class={styles.calendarMonthDateHeader}>
-                <div class={dateTextClasses(date)}>
-                  {date.date()}
-                </div>
+    <GMonthContainer
+      currentDate={props.currentDate}
+      firstWeekDay={props.firstWeekDay}
+      renderWeekDay={
+        (week) => (
+          <div class={styles.calendarMonthWeekHeaderItem}>
+            {week.format('ddd')}
+          </div>
+        )
+      }
+      renderDate={
+        (date) => (
+          <div class={cellClasses(date)}>
+            <div class={styles.calendarMonthDateHeader}>
+              <div class={dateTextClasses(date)}>
+                {date.date()}
               </div>
             </div>
-          )
-        }
-      />
-    </div >
+          </div>
+        )
+      }
+    />
   )
 }

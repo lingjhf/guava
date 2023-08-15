@@ -7,21 +7,23 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
-  border-bottom: var(--calendar-border);
 }
 
-.calendarMonthDate {
+.calendarMonthCell {
   flex-shrink: 0;
   width: 140px;
   height: 152px;
   padding: 4px 0;
   box-sizing: border-box;
-  border-bottom: var(--calendar-border);
-  border-right: var(--calendar-border);
+  border-top: var(--calendar-border);
 }
 
-.calendarMonthDate:hover {
+.calendarMonthCell:hover {
   background-color: var(--calendar-date-bg-color-hover);
+}
+
+.calendarMonthCell:not(:last-child){
+  border-right: var(--calendar-border);
 }
 
 .calendarMonthWeekend {
